@@ -6,3 +6,6 @@ gui-apps/qqterm ~amd64
 gui-apps/qindaqt-system-monitor ~amd64
 www-client/qindafox-bin ~amd64
 media-libs/noise-suppression-for-voice ~amd64
+kde-plasma/sloom-globalmenu ~amd64
+kde-plasma/sloom-panelmenu ~amd64
+media-gfx/sloom-studio-bin ~amd64
