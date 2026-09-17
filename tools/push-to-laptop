@@ -7,7 +7,7 @@ set -euo pipefail
 O="$(cd "$(dirname "$0")/.." && pwd)"
 LAPTOP="${LAPTOP:-gentoo-install}"
 cd "$O"
-git add -A && git commit -qm "overlay: $(date +%F) $(git status --short | wc -l) files" 2>/dev/null || true
+git add -A && git commit -qm "overlay: $(date +%F)" 2>/dev/null || true; git push -q hub HEAD 2>/dev/null || true
 pkgs=$(portageq match / '*/*::qindaqt' 2>/dev/null || true)
 [ -n "$pkgs" ] && sudo quickpkg --include-config=y --include-unmodified-config=y $(echo "$pkgs" | sed 's/^/=/') | grep -E "^\s*\*" || true
 ssh "$LAPTOP" 'emaint sync -r qindaqt >/dev/null && emerge --sync-binhost >/dev/null 2>&1; emerge -uDN --usepkg --binpkg-changed-deps=y @world'
