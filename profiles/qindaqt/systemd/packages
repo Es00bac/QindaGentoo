@@ -15,3 +15,6 @@ media-fonts/noto
 media-fonts/noto-emoji
 media-fonts/dejavu
 app-shells/zsh
+kde-plasma/sloom-globalmenu
+kde-plasma/sloom-panelmenu
+media-gfx/sloom-studio-bin
