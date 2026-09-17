@@ -1,0 +1,4 @@
+# QindaQt desktop profile: Wayland-first Qt 6 desktop on KWin 6.6.6 with PipeWire.
+USE="wayland X egl gles2 vulkan opengl vaapi pipewire pulseaudio alsa screencast qt6 -qt5 -kde -gnome -telemetry -handbook dbus policykit pam udev udisks upower networkmanager bluetooth -elogind ffmpeg opus flac mp3 aac vorbis vpx x264 x265 theora truetype fontconfig harfbuzz jpeg png webp svg tiff icu nls unicode threads xattr acl crypt ssl lz4 zstd"
+INPUT_DEVICES="libinput"
+L10N="en en-US"

@@ -1,0 +1,69 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-or-later
+set -eu
+
+runtime=/opt/qindafox/firefox
+launcher=/usr/libexec/qindafox/qindafox-launcher
+config_home=${XDG_CONFIG_HOME:-"$HOME/.config"}
+state_home=${XDG_STATE_HOME:-"$HOME/.local/state"}
+profile_file="$config_home/qindafox/profile"
+profile=${QINDAFOX_PROFILE:-}
+
+if [ -z "$profile" ] && [ -r "$profile_file" ]; then
+    IFS= read -r profile < "$profile_file" || true
+fi
+
+explicit_profile=false
+for argument in "$@"; do
+    case "$argument" in
+        -P|--profile|--profile=*|--ProfileManager)
+            explicit_profile=true
+            ;;
+    esac
+done
+
+if [ -n "$profile" ] && [ "$explicit_profile" = false ]; then
+    if [ ! -d "$profile" ]; then
+        printf '%s\n' "qindafox: configured Firefox profile does not exist: $profile" >&2
+        exit 2
+    fi
+
+    lock="$profile/.parentlock"
+    if [ -e "$lock" ] && command -v fuser >/dev/null 2>&1 && \
+            fuser "$lock" >/dev/null 2>&1; then
+        printf '%s\n' \
+            "qindafox: Firefox is using $profile; close Firefox before starting QindaFox" >&2
+        exit 3
+    elif [ -L "$lock" ]; then
+        lock_target=$(readlink "$lock" || true)
+        lock_pid=${lock_target##*+}
+        case "$lock_pid" in
+            ''|*[!0-9]*) ;;
+            *)
+                if kill -0 "$lock_pid" 2>/dev/null; then
+                    printf '%s\n' \
+                        "qindafox: Firefox is using $profile; close Firefox before starting QindaFox" >&2
+                    exit 3
+                fi
+                ;;
+        esac
+    fi
+
+    profile_name=$(basename -- "$profile")
+    backup_root="$state_home/qindafox/profile-backups"
+    backup="$backup_root/$profile_name.before-qindafox-155.0.1"
+    if [ ! -e "$backup" ]; then
+        umask 077
+        mkdir -p "$backup_root"
+        temporary="$backup.partial.$$"
+        trap 'rm -rf -- "$temporary"' EXIT HUP INT TERM
+        cp -a --reflink=auto "$profile" "$temporary"
+        mv "$temporary" "$backup"
+        trap - EXIT HUP INT TERM
+        printf '%s\n' "qindafox: backed up Firefox profile to $backup" >&2
+    fi
+
+    exec "$launcher" --qindafox-firefox "$runtime" --profile "$profile" "$@"
+fi
+
+exec "$launcher" --qindafox-firefox "$runtime" "$@"

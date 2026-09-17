@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>cabewse@qindaqt.local</email>
+		<name>QindaQt local overlay</name>
+	</maintainer>
+	<longdescription>
+		QindaFox is a Firefox artifact build adapted to the QindaQt desktop.
+		It uses the active Qt palette and font, delegates window decoration,
+		tabs, and splits to QindaQt, and retains the Firefox feature set.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">Es00bac/QindaQt</remote-id>
+	</upstream>
+</pkgmetadata>

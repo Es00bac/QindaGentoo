@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>cabewse@localhost</email>
+		<name>QindaQt local overlay</name>
+	</maintainer>
+	<longdescription>
+		QQ_Term is a Qt6 terminal emulator built for the QindaQt desktop.
+		Each window is one independent shell session (the desktop's window
+		containers provide tab and split grouping), with named profiles,
+		42 built-in color schemes with dark/light tone hints, per-window
+		transparency with optional KWin blur-behind, theme rotation so new
+		windows never repeat a look, and per-window global menu export over
+		the desktop's D-Bus dbusmenu stack. Configuration lives in
+		~/.config/qqterm/qqterm.ini.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">Es00bac/QindaQt</remote-id>
+	</upstream>
+</pkgmetadata>

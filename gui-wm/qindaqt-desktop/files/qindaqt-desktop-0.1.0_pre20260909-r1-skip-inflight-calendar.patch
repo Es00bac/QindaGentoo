@@ -1,0 +1,27 @@
+The bundled calendar app is mid-implementation by another workstream at the
+pinned commit and its sources do not compile yet. Skip its build and test
+subdirectories so the desktop checkpoint can be installed; drop this patch
+once the calendar lane lands a compiling candidate. No other target links
+against the calendar plugin (it is loaded at runtime), and the
+KF6CalendarCore find_package stays satisfied by the installed system package.
+
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -107,7 +107,6 @@
+ add_subdirectory(apps/settings_center)
+ add_subdirectory(apps/text_editor)
+ add_subdirectory(apps/file_manager)
+-add_subdirectory(apps/calendar)
+ add_subdirectory(apps/terminal)
+ add_subdirectory(apps/welcome)
+ 
+--- a/tests/CMakeLists.txt
++++ b/tests/CMakeLists.txt
+@@ -117,7 +117,6 @@
+ add_subdirectory(apps/settings_center)
+ add_subdirectory(apps/text_editor)
+ add_subdirectory(apps/file_manager)
+-add_subdirectory(apps/calendar)
+ add_subdirectory(apps/terminal)
+ 
+ if(TARGET qindaqt_session_supervisor_support)

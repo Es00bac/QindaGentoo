@@ -1,0 +1,23 @@
+#!/bin/bash
+# Copy each project's packaging/gentoo (or packaging/portage) tree into this overlay
+# and regenerate thin Manifests. Run from anywhere.
+set -euo pipefail
+O="$(cd "$(dirname "$0")/.." && pwd)"
+W="$(dirname "$O")"
+for src in "$W"/container-wm/packaging/gentoo "$W"/QindaOffice/packaging/gentoo \
+           "$W"/QindaQt_Apps/packaging/gentoo "$W"/QindaStudio/packaging/portage \
+           "$W"/sloom-studio-gpl/packaging/gentoo; do
+  [ -d "$src" ] || continue
+  for cat in "$src"/*/; do
+    c=$(basename "$cat"); case "$c" in metadata|profiles|tools) continue;; esac
+    rsync -a "$cat" "$O/$c/"
+  done
+  echo "synced $(basename "$(dirname "$(dirname "$src")")")"
+done
+ls -d "$O"/*/ | grep -vE "/(metadata|profiles|tools)/$" | xargs -n1 basename | sort > "$O/profiles/categories"
+if command -v pkgdev >/dev/null; then
+  (cd "$O" && pkgdev manifest 2>&1 | tail -3) || true
+else
+  for e in "$O"/*/*/*.ebuild; do ebuild "$e" manifest >/dev/null 2>&1 || echo "manifest failed: $e (distfile missing?)"; done
+fi
+echo done
