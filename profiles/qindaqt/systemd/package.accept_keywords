@@ -14,3 +14,4 @@ media-gfx/sloom-studio-bin ~amd64
 # v4l2loopback module in testing, so the profile accepts them for every machine.
 media-video/obs-studio ~amd64
 media-video/v4l2loopback ~amd64
+media-plugins/obs-qindaqt ~amd64
