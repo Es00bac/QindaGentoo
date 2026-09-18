@@ -10,3 +10,6 @@ media-libs/mesa vulkan vaapi zstd
 media-video/pipewire sound-server pipewire-alsa extra-client-tools dbus bluetooth -ffmpeg
 kde-plasma/plasma-login-sessions X wayland
 kde-plasma/plasma-nm networkmanager
+# QindaQt's OBS integration needs obs-websocket (the desktop's control channel),
+# V4L2 output (the virtual camera) and PipeWire/Wayland capture.
+media-video/obs-studio websocket v4l wayland screencast

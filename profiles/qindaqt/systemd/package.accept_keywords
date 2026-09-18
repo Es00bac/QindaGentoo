@@ -9,3 +9,8 @@ media-libs/noise-suppression-for-voice ~amd64
 kde-plasma/sloom-globalmenu ~amd64
 kde-plasma/sloom-panelmenu ~amd64
 media-gfx/sloom-studio-bin ~amd64
+# OBS Studio is an integrated part of the QindaQt desktop (Streaming route,
+# OBS applet, console-bus bridge, virtual camera): ::gentoo keeps it and the
+# v4l2loopback module in testing, so the profile accepts them for every machine.
+media-video/obs-studio ~amd64
+media-video/v4l2loopback ~amd64
