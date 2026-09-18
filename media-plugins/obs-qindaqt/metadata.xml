@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription lang="en">
+		An OBS Studio module that shows the QindaQt audio console to OBS: every
+		bus and strip becomes a named audio source that follows renames and
+		device changes, a dock lists them with the console's meters, and an
+		obs-websocket vendor request publishes the mapping for streaming tools.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">Es00bac/QindaQt</remote-id>
+	</upstream>
+</pkgmetadata>
