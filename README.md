@@ -10,6 +10,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `gui-apps/qqterm` | `QindaQt_Apps` |
 | `www-client/qindafox-bin` | `QindaQt_Apps/QindaFox` |
 | `gui-wm/qindastudio` | `QindaStudio` |
+| `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
 | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | `sloom-studio-gpl` |
 | `kde-plasma/kwin`, `kde-plasma/plasma-activities` | pinned 6.6.x copies the desktop's KWin plugin ABI needs |
 

@@ -13,3 +13,6 @@ kde-plasma/plasma-nm networkmanager
 # QindaQt's OBS integration needs obs-websocket (the desktop's control channel),
 # V4L2 output (the virtual camera) and PipeWire/Wayland capture.
 media-video/obs-studio websocket v4l wayland screencast
+# app-misc/venusprolinux[qindatk] loads the QindaTK QML module through PyQt6's
+# QtQml/QtQuick bindings, which dev-python/pyqt6 does not enable by default.
+dev-python/pyqt6 qml quick

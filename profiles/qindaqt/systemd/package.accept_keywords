@@ -15,3 +15,6 @@ media-gfx/sloom-studio-bin ~amd64
 media-video/obs-studio ~amd64
 media-video/v4l2loopback ~amd64
 media-plugins/obs-qindaqt ~amd64
+# Venus Pro Config (QindaVenusPro) and the python-hidapi binding it opens the mouse with.
+app-misc/venusprolinux ~amd64
+dev-python/hidapi ~amd64
