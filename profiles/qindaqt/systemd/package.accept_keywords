@@ -18,3 +18,6 @@ media-plugins/obs-qindaqt ~amd64
 # Venus Pro Config (QindaVenusPro) and the python-hidapi binding it opens the mouse with.
 app-misc/venusprolinux ~amd64
 dev-python/hidapi ~amd64
+# Idle screensavers started by qindaqt-desktop-controls.
+x11-misc/qinda-patrol ~amd64
+x11-misc/circuit-reef ~amd64
