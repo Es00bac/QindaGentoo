@@ -21,3 +21,6 @@ dev-python/hidapi ~amd64
 # Idle screensavers started by qindaqt-desktop-controls.
 x11-misc/qinda-patrol ~amd64
 x11-misc/circuit-reef ~amd64
+x11-misc/prism-circuit ~amd64
+x11-misc/prism-brawl ~amd64
+x11-misc/starward-reimagined ~amd64
