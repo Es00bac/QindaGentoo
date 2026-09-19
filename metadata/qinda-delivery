@@ -1,7 +1,7 @@
 # Completed desktop, application and screensaver delivery shared by both hosts.
-=gui-wm/qindaqt-desktop-0.1.0_pre20260919-r6
+=gui-wm/qindaqt-desktop-0.1.0_pre20260919-r7
 =media-video/qqmpv-0.1.0_p20260919
-=dev-libs/qindatk-0.1.0-r1
+=dev-libs/qindatk-0.1.0-r2
 =gui-apps/qindaoffice-0.1.0_p20260919
 =x11-misc/qinda-patrol-0.2.0
 =x11-misc/circuit-reef-1.1.0
