@@ -5,6 +5,7 @@ inherit cmake xdg git-r3
 DESCRIPTION="Qinda Prism Brawl with seven arenas and expressive full-body combat"
 HOMEPAGE="https://github.com/Es00bac/QindaQt"
 EGIT_REPO_URI="file:///home/cabewse/git/screensaver-suite.git"
+EGIT_BRANCH="prism-brawl-1.2.0"
 EGIT_COMMIT="0ced5ea7f5f4b85db60358f829c6c4d7dcc9293e"
 EGIT_CHECKOUT_DIR="${WORKDIR}/${P}"
 S="${EGIT_CHECKOUT_DIR}/prism-brawl"
