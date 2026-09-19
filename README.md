@@ -22,11 +22,46 @@ USE defaults, keywords and licenses. Select it with
 ## Workflow
 
 1. Bump an ebuild in the source project's `packaging/gentoo/` (or edit here directly).
-2. `tools/sync-from-projects` copies every project's `packaging/gentoo/` into this tree
-   and regenerates Manifests.
-3. Emerge on the desktop, then `tools/push-to-laptop` builds binary packages of every
-   installed overlay package, commits the overlay, and updates the laptop over SSH.
+2. Copy the completed recipe and its Manifest entries into this tree, preserving
+   other packages.
+3. Update `metadata/qinda-delivery` to name the exact versions to share, then commit
+   the overlay. `qinda-sync code .` publishes the committed branch to qinda.
+   `qinda-sync publish /path/to/package.tar.gz` verifies its Manifest and makes
+   the archive available in qinda's `/var/cache/distfiles` from either machine.
+4. Run `qinda-sync` on either machine to install that delivery through Portage.
+   From qinda, `tools/push-to-laptop` runs the same command on `qinda-top`.
 
 Both machines point their `qindaqt` repo at this git repository
 (`sync-type = git`), and the laptop also pulls binaries from the desktop's
 binhost on port 8090.
+
+## One command on either machine
+
+`tools/qinda-sync` is installed as `/usr/local/bin/qinda-sync` on both hosts.
+Run it as `cabewse`; it uses passwordless sudo only for Portage-owned files and
+installation. The default command reads the committed `metadata/qinda-delivery`
+from qinda's bare Git hub, obtains missing archives and pinned shared Git sources,
+preserves existing overlay entries, and asks Portage to install those exact
+versions. Available binaries use the existing binhost; source builds retain the
+host's configured compiler flags and `MAKEOPTS`. Already installed versions are
+skipped. It never updates `@world` or restarts the desktop.
+
+```sh
+qinda-sync                              # install the published delivery here
+qinda-sync packages --prepare-only       # fetch inputs and show the package plan
+qinda-sync packages =x11-misc/qinda-patrol-0.2.0
+qinda-sync code ~/work_space/container-wm # exchange committed work with qinda
+qinda-sync publish /path/to/package.tar.gz # supply an archive built on either host
+```
+
+For code, run the command in each checkout when publishing or receiving work.
+It uses qinda's existing `/home/cabewse/git/PROJECT.git` repositories, fast-forwards
+when one side is ahead, and pushes the current branch without force. Dirty trees
+or divergent branches stop with Git's explanation; unfinished work is never
+auto-committed, reset, or overwritten. Other checked-out worktrees remain under
+their current owner's control. New projects need a bare repository on the hub.
+
+Conflicting existing recipes or archive hashes also stop for an explicit version
+bump; the helper does not repair unrelated overlay changes. Updates run when
+invoked, so an offline laptop catches up with one command when it reconnects.
+There is no background timer. `QINDA_HUB` overrides the SSH host alias if needed.

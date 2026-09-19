@@ -28,9 +28,18 @@ sudo emerge -av gui-wm/qindaqt-desktop::qindaqt
 # List every installed package that comes from this overlay
 portageq match / '*/*::qindaqt'
 
-# Commit, quickpkg all installed overlay packages, then sync + update the laptop
-# over SSH (LAPTOP env var overrides the host name, default gentoo-install)
+# Install the committed exact delivery on the laptop over SSH
+# (LAPTOP env var overrides the host name, default qinda-top)
 tools/push-to-laptop
+
+# Synchronize a clean checkout's current branch through qinda; divergence stops.
+tools/qinda-sync code .
+
+# Install metadata/qinda-delivery locally; fetch missing archives/shared Git sources.
+tools/qinda-sync
+
+# Publish an archive after committing its matching Manifest to the hub.
+tools/qinda-sync publish /path/to/package.tar.gz
 
 # Select the desktop profile on a machine
 eselect profile set qindaqt:qindaqt/systemd
@@ -44,8 +53,12 @@ version bump is not done until the Manifest line for the new distfile exists.
 **Two machines, one git repo.** The overlay is developed on the desktop and consumed by
 the laptop; both point their `qindaqt` repo at this git repository with `sync-type = git`,
 and the laptop pulls binary packages from the desktop's binhost (port 8090).
-`push-to-laptop` assumes a git remote named `hub` and a binhost on the desktop, so it only
-makes sense to run from the desktop.
+`qinda-sync` works on either machine; qinda's bare Git repositories and existing
+binhost are the shared source. `push-to-laptop` invokes that command remotely.
+The exact approved delivery lives in `metadata/qinda-delivery`. The helper never
+auto-commits, force-pushes, overwrites differing recipes, updates `@world`, or
+restarts the desktop. Publish commits and verified archives explicitly; invoke
+the package command when the receiving machine is ready. See README for usage.
 
 **Distfile conventions.** Every first-party source repository is now published under
 github.com/Es00bac (2026-09-18), but the ebuilds still pin an exact reviewed commit and

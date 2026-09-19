@@ -1,13 +1,6 @@
 #!/bin/bash
-# Publish the current overlay + binaries to the laptop and update it.
-#   1. commit any overlay changes
-#   2. quickpkg every installed package that comes from this overlay (+ its pinned KDE bits)
-#   3. on the laptop: sync the overlay, refresh binhost index, update @world
+# Apply the committed delivery on the laptop, using the existing binhost.
+# Commit/publish the overlay and stage its exact archives on qinda first.
 set -euo pipefail
-O="$(cd "$(dirname "$0")/.." && pwd)"
-LAPTOP="${LAPTOP:-gentoo-install}"
-cd "$O"
-git add -A && git commit -qm "overlay: $(date +%F)" 2>/dev/null || true; git push -q hub HEAD 2>/dev/null || true
-pkgs=$(portageq match / '*/*::qindaqt' 2>/dev/null || true)
-[ -n "$pkgs" ] && sudo quickpkg --include-config=y --include-unmodified-config=y $(echo "$pkgs" | sed 's/^/=/') | grep -E "^\s*\*" || true
-ssh "$LAPTOP" 'emaint sync -r qindaqt >/dev/null && emerge --sync-binhost >/dev/null 2>&1; emerge -uDN --usepkg --binpkg-changed-deps=y @world'
+LAPTOP="${LAPTOP:-qinda-top}"
+exec ssh "$LAPTOP" /usr/local/bin/qinda-sync

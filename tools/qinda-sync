@@ -1,0 +1,236 @@
+#!/usr/bin/env python3
+"""Share committed work and install published Qinda packages through the qinda hub."""
+import argparse
+import hashlib
+import os
+from pathlib import Path
+import re
+import shlex
+import shutil
+import socket
+import subprocess
+import sys
+import tempfile
+import uuid
+
+
+HUB = os.environ.get("QINDA_HUB", "qinda")
+ON_HUB = socket.gethostname().split(".")[0] == HUB
+HUB_HOME = Path("/home/cabewse")
+CACHE = Path.home() / ".cache/qinda-sync"
+
+
+def run(*args, capture=False, **kwargs):
+    result = subprocess.run([str(x) for x in args], check=True, text=True,
+                            stdout=subprocess.PIPE if capture else None, **kwargs)
+    return result.stdout.strip() if capture else None
+
+
+def hub_path(path):
+    return str(path) if ON_HUB else f"{HUB}:{path}"
+
+
+def copy_from_hub(source, destination):
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    if ON_HUB:
+        shutil.copyfile(source, destination)
+    else:
+        run("scp", "-q", hub_path(source), destination)
+
+
+def code(directory):
+    directory = Path(directory).resolve()
+    if run("git", "-C", directory, "status", "--porcelain", capture=True):
+        raise RuntimeError("Commit or stash this checkout's edits before syncing; no files were changed.")
+    origin = run("git", "-C", directory, "remote", "get-url", "origin", capture=True)
+    name = origin.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
+    if name == "QindaQt":
+        name = "container-wm"
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+", name):
+        raise RuntimeError("Cannot identify the hub repository from origin.")
+    branch = run("git", "-C", directory, "symbolic-ref", "--short", "HEAD", capture=True)
+    remote = hub_path(HUB_HOME / "git" / (name + ".git"))
+    exists = run("git", "ls-remote", "--heads", remote, "refs/heads/" + branch, capture=True)
+    if exists:
+        tracking = "refs/remotes/qinda-sync/" + branch
+        run("git", "-C", directory, "fetch", remote, f"+refs/heads/{branch}:{tracking}")
+        local_ahead = subprocess.run(["git", "-C", str(directory), "merge-base",
+                                      "--is-ancestor", tracking, "HEAD"]).returncode == 0
+        if not local_ahead:
+            run("git", "-C", directory, "merge", "--ff-only", tracking)
+    # AGENT-GUARD: never force-push, reset, auto-commit, or auto-merge divergent work.
+    run("git", "-C", directory, "push", remote, f"HEAD:refs/heads/{branch}")
+    print(f"{name}/{branch} is synchronized with {HUB}.")
+
+
+def overlay():
+    repository = CACHE / "overlay"
+    if not repository.exists():
+        run("git", "clone", hub_path(HUB_HOME / "git/QindaGentoo.git"), repository)
+    else:
+        run("git", "-C", repository, "pull", "--ff-only")
+    return repository
+
+
+def publish(filenames):
+    repository = overlay()
+    manifests = [line.split() for path in repository.glob("*/*/Manifest")
+                 for line in path.read_text().splitlines() if line.startswith("DIST ")]
+    for filename in filenames:
+        source = Path(filename).resolve()
+        digest = hashlib.sha512(source.read_bytes()).hexdigest()
+        entries = [fields for fields in manifests if fields[1] == source.name]
+        if not entries or any(fields[fields.index("SHA512") + 1] != digest for fields in entries):
+            raise RuntimeError(f"Publish the matching Manifest to the Git hub first: {source.name}")
+        destination = Path("/var/cache/distfiles") / source.name
+        if ON_HUB:
+            if destination.exists() and hashlib.sha512(destination.read_bytes()).hexdigest() != digest:
+                raise RuntimeError(f"Existing archive differs: {destination}")
+            if source != destination:
+                run("sudo", "-n", "install", "-m", "0644", source, destination)
+        else:
+            temporary = HUB_HOME / ".cache/qinda-sync" / ("incoming-" + uuid.uuid4().hex)
+            staged = temporary / source.name
+            run("ssh", HUB, shlex.join(["mkdir", "-p", str(temporary)]))
+            try:
+                run("scp", "-q", source, hub_path(staged))
+                guard = f"test ! -e {shlex.quote(str(destination))} || " + shlex.join(
+                    ["cmp", "-s", str(staged), str(destination)])
+                run("ssh", HUB, guard)
+                run("ssh", HUB, shlex.join(["sudo", "-n", "install", "-m", "0644",
+                                            str(staged), str(destination)]))
+            finally:
+                run("ssh", HUB, shlex.join(["rm", "-f", str(staged)]) + " && " +
+                    shlex.join(["rmdir", str(temporary)]))
+        print(f"Published verified archive {source.name} on {HUB}.")
+
+
+def apply_stage(stage):
+    """Root-only copy boundary; inspect every conflict before writing anything."""
+    stage = Path(stage)
+    destination = Path(run("portageq", "get_repo_path", "/", "qindaqt", capture=True))
+    distdir = Path(run("portageq", "envvar", "DISTDIR", capture=True))
+    pending = []
+    for group, target_root in (("overlay", destination), ("distfiles", distdir)):
+        for source in (stage / group).rglob("*"):
+            if not source.is_file():
+                continue
+            target = target_root / source.relative_to(stage / group)
+            data = source.read_bytes()
+            if target.exists() and target.read_bytes() != data:
+                if source.name != "Manifest" or group != "overlay":
+                    raise RuntimeError(f"Preserving differing local file: {target}")
+                lines = target.read_text().splitlines()
+                keys = {tuple(line.split()[:2]): line for line in lines}
+                for line in data.decode().splitlines():
+                    key = tuple(line.split()[:2])
+                    if key in keys and keys[key] != line:
+                        raise RuntimeError(f"Conflicting archive hash in {target}: {key}")
+                    if key not in keys:
+                        lines.append(line)
+                data = ("\n".join(lines) + "\n").encode()
+            pending.append((target, data))
+    for target, data in pending:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if not target.exists() or target.read_bytes() != data:
+            target.write_bytes(data)
+            target.chmod(0o644)
+    keywords = Path("/etc/portage/package.accept_keywords/qinda-sync")
+    previous = keywords.read_text().splitlines() if keywords.exists() else []
+    additions = (stage / "keywords").read_text().splitlines()
+    keywords.write_text("\n".join(dict.fromkeys(previous + additions)) + "\n")
+
+
+def packages(atoms, prepare_only):
+    import portage
+    repository = overlay()
+    if not atoms:
+        atoms = [line for line in (repository / "metadata/qinda-delivery").read_text().splitlines()
+                 if line and not line.startswith("#")]
+    distdir = Path(run("portageq", "envvar", "DISTDIR", capture=True))
+    with tempfile.TemporaryDirectory(prefix="qinda-sync-", dir=CACHE) as temporary:
+        stage = Path(temporary)
+        for value in atoms:
+            atom = portage.dep.Atom(value)
+            if atom.operator != "=" or not atom.version or atom.slot or atom.repo:
+                raise RuntimeError("Use exact package versions: =category/package-version")
+            package = repository / atom.cp
+            recipe = package / (atom.cpv.split("/", 1)[1] + ".ebuild")
+            text = recipe.read_text()
+            target = stage / "overlay" / atom.cp
+            target.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(recipe, target / recipe.name)
+            if (package / "files").exists():
+                shutil.copytree(package / "files", target / "files", dirs_exist_ok=True)
+            manifest = package / "Manifest"
+            entries = manifest.read_text().splitlines() if manifest.exists() else []
+            pf = atom.cpv.split("/", 1)[1]
+            prefixes = (pf + ".", re.sub(r"-r\d+$", "", pf) + ".")
+            selected = [line for line in entries if line.startswith("DIST ")
+                        and line.split()[1].startswith(prefixes)]
+            if selected:
+                (target / "Manifest").write_text("\n".join(selected) + "\n")
+            for line in selected:
+                fields = line.split()
+                name = fields[1]
+                if Path(name).name != name:
+                    raise RuntimeError("Invalid distfile name")
+                cached = distdir / name
+                if not cached.exists():
+                    cached = stage / "distfiles" / name
+                    copy_from_hub(Path("/var/cache/distfiles") / name, cached)
+                digest = fields[fields.index("SHA512") + 1]
+                if hashlib.sha512(cached.read_bytes()).hexdigest() != digest:
+                    raise RuntimeError(f"Archive checksum mismatch: {name}")
+            source = re.search(r'^EGIT_REPO_URI="file://([^"\n]+)"', text, re.M)
+            commit = re.search(r'^EGIT_COMMIT="([0-9a-f]{40})"', text, re.M)
+            if source and commit and not ON_HUB:
+                local = Path(source[1])
+                if local.parent != HUB_HOME / "git" or not local.name.endswith(".git"):
+                    raise RuntimeError(f"Recipe needs a non-shared source checkout: {local}")
+                local.parent.mkdir(parents=True, exist_ok=True)
+                if not local.exists():
+                    run("git", "clone", "--bare", hub_path(local), local)
+                run("git", "-C", local, "fetch", hub_path(local),
+                    f"{commit[1]}:refs/heads/qinda-sync-{commit[1]}")
+        (stage / "keywords").write_text("".join(value + " ~amd64\n" for value in atoms))
+        run("sudo", "-n", sys.executable, Path(__file__).resolve(), "--apply", stage)
+    if prepare_only:
+        run("sudo", "-n", "emerge", "--pretend", "--verbose", "--oneshot", "--noreplace", *atoms)
+    else:
+        run("sudo", "-n", "emerge", "--oneshot", "--noreplace", "--usepkg", *atoms)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--apply", help=argparse.SUPPRESS)
+    sub = parser.add_subparsers(dest="command")
+    source = sub.add_parser("code", help="fast-forward/publish a clean checkout through qinda")
+    source.add_argument("directory", nargs="?", default=".")
+    upload = sub.add_parser("publish", help="publish verified source archives to qinda")
+    upload.add_argument("files", nargs="+")
+    install = sub.add_parser("packages", help="install the published delivery or explicit exact versions")
+    install.add_argument("--prepare-only", action="store_true", help="fetch inputs and show the Portage plan")
+    install.add_argument("atoms", nargs="*")
+    args = parser.parse_args()
+    if args.apply:
+        if os.geteuid() != 0:
+            raise RuntimeError("--apply requires root")
+        apply_stage(args.apply)
+    elif os.geteuid() == 0:
+        raise RuntimeError("Run qinda-sync as your normal user; package installation invokes sudo.")
+    elif args.command == "code":
+        code(args.directory)
+    else:
+        CACHE.mkdir(parents=True, exist_ok=True)
+        if args.command == "publish":
+            publish(args.files)
+        else:
+            packages(getattr(args, "atoms", []), getattr(args, "prepare_only", False))
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except (RuntimeError, OSError, subprocess.CalledProcessError, ValueError) as error:
+        sys.exit(str(error))
