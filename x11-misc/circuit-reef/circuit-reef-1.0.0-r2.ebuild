@@ -12,7 +12,7 @@ HOMEPAGE="https://github.com/Es00bac/QindaQt"
 EGIT_REPO_URI="file:///home/cabewse/git/circuit-reef.git
 	file:///home/cabewse/work_SPaC3/Screensaver/circuit-reef
 	file:///home/cabewse/work_space/Screensaver/circuit-reef"
-EGIT_COMMIT="22a3a0118849ae930d43185d50eb540e66fb049e"
+EGIT_COMMIT="dcacc60065aec9bc4bca5f52af90cc9f61c9f203"
 
 LICENSE="GPL-3+"
 SLOT="0"
@@ -20,6 +20,8 @@ KEYWORDS="~amd64"
 
 RDEPEND="
 	>=media-libs/libsdl2-2.0.18[wayland]
+	>=dev-qt/qtbase-6.11:6=[gui]
+	>=dev-qt/qtdeclarative-6.11:6=
 	x11-libs/cairo
 "
 DEPEND="${RDEPEND}"
@@ -32,7 +34,10 @@ src_configure() {
 		# uninstalled libreef-core.so the executable could not load.
 		-DBUILD_SHARED_LIBS=OFF
 		-DBUILD_TESTING=OFF
-		-DREEF_BUILD_QT=OFF
+		# The Qt adapter is built only for the QML module the screen locker's
+		# greeter imports (ADR-0216); the standalone saver stays SDL.
+		-DREEF_BUILD_QT=ON
+		-DREEF_BUILD_QML_MODULE=ON
 	)
 	cmake_src_configure
 }

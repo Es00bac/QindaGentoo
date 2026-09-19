@@ -12,7 +12,7 @@ HOMEPAGE="https://github.com/Es00bac/QindaQt"
 EGIT_REPO_URI="file:///home/cabewse/git/qinda-patrol.git
 	file:///home/cabewse/work_SPaC3/Screensaver/qinda-patrol
 	file:///home/cabewse/work_space/Screensaver/qinda-patrol"
-EGIT_COMMIT="c9f6d9bd44a0696ed77d560d6d774b0cbafa6f89"
+EGIT_COMMIT="cc0701fae73d86a45c6e90397f1f6cf8fa1d3d97"
 
 LICENSE="GPL-3+"
 SLOT="0"
@@ -22,6 +22,7 @@ KEYWORDS="~amd64"
 # how every monitor gets its own scene under the QindaQt compositor.
 RDEPEND="
 	>=dev-qt/qtbase-6.11:6=[gui,wayland]
+	>=dev-qt/qtdeclarative-6.11:6=
 	=kde-plasma/layer-shell-qt-6.6.6*:6=
 "
 DEPEND="${RDEPEND}"
@@ -35,6 +36,9 @@ src_configure() {
 		# leaving both executables unable to start. Link it in instead.
 		-DBUILD_SHARED_LIBS=OFF
 		-DBUILD_TESTING=OFF
+		# The screen locker's greeter draws the saver from QML (ADR-0216) and
+		# links nothing of this project, so the importable module ships too.
+		-DPATROL_BUILD_QML_MODULE=ON
 		-DPATROL_BUILD_DESKTOP=ON
 		-DPATROL_BUILD_QUICK=OFF
 		-DPATROL_LAYER_SHELL=ON
