@@ -2,6 +2,9 @@
 gui-wm/qindaqt-desktop ~amd64
 gui-apps/qindaqt-apps ~amd64
 gui-apps/qindaoffice ~amd64
+# The toolkit the whole office suite's UI is built from (D-031); it comes
+# in as qindaoffice's dependency, so it needs accepting the same way.
+dev-libs/qindatk ~amd64
 gui-apps/qqterm ~amd64
 gui-apps/qindaqt-system-monitor ~amd64
 www-client/qindafox-bin ~amd64
