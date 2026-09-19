@@ -27,6 +27,10 @@ BDEPEND="virtual/pkgconfig"
 
 src_configure() {
 	local mycmakeargs=(
+		# Same as qinda-patrol: reef-core is private, has no install rule, and
+		# cmake.eclass's global BUILD_SHARED_LIBS=ON turned it into an
+		# uninstalled libreef-core.so the executable could not load.
+		-DBUILD_SHARED_LIBS=OFF
 		-DBUILD_TESTING=OFF
 		-DREEF_BUILD_QT=OFF
 	)

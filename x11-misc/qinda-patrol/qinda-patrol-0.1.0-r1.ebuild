@@ -29,6 +29,11 @@ BDEPEND="app-alternatives/ninja"
 
 src_configure() {
 	local mycmakeargs=(
+		# patrol_core is a private helper library with no install rule and no
+		# SONAME discipline. cmake.eclass turns BUILD_SHARED_LIBS on for every
+		# package, which built it as a libpatrol_core.so that nothing installs,
+		# leaving both executables unable to start. Link it in instead.
+		-DBUILD_SHARED_LIBS=OFF
 		-DBUILD_TESTING=OFF
 		-DPATROL_BUILD_DESKTOP=ON
 		-DPATROL_BUILD_QUICK=OFF
