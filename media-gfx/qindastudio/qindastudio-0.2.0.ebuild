@@ -28,8 +28,14 @@ RESTRICT="!test? ( test )"
 # QindaTK supplies the QML module every toolkit surface binds to. Without it
 # the build still succeeds and the interface comes up missing its controls,
 # which is why it is a hard dependency here rather than an optional one.
+#
+# The version floor is not housekeeping. The workspace switcher binds to
+# Tk.PillSwitcher, which no QindaTK before r4 contains; built against an
+# older one this package installs cleanly and then fails to start, because
+# the QML root cannot resolve the type. `tests/toolkit_components_check.py`
+# is the same guard at build time.
 COMMON_DEPEND="
-	dev-libs/qindatk
+	>=dev-libs/qindatk-0.1.0-r4
 	dev-qt/qtbase:6[concurrent,dbus,gui,network,ssl]
 	dev-qt/qtdeclarative:6
 	dev-qt/qtmultimedia:6
