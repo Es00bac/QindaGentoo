@@ -1,0 +1,17 @@
+# 2026-09-21 — gaming stack.
+#
+# Wine's wow64 mode runs 32-bit Windows programs on a pure 64-bit Wine, so it
+# needs no 32-bit host libraries at all, and its REQUIRED_USE forbids combining
+# the two (`wow64? ( !abi_x86_32 )`). Keep wow64 and turn the 32-bit ABI off
+# here specifically; the global abi_x86_32 stays on because the Steam client
+# itself is 32-bit and its runtime does need those libraries.
+app-emulation/wine-proton -abi_x86_32 wow64 vulkan
+app-emulation/wine-vanilla -abi_x86_32 wow64 vulkan
+
+# Steam: the client and its runtime are 32-bit.
+games-util/steam-launcher abi_x86_32
+
+# Vulkan and GL for both ABIs, which is what Proton's DXVK/VKD3D need.
+media-libs/mesa abi_x86_32 vulkan
+media-libs/vulkan-loader abi_x86_32
+media-libs/libglvnd abi_x86_32

@@ -1,0 +1,10 @@
+# 2026-09-21 — gaming stack; the operator accepts testing keywords for these.
+games-util/gamemode ~amd64
+games-util/lutris ~amd64
+app-emulation/wine-proton ~amd64
+app-emulation/wine-vanilla ~amd64
+app-emulation/winetricks ~amd64
+games-util/steam-launcher ~amd64
+games-util/mangohud ~amd64
+app-emulation/dxvk ~amd64
+app-emulation/vkd3d-proton ~amd64
