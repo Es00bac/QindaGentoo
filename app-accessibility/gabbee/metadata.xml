@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		Gabbee is a push-to-talk dictation bar for Wayland desktops. Holding
+		its shortcut records the microphone, streams it to a speech provider,
+		and inserts the result into whatever window has keyboard focus through
+		the first delivery route that works: a verified IBus commit, AT-SPI
+		EditableText, a clipboard paste with restoration, or a direct typing
+		tool. A separate shortcut runs saved, schema-validated desktop actions;
+		ordinary dictation can only ever produce text. Transcripts are
+		formatted semantically, so spoken numbers, phone numbers, versions,
+		dates, money and punctuation come out the way they are written.
+
+		On the QindaQt desktop Gabbee is also the org.qindaqt.Voice1 provider:
+		it is what the panel's Voice applet, the Settings Voice route and the
+		qindaqt-voice console talk to. That contract is owned by the desktop
+		and implemented here, so either side can be replaced independently.
+	</longdescription>
+	<use>
+		<flag name="qindaqt">Install the D-Bus activation file for the QindaQt desktop's <pkg>org.qindaqt.Voice1</pkg> voice contract</flag>
+		<flag name="ibus">Install the IBus engine component, the primary text-delivery route</flag>
+		<flag name="sound">Enable start, stop and error cues through <pkg>media-libs/libcanberra</pkg></flag>
+	</use>
+	<upstream>
+		<remote-id type="github">Es00bac/gabbee</remote-id>
+		<bugs-to>https://github.com/Es00bac/gabbee/issues</bugs-to>
+	</upstream>
+</pkgmetadata>

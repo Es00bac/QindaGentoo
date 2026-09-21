@@ -3,6 +3,7 @@ gui-wm/qindaqt-desktop
 gui-apps/qindaoffice
 gui-apps/qqterm
 gui-apps/qindaqt-system-monitor
+app-accessibility/gabbee
 www-client/qindafox-bin
 x11-misc/sddm
 net-misc/networkmanager

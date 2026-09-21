@@ -16,3 +16,10 @@ media-video/obs-studio websocket v4l wayland screencast
 # app-misc/venusprolinux[qindatk] loads the QindaTK QML module through PyQt6's
 # QtQml/QtQuick bindings, which dev-python/pyqt6 does not enable by default.
 dev-python/pyqt6 qml quick
+# app-accessibility/gabbee records the microphone with pw-record, which
+# media-video/pipewire builds only with USE=extra (it is a pw-cat link).
+media-video/pipewire extra
+# Gabbee's primary text-delivery route is its own IBus engine, and its
+# accessibility route walks AT-SPI; both go through GObject introspection.
+app-i18n/ibus introspection
+app-accessibility/at-spi2-core introspection

@@ -7,6 +7,8 @@ gui-apps/qindaoffice ~amd64
 dev-libs/qindatk ~amd64
 gui-apps/qqterm ~amd64
 gui-apps/qindaqt-system-monitor ~amd64
+# The desktop's org.qindaqt.Voice1 provider: dictation into any window.
+app-accessibility/gabbee ~amd64
 www-client/qindafox-bin ~amd64
 media-libs/noise-suppression-for-voice ~amd64
 kde-plasma/sloom-globalmenu ~amd64
