@@ -101,6 +101,13 @@ src_configure() {
 		-DQINDAQT_BUILD_SHELL=ON
 		-DQINDAQT_BUILD_PRODUCTION_SHELL=ON
 		-DQINDAQT_BUILD_VIEWER=ON
+		# gui-apps/qindaqt-system-monitor owns qindaqt-system-monitor, its
+		# desktop entry and its icon. The System Monitor landed on main after
+		# the pre20260919-r9 pin, so this option's ON default silently made
+		# the desktop package install all three and collide with that package
+		# at merge time. The shell's own dock dashboard applet is separate and
+		# unaffected.
+		-DQINDAQT_BUILD_SYSTEM_MONITOR=OFF
 		-DQINDAQT_ENABLE_HOST_UINPUT_TESTS=OFF
 		-DQINDAQT_ENABLE_STRICT_WARNINGS=OFF
 	)
