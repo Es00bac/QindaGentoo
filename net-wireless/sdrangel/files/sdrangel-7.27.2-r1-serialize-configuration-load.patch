@@ -1,0 +1,89 @@
+SDRangel segfaults when a configuration is loaded twice in quick succession,
+which is easy to do by accident on first run: with no saved settings SDRangel
+populates the bundled example configurations and opens the Configurations dialog
+straight away, and that dialog calls on_configurationLoad_clicked() from both
+on_configurationsTree_itemActivated() (double-click or Enter) and accept() (the
+OK button). A double-click followed by OK, or simply a second click on Load
+while the first is still running, therefore starts two LoadConfigurationFSMs.
+
+MainWindow::loadConfiguration() had no guard, so the two run concurrently. The
+second FSM's RemoveAllWorkspacesFSM deletes the workspaces, device sets and GUI
+widgets that the first FSM is still walking, and the first then dereferences
+freed objects. The victim depends on timing and on which configuration is being
+loaded - the QProgressDialog in LoadConfigurationFSM::loadDeviceSetSettings(),
+or the Map feature's QQuickWidget, have both been observed. Reproduces 3/3 with
+two loads and 0/2 with one.
+
+This serialises the loads: a request arriving while one is in flight is refused
+with a warning. The in-flight FSM is tracked through a QPointer, which clears
+itself if the FSM is destroyed without finishing, so a load that goes wrong
+cannot wedge configuration loading permanently.
+
+LoadConfigurationFSM::m_waitBox becomes a QPointer for the same reason: the
+progress dialog is created with WA_DeleteOnClose and the FSM outlives it, so the
+existing "if (m_waitBox)" checks in the state handlers were testing a pointer
+that could already dangle.
+
+--- a/sdrgui/mainwindow.h	2026-08-19 12:28:39.000000000 -0600
++++ b/sdrgui/mainwindow.h	2026-09-21 11:54:20.886653667 -0600
+@@ -32,6 +32,7 @@
+ #include <QFinalState>
+ #include <QSignalTransition>
+ #include <QProgressDialog>
++#include <QPointer>
+ 
+ #include "settings/mainsettings.h"
+ #include "util/message.h"
+@@ -231,7 +232,10 @@
+ private:
+ 
+     const Configuration *m_configuration;
+-    QProgressDialog *m_waitBox;
++    // The dialog is created with WA_DeleteOnClose and this FSM outlives it,
++    // so a bare pointer can dangle between states. QPointer makes the null
++    // checks in the state handlers mean what they are written to mean.
++    QPointer<QProgressDialog> m_waitBox;
+ 
+     RemoveAllWorkspacesFSM *m_removeAllWorkspacesFSM;
+ 
+@@ -346,6 +350,7 @@
+ #endif
+ 
+     bool m_settingsSaved;               // Records if settings have already been saved in response to a QCloseEvent
++    QPointer<LoadConfigurationFSM> m_configurationLoadFSM; // In-flight load started by loadConfiguration(), if any
+     const MainParser& m_parser;
+ 
+ 	void loadSettings();
+--- a/sdrgui/mainwindow.cpp	2026-08-19 12:28:39.000000000 -0600
++++ b/sdrgui/mainwindow.cpp	2026-09-21 11:54:20.887092693 -0600
+@@ -1924,6 +1924,21 @@
+         (int)configuration->getFeatureSetPreset().getFeatureCount()
+     );
+ 
++    // ConfigurationsDialog calls on_configurationLoad_clicked() from both
++    // on_configurationsTree_itemActivated() (double-click or Enter) and accept()
++    // (the OK button), so a double-click followed by OK - or simply a second click
++    // on Load while the first is still running - starts a second LoadConfigurationFSM.
++    // The two then overlap: the second one's RemoveAllWorkspacesFSM deletes the
++    // workspaces, device sets and GUI widgets the first is still walking, and the
++    // first goes on to dereference freed objects. Serialize them instead.
++    // The QPointer clears itself if the FSM dies without finishing, so a load that
++    // goes wrong cannot wedge this permanently.
++    if (!m_configurationLoadFSM.isNull())
++    {
++        qWarning("MainWindow::loadConfiguration: a configuration is already being loaded - ignoring this request");
++        return;
++    }
++
+     QProgressDialog *waitBox = nullptr;
+ 
+     if (fromDialog)
+@@ -1938,6 +1953,8 @@
+     }
+ 
+     LoadConfigurationFSM *fsm = new LoadConfigurationFSM(this, configuration, waitBox);
++    m_configurationLoadFSM = fsm;
++    connect(fsm, &LoadConfigurationFSM::finished, this, [this]() { m_configurationLoadFSM.clear(); });
+     connect(fsm, &LoadConfigurationFSM::finished, fsm, &LoadConfigurationFSM::deleteLater);
+     fsm->start();
+     }

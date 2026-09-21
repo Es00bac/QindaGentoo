@@ -7,7 +7,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A Gentoo Portage overlay (repo name `qindaqt`, `masters = gentoo`, thin Manifests) for
 everything Sloom Studio / QindaQt develops in-house: the QindaQt Wayland desktop and its
 apps, QindaOffice, QindaStudio, QindaFox, and the Sloom Studio Plasma bits. There is no
-application code here, only ebuilds, a profile, and two shell tools. Ebuilds are edited
+application code here, only ebuilds, a profile, and two shell tools. The one exception to
+"in-house" is `net-wireless/*`, the third-party SDRangel stack: it is kept here rather
+than in a local overlay so the patches it carries are version-controlled and reach both
+machines. Ebuilds are edited
 either directly here or in each source project's `packaging/gentoo/` (QindaStudio uses
 `packaging/portage/`) and then copied in. The README's table maps packages to source
 projects; those projects are expected as sibling checkouts of this directory.

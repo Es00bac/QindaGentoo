@@ -14,6 +14,16 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | `sloom-studio-gpl` |
 | `kde-plasma/kwin`, `kde-plasma/plasma-activities` | pinned 6.6.x copies the desktop's KWin plugin ABI needs |
 
+### Third-party packages
+
+`net-wireless/*` is the SDRangel software-defined-radio stack: `sdrangel` itself
+plus the twelve upstream libraries it needs that Gentoo does not package
+(`aptdec`, `cm256cc`, `cspice`, `dab-cmdline`, `dsdcc`, `ggmorse`, `inmarsatc`,
+`libsigmf`, `mbelib`, `serialdv`, `sgp4`). These are not developed here; they
+live in this overlay because it is the version-controlled one, so the patches
+carried against them are tracked and reach both machines. `licenses/CSPICE` is
+the NASA/Caltech licence `net-wireless/cspice` refers to.
+
 `profiles/qindaqt/systemd` is the desktop profile: parent
 `default/linux/amd64/23.0/desktop/plasma/systemd` plus the QindaQt package set,
 USE defaults, keywords and licenses. Select it with

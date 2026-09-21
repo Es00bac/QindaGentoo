@@ -1,0 +1,27 @@
+PacketDemodFramer::PACKETDEMOD_CHASE_MAX is declared as a static const int with
+an in-class initialiser and never defined out of line. chaseDecode() passes it to
+std::min(), which takes its arguments by const reference and so odr-uses it. In
+C++17 a static const (as opposed to static constexpr) data member is not
+implicitly inline, so the compiler emits a reference to a symbol nothing defines
+and libdemodpacket.so fails to load at runtime:
+
+  PluginManager::loadPluginsDir: Cannot load library libdemodpacket.so:
+  undefined symbol: _ZN17PacketDemodFramer21PACKETDEMOD_CHASE_MAXE
+
+The Packet demodulator is then silently missing from the channel list, and the
+bundled "ISS Packet" example configuration loads without its demodulator.
+
+Making the member constexpr makes it implicitly inline in C++17, which gives it
+the definition std::min needs. Reported upstream behaviour, not Gentoo-specific.
+
+--- a/plugins/channelrx/demodpacket/packetdemodframer.h	2026-08-19 12:28:39.000000000 -0600
++++ b/plugins/channelrx/demodpacket/packetdemodframer.h	2026-09-21 11:53:38.480661645 -0600
+@@ -57,7 +57,7 @@
+     // and re-CRC'd frames for every CRC failure on every detector, so 12 is already 4095;
+     // the value reaches here from presets and the REST API, neither of which bounds it,
+     // and 1u << n is undefined once n reaches 32.
+-    static const int PACKETDEMOD_CHASE_MAX = 12;
++    static constexpr int PACKETDEMOD_CHASE_MAX = 12;
+ 
+     // Returns true if the frame was accepted - the caller's deduplication decides, and the
+     // framer reports that back so callers can count distinct packets rather than the
