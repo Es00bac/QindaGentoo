@@ -22,9 +22,10 @@
 		and implemented here, so either side can be replaced independently.
 	</longdescription>
 	<use>
-		<flag name="qindaqt">Install the D-Bus activation file for the QindaQt desktop's <pkg>org.qindaqt.Voice1</pkg> voice contract</flag>
+		<flag name="qindaqt">Install the D-Bus activation file for the QindaQt desktop's org.qindaqt.Voice1 voice contract</flag>
 		<flag name="ibus">Install the IBus engine component, the primary text-delivery route</flag>
 		<flag name="sound">Enable start, stop and error cues through <pkg>media-libs/libcanberra</pkg></flag>
+		<flag name="whisper">Dictate offline: transcribe on this computer with <pkg>dev-python/faster-whisper</pkg> and a model from <pkg>app-accessibility/faster-whisper-models</pkg> when online recognition fails</flag>
 	</use>
 	<upstream>
 		<remote-id type="github">Es00bac/gabbee</remote-id>
