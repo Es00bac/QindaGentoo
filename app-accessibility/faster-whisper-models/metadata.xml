@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		OpenAI Whisper speech recognition models in the CTranslate2 format
+		that faster-whisper loads, pinned to upstream revisions and
+		installed under /usr/share/faster-whisper/NAME. Gabbee's offline
+		dictation looks models up there by name, so dictation keeps working
+		with no network and downloads nothing at run time.
+	</longdescription>
+	<use>
+		<flag name="distil-small-en">Install distil-small.en, the English default: accurate and fast enough on a CPU for push-to-talk</flag>
+		<flag name="base-en">Install base.en, faster and less accurate, for slow CPUs</flag>
+		<flag name="large-v3-turbo">Install the multilingual large-v3-turbo (1.6 GB); too slow for dictation without a GPU</flag>
+	</use>
+</pkgmetadata>

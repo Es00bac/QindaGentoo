@@ -9,6 +9,16 @@ gui-apps/qqterm ~amd64
 gui-apps/qindaqt-system-monitor ~amd64
 # The desktop's org.qindaqt.Voice1 provider: dictation into any window.
 app-accessibility/gabbee ~amd64
+# Its offline dictation (gabbee[whisper]): faster-whisper, its CTranslate2
+# runtime, the models and PyAV from this overlay, and the parts of the
+# Hugging Face stack that ::gentoo keeps in testing.
+dev-python/faster-whisper ~amd64
+sci-ml/ctranslate2 ~amd64
+app-accessibility/faster-whisper-models ~amd64
+dev-python/av ~amd64
+sci-ml/tokenizers ~amd64
+sci-ml/huggingface_hub ~amd64
+sci-ml/hf_xet ~amd64
 www-client/qindafox-bin ~amd64
 media-libs/noise-suppression-for-voice ~amd64
 kde-plasma/sloom-globalmenu ~amd64

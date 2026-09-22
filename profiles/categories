@@ -1,10 +1,12 @@
 app-accessibility
 app-misc
 dev-libs
+dev-python
 gui-apps
 gui-wm
 kde-plasma
 media-gfx
 media-plugins
+sci-ml
 www-client
 x11-misc

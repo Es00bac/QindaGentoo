@@ -11,6 +11,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `www-client/qindafox-bin` | `QindaQt_Apps/QindaFox` |
 | `gui-wm/qindastudio` | `QindaStudio` |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
+| `app-accessibility/gabbee` | `gabbee` (dictation; QindaQt's `org.qindaqt.Voice1` provider) |
 | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | `sloom-studio-gpl` |
 | `kde-plasma/kwin`, `kde-plasma/plasma-activities` | pinned 6.6.x copies the desktop's KWin plugin ABI needs |
 
@@ -23,6 +24,18 @@ plus the twelve upstream libraries it needs that Gentoo does not package
 live in this overlay because it is the version-controlled one, so the patches
 carried against them are tracked and reach both machines. `licenses/CSPICE` is
 the NASA/Caltech licence `net-wireless/cspice` refers to.
+
+`sci-ml/ctranslate2`, `dev-python/faster-whisper`, `dev-python/av` and
+`app-accessibility/faster-whisper-models` are Gabbee's offline dictation,
+`app-accessibility/gabbee[whisper]`, which is on by default: when online
+recognition fails, the recording is transcribed on the machine itself.
+They are the CTranslate2 engine built on oneDNN for the CPU, faster-whisper
+on top of it, PyAV (a verbatim copy of ::guru's, because this overlay's only
+master is ::gentoo), and Whisper models pinned to upstream revisions and
+installed under `/usr/share/faster-whisper`, so nothing is downloaded at run
+time. `distil-small.en` is the default model, chosen by measurement on both
+machines; the `base-en` and `large-v3-turbo` USE flags add others. The profile
+accepts the `~amd64` Hugging Face packages they need from ::gentoo.
 
 `profiles/qindaqt/systemd` is the desktop profile: parent
 `default/linux/amd64/23.0/desktop/plasma/systemd` plus the QindaQt package set,

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		CTranslate2 is a C++ and Python library for efficient inference with
+		Transformer models, including Whisper through faster-whisper. This
+		build targets the CPU through oneDNN with int8 quantization.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">OpenNMT/CTranslate2</remote-id>
+		<remote-id type="pypi">ctranslate2</remote-id>
+	</upstream>
+</pkgmetadata>
