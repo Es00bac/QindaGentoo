@@ -9,6 +9,10 @@ gui-apps/qqterm ~amd64
 gui-apps/qindaqt-system-monitor ~amd64
 # The desktop's org.qindaqt.Voice1 provider: dictation into any window.
 app-accessibility/gabbee ~amd64
+# Gabbee's active-window typing route uses dotool on Wayland.
+x11-misc/dotool ~amd64
+# Versioned appearance pack authored on qinda-top.
+x11-themes/qinda-seven ~amd64
 # Its offline dictation (gabbee[whisper]): faster-whisper, its CTranslate2
 # runtime, the models and PyAV from this overlay, and the parts of the
 # Hugging Face stack that ::gentoo keeps in testing.

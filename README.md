@@ -12,6 +12,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `gui-wm/qindastudio` | `QindaStudio` |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
 | `app-accessibility/gabbee` | `gabbee` (dictation; QindaQt's `org.qindaqt.Voice1` provider) |
+| `x11-themes/qinda-seven` | `QindaThemes` (seven themes, paired decorations, and KDE color schemes) |
 | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | `sloom-studio-gpl` |
 | `kde-plasma/kwin`, `kde-plasma/plasma-activities` | pinned 6.6.x copies the desktop's KWin plugin ABI needs |
 
@@ -41,6 +42,11 @@ accepts the `~amd64` Hugging Face packages they need from ::gentoo.
 `default/linux/amd64/23.0/desktop/plasma/systemd` plus the QindaQt package set,
 USE defaults, keywords and licenses. Select it with
 `eselect profile set qindaqt:qindaqt/systemd`.
+
+The profile installs `x11-misc/dotool` for Gabbee's focused-window typing
+route and `x11-themes/qinda-seven` for the appearance catalog. The latter pins
+the source-controlled theme pack in the local Git hub; Portage owns its 21
+installed data files. The user still chooses a theme in Settings → Appearance.
 
 ## Workflow
 
