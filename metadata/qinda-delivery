@@ -1,16 +1,16 @@
 # Completed desktop, application and screensaver delivery shared by both hosts.
 # Adoption stays an explicit update: qinda-sync installs exactly these atoms.
 #
-# 2026-09-20: the desktop checkpoint pins main 4fd1372e (panel popup placement,
-# the lazy start panel, nine stock layouts, the start-menu variants) and no
-# longer builds a terminal, so gui-apps/qqterm joins the delivery as its
-# post-dependency.
+# 2026-09-23: the desktop checkpoint pins QindaQt
+# 8a86b74877c2fadbd0b3d4c8b8c03100db374642: active-window dictation
+# startup, fullscreen dock autohiding, Gather's upper-left corner and stable
+# free-window previews. It still uses gui-apps/qqterm as its terminal.
 #
 # Deliberately absent: media-gfx/qindastudio and the screensaver/game suite are
 # under active development, so this file keeps naming the versions both hosts
 # already run rather than a moving head. media-plugins/obs-qindaqt is absent
 # because qinda-top has no OBS.
-=gui-wm/qindaqt-desktop-0.1.0_pre20260922
+=gui-wm/qindaqt-desktop-0.1.0_pre20260923-r2
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r4
