@@ -7,8 +7,8 @@ inherit cmake git-r3
 
 DESCRIPTION="Seven QindaQt themes with paired decorations and KDE color schemes"
 HOMEPAGE="https://github.com/Es00bac/QindaQt"
-# AGENT-CONTRACT: both hosts have this exact source commit in their local Git
-# hub. The laptop's original working directory was not a Git repository.
+# AGENT-CONTRACT: both hosts track this exact source commit in clean theme
+# checkouts and the qinda Git hub; never package an uncommitted working tree.
 EGIT_REPO_URI="file:///home/cabewse/git/QindaThemes.git"
 EGIT_COMMIT="3c05226b25b4d25d03e892eacaff1e8592c185e0"
 
