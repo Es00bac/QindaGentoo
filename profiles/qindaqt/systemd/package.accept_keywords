@@ -24,6 +24,7 @@ dev-python/av ~amd64
 sci-ml/tokenizers ~amd64
 sci-ml/huggingface_hub ~amd64
 sci-ml/hf_xet ~amd64
+dev-util/opencode-bin ~amd64
 www-client/qindafox-bin ~amd64
 media-libs/noise-suppression-for-voice ~amd64
 kde-plasma/sloom-globalmenu ~amd64

@@ -8,6 +8,7 @@ app-accessibility/gabbee
 x11-misc/dotool
 x11-themes/qinda-seven
 www-client/qindafox-bin
+dev-util/opencode-bin
 x11-misc/sddm
 net-misc/networkmanager
 media-video/pipewire

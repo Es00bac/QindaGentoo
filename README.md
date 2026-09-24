@@ -9,6 +9,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `gui-apps/qindaoffice` | `QindaOffice` |
 | `gui-apps/qqterm` | `QindaQt_Apps` |
 | `www-client/qindafox-bin` | `QindaQt_Apps/QindaFox` |
+| `dev-util/opencode-bin` | OpenCode official Linux release, packaged through Portage |
 | `gui-wm/qindastudio` | `QindaStudio` |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
 | `app-office/obsidian` | Obsidian public Linux desktop release, packaged through Portage |
@@ -20,6 +21,9 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 ### Third-party packages
 
 `app-office/obsidian` packages Obsidian's official Linux release tarball and Debian metadata archive through Portage; its ebuild, license text, and checksums are tracked here.
+
+`dev-util/opencode-bin` packages the official OpenCode Linux CLI release through
+Portage so the version and release checksum are shared by both Qinda hosts.
 
 `net-wireless/*` is the SDRangel software-defined-radio stack: `sdrangel` itself
 plus the twelve upstream libraries it needs that Gentoo does not package
