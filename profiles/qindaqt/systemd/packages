@@ -1,4 +1,5 @@
 # @profile set: what a QindaQt desktop machine gets by default.
+app-office/obsidian
 gui-wm/qindaqt-desktop
 gui-apps/qindaoffice
 gui-apps/qqterm

@@ -11,12 +11,15 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `www-client/qindafox-bin` | `QindaQt_Apps/QindaFox` |
 | `gui-wm/qindastudio` | `QindaStudio` |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
+| `app-office/obsidian` | Obsidian public Linux desktop release, packaged through Portage |
 | `app-accessibility/gabbee` | `gabbee` (dictation; QindaQt's `org.qindaqt.Voice1` provider) |
 | `x11-themes/qinda-seven` | `QindaThemes` (seven themes, paired decorations, and KDE color schemes) |
 | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | `sloom-studio-gpl` |
 | `kde-plasma/kwin`, `kde-plasma/plasma-activities` | pinned 6.6.x copies the desktop's KWin plugin ABI needs |
 
 ### Third-party packages
+
+`app-office/obsidian` packages Obsidian's official Linux release tarball and Debian metadata archive through Portage; its ebuild, license text, and checksums are tracked here.
 
 `net-wireless/*` is the SDRangel software-defined-radio stack: `sdrangel` itself
 plus the twelve upstream libraries it needs that Gentoo does not package

@@ -1,4 +1,5 @@
 # The QindaQt overlay packages are ~amd64 checkpoints.
+app-office/obsidian ~amd64
 gui-wm/qindaqt-desktop ~amd64
 gui-apps/qindaqt-apps ~amd64
 gui-apps/qindaoffice ~amd64
