@@ -11,7 +11,7 @@
 # under active development, so this file keeps naming the versions both hosts
 # already run rather than a moving head. media-plugins/obs-qindaqt is absent
 # because qinda-top has no OBS.
-=app-office/obsidian-1.13.7
+=app-office/obsidian-1.13.7-r1
 =gui-wm/qindaqt-desktop-0.1.0_pre20260923-r4
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
