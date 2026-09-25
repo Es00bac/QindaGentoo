@@ -1,0 +1,4 @@
+# Hold umu at the tested release. umu decides which Steam Runtime and which
+# Proton a game runs under, so a new umu is a compatibility change for every
+# game; unmask it here only after it has been verified on both machines.
+>games-util/umu-launcher-1.4.4

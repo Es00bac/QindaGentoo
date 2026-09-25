@@ -1,4 +1,5 @@
 app-accessibility
+app-emulation
 app-misc
 app-office
 dev-libs
@@ -9,6 +10,8 @@ gui-wm
 kde-plasma
 media-gfx
 media-plugins
+media-video
+net-wireless
 sci-ml
 www-client
 x11-misc

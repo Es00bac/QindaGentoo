@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <longdescription>
+    Prebuilt GE-Proton releases installed side by side, one slot per release,
+    under /usr/share/steam/compatibilitytools.d. QindaQt pins games to an exact
+    slot so a new Proton build never reaches a game until it has been tested.
+  </longdescription>
+  <upstream>
+    <remote-id type="github">GloriousEggroll/proton-ge-custom</remote-id>
+  </upstream>
+</pkgmetadata>

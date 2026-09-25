@@ -27,3 +27,8 @@
 =x11-misc/prism-circuit-1.1.0
 =x11-misc/prism-brawl-1.2.1
 =x11-misc/starward-reimagined-2.1.0
+# 2026-09-25: GE-Proton 11-6 as a pinned, system-wide compatibility tool.
+# GE-Proton11-7 froze WoW's render loop ~1.2 s every ~2 s on qinda-top (55% of
+# frames stalled vs 0-2% on 11-6); games must name an exact build. Pulls
+# games-util/umu-launcher from ::guru, held at 1.4.4 by the profile mask.
+=app-emulation/ge-proton-bin-11.6

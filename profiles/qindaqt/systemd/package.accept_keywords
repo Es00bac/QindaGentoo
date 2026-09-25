@@ -45,3 +45,7 @@ x11-misc/circuit-reef ~amd64
 x11-misc/prism-circuit ~amd64
 x11-misc/prism-brawl ~amd64
 x11-misc/starward-reimagined ~amd64
+# Windows games (QindaLutris, ADR-0275). Exact versions only: a Proton build or
+# umu release reaches users after it has been tested, never by floating.
+=app-emulation/ge-proton-bin-11.6 ~amd64
+=games-util/umu-launcher-1.4.4 ~amd64
