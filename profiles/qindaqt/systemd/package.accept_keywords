@@ -49,3 +49,8 @@ x11-misc/starward-reimagined ~amd64
 # umu release reaches users after it has been tested, never by floating.
 =app-emulation/ge-proton-bin-11.6 ~amd64
 =games-util/umu-launcher-1.4.4 ~amd64
+# Store clients behind QindaLutris's built-in sign-in (ADR-0275): Epic via
+# ::guru legendary, GOG via gogdl, Amazon via nile. Exact tested versions.
+=games-util/gogdl-bin-1.3.0 ~amd64
+=games-util/nile-bin-1.2.0 ~amd64
+=games-util/legendary-0.20.34-r2 ~amd64
