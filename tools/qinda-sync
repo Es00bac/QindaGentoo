@@ -105,10 +105,55 @@ def publish(filenames):
         print(f"Published verified archive {source.name} on {HUB}.")
 
 
+def refresh_system_overlay(destination):
+    """Fast-forward the host's ::qindaqt checkout to the hub's master.
+
+    Without this, only the pinned recipes ever reached a host: a fixed
+    dependency (ctranslate2 4.8.2-r1) stayed invisible while the checkout sat
+    days behind, so the hosts drifted apart. Local differences that
+    qinda-sync itself staged (files identical to the hub, Manifests whose
+    lines the hub also carries) are safe to replace; any other local edit
+    keeps the checkout as it is, and the run says so.
+    """
+    if not (destination / ".git").exists():
+        return
+    git = ["git", "-c", "safe.directory=*", "-C", str(destination)]
+    try:
+        run(*git, "fetch", "-q", "origin")
+    except subprocess.CalledProcessError:
+        print("qinda-sync: could not fetch the overlay hub; keeping the current checkout")
+        return
+    # Not run(..., capture=True): it strips, and the first porcelain line's
+    # leading status space is part of the format.
+    changed = subprocess.run(git + ["status", "--porcelain", "--untracked-files=all"],
+                             check=True, capture_output=True, text=True).stdout
+    for line in changed.splitlines():
+        name = line[3:]
+        if name.startswith("metadata/md5-cache/"):
+            continue
+        local = destination / name
+        try:
+            upstream = subprocess.run(git + ["show", f"origin/master:{name}"], check=True,
+                                      capture_output=True).stdout
+        except subprocess.CalledProcessError:
+            upstream = None
+        if local.is_file() and upstream is not None:
+            if local.read_bytes() == upstream:
+                continue
+            if local.name == "Manifest" and set(local.read_text().splitlines()) <= set(
+                    upstream.decode().splitlines()):
+                continue
+        print(f"qinda-sync: local overlay edit kept, checkout not updated: {name}")
+        return
+    run(*git, "reset", "-q", "--hard", "origin/master")
+    run(*git, "clean", "-qfd", "-e", "metadata/md5-cache")
+
+
 def apply_stage(stage):
     """Root-only copy boundary; inspect every conflict before writing anything."""
     stage = Path(stage)
     destination = Path(run("portageq", "get_repo_path", "/", "qindaqt", capture=True))
+    refresh_system_overlay(destination)
     distdir = Path(run("portageq", "envvar", "DISTDIR", capture=True))
     pending = []
     for group, target_root in (("overlay", destination), ("distfiles", distdir)):
