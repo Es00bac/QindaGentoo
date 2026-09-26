@@ -17,7 +17,7 @@
 =gui-wm/qindaqt-desktop-0.1.0_pre20260925-r2
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
-=dev-libs/qindatk-0.1.0-r8
+=dev-libs/qindatk-0.1.0-r9
 =gui-apps/qindaoffice-0.1.0_p20260926-r2
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
@@ -60,3 +60,4 @@
 # recovered QindaWrite document finally sticks (no second journal key).
 # 2026-09-26: qindaoffice p20260926-r2 (QindaOffice bd25fca): Office global
 # menus stay open (changes held while the window is inactive, D-054).
+# 2026-09-26: qindatk r9: ribbon tabs squeeze group by group (D-305).
