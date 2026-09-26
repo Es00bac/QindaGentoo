@@ -18,7 +18,7 @@
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r8
-=gui-apps/qindaoffice-0.1.0_p20260926
+=gui-apps/qindaoffice-0.1.0_p20260926-r1
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
 =x11-themes/qinda-seven-1.0.0_p20260922
@@ -56,3 +56,5 @@
 # Installed on qinda (Portage build) and qinda-top (signed binpkgs from the
 # qinda binhost via quickpkg); both smoke-tested: no unresolved library,
 # qindanote --list-commands carries noteTouchDrawAction.
+# 2026-09-26: qindaoffice p20260926-r1 (QindaOffice ce86fcc): Discard on a
+# recovered QindaWrite document finally sticks (no second journal key).
