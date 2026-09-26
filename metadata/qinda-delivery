@@ -48,5 +48,5 @@
 # 2026-09-26: QindaOffice 0b86d23 (qindaoffice p20260925) moves the suite to
 # the QindaTK ribbon and adds QindaMail, QindaBooks (Mercury, Stripe),
 # QindaBase, QindaDiagram and QindaPlan, over qindatk r7 (QindaTK 6cd0482d).
-# Installed and smoke-tested on qinda-top; before emerging on either host,
+# Installed and smoke-tested on qinda-top and qinda; before emerging on either host,
 # fast-forward ~/git/QindaTK.git's main from the hub (git-r3 reads HEAD).
