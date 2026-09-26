@@ -79,7 +79,9 @@ installation. The default command reads the committed `metadata/qinda-delivery`
 from qinda's bare Git hub, obtains missing archives and pinned shared Git sources,
 preserves existing overlay entries, and asks Portage to install those exact
 versions. Available binaries use the existing binhost; source builds retain the
-host's configured compiler flags and `MAKEOPTS`. Already installed versions are
+host's configured compiler flags and `MAKEOPTS`. On qinda the install also
+writes a signed binary package (`--buildpkg`), so `qinda-sync` on `qinda-top`
+then installs the same build from the binhost. Already installed versions are
 skipped. It never updates `@world` or restarts the desktop.
 
 ```sh

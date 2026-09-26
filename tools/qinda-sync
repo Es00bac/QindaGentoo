@@ -213,7 +213,12 @@ def packages(atoms, prepare_only):
     if prepare_only:
         run("sudo", "-n", "emerge", "--pretend", "--verbose", "--oneshot", "--noreplace", *atoms)
     else:
-        run("sudo", "-n", "emerge", "--oneshot", "--noreplace", "--usepkg", *atoms)
+        # On the hub, also keep a signed binary package of each delivered
+        # version: qinda-top installs from this binhost, and qinda's make.conf
+        # has no FEATURES=buildpkg, so without this the laptop compiled
+        # every delivery from source.
+        extra = ("--buildpkg",) if ON_HUB else ()
+        run("sudo", "-n", "emerge", "--oneshot", "--noreplace", "--usepkg", *extra, *atoms)
 
 
 def main():
