@@ -23,3 +23,8 @@ media-video/pipewire extra
 # accessibility route walks AT-SPI; both go through GObject introspection.
 app-i18n/ibus introspection
 app-accessibility/at-spi2-core introspection
+
+# QindaLutris's built-in store sign-in (ADR-0275 section 4) shows the store's
+# own login page in an embedded web view. qtwebengine must match qtbase's
+# accessibility flag, which this profile enables.
+dev-qt/qtwebengine accessibility
