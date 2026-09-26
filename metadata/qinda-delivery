@@ -53,3 +53,6 @@
 # 2026-09-26: qindaoffice p20260926 (QindaOffice d0a0b2c) over qindatk r8
 # (QindaTK 77d01dab): recovered untitled documents stop multiplying; QindaNote
 # typing is ink on paper under dark themes; touch inks, pinches and pans.
+# Installed on qinda (Portage build) and qinda-top (signed binpkgs from the
+# qinda binhost via quickpkg); both smoke-tested: no unresolved library,
+# qindanote --list-commands carries noteTouchDrawAction.
