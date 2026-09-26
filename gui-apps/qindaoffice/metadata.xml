@@ -8,7 +8,11 @@
 	<longdescription>
 		QindaQt Office is the office suite for the QindaQt desktop:
 		QindaWrite (word processor), QindaCalc (spreadsheet), QindaShow
-		(presentations) and QindaNote (notes with pen input). Every
+		(presentations), QindaNote (notes with pen input), QindaMail (mail
+		and calendar: IMAP, POP3, SMTP, CalDAV, iCalendar, Exchange and
+		Microsoft 365), QindaBooks (bookkeeping, with Mercury and Stripe
+		connections), QindaBase (databases), QindaDiagram (diagrams) and
+		QindaPlan (project plans), behind a shared ribbon. Every
 		document lives in an ordinary top-level window so the desktop's
 		window containers provide tab and split grouping, and each window
 		exports its menu to the panel over the desktop's D-Bus dbusmenu
@@ -16,6 +20,8 @@
 		CLI subscriptions or OpenAI-/Anthropic-compatible HTTP endpoints.
 	</longdescription>
 	<use>
+		<flag name="charts">Build QindaCalc's charts (drawn by the suite's
+			own renderer; no dev-qt/qtcharts needed)</flag>
 		<flag name="libreoffice">Enable headless LibreOffice conversion for
 			docx/xls/ppt-class import and export (default on)</flag>
 	</use>
