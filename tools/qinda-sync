@@ -193,7 +193,17 @@ def packages(atoms, prepare_only):
                 cached = distdir / name
                 if not cached.exists():
                     cached = stage / "distfiles" / name
-                    copy_from_hub(Path("/var/cache/distfiles") / name, cached)
+                    try:
+                        copy_from_hub(Path("/var/cache/distfiles") / name, cached)
+                    except (OSError, subprocess.CalledProcessError):
+                        # A public archive (PyAV's GitHub tarball, say) the hub
+                        # never downloaded: Portage fetches and verifies it
+                        # itself. Only fetch-restricted first-party archives
+                        # must come from the hub.
+                        if re.search(r'^RESTRICT="[^"]*\bfetch\b', text, re.M):
+                            raise RuntimeError(f"Archive not published on qinda: {name}"
+                                               " (run qinda-sync publish on the host that has it)")
+                        continue
                 digest = fields[fields.index("SHA512") + 1]
                 if hashlib.sha512(cached.read_bytes()).hexdigest() != digest:
                     raise RuntimeError(f"Archive checksum mismatch: {name}")

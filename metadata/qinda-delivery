@@ -24,8 +24,8 @@
 =x11-themes/qinda-seven-1.0.0_p20260922
 =x11-misc/qinda-patrol-0.2.0
 =x11-misc/circuit-reef-1.1.0
-=x11-misc/prism-circuit-1.1.0
-=x11-misc/prism-brawl-1.2.1
+=x11-misc/prism-circuit-1.5.1
+=x11-misc/prism-brawl-1.4.4
 =x11-misc/starward-reimagined-2.1.0
 # 2026-09-25: GE-Proton 11-6 as a pinned, system-wide compatibility tool.
 # GE-Proton11-7 froze WoW's render loop ~1.2 s every ~2 s on qinda-top (55% of
@@ -62,3 +62,16 @@
 # menus stay open (changes held while the window is inactive, D-054).
 # 2026-09-26: qindatk r9: ribbon tabs squeeze group by group (D-305).
 # 2026-09-26: qindaoffice p20260926-r3 (QindaOffice 0400b81): no dock toggle loop.
+# 2026-09-26: both hosts caught up to the newest recipe of every overlay
+# package either host runs (owner: no discrepancies between the machines).
+# The screensavers follow their newest releases instead of the 2026-09-23
+# pins, and qinda gains what only qinda-top had: Gabbee's offline Whisper
+# dictation, VenusPro, SDRangel, QindaStudio's and OBS's plugins, QindaFox.
+=app-accessibility/gabbee-0.1.0_p20260921-r9
+=app-accessibility/faster-whisper-models-20260922
+=dev-python/av-17.0.1
+=app-misc/venusprolinux-0.3.0_p20260918-r1
+=net-wireless/sdrangel-7.27.2-r1
+=media-gfx/qindastudio-0.2.0
+=media-plugins/obs-qindaqt-0.1.0_pre20260921-r2
+=www-client/qindafox-bin-155.0.1-r2
