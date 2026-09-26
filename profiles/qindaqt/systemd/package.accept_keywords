@@ -54,3 +54,6 @@ x11-misc/starward-reimagined ~amd64
 =games-util/gogdl-bin-1.3.0 ~amd64
 =games-util/nile-bin-1.2.0 ~amd64
 =games-util/legendary-0.20.34-r2 ~amd64
+# "Run in its own screen" in QindaLutris (ADR-0275 section 4c) starts games in
+# gamescope. The version qinda already runs; exact, like every gaming atom.
+=gui-wm/gamescope-3.16.28 ~amd64

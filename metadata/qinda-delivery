@@ -14,10 +14,10 @@
 # 2026-09-24: OpenCode 1.18.32 is the current official Linux CLI release.
 =dev-util/opencode-bin-1.18.32
 =app-office/obsidian-1.13.7-r1
-=gui-wm/qindaqt-desktop-0.1.0_pre20260923-r4
+=gui-wm/qindaqt-desktop-0.1.0_pre20260925-r1
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
-=dev-libs/qindatk-0.1.0-r4
+=dev-libs/qindatk-0.1.0-r6
 =gui-apps/qindaoffice-0.1.0_p20260919
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
@@ -32,3 +32,7 @@
 # frames stalled vs 0-2% on 11-6); games must name an exact build. Pulls
 # games-util/umu-launcher from ::guru, held at 1.4.4 by the profile mask.
 =app-emulation/ge-proton-bin-11.6
+# 2026-09-25: desktop r1 pins QindaQt 8a2bfc78: QindaLutris becomes the game
+# installer (ADR-0275) and Wine/Proton tray icons appear (GetAll names the
+# Properties interface). gamescope is pinned for "Run in its own screen".
+=gui-wm/gamescope-3.16.28
