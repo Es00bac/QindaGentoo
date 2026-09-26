@@ -18,7 +18,7 @@
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r9
-=gui-apps/qindaoffice-0.1.0_p20260926-r3
+=gui-apps/qindaoffice-0.1.0_p20260926-r4
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
 =x11-themes/qinda-seven-1.0.0_p20260922
@@ -75,3 +75,4 @@
 =media-gfx/qindastudio-0.2.0
 =media-plugins/obs-qindaqt-0.1.0_pre20260921-r2
 =www-client/qindafox-bin-155.0.1-r2
+# 2026-09-26: qindaoffice p20260926-r4 (QindaOffice 0fbb89d): Recovered Documents dialog.
