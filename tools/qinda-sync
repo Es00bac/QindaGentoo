@@ -156,6 +156,13 @@ def packages(atoms, prepare_only):
                 raise RuntimeError("Use exact package versions: =category/package-version")
             package = repository / atom.cp
             recipe = package / (atom.cpv.split("/", 1)[1] + ".ebuild")
+            if not recipe.exists():
+                # A pinned package from another repository (x11-misc/dotool
+                # from ::guru): nothing to stage, Portage resolves it where
+                # the host already has it configured.
+                if not portage.db[portage.root]["porttree"].dbapi.cpv_exists(atom.cpv):
+                    raise RuntimeError(f"No repository provides {value}")
+                continue
             text = recipe.read_text()
             target = stage / "overlay" / atom.cp
             target.mkdir(parents=True, exist_ok=True)
@@ -165,9 +172,17 @@ def packages(atoms, prepare_only):
             manifest = package / "Manifest"
             entries = manifest.read_text().splitlines() if manifest.exists() else []
             pf = atom.cpv.split("/", 1)[1]
-            prefixes = (pf + ".", re.sub(r"-r\d+$", "", pf) + ".")
-            selected = [line for line in entries if line.startswith("DIST ")
-                        and line.split()[1].startswith(prefixes)]
+            dist = [line for line in entries if line.startswith("DIST ")]
+            # Archives named after ${PF} belong to exactly this revision. Only
+            # a recipe with no ${PF} archive falls back to its ${P} name:
+            # matching both made an -rN recipe demand the older revision's
+            # ${P} archive, which a host may no longer keep (qinda had
+            # system-monitor pre20260919-r2 installed and lacked the
+            # un-revised pre20260919 tarball, so every bare run failed).
+            selected = [line for line in dist if line.split()[1].startswith(pf + ".")]
+            if not selected:
+                p_name = re.sub(r"-r\d+$", "", pf) + "."
+                selected = [line for line in dist if line.split()[1].startswith(p_name)]
             if selected:
                 (target / "Manifest").write_text("\n".join(selected) + "\n")
             for line in selected:
