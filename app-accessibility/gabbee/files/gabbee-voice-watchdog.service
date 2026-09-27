@@ -1,0 +1,8 @@
+[Unit]
+Description=Keep QindaQt desktop services connected to the physical session
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 -m gabbee.voice_watchdog
+TimeoutStartSec=180
+UMask=0077

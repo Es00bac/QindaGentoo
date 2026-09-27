@@ -14,10 +14,10 @@
 # 2026-09-24: OpenCode 1.18.32 is the current official Linux CLI release.
 =dev-util/opencode-bin-1.18.32
 =app-office/obsidian-1.13.7-r1
-=gui-wm/qindaqt-desktop-0.1.0_pre20260925-r2
+=gui-wm/qindaqt-desktop-0.1.0_pre20260927
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
-=dev-libs/qindatk-0.1.0-r9
+=dev-libs/qindatk-0.1.0-r12
 =gui-apps/qindaoffice-0.1.0_p20260926-r4
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
@@ -61,13 +61,15 @@
 # 2026-09-26: qindaoffice p20260926-r2 (QindaOffice bd25fca): Office global
 # menus stay open (changes held while the window is inactive, D-054).
 # 2026-09-26: qindatk r9: ribbon tabs squeeze group by group (D-305).
+# 2026-09-27: qindatk r12 is the shared QindaQt/Settings toolkit floor on
+# both hosts; the desktop delivery below requires the same revision.
 # 2026-09-26: qindaoffice p20260926-r3 (QindaOffice 0400b81): no dock toggle loop.
 # 2026-09-26: both hosts caught up to the newest recipe of every overlay
 # package either host runs (owner: no discrepancies between the machines).
 # The screensavers follow their newest releases instead of the 2026-09-23
 # pins, and qinda gains what only qinda-top had: Gabbee's offline Whisper
 # dictation, VenusPro, SDRangel, QindaStudio's and OBS's plugins, QindaFox.
-=app-accessibility/gabbee-0.1.0_p20260921-r9
+=app-accessibility/gabbee-0.1.0_p20260926
 =app-accessibility/faster-whisper-models-20260922
 =dev-python/av-17.0.1
 =app-misc/venusprolinux-0.3.0_p20260918-r1
