@@ -14,7 +14,7 @@
 # 2026-09-24: OpenCode 1.18.32 is the current official Linux CLI release.
 =dev-util/opencode-bin-1.18.32
 =app-office/obsidian-1.13.7-r1
-=gui-wm/qindaqt-desktop-0.1.0_pre20260927-r5
+=gui-wm/qindaqt-desktop-0.1.0_pre20260927-r6
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r12
@@ -94,3 +94,8 @@
 
 # Corner Bar click-through requires the patched, exact-ABI compositor.
 =kde-plasma/kwin-6.6.6-r1
+
+# r6 4c704e12: shaped corner chrome, live light/dark palette and independent icon families.
+
+# Six independently selectable complete icon families, QindaThemes e530b032.
+=x11-themes/qinda-icons-1.0.0_p20260927
