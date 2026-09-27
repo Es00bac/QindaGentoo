@@ -14,7 +14,7 @@
 # 2026-09-24: OpenCode 1.18.32 is the current official Linux CLI release.
 =dev-util/opencode-bin-1.18.32
 =app-office/obsidian-1.13.7-r1
-=gui-wm/qindaqt-desktop-0.1.0_pre20260927-r2
+=gui-wm/qindaqt-desktop-0.1.0_pre20260927-r3
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r12
@@ -83,3 +83,6 @@
 
 # 2026-09-27: desktop r2 322b1ba6: bounded repaint feedback, cached task
 # rows and retained dock tiles, paired with Gabbee p20260927 resident recovery.
+
+# r3 a91690f9: include the final strict-wiki link correction; r2
+# archive remains immutable and was never installed by this delivery.
