@@ -1,3 +1,5 @@
 sys-kernel/linux-firmware linux-fw-redistributable
 x11-themes/qinda-seven all-rights-reserved
 app-office/obsidian Obsidian-EULA
+sys-boot/qinda-boot all-rights-reserved
+sci-ml/qinda-llm-server all-rights-reserved

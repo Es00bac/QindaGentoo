@@ -13,6 +13,8 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `gui-wm/qindastudio` | `QindaStudio` |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
 | `app-office/obsidian` | Obsidian public Linux desktop release, packaged through Portage |
+| `sys-boot/qinda-boot` | `QindaBoot` (graphical boot menu and Plymouth splash) |
+| `sci-ml/qinda-llm-server` | `QindaLLM` (LLM Server mode, qinda only) |
 | `app-accessibility/gabbee` | `gabbee` (dictation; QindaQt's `org.qindaqt.Voice1` provider) |
 | `x11-themes/qinda-seven` | `QindaThemes` (seven themes, paired decorations, and KDE color schemes) |
 | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | `sloom-studio-gpl` |
@@ -24,6 +26,22 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 
 `dev-util/opencode-bin` packages the official OpenCode Linux CLI release through
 Portage so the version and release checksum are shared by both Qinda hosts.
+
+`sci-ml/qinda-llm-server` and `sci-ml/gguf-coding-models` are qinda's local
+coding-model service. `qinda-llm.service` runs llama.cpp's `llama-server`
+(::guru's `sci-misc/llama-cpp[vulkan]`, on the RX 5700 XT through RADV) in
+router mode with an API key, over Ornith 1.5 35B-A3B and Qwen3.6 35B-A3B GGUF
+weights pinned to Hugging Face revisions under `/usr/share/gguf`. Settings are
+in `/etc/qinda-llm/`. Its "LLM Server" boot mode (`qinda-llm-server.target`)
+skips SDDM and the desktop and shows the `qinda-llm-top` console on tty1. It
+runs on qinda only, so it is not in `metadata/qinda-delivery`; qinda-top's
+coding agents reach it over Tailscale.
+
+`sys-boot/qinda-boot` is the boot experience of both hosts: a themed rEFInd
+menu of boot modes in `EFI/qinda` on the ESP (first in the firmware boot
+order, systemd-boot kept as fallback and "Advanced" row) and the `qindaqt`
+Plymouth splash. First deployment is `emerge --config sys-boot/qinda-boot`,
+then an initramfs rebuild; kernel updates keep the menu current.
 
 `net-wireless/*` is the SDRangel software-defined-radio stack: `sdrangel` itself
 plus the twelve upstream libraries it needs that Gentoo does not package

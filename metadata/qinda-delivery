@@ -101,3 +101,8 @@
 =x11-themes/qinda-icons-1.0.0_p20260927
 
 # r7 6a9ca787: Settings previews share the live corner silhouette and shadow.
+# 2026-09-27: the QindaQt boot menu (themed rEFInd in EFI/qinda, systemd-boot
+# kept as fallback) and the qindaqt Plymouth splash (QindaBoot a49f024).
+# After installing, run once: emerge --config sys-boot/qinda-boot, then
+# rebuild the initramfs (emerge --config sys-kernel/gentoo-kernel-bin).
+=sys-boot/qinda-boot-1.0.0

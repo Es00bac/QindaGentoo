@@ -28,3 +28,7 @@ app-accessibility/at-spi2-core introspection
 # own login page in an embedded web view. qtwebengine must match qtbase's
 # accessibility flag, which this profile enables.
 dev-qt/qtwebengine accessibility
+
+# sci-ml/qinda-llm-server runs llama.cpp on the GPU through Vulkan (RADV):
+# ROCm does not support qinda's RX 5700 XT (gfx1010).
+sci-misc/llama-cpp vulkan

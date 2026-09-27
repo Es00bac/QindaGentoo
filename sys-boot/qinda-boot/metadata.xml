@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		The graphical boot menu of QindaQt machines: rEFInd with the QindaQt
+		theme, listing boot modes (the desktop, plus any that packages add in
+		/usr/share/qinda-boot/modes.d) and kept in step with the installed
+		kernels by a kernel-install hook; and the qindaqt Plymouth splash.
+		systemd-boot remains installed as the fallback.
+	</longdescription>
+</pkgmetadata>

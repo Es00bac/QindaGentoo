@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		qinda's local coding-model server: llama.cpp's llama-server in router
+		mode (qinda-llm.service) over the models from sci-ml/gguf-coding-models,
+		with an API key for coding agents on the tailnet, plus LLM Server mode
+		(qinda-llm-server.target): a boot without SDDM or the desktop that shows
+		the qinda-llm-top console on tty1. Adds the "LLM Server" row to the
+		QindaQt boot menu.
+	</longdescription>
+</pkgmetadata>

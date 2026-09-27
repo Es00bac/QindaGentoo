@@ -57,3 +57,10 @@ x11-misc/starward-reimagined ~amd64
 # "Run in its own screen" in QindaLutris (ADR-0275 section 4c) starts games in
 # gamescope. The version qinda already runs; exact, like every gaming atom.
 =gui-wm/gamescope-3.16.28 ~amd64
+# qinda's local coding-model service (sci-ml/qinda-llm-server): llama.cpp from
+# ::guru with its Vulkan backend, and the pinned GGUF models it serves.
+sci-misc/llama-cpp ~amd64
+sci-ml/gguf-coding-models ~amd64
+sci-ml/qinda-llm-server ~amd64
+# The QindaQt boot menu (themed rEFInd) and Plymouth splash, both hosts.
+sys-boot/qinda-boot ~amd64
