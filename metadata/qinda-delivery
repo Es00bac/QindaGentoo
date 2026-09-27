@@ -14,7 +14,7 @@
 # 2026-09-24: OpenCode 1.18.32 is the current official Linux CLI release.
 =dev-util/opencode-bin-1.18.32
 =app-office/obsidian-1.13.7-r1
-=gui-wm/qindaqt-desktop-0.1.0_pre20260927-r4
+=gui-wm/qindaqt-desktop-0.1.0_pre20260927-r5
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r12
@@ -89,3 +89,5 @@
 
 # r4 c25c680f: finish the measured workstation missing-icon hot path,
 # retaining r3 shell/compositor/recovery fixes and fresh icon containment.
+
+# r5 26ea670b: custom wallpaper folder gallery and native chooser import.
