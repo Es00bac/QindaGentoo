@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		Mixture-of-experts coding models (35B total, about 3B active per
+		token) quantized to GGUF, pinned to upstream Hugging Face revisions
+		and installed under /usr/share/gguf, where qinda-llm-server serves
+		them with llama.cpp. Nothing is downloaded at run time.
+	</longdescription>
+	<use>
+		<flag name="ornith-1-5-35b-a3b">Install Ornith 1.5 35B-A3B at Q5_K_M (25.3 GB), the default coding model</flag>
+		<flag name="qwen3-6-35b-a3b">Install Qwen3.6 35B-A3B at UD-Q5_K_XL (26.6 GB), the comparison and fallback model</flag>
+	</use>
+</pkgmetadata>

@@ -17,7 +17,7 @@ DESCRIPTION="LLM Server mode for QindaQt: llama.cpp router service and qinda-llm
 HOMEPAGE="https://github.com/Es00bac/QindaGentoo"
 # AGENT-CONTRACT: build this exact commit of qinda's QindaLLM hub.
 EGIT_REPO_URI="file:///home/cabewse/git/QindaLLM.git"
-EGIT_COMMIT="0f38b9153c1bb87057c556b3ea5fec8df3add168"
+EGIT_COMMIT="ac361c85cb1f431e3d22d99a769fb6dd998e8621"
 
 # No license grant has been made for this source yet; the owner chooses one.
 LICENSE="all-rights-reserved"
