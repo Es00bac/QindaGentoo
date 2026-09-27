@@ -44,6 +44,8 @@ COMMON_DEPEND="
 	kde-frameworks/karchive:6
 	media-libs/fontconfig
 	media-libs/lcms:2
+	media-libs/libmypaint:=
+	media-gfx/mypaint-brushes
 	media-libs/opencv:=
 	exr? ( media-libs/openexr:= )
 	avif? ( media-libs/libavif:= )
