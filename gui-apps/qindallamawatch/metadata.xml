@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>qindaqt@example.invalid</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">Es00bac/QindaQt</remote-id>
+	</upstream>
+	<longdescription>
+		A QindaTK desktop monitor for a llama.cpp server on another machine:
+		loaded model and its placement, live and lifetime prompt/generation
+		tokens per second, slots, recent request timings, and the host's CPU,
+		GPU, RAM, VRAM and network, sampled over one ssh session. The desktop
+		counterpart of qinda-llm-top.
+	</longdescription>
+</pkgmetadata>
