@@ -30,8 +30,8 @@ Portage so the version and release checksum are shared by both Qinda hosts.
 `sci-ml/qinda-llm-server` and `sci-ml/gguf-coding-models` are qinda's local
 coding-model service. `qinda-llm.service` runs llama.cpp's `llama-server`
 (::guru's `sci-misc/llama-cpp[vulkan]`, on the RX 5700 XT through RADV) in
-router mode with an API key, over Ornith 1.5 35B-A3B and Qwen3.6 35B-A3B GGUF
-weights pinned to Hugging Face revisions under `/usr/share/gguf`. Settings are
+router mode with an API key, over the Ornith 1.5 35B-A3B GGUF weights (Qwen3.6
+35B-A3B optional) pinned to Hugging Face revisions under `/usr/share/gguf`. Settings are
 in `/etc/qinda-llm/`. Its "LLM Server" boot mode (`qinda-llm-server.target`)
 skips SDDM and the desktop and shows the `qinda-llm-top` console on tty1. It
 runs on qinda only, so it is not in `metadata/qinda-delivery`; qinda-top's

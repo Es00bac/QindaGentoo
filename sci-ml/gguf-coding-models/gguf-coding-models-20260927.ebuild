@@ -45,7 +45,7 @@ LICENSE="
 "
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="+ornith-1-5-35b-a3b +qwen3-6-35b-a3b"
+IUSE="+ornith-1-5-35b-a3b qwen3-6-35b-a3b"
 REQUIRED_USE="|| ( ornith-1-5-35b-a3b qwen3-6-35b-a3b )"
 # Weights: nothing to strip, no ELF files to check, nothing to build.
 RESTRICT="binchecks strip"
@@ -55,14 +55,30 @@ src_unpack() {
 	:
 }
 
+# AGENT-NOTE: each model is 25+ GB. Copying one into the image took 20+
+# minutes on qinda's QLC NVMe and evicted a running model from the page
+# cache, so the verified distfile is hard-linked into the image instead; the
+# merge renames it into place on the same filesystem. Installing then costs
+# no time and no second copy (the distfile and /usr/share/gguf share one
+# inode, which eclean-dist may later unlink safely). A copy is the fallback
+# when DISTDIR is on another filesystem.
+install_model() {
+	local src dst="${ED}/usr/share/gguf/${2}"
+	src=$(readlink -f "${DISTDIR}/${1}") || die
+	mkdir -p "${ED}/usr/share/gguf" || die
+	addwrite "${src%/*}"
+	if ! ln "${src}" "${dst}" 2>/dev/null; then
+		cp "${src}" "${dst}" || die "cannot install ${2}"
+	fi
+	fowners root:root "/usr/share/gguf/${2}"
+	fperms 0644 "/usr/share/gguf/${2}"
+}
+
 src_install() {
-	insinto /usr/share/gguf
 	if use ornith-1-5-35b-a3b; then
-		newins "${DISTDIR}/${PN}-${ORNITH_COMMIT:0:8}-${ORNITH_FILE}" \
-			Ornith-1.5-35B-A3B-Q5_K_M.gguf
+		install_model "${PN}-${ORNITH_COMMIT:0:8}-${ORNITH_FILE}" Ornith-1.5-35B-A3B-Q5_K_M.gguf
 	fi
 	if use qwen3-6-35b-a3b; then
-		newins "${DISTDIR}/${PN}-${QWEN36_COMMIT:0:8}-${QWEN36_FILE}" \
-			Qwen3.6-35B-A3B-UD-Q5_K_XL.gguf
+		install_model "${PN}-${QWEN36_COMMIT:0:8}-${QWEN36_FILE}" Qwen3.6-35B-A3B-UD-Q5_K_XL.gguf
 	fi
 }

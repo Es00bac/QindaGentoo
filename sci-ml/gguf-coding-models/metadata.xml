@@ -13,6 +13,6 @@
 	</longdescription>
 	<use>
 		<flag name="ornith-1-5-35b-a3b">Install Ornith 1.5 35B-A3B at Q5_K_M (25.3 GB), the default coding model</flag>
-		<flag name="qwen3-6-35b-a3b">Install Qwen3.6 35B-A3B at UD-Q5_K_XL (26.6 GB), the comparison and fallback model</flag>
+		<flag name="qwen3-6-35b-a3b">Install Qwen3.6 35B-A3B at UD-Q5_K_XL (26.6 GB), an alternative (off by default)</flag>
 	</use>
 </pkgmetadata>
