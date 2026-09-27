@@ -69,7 +69,7 @@
 # The screensavers follow their newest releases instead of the 2026-09-23
 # pins, and qinda gains what only qinda-top had: Gabbee's offline Whisper
 # dictation, VenusPro, SDRangel, QindaStudio's and OBS's plugins, QindaFox.
-=app-accessibility/gabbee-0.1.0_p20260926
+=app-accessibility/gabbee-0.1.0_p20260927
 =app-accessibility/faster-whisper-models-20260922
 =dev-python/av-17.0.1
 =app-misc/venusprolinux-0.3.0_p20260918-r1
@@ -78,3 +78,5 @@
 =media-plugins/obs-qindaqt-0.1.0_pre20260921-r2
 =www-client/qindafox-bin-155.0.1-r2
 # 2026-09-26: qindaoffice p20260926-r4 (QindaOffice 0fbb89d): Recovered Documents dialog.
+
+# 2026-09-27: core resident recovery, new-login environment, local hub reports.
