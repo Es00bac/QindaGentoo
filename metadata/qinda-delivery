@@ -91,3 +91,6 @@
 # retaining r3 shell/compositor/recovery fixes and fresh icon containment.
 
 # r5 26ea670b: custom wallpaper folder gallery and native chooser import.
+
+# Corner Bar click-through requires the patched, exact-ABI compositor.
+=kde-plasma/kwin-6.6.6-r1
