@@ -45,6 +45,7 @@ COMMON_DEPEND="
 	media-libs/fontconfig
 	media-libs/lcms:2
 	media-libs/libmypaint:=
+	media-libs/libraw:=
 	media-gfx/mypaint-brushes
 	media-libs/opencv:=
 	exr? ( media-libs/openexr:= )
