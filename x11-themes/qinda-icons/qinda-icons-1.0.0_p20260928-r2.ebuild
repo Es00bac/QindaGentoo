@@ -5,7 +5,7 @@ inherit cmake xdg git-r3
 DESCRIPTION="Seven Qinda icon families, including the true-color Qinda Native, for apps, places, file types and actions"
 HOMEPAGE="https://github.com/Es00bac/QindaQt"
 EGIT_REPO_URI="file:///home/cabewse/git/QindaThemes.git"
-EGIT_COMMIT="7387de435541c29db07a455fb045ab1c8946a953"
+EGIT_COMMIT="ec9320a0a6b3ffa6ccb0f51e83342f7395d73ef7"
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="~amd64"
