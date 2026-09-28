@@ -15,4 +15,7 @@
 		applies approved plans through a polkit-authorised helper that
 		snapshots /etc/portage first. The model unloads itself before builds.
 	</longdescription>
+	<use>
+		<flag name="wheel-nopasswd">Install a polkit rule that lets local, active members of wheel apply QindaPortage plans without a password prompt, so the assistant can act on its own (matches a passwordless-sudo wheel setup)</flag>
+	</use>
 </pkgmetadata>
