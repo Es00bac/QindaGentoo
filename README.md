@@ -16,6 +16,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `sys-boot/qinda-boot` | `QindaBoot` (graphical boot menu and Plymouth splash) |
 | `sci-ml/qinda-llm-server` | `QindaLLM` (LLM Server mode, qinda only) |
 | `gui-apps/qindallamawatch` | `QindaLlamaWatch` (desktop monitor for a remote llama.cpp server; counterpart of `qinda-llm-top`) |
+| `app-portage/qindaportage` | `LocalAiPortage` (QindaPortage: Portage manager with a local LLM, dependency graph, impact previews, qinda-local overlay for URL installs) |
 | `media-gfx/qindahane-bin` | `QindaHane` (Tiltmark painting app; proprietary prebuilt archive cut by its `tools/package-gentoo-bin`, fetch-restricted) |
 | `app-accessibility/gabbee` | `gabbee` (dictation; QindaQt's `org.qindaqt.Voice1` provider) |
 | `x11-themes/qinda-seven` | `QindaThemes` (seven themes, paired decorations, and KDE color schemes) |

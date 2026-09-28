@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>qindaqt@example.invalid</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		A QindaTK package manager for Portage with a local LLM: installed
+		packages with USE flags and where each value comes from, the dependency
+		graph, why every package is installed, orphans, and impact previews of
+		any change. The assistant plans installs, USE and keyword changes,
+		patches and ebuilds for software outside the repositories (packaged in
+		the qinda-local overlay), verifies them with emerge --pretend, and
+		applies approved plans through a polkit-authorised helper that
+		snapshots /etc/portage first. The model unloads itself before builds.
+	</longdescription>
+</pkgmetadata>
