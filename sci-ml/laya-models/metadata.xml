@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		The Laya checkpoints (Convai Innovations, Apache-2.0): typed
+		choice, score and yes/no decisions over text in one forward pass,
+		with calibrated probabilities. Pinned to a Hugging Face revision and
+		installed under /usr/share/laya/NAME, where sci-ml/laya's laya-serve
+		loads them with no network. QindaNote's live notes use Laya as the
+		gate that decides when new speech is worth a notes update.
+	</longdescription>
+	<use>
+		<flag name="english">Install the English checkpoint (421M parameters, 512 tokens), the default</flag>
+		<flag name="multilingual">Install the multilingual checkpoint (322M parameters, 100+ languages, 644 MB)</flag>
+		<flag name="typed-decisions">Install the typed-decisions checkpoint (421M parameters), fine-tuned for typed domain decisions</flag>
+	</use>
+	<upstream>
+		<remote-id type="huggingface">convaiinnovations/laya</remote-id>
+	</upstream>
+</pkgmetadata>

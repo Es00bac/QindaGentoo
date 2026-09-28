@@ -1,0 +1,46 @@
+--- a/laya/serve.py
++++ b/laya/serve.py
+@@ -299,6 +299,31 @@
+     return n
+ 
+ 
++def _local_models() -> Dict[str, str]:
++    """Checkpoints installed on disk, from ``LAYA_MODEL_DIR`` (Gentoo).
++
++    The directory holds one sub-directory per checkpoint -- ``english``,
++    ``multilingual``, ``typed-decisions`` -- as the ``sci-ml/laya-models``
++    package installs them under /usr/share/laya, so the server never reaches
++    the Hub. A checkpoint that is not installed is served by the first one
++    that is (automatic routing may still pick it), with a warning at start-up.
++    """
++    root = os.environ.get("LAYA_MODEL_DIR", "").strip()
++    if not root:
++        return {}
++    installed = {name: os.path.join(root, name) for name in sorted(_KNOWN_MODELS)
++                 if os.path.isfile(os.path.join(root, name, "rl_agent_config.json"))}
++    if not installed:
++        raise SystemExit("LAYA_MODEL_DIR %r holds no checkpoint (expected %s)"
++                         % (root, ", ".join(sorted(_KNOWN_MODELS))))
++    fallback = installed.get("english") or next(iter(installed.values()))
++    for name in sorted(_KNOWN_MODELS - set(installed)):
++        _log.warning("checkpoint %r is not installed in %s; %s answers for it",
++                     name, root, os.path.basename(fallback))
++        installed[name] = fallback
++    return installed
++
++
+ def build_router():
+     """Build a Router from the environment, preloading unless told otherwise."""
+     from .mcp.device import env_device
+@@ -312,6 +337,11 @@
+     models_env = os.environ.get("LAYA_MODELS", "").strip()
+     preload_names = [m.strip() for m in models_env.split(",") if m.strip()] or None
+     options = {"device": device, "auto_task_detection": _env_bool("LAYA_AUTO_TASK", False)}
++    local = _local_models()
++    if local:
++        options["models"] = local
++        if preload_names is None:
++            preload_names = sorted(n for n in local if os.path.basename(local[n]) == n)
+     max_loaded = _resolve_max_loaded()
+     if max_loaded is not None:
+         options["max_loaded"] = max_loaded

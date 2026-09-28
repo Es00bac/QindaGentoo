@@ -1,0 +1,27 @@
+[Unit]
+Description=Laya System One decision server (Jev-compatible /v1/systemone)
+Documentation=https://huggingface.co/convaiinnovations/laya
+After=network.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+EnvironmentFile=/etc/laya/serve.env
+# The checkpoints are local (sci-ml/laya-models); never reach the Hub.
+Environment=HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HUB_DISABLE_TELEMETRY=1
+# torch and transformers want a writable cache directory.
+CacheDirectory=laya
+Environment=HOME=/var/cache/laya XDG_CACHE_HOME=/var/cache/laya
+ExecStart=/usr/bin/laya-serve
+Restart=on-failure
+RestartSec=5s
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+
+[Install]
+WantedBy=multi-user.target

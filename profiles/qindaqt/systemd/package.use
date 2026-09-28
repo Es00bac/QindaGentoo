@@ -32,3 +32,7 @@ dev-qt/qtwebengine accessibility
 # sci-ml/qinda-llm-server runs llama.cpp on the GPU through Vulkan (RADV):
 # ROCm does not support qinda's RX 5700 XT (gfx1010).
 sci-misc/llama-cpp vulkan
+
+# Laya (sci-ml/laya) runs its checkpoints through transformers' PyTorch
+# backend (QindaOffice D-057).
+sci-ml/transformers torch

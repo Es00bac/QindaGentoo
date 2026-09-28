@@ -66,3 +66,20 @@ sci-ml/gguf-coding-models ~amd64
 sci-ml/qinda-llm-server ~amd64
 # The QindaQt boot menu (themed rEFInd) and Plymouth splash, both hosts.
 sys-boot/qinda-boot ~amd64
+# Laya (sci-ml/laya, sci-ml/laya-models): the self-hosted Jev-compatible
+# decision server QindaNote's live notes use as their gate (QindaOffice
+# D-057), and the parts of the PyTorch / Hugging Face stack it needs that
+# ::gentoo keeps in testing.
+sci-ml/laya ~amd64
+sci-ml/laya-models ~amd64
+sci-ml/transformers ~amd64
+sci-ml/pytorch ~amd64
+sci-ml/safetensors ~amd64
+dev-python/fastapi ~amd64
+dev-python/uvicorn ~amd64
+# pytorch's own testing-only build dependencies and transformers[torch]'s accelerate.
+dev-libs/cpuinfo ~amd64
+dev-libs/pocketfft ~amd64
+sci-ml/accelerate ~amd64
+sci-ml/FP16 ~amd64
+sci-ml/onnx ~amd64

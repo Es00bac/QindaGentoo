@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		Laya: a non-autoregressive "System 1" decision engine. It answers
+		typed choice, score and yes/no questions over any text in one forward
+		pass, with calibrated probabilities, and serves them on the same
+		POST /v1/systemone API as TypeSafe Jev. The server loads the
+		checkpoints from sci-ml/laya-models and never downloads at run time.
+	</longdescription>
+	<use>
+		<flag name="serve">Install laya-serve, its systemd unit and /etc/laya/serve.env (FastAPI + uvicorn)</flag>
+	</use>
+	<upstream>
+		<remote-id type="pypi">laya</remote-id>
+		<remote-id type="github">NandhaKishorM/laya</remote-id>
+	</upstream>
+</pkgmetadata>
