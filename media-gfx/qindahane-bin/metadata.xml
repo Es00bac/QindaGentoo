@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>qindaqt@example.invalid</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		QindaHane: a native QindaQt drawing and painting application built on
+		Tiltmark, the physical-media brush engine of HANE by Sloom. Pencils,
+		charcoal, inks, markers, watercolor, gouache, acrylic and oils with
+		finite implement reservoirs, wet paper physics and drying. Proprietary
+		prebuilt binary; the archive is cut from the qinda build.
+	</longdescription>
+</pkgmetadata>
