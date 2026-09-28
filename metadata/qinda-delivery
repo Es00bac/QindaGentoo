@@ -18,7 +18,7 @@
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r12
-=gui-apps/qindaoffice-0.1.0_p20260927-r3
+=gui-apps/qindaoffice-0.1.0_p20260927-r4
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
 =x11-themes/qinda-seven-1.0.0_p20260922
@@ -112,3 +112,4 @@
 # documents in every app; live-notes Detail slider.
 # 2026-09-27: qindaoffice p20260927-r2 (QindaOffice 428a49d, D-059): live-notes session setup.
 # 2026-09-27: qindaoffice p20260927-r3 (QindaOffice e938dc7, D-060): live-notes speaker labels.
+# 2026-09-27: qindaoffice p20260927-r4 (QindaOffice 14d3f3c, D-061): live notes round two; needs qtmultimedia[qml].
