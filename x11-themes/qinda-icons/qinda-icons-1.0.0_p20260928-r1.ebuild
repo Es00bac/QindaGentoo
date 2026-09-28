@@ -2,10 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 EAPI=8
 inherit cmake xdg git-r3
-DESCRIPTION="Six complete Qinda icon families for applications, files and desktop actions"
+DESCRIPTION="Seven Qinda icon families, including the true-color Qinda Native, for apps, places, file types and actions"
 HOMEPAGE="https://github.com/Es00bac/QindaQt"
 EGIT_REPO_URI="file:///home/cabewse/git/QindaThemes.git"
-EGIT_COMMIT="e530b0328973c2ce75ab57d14fa28417e1e8a1df"
+EGIT_COMMIT="7387de435541c29db07a455fb045ab1c8946a953"
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="~amd64"

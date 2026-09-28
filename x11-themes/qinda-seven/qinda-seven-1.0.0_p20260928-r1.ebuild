@@ -10,11 +10,12 @@ HOMEPAGE="https://github.com/Es00bac/QindaQt"
 # AGENT-CONTRACT: both hosts track this exact source commit in clean theme
 # checkouts and the qinda Git hub; never package an uncommitted working tree.
 EGIT_REPO_URI="file:///home/cabewse/git/QindaThemes.git"
-EGIT_COMMIT="3c05226b25b4d25d03e892eacaff1e8592c185e0"
+EGIT_COMMIT="7387de435541c29db07a455fb045ab1c8946a953"
 
 # The source pack has no license grant. Do not assign one on the artist's behalf.
 LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64"
 
-RDEPEND=">=gui-wm/qindaqt-desktop-0.1.0_pre20260921"
+RDEPEND=">=gui-wm/qindaqt-desktop-0.1.0_pre20260921
+	x11-themes/qinda-icons"
