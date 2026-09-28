@@ -38,6 +38,16 @@ skips SDDM and the desktop and shows the `qinda-llm-top` console on tty1. It
 runs on qinda only, so it is not in `metadata/qinda-delivery`; qinda-top's
 coding agents reach it over Tailscale.
 
+`sci-ml/qinda-notes-llm` is the laptop's offline notes model for QindaNote's
+live notes: Qwen3.5-4B (unsloth UD-Q4_K_XL, pinned; USE=vision adds the
+image projector) under `/usr/share/gguf`, served by the same
+`sci-misc/llama-cpp[vulkan]` on the integrated GPU. It is on demand:
+`qinda-notes-llm.socket` listens on `127.0.0.1:8080`, the first connection
+starts llama-server and waits for the model, and it unloads after
+`NOTES_IDLE_EXIT` (15 min) without a connection. Settings are in
+`/etc/qinda-notes-llm/serve.env`; enable once with
+`systemctl enable --now qinda-notes-llm.socket`.
+
 `sys-boot/qinda-boot` is the boot experience of both hosts: a themed rEFInd
 menu of boot modes in `EFI/qinda` on the ESP (first in the firmware boot
 order, systemd-boot kept as fallback and "Advanced" row) and the `qindaqt`

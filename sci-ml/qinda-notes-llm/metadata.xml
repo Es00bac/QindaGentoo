@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		A small local language model for QindaNote's live notes on machines
+		without a large GPU: Qwen3.5-4B (GGUF, pinned Hugging Face revision)
+		served by llama.cpp's llama-server on 127.0.0.1:8080 through a
+		socket-activated systemd proxy, so the model is loaded only while a
+		client uses it and unloaded after it has been idle. With local
+		Whisper this makes live notes work fully offline.
+	</longdescription>
+	<use>
+		<flag name="vision">Also install the vision projector (0.67 GB) so screen captures reach the model</flag>
+	</use>
+</pkgmetadata>

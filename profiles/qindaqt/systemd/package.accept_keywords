@@ -64,6 +64,8 @@ x11-misc/starward-reimagined ~amd64
 sci-misc/llama-cpp ~amd64
 sci-ml/gguf-coding-models ~amd64
 sci-ml/qinda-llm-server ~amd64
+# The laptop's on-demand offline notes model for QindaNote (same llama.cpp).
+sci-ml/qinda-notes-llm ~amd64
 # The QindaQt boot menu (themed rEFInd) and Plymouth splash, both hosts.
 sys-boot/qinda-boot ~amd64
 # Laya (sci-ml/laya, sci-ml/laya-models): the self-hosted Jev-compatible

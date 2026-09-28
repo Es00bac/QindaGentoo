@@ -1,0 +1,17 @@
+# qinda-notes-llm (sci-ml/qinda-notes-llm): the local notes model, on demand.
+# AGENT-NOTE: the socket is what listens. The first connection starts the
+# proxy, which starts llama-server and waits until the model is loaded; the
+# proxy exits after it has been idle (serve.env), and llama-server stops with
+# it (StopWhenUnneeded). So the model's ~3.5 GB of RAM is held only while
+# something (QindaNote's live notes) is talking to it.
+[Unit]
+Description=Local notes model (llama.cpp, on demand) socket
+
+[Socket]
+# AGENT-CONTRACT: QindaOffice's "llama-server" provider preset defaults to
+# http://127.0.0.1:8080/v1; keep the two in step.
+ListenStream=127.0.0.1:8080
+NoDelay=yes
+
+[Install]
+WantedBy=sockets.target

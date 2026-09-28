@@ -1,0 +1,29 @@
+# llama-server for the local notes model. Started and stopped by
+# qinda-notes-llm.service; not meant to be enabled on its own.
+[Unit]
+Description=Local notes model (llama.cpp llama-server)
+StopWhenUnneeded=yes
+
+[Service]
+Type=exec
+DynamicUser=yes
+# Vulkan (RADV) needs the render node.
+SupplementaryGroups=render video
+EnvironmentFile=/etc/qinda-notes-llm/serve.env
+CacheDirectory=qinda-notes-llm
+Environment=HOME=/var/cache/qinda-notes-llm XDG_CACHE_HOME=/var/cache/qinda-notes-llm
+ExecStart=/usr/bin/llama-server --host 127.0.0.1 --port ${NOTES_BACKEND_PORT} --model ${NOTES_MODEL} --alias ${NOTES_ALIAS} --ctx-size ${NOTES_CTX} $NOTES_ARGS
+# AGENT-NOTE: llama-server listens before the model is loaded and answers 503
+# meanwhile; hold activation until /health is 200 so the proxy (and so the
+# first client request) only ever reaches a loaded model.
+ExecStartPost=/usr/libexec/qinda-notes-llm/wait-ready
+Restart=on-failure
+RestartSec=5s
+TimeoutStartSec=180
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes

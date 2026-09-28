@@ -1,0 +1,14 @@
+# Socket-activated proxy in front of qinda-notes-llm-server.service.
+[Unit]
+Description=Local notes model (llama.cpp, on demand) proxy
+Requires=qinda-notes-llm-server.service qinda-notes-llm.socket
+After=qinda-notes-llm-server.service qinda-notes-llm.socket
+
+[Service]
+Type=notify
+EnvironmentFile=/etc/qinda-notes-llm/serve.env
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd --exit-idle-time=${NOTES_IDLE_EXIT} 127.0.0.1:${NOTES_BACKEND_PORT}
+DynamicUser=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes

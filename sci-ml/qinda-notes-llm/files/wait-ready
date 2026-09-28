@@ -1,0 +1,8 @@
+#!/bin/sh
+# Wait until qinda-notes-llm-server's llama-server reports the model loaded.
+for _ in $(seq 1 340); do
+	curl -sf -o /dev/null "http://127.0.0.1:${NOTES_BACKEND_PORT}/health" && exit 0
+	sleep 0.5
+done
+echo "llama-server did not become ready" >&2
+exit 1
