@@ -18,6 +18,9 @@ EGIT_REPO_URI="file:///home/cabewse/git/LocalAiPortage.git
 # an unpinned git-r3 ebuild builds whatever the hub holds.
 # 7a353cd1: first release; 17 test suites; assistant verified end to end with
 # qportage-ask on the local Qwen3.5-4B and on qinda's tier.
+# r1 (c576c7e4): approving in the chat or with the dock's Apply button runs
+# the plan; the helper's snapshot works when started outside / (found on
+# the first live root run; apply + revert verified as root).
 EGIT_COMMIT="c576c7e45a3064c20dc8cb205c4b9b81139daf71"
 
 LICENSE="GPL-3+"
