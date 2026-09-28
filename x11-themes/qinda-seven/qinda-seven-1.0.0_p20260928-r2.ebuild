@@ -19,3 +19,13 @@ KEYWORDS="~amd64"
 
 RDEPEND=">=gui-wm/qindaqt-desktop-0.1.0_pre20260921
 	x11-themes/qinda-icons"
+
+# AGENT-GUARD: x11-themes/qinda-icons owns the icon families; installing them
+# here too makes the two packages collide.
+src_configure() {
+	local mycmakeargs=(
+		-DQINDA_THEMES_INSTALL_APPEARANCES=ON
+		-DQINDA_THEMES_INSTALL_ICONS=OFF
+	)
+	cmake_src_configure
+}
