@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>qindaqt@example.invalid</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription>
+		OpenAI Codex, the command-line coding agent, packaged from the
+		official prebuilt musl archive rather than installed with the vendor
+		install.sh. The payload is self-contained (its own rg, bwrap, zsh
+		and gstreamer runtime) and Portage owns the files under
+		/usr/opt/codex, so upgrades are transactional and the package can
+		be removed cleanly. Entries here supersede the older hand-maintained
+		dev-util/codex-bin ebuilds that lived in the untracked sloom-private
+		overlay.
+	</longdescription>
+</pkgmetadata>
