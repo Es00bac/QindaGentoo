@@ -16,25 +16,28 @@ DESCRIPTION="QQ_Term - QindaTK terminal for the QindaQt desktop, one session per
 HOMEPAGE="https://github.com/Es00bac/QindaQt_Apps"
 EGIT_REPO_URI="file:///home/cabewse/git/QindaQt_Apps.git"
 # 0.2.0 rebuilds the UI on QindaTK (Tk.AppWindow/MenuBar/TerminalView) in
-# place of Qt Widgets + qtermwidget6.
-EGIT_COMMIT="df3e4976481da4cc0e8a6487db2c3ac83df6a462"
+# place of Qt Widgets + qtermwidget6, then restores global menu export
+# (a from-scratch QmlMenuSource) and per-window transparency.
+EGIT_COMMIT="4df7a231e6f29f7ae3f0e696c6f6b08767e5631f"
 
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-# gui-wm/qindaqt-desktop publishes the QindaQt.Tokens QML module that
-# QindaTK's QindaQtTheme bridge imports (src/bridge/QindaQtTheme.qml on
-# dev-libs/qindatk) to follow the desktop's theme; without it that import
-# fails outright, so it stays a hard runtime dependency even though nothing
-# here links against it anymore (no more global-menu/settings-client static
-# archives: the whole UI is QindaTK QML, not Qt Widgets).
+# gui-wm/qindaqt-desktop publishes the QindaQt.Tokens QML module the
+# QindaQtTheme bridge imports (theme following) and the global-menu
+# protocol/exporter/dbusmenu static archives (menu export, via a from-scratch
+# QmlMenuSource -- this app never links the Qt Widgets adapter, since the
+# menu bar is QindaTK QML, not QMenuBar). dev-qt/qtdeclarative also carries
+# the QtQuickTemplates2 private headers QmlMenuSource walks the menu tree
+# through. kwindowsystem is blur-behind for translucent profiles.
 RDEPEND="
 	>=gui-wm/qindaqt-desktop-0.1.0_pre20260907-r1
 	>=dev-libs/qindatk-0.1.0-r12
 	>=dev-qt/qtbase-6.11:6=[dbus,gui,wayland]
 	>=dev-qt/qtdeclarative-6.11:6=
+	>=kde-frameworks/kwindowsystem-6.0:6=
 "
 DEPEND="${RDEPEND}"
 BDEPEND="

@@ -9,11 +9,14 @@
 		QQ_Term is a QindaTK terminal emulator built for the QindaQt desktop.
 		Each window is one independent shell session (the desktop's window
 		containers provide tab and split grouping), with named launch
-		profiles (shell, working directory) and a QindaTK AppWindow shell
-		(menu bar, terminal surface) that follows the QindaQt desktop's
-		theme automatically. The menu bar can hide down to a bare terminal
-		(Ctrl+Shift+M), optionally by default for new windows. Configuration
-		lives in ~/.config/qqterm/qqterm.ini.
+		profiles (shell, working directory, opacity/blur) and a QindaTK
+		AppWindow shell (menu bar, terminal surface) that follows the
+		QindaQt desktop's theme automatically. Profiles can make the window
+		translucent with optional KWin blur-behind, and the menu bar exports
+		to the desktop panel over the standard dbusmenu protocol. The menu
+		bar can also hide down to a bare terminal (Ctrl+Shift+M), optionally
+		by default for new windows. Configuration lives in
+		~/.config/qqterm/qqterm.ini.
 	</longdescription>
 	<upstream>
 		<remote-id type="github">Es00bac/QindaQt</remote-id>
