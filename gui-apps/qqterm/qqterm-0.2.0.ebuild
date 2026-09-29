@@ -17,7 +17,7 @@ HOMEPAGE="https://github.com/Es00bac/QindaQt_Apps"
 EGIT_REPO_URI="file:///home/cabewse/git/QindaQt_Apps.git"
 # 0.2.0 rebuilds the UI on QindaTK (Tk.AppWindow/MenuBar/TerminalView) in
 # place of Qt Widgets + qtermwidget6.
-EGIT_COMMIT="ac45ccf25dcb309f9df4092822b7731bea8c6dd4"
+EGIT_COMMIT="df3e4976481da4cc0e8a6487db2c3ac83df6a462"
 
 LICENSE="GPL-3+"
 SLOT="0"
