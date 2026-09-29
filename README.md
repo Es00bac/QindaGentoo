@@ -23,6 +23,12 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | `sloom-studio-gpl` |
 | `kde-plasma/kwin`, `kde-plasma/plasma-activities` | pinned 6.6.x copies the desktop's KWin plugin ABI needs |
 
+### Documentation build tools
+
+The `dev-python/mkdocs` recipe and its small Python dependency recipes keep the
+QindaQt wiki's required `mkdocs build --strict` gate available through Portage.
+They are developer tooling and are not entries in `metadata/qinda-delivery`.
+
 ### Third-party packages
 
 `app-office/obsidian` packages Obsidian's official Linux release tarball and Debian metadata archive through Portage; its ebuild, license text, and checksums are tracked here.
