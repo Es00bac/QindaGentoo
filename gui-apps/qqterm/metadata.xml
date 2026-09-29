@@ -6,14 +6,14 @@
 		<name>QindaQt local overlay</name>
 	</maintainer>
 	<longdescription>
-		QQ_Term is a Qt6 terminal emulator built for the QindaQt desktop.
+		QQ_Term is a QindaTK terminal emulator built for the QindaQt desktop.
 		Each window is one independent shell session (the desktop's window
-		containers provide tab and split grouping), with named profiles,
-		42 built-in color schemes with dark/light tone hints, per-window
-		transparency with optional KWin blur-behind, theme rotation so new
-		windows never repeat a look, and per-window global menu export over
-		the desktop's D-Bus dbusmenu stack. Configuration lives in
-		~/.config/qqterm/qqterm.ini.
+		containers provide tab and split grouping), with named launch
+		profiles (shell, working directory) and a QindaTK AppWindow shell
+		(menu bar, terminal surface) that follows the QindaQt desktop's
+		theme automatically. The menu bar can hide down to a bare terminal
+		(Ctrl+Shift+M), optionally by default for new windows. Configuration
+		lives in ~/.config/qqterm/qqterm.ini.
 	</longdescription>
 	<upstream>
 		<remote-id type="github">Es00bac/QindaQt</remote-id>

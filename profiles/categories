@@ -6,14 +6,17 @@ app-portage
 dev-libs
 dev-python
 dev-util
+games-util
 gui-apps
 gui-wm
 kde-plasma
+licenses
 media-gfx
 media-plugins
 media-video
 net-wireless
 sci-ml
+sys-boot
 www-client
 x11-misc
 x11-themes
