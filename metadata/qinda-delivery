@@ -18,7 +18,7 @@
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r13
-=gui-apps/qindaoffice-0.1.0_p20260927-r4
+=gui-apps/qindaoffice-0.1.0_p20260929
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
 =x11-themes/qinda-seven-1.0.0_p20260922
@@ -115,3 +115,7 @@
 # 2026-09-27: qindaoffice p20260927-r4 (QindaOffice 14d3f3c, D-061): live notes round two; needs qtmultimedia[qml].
 
 # 2026-09-29: qindatk r13 (1d14371, D-306): live agent SDK, private Unix RPC, CLI/MCP.
+
+# 2026-09-29: qindaoffice p20260929 (f518e04, M58, D-064): live Calc state,
+# native local-agent grants, CLI/MCP edits, retry receipts and named undo.
+# Requires qindatk r13; clean qinda build passed all 129 Office test targets.
