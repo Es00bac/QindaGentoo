@@ -47,12 +47,13 @@ COMMON_DEPEND="
 	media-libs/libmypaint:=
 	media-libs/libraw:=
 	media-gfx/mypaint-brushes
-	media-libs/opencv:=
+	>=media-libs/opencv-4.12.0:=
 	exr? ( media-libs/openexr:= )
 	avif? ( media-libs/libavif:= )
 "
 DEPEND="${COMMON_DEPEND}"
 RDEPEND="${COMMON_DEPEND}
+	=sci-ml/opencv-face-liquify-models-20260929
 	gui-wm/qindaqt-desktop
 	media-video/ffmpeg
 "
