@@ -88,3 +88,6 @@ dev-libs/pocketfft ~amd64
 sci-ml/accelerate ~amd64
 sci-ml/FP16 ~amd64
 sci-ml/onnx ~amd64
+
+# Pinned independent PSD reference reader for Studio format qualification.
+=dev-python/psd-tools-1.21.0 ~amd64

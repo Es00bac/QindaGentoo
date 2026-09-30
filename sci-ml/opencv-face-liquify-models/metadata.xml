@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+ <maintainer type="person"><email>support@sloom.studio</email><name>QindaQt contributors</name></maintainer>
+ <longdescription>Pinned MIT OpenCV Zoo YuNet 2023mar weights for CPU five-point facial landmarks. Data only; no runtime fetch. Optional NASA informational fixtures have independent source attribution.</longdescription>
+ <use><flag name="test-fixtures">Install NASA portrait/crew numerical test fixtures under /usr/share/opencv-face-liquify/tests</flag></use>
+</pkgmetadata>
