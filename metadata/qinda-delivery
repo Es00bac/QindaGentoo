@@ -18,7 +18,7 @@
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r15
-=gui-apps/qindaoffice-0.1.0_p20260929
+=gui-apps/qindaoffice-0.1.0_p20260929-r1
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
 =x11-themes/qinda-seven-1.0.0_p20260922
@@ -123,3 +123,7 @@
 # 2026-09-29: qindatk r14 (D-307): terminal input modes, styled cell history, cursor/title, launch errors and final output.
 
 # qindatk r15: traditional control keys, direct foreground/cwd queries and retained history width.
+
+# 2026-09-29: qindaoffice p20260929-r1 (M57/M59, D-063/D-065): organised
+# live notes, technical/planning/troubleshooting structures, reviewed follow-ups
+# and granted live Note CLI/MCP access. Requires the existing qindatk r13 SDK.
