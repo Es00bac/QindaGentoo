@@ -7,6 +7,13 @@ install on the laptop with `--usepkgonly`; do not compile on the laptop. Gecko
 browsing, dismissible controls and global menus are available. Automatic container
 tabs/splits remain pending the desktop package and are not claimed delivered.
 
+Both hosts now have the signed alpha1 browser and QtWayland r2 packages installed.
+The preview configuration with installed QindaTK r15 passed three routine tests and
+four real-Gecko UI/profile checks on qinda, with no failures/skips. The laptop's
+version command and dynamic-library checks passed; its launcher/icon are installed.
+No local compilation or native GUI test was run. The profile enables only alpha1's
+headless test flag to match the binary's USE metadata without changing runtime features.
+
 `qindaweb-0.1.0_alpha1-r1.ebuild.in` is deliberately unready. The desktop manager
 holds consolidated packaging until source qualification and an external installed
 SDK consumer pass. Replace `@DESKTOP_SDK_ATOM@` with the manager's exact qualified

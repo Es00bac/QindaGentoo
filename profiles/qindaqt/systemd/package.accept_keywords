@@ -91,3 +91,6 @@ sci-ml/onnx ~amd64
 
 # Pinned independent PSD reference reader for Studio format qualification.
 =dev-python/psd-tools-1.21.0 ~amd64
+
+# Explicitly experimental ordinary-window browser preview, shipped as a binpkg.
+=www-client/qindaweb-0.1.0_alpha1 ~amd64

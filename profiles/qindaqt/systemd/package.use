@@ -40,3 +40,6 @@ sci-ml/transformers torch
 # QindaStudio's offline Face-Aware qualification uses the licensed NASA
 # fixtures shipped by the model data package; keep them managed by Portage.
 sci-ml/opencv-face-liquify-models test-fixtures
+
+# Match the qinda-built browser binary's headless test coverage (no runtime change).
+=www-client/qindaweb-0.1.0_alpha1 test

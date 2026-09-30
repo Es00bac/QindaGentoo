@@ -130,3 +130,10 @@
 
 # 2026-09-29: qqterm 0.3.0: terminal modes, cell rendering and styled history,
 # selection/search/export, IME, validated profiles and session/window cleanup.
+
+# 2026-09-30: experimental ordinary-window Gecko/QindaTK browser preview.
+# Built/signed through Portage on qinda; installed from binaries on qinda-top.
+# QtWayland r2 delivers input to both GTK/Mozilla keyboard resources; public ABI unchanged.
+# Automatic container tabs/splits await the desktop's released placement SDK.
+=dev-qt/qtwayland-6.11.1-r2
+=www-client/qindaweb-0.1.0_alpha1
