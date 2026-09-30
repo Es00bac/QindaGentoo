@@ -17,7 +17,7 @@
 =gui-wm/qindaqt-desktop-0.1.0_pre20260927-r7
 =gui-apps/qqterm-0.1.0_p20260920
 =media-video/qqmpv-0.1.0_p20260920
-=dev-libs/qindatk-0.1.0-r14
+=dev-libs/qindatk-0.1.0-r15
 =gui-apps/qindaoffice-0.1.0_p20260929
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
@@ -121,3 +121,5 @@
 # Requires qindatk r13; clean qinda build passed all 129 Office test targets.
 
 # 2026-09-29: qindatk r14 (D-307): terminal input modes, styled cell history, cursor/title, launch errors and final output.
+
+# qindatk r15: traditional control keys, direct foreground/cwd queries and retained history width.
