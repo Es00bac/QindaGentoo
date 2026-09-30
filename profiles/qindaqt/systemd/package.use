@@ -36,3 +36,7 @@ sci-misc/llama-cpp vulkan
 # Laya (sci-ml/laya) runs its checkpoints through transformers' PyTorch
 # backend (QindaOffice D-057).
 sci-ml/transformers torch
+
+# QindaStudio's offline Face-Aware qualification uses the licensed NASA
+# fixtures shipped by the model data package; keep them managed by Portage.
+sci-ml/opencv-face-liquify-models test-fixtures
