@@ -1,5 +1,12 @@
 # Native browser package candidate
 
+`qindaweb-0.1.0_alpha1.ebuild` delivers an explicitly experimental ordinary-window
+preview now at the owner's request. It disables placement SDK discovery, so it
+links only installed, package-owned libraries. Build/sign its binary on qinda and
+install on the laptop with `--usepkgonly`; do not compile on the laptop. Gecko
+browsing, dismissible controls and global menus are available. Automatic container
+tabs/splits remain pending the desktop package and are not claimed delivered.
+
 `qindaweb-0.1.0_alpha1.ebuild.in` is deliberately unready. The desktop manager
 holds consolidated packaging until source qualification and an external installed
 SDK consumer pass. Replace `@DESKTOP_SDK_ATOM@` with the manager's exact qualified
