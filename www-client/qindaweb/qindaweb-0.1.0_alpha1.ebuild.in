@@ -1,0 +1,63 @@
+# Copyright 2026 QindaQt contributors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=8
+
+# Unready native package candidate. Replace @DESKTOP_SDK_ATOM@ with the
+# desktop owner's qualified minimum, then rename to .ebuild and qualify it
+# against installed, Portage-owned SDK files. Never copy a development stage.
+
+inherit cmake git-r3 xdg
+
+DESCRIPTION="Experimental native QindaTK browser with Gecko content and QindaQt menus"
+HOMEPAGE="https://github.com/Es00bac/QindaQt"
+EGIT_REPO_URI="file:///home/cabewse/git/QindaWeb.git"
+EGIT_BRANCH="feature/native-browser"
+EGIT_COMMIT="82b091aa2f32570a1226ee135233d364242fa28b"
+
+LICENSE="GPL-3+"
+SLOT="0"
+KEYWORDS="~amd64"
+IUSE="test"
+RESTRICT="!test? ( test )"
+
+RDEPEND="
+	>=dev-libs/qindatk-0.1.0-r13[qindaqt]
+	dev-libs/wayland
+	>=dev-qt/qtbase-6.11:6=[dbus,gui,network,opengl,ssl,wayland]
+	>=dev-qt/qtdeclarative-6.11:6=
+	=dev-qt/qtwayland-6.11.1-r2:6=[qml]
+	>=dev-qt/qtwebsockets-6.11:6=
+	@DESKTOP_SDK_ATOM@
+	kde-plasma/kwayland:6
+	sys-apps/dbus
+	|| (
+		>=www-client/qindafox-bin-155
+		>=www-client/firefox-155[wayland]
+		>=www-client/firefox-bin-155
+	)
+"
+DEPEND="${RDEPEND}"
+BDEPEND="app-alternatives/ninja virtual/pkgconfig"
+
+src_configure() {
+	local mycmakeargs=(
+		-DBUILD_TESTING=$(usex test)
+		-DQINDAWEB_REQUIRE_DESKTOP_SDK=ON
+	)
+	cmake_src_configure
+}
+
+src_test() {
+	# CTest runs raw keyboard lifecycle, URL and bounded launch-IPC checks.
+	# The latter owns an isolated bus. Explicit native Gecko
+	# acceptance is explicit and never uses a person's existing profile.
+	cmake_src_test
+}
+
+pkg_postinst() {
+	xdg_pkg_postinst
+	elog "QindaWeb is an experimental Gecko host with a separate owned profile."
+	elog "Ctrl+Shift+H hides all browser controls; Ctrl+L temporarily opens the address field."
+	elog "Ctrl+T adds a container tab; Ctrl+Shift+Enter opens the four-side split picker."
+}
