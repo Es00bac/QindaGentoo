@@ -3,7 +3,7 @@
 
 EAPI=8
 
-# Unready native package candidate. Replace @DESKTOP_SDK_ATOM@ with the
+# Unready future native package revision. Replace @DESKTOP_SDK_ATOM@ with the
 # desktop owner's qualified minimum, then rename to .ebuild and qualify it
 # against installed, Portage-owned SDK files. Never copy a development stage.
 

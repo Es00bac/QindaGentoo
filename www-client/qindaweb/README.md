@@ -7,7 +7,7 @@ install on the laptop with `--usepkgonly`; do not compile on the laptop. Gecko
 browsing, dismissible controls and global menus are available. Automatic container
 tabs/splits remain pending the desktop package and are not claimed delivered.
 
-`qindaweb-0.1.0_alpha1.ebuild.in` is deliberately unready. The desktop manager
+`qindaweb-0.1.0_alpha1-r1.ebuild.in` is deliberately unready. The desktop manager
 holds consolidated packaging until source qualification and an external installed
 SDK consumer pass. Replace `@DESKTOP_SDK_ATOM@` with the manager's exact qualified
 minimum dependency, then rename to `.ebuild`, generate its Manifest and qualify
