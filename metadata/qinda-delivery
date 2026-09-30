@@ -15,7 +15,7 @@
 =dev-util/opencode-bin-1.18.32
 =app-office/obsidian-1.13.7-r1
 =gui-wm/qindaqt-desktop-0.1.0_pre20260927-r7
-=gui-apps/qqterm-0.1.0_p20260920
+=gui-apps/qqterm-0.3.0
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r15
 =gui-apps/qindaoffice-0.1.0_p20260929-r1
@@ -127,3 +127,6 @@
 # 2026-09-29: qindaoffice p20260929-r1 (M57/M59, D-063/D-065): organised
 # live notes, technical/planning/troubleshooting structures, reviewed follow-ups
 # and granted live Note CLI/MCP access. Requires the existing qindatk r13 SDK.
+
+# 2026-09-29: qqterm 0.3.0: terminal modes, cell rendering and styled history,
+# selection/search/export, IME, validated profiles and session/window cleanup.
