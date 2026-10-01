@@ -36,6 +36,66 @@ UDisks and the FAT/exFAT/ext4 providers are Portage dependencies. The initial
 unreleased, rejected recipe is masked; r2 is in the shared delivery. Its dependency floor is the current shared
 pre20260927-r7 desktop; the component also runs on the laptop's newer desktop.
 
+### Plasma-free runtime dependency gate (PF25)
+
+`tools/check-plasma-dependencies` checks only the resolved runtime closure rooted
+at exact QindaQt desktop and fork package versions. Stock Plasma may remain
+independently installed: it fails the gate only when a runtime dependency path
+from either root reaches it. The final allow-list is exactly
+`kde-plasma/kwayland` and `kde-plasma/layer-shell-qt`; no temporary locker or
+shortcut exceptions and no global Plasma masks are introduced.
+
+After configuring the reviewed candidate repository/profile in a clean Portage
+image, supply both immutable recipe versions (these example versions are
+placeholders, not a published delivery):
+
+```sh
+tools/check-plasma-dependencies --resolve \
+  --root '=gui-wm/qindaqt-desktop-0.1.0_pre20261001' \
+  --root '=gui-wm/qindaqt-kwin-6.6.6_p2'
+```
+
+This invokes Portage's backtracking resolver in pretend/empty-tree mode with
+world selection and automatic configuration writes disabled. It does not fetch,
+merge, unmerge, update world, change profiles or start services. Its traversal
+uses selected alternatives, USE flags and virtual providers and follows both
+RDEPEND and PDEPEND (including runtime slot-operator edges). Build-only edges
+are excluded from the reported runtime closure; the source resolver can still
+refuse candidates whose build dependencies cannot be solved. Candidate selection
+uses the configured repositories/profile; isolated, unregistered worktree recipes
+are not magically visible. This gate does not qualify build-time dependencies,
+co-installation files, physical login, portals, locks or secret migration.
+
+For a read-only installed diagnostic, `--installed` accepts one or both exact
+roots and uses installed metadata without dynamic recipe substitution. A
+single-root diagnostic is **not** the final two-root delivery gate:
+
+```sh
+tools/check-plasma-dependencies --installed \
+  --root '=gui-wm/qindaqt-desktop-0.1.0_pre20260927-r7'
+python3 -m unittest discover -s tests -p test_plasma_dependencies.py -v
+```
+
+Exit 0 means the inspected graph passes the category policy, exit 1 reports every
+reachable forbidden package with a shortest dependency chain, and exit 2 means
+invalid input, unavailable roots, incomplete resolution, unsupported resolver
+API, or malformed graph. A missing fork/root cannot produce a final gate pass.
+The installed diagnostic refuses runtime nodes needing installation. Neither
+mode calls Portage's scheduler or commits mtimedb. The resolver adapter uses
+private Portage APIs (qualified initially on 3.0.81.3); API drift fails closed
+and requires a focused adapter recheck.
+
+`--graph FILE` inspects a supplied resolved-runtime snapshot for review/fixtures;
+it explicitly reports that this is not Portage resolution evidence. Schema 1 has
+exactly `schemaVersion:1`, `roots:[exact-cpv,...]` naming both roots and
+`nodes:{exact-cpv:[runtime-child-cpv,...]}`. Every root and edge must exist;
+duplicate keys/roots/edges and unknown schema fields are rejected. Supplied
+snapshots cannot prove that a producer included every dependency, so use
+`--resolve` for real candidate acceptance. Focused tests cover shared libraries,
+forbidden direct/transitive paths, unrelated installed Plasma, runtime versus
+build edges, PDEPEND, cycles, duplicate identities, and fail-closed input/API
+errors.
+
 ### Documentation build tools
 
 The `dev-python/mkdocs` recipe and its small Python dependency recipes keep the

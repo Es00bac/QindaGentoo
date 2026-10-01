@@ -1,0 +1,213 @@
+#!/usr/bin/env python3
+"""Read-only PF25 gate over Portage-selected RDEPEND/PDEPEND edges."""
+import argparse
+from collections import deque
+import json
+from pathlib import Path
+import re
+import sys
+
+ALLOWED = frozenset({"kde-plasma/kwayland", "kde-plasma/layer-shell-qt"})
+REQUIRED = frozenset({"gui-wm/qindaqt-desktop", "gui-wm/qindaqt-kwin"})
+CPV = re.compile(r"([A-Za-z0-9+_.-]+/[A-Za-z0-9+_.-]+)-([0-9]+(?:\.[0-9]+)*[a-z]?(?:_(?:alpha|beta|pre|rc|p)[0-9]*)*(?:-r[0-9]+)?)\Z")
+
+
+class GraphError(ValueError):
+    pass
+
+
+def package(cpv):
+    if not isinstance(cpv, str) or not CPV.fullmatch(cpv):
+        raise GraphError(f"invalid exact package version: {cpv!r}")
+    return CPV.fullmatch(cpv).group(1)
+
+
+def validate_graph(data):
+    """Strict snapshot boundary; absent nodes/edges may never become empty success."""
+    if not isinstance(data, dict) or set(data) != {"schemaVersion", "roots", "nodes"}:
+        raise GraphError("graph requires exactly schemaVersion, roots, nodes")
+    if type(data["schemaVersion"]) is not int or data["schemaVersion"] != 1:
+        raise GraphError("unsupported graph schemaVersion")
+    roots, nodes = data["roots"], data["nodes"]
+    if not isinstance(roots, list) or not roots or not isinstance(nodes, dict):
+        raise GraphError("nonempty roots list and nodes mapping required")
+    if any(not isinstance(x, str) for x in roots):
+        raise GraphError("roots must be exact package version strings")
+    if len(set(roots)) != len(roots):
+        raise GraphError("duplicate roots")
+    for root in roots:
+        if package(root) not in REQUIRED:
+            raise GraphError("roots must be exact QindaQt desktop/fork versions")
+        if root not in nodes:
+            raise GraphError(f"unavailable root: {root}")
+    for cpv, children in nodes.items():
+        package(cpv)
+        if not isinstance(children, list) or any(not isinstance(x, str) for x in children):
+            raise GraphError(f"runtime edges must be a string list: {cpv}")
+        if len(set(children)) != len(children):
+            raise GraphError(f"duplicate runtime edge: {cpv}")
+        for child in children:
+            package(child)
+            if child not in nodes:
+                raise GraphError(f"unresolved runtime edge: {cpv} -> {child}")
+    return data
+
+
+def forbidden_paths(data):
+    data = validate_graph(data)
+    queue = deque((root, [root]) for root in data["roots"])
+    seen, failures = set(), []
+    while queue:
+        node, path = queue.popleft()
+        if node in seen:
+            continue
+        seen.add(node)
+        cp = package(node)
+        if cp.startswith("kde-plasma/") and cp not in ALLOWED:
+            failures.append(path)
+        queue.extend((child, path + [child]) for child in sorted(data["nodes"][node]))
+    return failures, len(seen)
+
+
+def exact_roots(atoms, diagnostic=False):
+    cpvs = []
+    for atom in atoms:
+        if not isinstance(atom, str) or not atom.startswith("="):
+            raise GraphError("supply exact =category/package-version roots")
+        cpv = atom[1:]
+        if package(cpv) not in REQUIRED:
+            raise GraphError(f"unsupported root: {atom}")
+        cpvs.append(cpv)
+    names = [package(x) for x in cpvs]
+    if not cpvs or len(set(names)) != len(names):
+        raise GraphError("supply one exact version per root package")
+    if not diagnostic and set(names) != REQUIRED:
+        raise GraphError("final gate requires both exact desktop and fork roots")
+    return cpvs
+
+
+def portage_graph(atoms, installed=False):
+    # AGENT-CONTRACT: use the solver's selected alternatives/USE/virtuals and
+    # runtime priorities, never scan @world or infer closure from installed count.
+    # These private APIs are deliberately confined here; API drift fails closed.
+    import portage
+    from _emerge.actions import load_emerge_config
+    from _emerge.create_depgraph_params import create_depgraph_params
+    from _emerge.depgraph import backtrack_depgraph
+    from _emerge.Package import Package
+    from _emerge.stdout_spinner import stdout_spinner
+
+    cpvs = exact_roots(atoms, diagnostic=installed)
+    for atom in atoms:
+        parsed = portage.dep.Atom(atom)
+        if parsed.operator != "=" or parsed.cp not in REQUIRED:
+            raise GraphError(f"invalid exact Portage root: {atom}")
+    config = load_emerge_config()
+    settings = config.target_config.settings
+    config.target_config.mtimedb.make_readonly()
+    opts = {"--pretend": True, "--deep": True, "--with-bdeps": "n",
+            "--ignore-world": True, "--implicit-system-deps": "n",
+            "--autounmask": "n", "--autounmask-write": "n", "--quiet": True}
+    if installed:
+        db = config.target_config.trees["vartree"].dbapi
+        for atom in atoms:
+            if not db.match(atom):
+                raise GraphError(f"unavailable installed root: {atom}")
+        opts.update({"--noreplace": True, "--usepkgonly": True, "--dynamic-deps": "n"})
+    else:
+        db = config.target_config.trees["porttree"].dbapi
+        for atom in atoms:
+            if not db.xmatch("match-all", atom):
+                raise GraphError(f"unavailable candidate root in configured repositories: {atom}")
+        # Empty-tree resolution expands every runtime edge of candidate recipes;
+        # it schedules nothing: no scheduler, merge, config writer or mtimedb commit.
+        opts["--emptytree"] = True
+    spinner = stdout_spinner()
+    spinner.update = spinner.update_quiet
+    success, resolver, _ = backtrack_depgraph(
+        settings, config.trees, opts, create_depgraph_params(opts, None),
+        None, atoms, spinner)
+    if not success or resolver.need_config_reload():
+        resolver.display_problems()
+        raise GraphError("Portage cannot resolve the exact roots without configuration changes")
+    graph = resolver._dynamic_config.digraph
+    selected = [p for p in graph.all_nodes()
+                if isinstance(p, Package) and p.root == settings["EROOT"]]
+    root_nodes = []
+    for cpv in cpvs:
+        matches = [p for p in selected if str(p.cpv) == cpv]
+        if len(matches) != 1:
+            raise GraphError(f"unavailable or ambiguous resolved root: {cpv}")
+        root_nodes.append(matches[0])
+    return runtime_graph(graph, root_nodes, Package, settings["EROOT"], installed)
+
+
+def runtime_graph(graph, root_nodes, package_type, target_root, installed):
+    """Extract selected runtime edges; build-only and unrelated nodes stay outside."""
+    queue, nodes, identities = deque(root_nodes), {}, {}
+    while queue:
+        node = queue.popleft()
+        cpv = str(node.cpv)
+        if cpv in nodes:
+            if identities[cpv] is not node:
+                raise GraphError(f"ambiguous resolved package: {cpv}")
+            continue
+        if installed and not node.installed:
+            raise GraphError(f"runtime dependency is not installed: {cpv}")
+        nodes[cpv], identities[cpv] = [], node
+        for child in graph.child_nodes(node):
+            priorities = graph.nodes[node][0][child]
+            if not priorities or any(not hasattr(p, "runtime_post") for p in priorities):
+                raise GraphError(f"unsupported Portage edge priority at {cpv}")
+            if not any(p.runtime or p.runtime_post or p.runtime_slot_op for p in priorities):
+                continue
+            if not isinstance(child, package_type) or child.root != target_root:
+                raise GraphError(f"unsupported runtime target at {cpv}: {child}")
+            nodes[cpv].append(str(child.cpv))
+            queue.append(child)
+        nodes[cpv] = sorted(set(nodes[cpv]))
+    return validate_graph({"schemaVersion": 1, "roots": [str(p.cpv) for p in root_nodes], "nodes": nodes})
+
+
+def read_graph(path):
+    def unique_pairs(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise GraphError(f"duplicate JSON key: {key}")
+            result[key] = value
+        return result
+    return validate_graph(json.loads(Path(path).read_text(), object_pairs_hook=unique_pairs))
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    modes = parser.add_mutually_exclusive_group(required=True)
+    modes.add_argument("--resolve", action="store_true", help="resolve exact candidate recipes, without installing")
+    modes.add_argument("--installed", action="store_true", help="diagnose exact installed roots; one root allowed")
+    modes.add_argument("--graph", type=Path, help="inspect a supplied schema-1 runtime graph (not solver evidence)")
+    parser.add_argument("--root", action="append", default=[], help="exact =gui-wm/package-version; repeat for both roots")
+    args = parser.parse_args(argv)
+    try:
+        if args.graph:
+            if args.root:
+                raise GraphError("--graph uses roots inside the snapshot")
+            data = read_graph(args.graph)
+            exact_roots(["=" + x for x in data["roots"]])
+            print("Supplied graph inspection; this is not Portage resolution evidence.")
+        else:
+            exact_roots(args.root, diagnostic=args.installed)
+            data = portage_graph(args.root, installed=args.installed)
+            print("Installed runtime diagnostic." if args.installed else "Exact candidate runtime gate.")
+        failures, count = forbidden_paths(data)
+        for path in failures:
+            print("FORBIDDEN: " + " -> ".join(path))
+        print(f"Runtime closure: {count} packages; {len(failures)} forbidden Plasma packages.")
+        return 1 if failures else 0
+    except Exception as error:
+        print(f"ERROR: dependency graph unavailable/invalid: {error}", file=sys.stderr)
+        return 2
+
+
+if __name__ == "__main__":
+    sys.exit(main())
