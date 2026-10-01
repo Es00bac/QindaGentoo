@@ -137,3 +137,7 @@
 # Automatic container tabs/splits await the desktop's released placement SDK.
 =dev-qt/qtwayland-6.11.1-r2
 =www-client/qindaweb-0.1.0_alpha1
+
+# 2026-09-30: reviewed graphical removable-media handler; compatibility login
+# autostart for the installed desktop, with per-media mount/read-only choices.
+=gui-apps/qindaqt-removable-media-0.1.0_p20260930-r1

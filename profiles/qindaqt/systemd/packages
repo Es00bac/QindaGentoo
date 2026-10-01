@@ -4,6 +4,7 @@ gui-wm/qindaqt-desktop
 gui-apps/qindaoffice
 gui-apps/qqterm
 gui-apps/qindaqt-system-monitor
+gui-apps/qindaqt-removable-media
 app-accessibility/gabbee
 x11-misc/dotool
 x11-themes/qinda-seven

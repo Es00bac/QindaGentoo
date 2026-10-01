@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>jarrodmcary@gmail.com</email>
+    <name>QindaQt contributors</name>
+  </maintainer>
+  <longdescription>Graphical insertion notifications and user-controlled UDisks mounting, read-only access, per-media choices, safe removal and confirmed formatting.</longdescription>
+</pkgmetadata>

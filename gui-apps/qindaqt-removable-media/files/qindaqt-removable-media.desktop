@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Removable Media
+Exec=qindaqt-removable-media --watch
+TryExec=qindaqt-removable-media
+OnlyShowIn=QindaQt;
+NoDisplay=true
+X-QindaQt-Supervised=true

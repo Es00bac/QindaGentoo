@@ -5,7 +5,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | Package | Source project |
 | --- | --- |
 | `gui-wm/qindaqt-desktop` | `container-wm` |
-| `gui-apps/qindaqt-apps`, `gui-apps/qindaqt-system-monitor` | `container-wm` |
+| `gui-apps/qindaqt-apps`, `gui-apps/qindaqt-system-monitor`, `gui-apps/qindaqt-removable-media` | `container-wm` |
 | `gui-apps/qindaoffice` | `QindaOffice` |
 | `gui-apps/qqterm` | `QindaQt_Apps` |
 | `www-client/qindafox-bin` | `QindaQt_Apps/QindaFox` |
@@ -22,6 +22,18 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `x11-themes/qinda-seven` | `QindaThemes` (seven themes, paired decorations, and KDE color schemes) |
 | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | `sloom-studio-gpl` |
 | `kde-plasma/kwin`, `kde-plasma/plasma-activities` | pinned 6.6.x copies the desktop's KWin plugin ABI needs |
+
+### Removable media
+
+`gui-apps/qindaqt-removable-media` owns the removable-media executable, launcher
+and compatibility XDG autostart entry. It builds only the `RemovableMedia`
+component from the reviewed source; the desktop package owns shared QML runtime
+libraries. Future desktop recipes using that source must configure
+`-DQINDAQT_BUILD_REMOVABLE_MEDIA=OFF` to avoid overlapping package files.
+The source supervisor owns the helper in new sessions; the session-bus singleton
+makes the compatibility autostart's second `--watch` invocation inert.
+UDisks and the FAT/exFAT/ext4 providers are Portage dependencies. The initial
+unreleased, rejected recipe is masked; only r1 is in the shared delivery.
 
 ### Documentation build tools
 

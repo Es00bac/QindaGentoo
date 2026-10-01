@@ -2,3 +2,6 @@
 # Proton a game runs under, so a new umu is a compatibility change for every
 # game; unmask it here only after it has been verified on both machines.
 >games-util/umu-launcher-1.4.4
+
+# Unreleased first media build: independently reproduced late-reply races.
+=gui-apps/qindaqt-removable-media-0.1.0_p20260930
