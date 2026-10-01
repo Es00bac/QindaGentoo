@@ -33,7 +33,8 @@ libraries. Future desktop recipes using that source must configure
 The source supervisor owns the helper in new sessions; the session-bus singleton
 makes the compatibility autostart's second `--watch` invocation inert.
 UDisks and the FAT/exFAT/ext4 providers are Portage dependencies. The initial
-unreleased, rejected recipe is masked; only r1 is in the shared delivery.
+unreleased, rejected recipe is masked; r2 is in the shared delivery. Its dependency floor is the current shared
+pre20260927-r7 desktop; the component also runs on the laptop's newer desktop.
 
 ### Documentation build tools
 

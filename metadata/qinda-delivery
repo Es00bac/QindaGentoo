@@ -140,4 +140,4 @@
 
 # 2026-09-30: reviewed graphical removable-media handler; compatibility login
 # autostart for the installed desktop, with per-media mount/read-only choices.
-=gui-apps/qindaqt-removable-media-0.1.0_p20260930-r1
+=gui-apps/qindaqt-removable-media-0.1.0_p20260930-r2
