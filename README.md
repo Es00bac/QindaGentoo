@@ -83,6 +83,38 @@ confirm that the existing selected icon family stays unchanged on both hosts.
 Settings discovers the valid installed XDG index through the existing bounded
 catalog; no hard-coded registry or forced Settings write is needed.
 
+### Complete hand-rendered icon family
+
+`x11-themes/qinda-breeze-handdrawn-1.0.0_p20261001` packages the independent
+`QindaQt-Handdrawn` XDG family: the same 7,172 category/name paths as the supplied
+painted pack, backed by 3,261 distinct canonical colored-pencil and pastel
+drawings. Original source-identical aliases share their corresponding drawing.
+The runtime consists of static 128 x 128 RGBA PNGs with authored colors;
+symbolic filenames do not introduce runtime recoloring. All twelve categories
+have fixed128 discovery metadata and only hicolor is a runtime dependency.
+
+The source is QindaIconArt commit
+`6cdcfeccf22411534f2b0fb07579c7c53c5e73b6`, independently verified complete with
+zero missing names or provenance errors. The fetch-restricted archive is
+`qinda-breeze-handdrawn-1.0.0_p20261001.tar.xz`, 740,774,588 bytes, SHA256
+`6a8e2810c331c6a47f42989fcac85a88c984bea03d077279642c78926b55cb5d`;
+its prefix is `QindaIconArt-6cdcfeccf22411534f2b0fb07579c7c53c5e73b6/`.
+The Manifest also pins SHA512 and BLAKE2B. The archive retains original raster
+references, raw generated atlases, prompts/tool records, unchanged-pixel crop
+proofs, per-atlas reviews and the source-bound release manifest. The hand-rendered
+appearance was generated with ImageGen; it is not a claim of human authorship.
+
+Source preparation verifies full artwork provenance, then rebuilds the complete
+release manifest and rejects incomplete authoring checkpoints before installation.
+Runtime `COPYING-ICONS` and `HANDDRAWN-MODIFICATIONS.txt` prominently preserve
+LGPL notices and explain the separate method. Source notices and release proofs
+remain uncompressed under `/usr/share/doc/${PF}`. Complete raw provenance is
+available in the pinned source archive without duplicating it in the runtime
+package. The package makes the theme available for discovery and never changes
+the saved icon choice. Delivery requires package-image byte/inventory checks,
+native QindaQt catalog and twelve exact Qt render samples, followed by Portage
+ownership, integrity and signed-binary identity checks on each host.
+
 ### Plasma-free runtime dependency gate (PF25)
 
 `tools/check-plasma-dependencies` checks only the resolved runtime closure rooted

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>jarrodmcary@gmail.com</email>
+    <name>QindaQt contributors</name>
+  </maintainer>
+  <upstream>
+    <remote-id type="github">Es00bac/QindaQt</remote-id>
+  </upstream>
+  <longdescription>Complete hand-rendered colored-pencil and pastel raster sibling of the supplied Breeze Painted family: 7,172 exact named 128-pixel RGBA PNG paths, 3,261 independently generated canonical drawings, source-bound atlas provenance and preserved LGPL notices. All twelve XDG categories are discoverable. Data-only installation preserves theme selection and depends only on hicolor at runtime.</longdescription>
+</pkgmetadata>
