@@ -36,6 +36,53 @@ UDisks and the FAT/exFAT/ext4 providers are Portage dependencies. The initial
 unreleased, rejected recipe is masked; r2 is in the shared delivery. Its dependency floor is the current shared
 pre20260927-r7 desktop; the component also runs on the laptop's newer desktop.
 
+### Supplied Breeze Painted icon family
+
+`x11-themes/qinda-breeze-painted-1.0.0_p20260929` installs the complete supplied
+`QindaQt-Breeze-Painted` XDG family under `/usr/share/icons`: 7,172 unchanged
+128 x 128 RGBA PNG category/name paths and the original `index.theme`.
+It is independent of QindaThemes and introduces no desktop dependency or
+selection change. Its only runtime dependency is the system hicolor theme;
+Breeze in the original inheritance list is an optional ambient fallback.
+
+The immutable fetch-restricted `${PF}.tar.gz` consolidates the ten original
+2026-09-29 icon batch ZIPs plus Source-and-Manifest ZIP. Its `INPUT-SHA256SUMS`
+pins all eleven input files, and `PACKAGE-README.txt` records upstream Breeze
+snapshot `533733ff0b463f4d1118b22595346b99be0029fd` and preservation scope.
+The archive contains the complete original source companion, manifests,
+licenses, renderer/build source and modification notices. Installed originals
+are retained uncompressed under `/usr/share/doc/${PF}/theme` and `/source`;
+the supplied shell installer is documentation only and must never be run.
+This artwork is the supplied procedural gouache/ink treatment, not the later
+separate hand-drawn family.
+
+Archive: `qinda-breeze-painted-1.0.0_p20260929.tar.gz`, 94,243,325 bytes;
+SHA256 `c92ca981df77279751c089e27b0f2ea115f1105d41b72ef15cc0b825a05176ef`.
+The Portage Manifest pins its BLAKE2B and SHA512 as well. Exact original inputs
+(SHA256, matching the archived INPUT-SHA256SUMS):
+
+```text
+865aa9cf5e3192b03fa1c92255851cac638fde65275b0b980f0d59fa9be28064  QindaQt-Breeze-Painted-01-of-10-720-icons.zip
+e1f7abd659c1ebac8032e2ef46fada460a0441bf38b2e0cee46347ce5e9e8d1f  QindaQt-Breeze-Painted-02-of-10-720-icons.zip
+953bea4a430c596d15865653b478e3a3c3c0e38beac6ee45fc821cd7705a9bac  QindaQt-Breeze-Painted-03-of-10-720-icons.zip
+c8da3bf972a41f07de5278a45265cac39ef3c1871439126eefcce9db160e35ce  QindaQt-Breeze-Painted-04-of-10-720-icons.zip
+7fe9ee006c6dfbcd923f053b83d804d089fec31307d3066f95b68058d9287be9  QindaQt-Breeze-Painted-05-of-10-720-icons.zip
+479703559fe4524c26080cfb7dafe45dc81bfaeb36b88ceede62ae584a42d3be  QindaQt-Breeze-Painted-06-of-10-720-icons.zip
+2319a3033040ab2854729df96c0e88535dd4a025b02ba2201dc6e8daa04ef736  QindaQt-Breeze-Painted-07-of-10-720-icons.zip
+69924a8338ded774636a6075ad67e19ebcc2ba5ebc57c90aa59f65c44c7562a6  QindaQt-Breeze-Painted-08-of-10-720-icons.zip
+89ff0fb5dd62a89dfb06e6a6a46f79637a4e68926b5169f975f216490c554161  QindaQt-Breeze-Painted-09-of-10-720-icons.zip
+47839d5a83de2834ee9f607ee1d316f748c16cb8ed66339407a253a257836bf9  QindaQt-Breeze-Painted-10-of-10-692-icons.zip
+c236ae058dcec5fb252e844c313a87f6910c235843399595238ef0a37de5457e  QindaQt-Breeze-Painted-Source-and-Manifest.zip
+```
+
+The source preparation verifies all supplied PNG hashes, dimensions and RGBA
+modes and the complete 7,172-file runtime inventory. Package-image and installed
+QA must compare the original manifest against the runtime icon root, verify
+Portage ownership/integrity and read-only native catalog/QIcon rendering, and
+confirm that the existing selected icon family stays unchanged on both hosts.
+Settings discovers the valid installed XDG index through the existing bounded
+catalog; no hard-coded registry or forced Settings write is needed.
+
 ### Plasma-free runtime dependency gate (PF25)
 
 `tools/check-plasma-dependencies` checks only the resolved runtime closure rooted

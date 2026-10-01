@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>jarrodmcary@gmail.com</email>
+    <name>QindaQt contributors</name>
+  </maintainer>
+  <upstream>
+    <remote-id type="github">Es00bac/QindaQt</remote-id>
+  </upstream>
+  <longdescription>Complete supplied Breeze Painted XDG icon family: 7,172 original named 128-pixel RGBA PNGs, preserved notices, manifests and editable source companion. Data-only installation does not select the icon theme or depend on Plasma.</longdescription>
+</pkgmetadata>

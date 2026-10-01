@@ -95,3 +95,6 @@ sci-ml/onnx ~amd64
 
 # Explicitly experimental ordinary-window browser preview, shipped as a binpkg.
 =www-client/qindaweb-0.1.0_alpha1 ~amd64
+
+# Independent supplied painted icon family; selection remains user-owned.
+=x11-themes/qinda-breeze-painted-1.0.0_p20260929 ~amd64
