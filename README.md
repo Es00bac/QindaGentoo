@@ -366,3 +366,9 @@ Desktop revision 1 remains a superseded archive/source candidate. Revision 2
 includes the independently accepted native release contract and fork pin
 metadata repair. Root reports actual native Shortcuts 8/8 and protected input
 receipts accepted; package build/signature/installed gates stay separate.
+
+Before its first binary artifact, desktop-r2 carries an install-only downstream
+patch corresponding exactly to upstream8a622b4b76d25d509ca50e8ca7fbf62d62753a4e.
+It installs the actual Keyring `_qml.qmltypes` filename bound by generated
+qmldir. The immutable29f archive and compiled application code are unchanged.
+Retained Portage phase continuation waits exact source/recipe acceptance.

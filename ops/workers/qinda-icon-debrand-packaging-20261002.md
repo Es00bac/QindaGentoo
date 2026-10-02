@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — Desktop29f/r2 compile complete but installmetadata missing Keyring qmltypes; warm build preserved, compiler released, root minimal repair pending
+- Status: waiting — exact8a downstream install-only patch/recipe and supported retained-phase plan ready; source/Input+recipe acceptance pending, compiler released
 - Outcome: concrete desktop/fork source freeze recipes/archives, actual two-host dependency closure and qinda signed fork build-only
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -75,3 +75,5 @@
 - 2026-10-02T21:20:15.920114+00:00 — ActualDesktopbuild live1833813 at3299/5040, MemAvailable10353548KiB/no CMake or compiler errors. Original8job/load24/6GiBguard/frozen393profile unchanged; no other workload. Root integrated128 runtimeedge recipes/disjoint profile flags do not recut source29f or change this private configuration. Existing release/portalboundary staged-image checkers selected; native keyring/PAM/Power/switcher inventory follows signature, no new testharness/runtime launch.
 
 - 2026-10-02T21:33:03.303770+00:00 — ActualDesktopbuild exit1/1670.122s atsrc_install aftercompilecompleted. Missing Keyring qindaqt_settings_keyring.qmltypes; actualgenerated qindaqt_settings_keyring_qml.qmltypes exists864bytes/qmldir binds actual. Narrow103scheduled.qmltypes refs scan finds onlythismissingfile. Guardinactive/min9291984896bytes; DesktopVDB/world unchanged. PGID1833813 ended/8joblease RELEASED. No signedDesktopartifact/falsePASS; source/work/image/log preserved for minimal rootrepair/warm replay.
+
+- 2026-10-02T21:41:18.202910+00:00 — Prepared downstreampatch byte-corresponding root8a one-line CMakefix, parse numstat1+/1-/bash-n/diff-check0; no patch/phase executed. Read actualPortage noauto/marker/eclass semantics. Proposed removeonlyphase markers thenPortageprepare/configure/dryrun/compile/install/package, preserve5040warmbuild. Before-lineage5396sourcefiles/3152compiledoutputs/cache/qmldir/typeinfo hashes savedqinda1.838s. Source29archiveimmutable and no signedr2 existed; awaiting exactacceptance.
