@@ -296,11 +296,12 @@ There is no background timer. `QINDA_HUB` overrides the SSH host alias if needed
 ### Prepared native desktop cutover (2026-10-02)
 
 The new desktop `0.1.0_pre20261002` and fork `6.6.6_p1-r1` recipes are
-provisional packaging checkpoints, **not release-qualified delivery**. Their
-exact manager source pins will be replaced by final reviewed commits after
-runtime gates. No archive size or digest is fabricated: both matching final
-Manifest entries and source archives remain required before publication or
-installation. The held fork p1 recipe/archive are preserved on their original
+exact manager source freeze candidates, **not release-qualified delivery**.
+Desktop source is `cb58205992bdf35bddc7bb30780482f5695f623d`; fork source is
+`a6964310dbfb3a11df06532a32059f4ab9e92ac2`. Matching private qinda archives
+and actual new Manifest rows are prepared for independent review. Native/runtime
+qualification, publication and installation remain pending manager gates.
+The held fork p1 recipe/archive are preserved on their original
 branch; p1-r1 retains source ABI serial1 (6.6.6.1) and uses `${PF}.tar.gz`,
 so new source bytes never replace the held p1 archive.
 
@@ -312,8 +313,10 @@ explicit PF25 KWayland and LayerShellQt allowances. Native session lock and
 Schedule1 nightlight are fork built-ins; `KWIN_NATIVE_SHORTCUTS=ON` selects
 the reviewed native adapter, Activities are OFF, and the desktop selects
 `QINDAQT_NATIVE_POWER_EXCLUSIVE=ON` with ordinary native QtQuick presentation.
-The Power option is defined by candidate99cfa78e7 and must be present in the
-final manager desktop pin; the present provisional pin precedes that merge.
+The frozen desktop source includes the reviewed native Power option and
+startup-failure repair. Its portal composition exports 13 ordinary interfaces
+and 5 protected sharing/input interfaces, with all 18 selected natively and a
+closed default; source review does not qualify their runtime behavior.
 CUPS and Qt PrintSupport supply the native Print portal's existing FD/spool
 flow.
 

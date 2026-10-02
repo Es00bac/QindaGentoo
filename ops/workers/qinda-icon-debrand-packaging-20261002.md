@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — final desktop/fork recipe workflow prepared; manager exact source freeze pins pending
+- Status: working — pinning exact desktop cb582059/fork a6964310 source candidates and preparing private qinda archives/Manifests
 - Outcome: new Gabbee p20261002 pin/floor and qindaqt native unit packaging; desktop/fork final pins remain manager-owned
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -35,3 +35,7 @@
 - 2026-10-02T19:44:10Z — Signed Gabbee build-only at accepted recipe2e6/source0a232 exited0 in13.296s. Portage GPkg mandatory signature/whole-package verification passed; image254 entries, seven native recovery drop-ins and frontend drop-in present, obsolete KDE drop-in absent, watchdog exact source bytes. Gabbee installedVDB and world unchanged. Artifact/command/log hashes preserved in immutable receipt; final installs remain manager-owned.
 
 - 2026-10-02T20:06:39.220785+00:00 — Independently source-accepted repaired native routing d2dac079 paired input e364/fcc and fork1321, exact receiptac2c1c07 in desktop hub. Final overlay product remains accepted2e6 Gabbee0a232, Media27b ownership fix and direct libei. Prepared deterministic qinda archive/layout/hash/newDIST-only workflow below; no final desktop/fork pins, archives or Manifest claims invented. No compiler/native/install/restart/icon work.
+
+- 2026-10-02T20:08:03.431595+00:00 — Manager supplied exact source freeze candidates cb58205992bdf35bddc7bb30780482f5695f623d/a6964310dbfb3a11df06532a32059f4ab9e92ac2. Verified hub objects, fork serial1/native options and protected metadata install. Pins/archive/Manifest preparation authorized; runtime/build/install lease pending. Gabbee0a232/Media27b/libei/KIO/profile unchanged.
+
+- 2026-10-02T20:09:07.609155+00:00 — Actual qinda deterministic candidate archives generated: desktop41323162bytes/10713members, fork15857349bytes/4017members; no links or unsafe paths. Selected source members match exact hub bytes, fork serial1 and native controls present. Actual BLAKE2B/SHA512 new DIST rows appended only; old Manifest bytes preserved. Native/runtime gates and archive publication/build/install lease pending.

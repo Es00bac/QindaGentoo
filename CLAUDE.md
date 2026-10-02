@@ -122,13 +122,18 @@ prebuilt (`QA_PREBUILT`, `RESTRICT="strip"`); QindaFox's tarball comes from its 
 ## Native desktop cutover candidate
 
 New desktop pre20261002 and fork6.6.6_p1-r1 preserve all released recipes and
-old distfile records. Source pins are explicitly provisional until manager
-runtime qualification, with new Manifest rows pending final archives. Do not
-run qinda-sync installation from this candidate. Fork serial1 remains the
+old distfile records. Exact manager source freeze candidates are desktop
+cb58205992bdf35bddc7bb30780482f5695f623d and fork
+a6964310dbfb3a11df06532a32059f4ab9e92ac2. Private qinda archives and actual new
+Manifest rows await independent recipe review and native/runtime qualification.
+Do not publish or run qinda-sync installation from this candidate.
+Fork serial1 remains the
 exact6.6.6.1 plugin ABI; r1 names a distinct `${PF}` archive. Native shortcuts,
 lock and Schedule1 nightlight replace the retired Plasma runtime providers.
-The desktop enables the real `QINDAQT_NATIVE_POWER_EXCLUSIVE` option from
-Power candidate99cfa78e7; final source must contain that reviewed merge.
+The desktop enables the integrated `QINDAQT_NATIVE_POWER_EXCLUSIVE` option
+and its reviewed startup-failure repair. Source routing separates 13 ordinary
+portal interfaces from 5 protected sharing/input interfaces; all 18 rows select
+native owners under defaultnone, pending coherent runtime qualification.
 The ordinary desktop/systemd profile stops selecting replaced Plasma
 services/applets. This does not unmerge independently installed packages or
 change world. Reuse tools/check-plasma-dependencies for actual solver-picked

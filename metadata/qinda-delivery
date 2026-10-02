@@ -1,5 +1,5 @@
-# PROVISIONAL desktop/fork cutover: do not publish/install until manager final
-# source pins, archive Manifests, runtime gates and independent recipe review.
+# Native desktop/fork source freeze cb582059/a6964310; candidate archives only.
+# Do not publish/install until runtime gates and independent recipe review pass.
 # Completed desktop, application and screensaver delivery shared by both hosts.
 # Adoption stays an explicit update: qinda-sync installs exactly these atoms.
 #

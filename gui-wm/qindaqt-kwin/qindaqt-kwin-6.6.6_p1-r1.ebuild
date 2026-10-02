@@ -12,8 +12,8 @@ inherit ecm fcaps python-any-r1 toolchain-funcs xdg
 DESCRIPTION="QindaQt's compositor: a KWin 6.6 fork that installs beside stock KWin"
 HOMEPAGE="https://github.com/Es00bac/QindaQt"
 # Hub: qinda:~/git/qindaqt-kwin.git. The tarball is `git archive` of this commit.
-# PROVISIONAL manager checkpoint: not a release-qualified/published archive.
-QINDAQT_KWIN_COMMIT="7f4b2483a9b7e1de2efb2f62036679770008681d"
+# Exact manager source freeze candidate; native/runtime release gates pending.
+QINDAQT_KWIN_COMMIT="a6964310dbfb3a11df06532a32059f4ab9e92ac2"
 SRC_URI="${PF}.tar.gz"
 S="${WORKDIR}/${PF}"
 

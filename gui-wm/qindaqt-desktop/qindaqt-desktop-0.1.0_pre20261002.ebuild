@@ -7,8 +7,8 @@ inherit cmake xdg
 
 DESCRIPTION="QindaQt Wayland desktop, services and bundled applications"
 HOMEPAGE="https://github.com/Es00bac/QindaQt"
-# PROVISIONAL manager checkpoint: final runtime-qualified pin/Manifest pending.
-QINDAQT_COMMIT="1502fcc7a635d6a149448e0094377b49f28438e2"
+# Exact manager source freeze candidate; native/runtime release gates pending.
+QINDAQT_COMMIT="cb58205992bdf35bddc7bb30780482f5695f623d"
 SRC_URI="https://github.com/Es00bac/QindaQt/archive/${QINDAQT_COMMIT}.tar.gz -> ${PF}.tar.gz"
 S="${WORKDIR}/QindaQt-${QINDAQT_COMMIT}"
 
@@ -18,8 +18,8 @@ KEYWORDS="~amd64"
 RESTRICT="fetch"
 
 # Candidate native cutover: own fork/lock/nightlight/shortcuts, Power1,
-# polkit agent, screenshot and portal helpers. Final manager source must
-# include native-exclusive Power1/session admission and qualified routes.
+# polkit agent, screenshot and portal helpers. Native-exclusive Power1 and
+# protected five-family routing are integrated; release qualification is pending.
 RDEPEND="
 	>=x11-themes/qinda-icons-1.0.0_p20260928-r2
 	>=app-accessibility/gabbee-0.1.0_p20261002[qindaqt]
