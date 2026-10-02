@@ -1,12 +1,12 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — source-ready desktop candidate handed off; solver replay held by manager desktop/audio recovery pause
+- Status: waiting — qinda runtime closure passed; exact recipe review, final manager pins and laptop recovery release pending
 - Outcome: desktop/fork recipes, native desktop profile, provisional manager source pins and actual Portage resolution; icon delivery complete
 - Base: `8f23e1e90490ab02f49e88d5c99994bbf1f0082b`
 - Branch: `worker/pf-desktop-portage-20261002`
 - Worktree: `/home/cabewse/work_space/QindaGentoo-desktop-portage-20261002`
-- Ownership: new gui-wm/qindaqt-kwin and qindaqt-desktop recipes, profile parent/packages/defaults/USE/keywords, metadata delivery and README/CLAUDE; own board/thread only
+- Ownership: new gui-wm/qindaqt-kwin and qindaqt-desktop recipes, narrow matching KIO recipes/provenance, profile parent/packages/defaults/USE/keywords, metadata delivery and README/CLAUDE; own board/thread only
 - Resource limits: read-only candidate Portage resolution on both hosts; no native source, C++ compile, GPU, install or restart; host configs/world unchanged
 - Provider/model evidence: requested model configuration is not runtime provider/model evidence; no runtime identity assertion
 
@@ -21,3 +21,5 @@
 - 2026-10-02T16:32:04Z — Handdrawn image replay exit0/84.053s; both7310PNG/3291drawings with all7172 original names +138aliases and exact notices. Independently checked all57 original painted companion files byte-exact in docs. Cloned image missing/tampered/extra/symlink negatives reject and restored image PASS, exit0/6.427s. Posted exact candidate handoff; no installedphase/prefs/world/profile changes, native/installed/signed binary gates still manager-owned.
 - 2026-10-02T18:24:46Z — Manager accepted prior icon delivery; no further icon work. Claimed desktop packaging from exact overlay base after fetch. VDB inspected both hosts: fork uninstalled; desktop laptop pre20260928-r3, qinda pre20260927-r7; stock KWin r2/r1. Frozen manager fork serial1 requires 6.6.6.1 ABI, so proposed new 6.6.6_p1-r1 rather than inventing serial2. Source/archive pins remain provisional until manager release qualification.
 - 2026-10-02T18:41:29Z — Source-ready exact candidate c41a8625f8f087ff63a6c0743f1ea54588c8aa31. Four ebuild syntax checks exit0; matching KIO recipes/patch and two DIST rows independently compared to actual respective Gentoo origins, PASS. Actual pre-KIO PF25 replay: laptop579/qinda592 runtime packages, two forbidden KIO post-dependencies each, exit1. Authorized only-keditfiletype KIO adaptation complete; no new resolver pass after manager recovery hold. Final manager Power/source integration, archive Manifests, exact review and two-host runtime closure remain pending.
+- 2026-10-02T18:51:01Z — Manager released qinda-only read-only solver. Actual two-root PF25 at exact 73e5a115c3f2d616529393dce38ff43369f93f16 passed: 586 runtime packages, zero forbidden Plasma packages, exit0/19.369s. Prior KIO failure preserved separately. Laptop replay remains deferred by recovery instruction. Preparing exact final-pin archive/Manifest commands only; source qualification, final archives and installation remain manager-owned.
+- 2026-10-02T18:52:20Z — Recorded actual qinda log hash and ready deterministic archive/Manifest commands for exact future reviewed pins. No archives or dummy hashes generated. Source-ready recipe candidate remains c41a8625f8f087ff63a6c0743f1ea54588c8aa31; current status waits for independent review and final manager source pins, with laptop resolver still recovery-deferred.
