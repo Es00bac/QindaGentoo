@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — final fork repeat-signal repair/pin and desktop helper freeze pending; r3/r1 archive/closure/build-only workflow ready, compiler released
+- Status: working — final55d fork r3 archive/recipe preflight and authorized private signed build-only startup; final desktop pin pending
 - Outcome: concrete desktop/fork source freeze recipes/archives, actual two-host dependency closure and qinda signed fork build-only
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -51,3 +51,5 @@
 - 2026-10-02T20:31:38.173821+00:00 — Corrected e9 r2 archive15858433bytes/4017members/no links and six source members exact hub bytes. Two recipe bash syntax checks/diff-check0; r1 recipe/archive/Manifest row unchanged. Historical r1 GPkg mandatory full signature/checksum verification PASS0.17s,456 image entries, exactABI6.6.6.1/twoauthorityheaders; not qualified delivery. Final source/closure receipt preserved for805 only, no r2 solver/build/install/publish claim.
 
 - 2026-10-02T20:38:22.431983+00:00 — Root found native repeat-signal compatibility defect after source-accepting2f; r2 archive remains immutable/nonfinal. Confirmed own historical compiler PGID absent and lease released. Prepared qinda task-local final desktop-r1/fork-r3 recipe/archive/closure and build-only argv from existing workflow; no pins/hashes/recipes fabricated, no command executed. Waiting exact accepted source freezes.
+
+- 2026-10-02T20:40:02.958421+00:00 — Root independently source-accepted final55d repeat repair and granted r3 signed build-only after preflight,4jobs/6GiBguard. New archive15858526bytes/4017members/no links, six source members exactGit/serial1. Existing r1/r2 recipes/archive rows unchanged, desktop dependency/delivery forkatom nowr3; final desktop freeze pending. No publish/install/native artifact mutation.

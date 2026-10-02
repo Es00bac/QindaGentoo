@@ -131,7 +131,7 @@ placeholders, not a published delivery):
 ```sh
 tools/check-plasma-dependencies --resolve \
   --root '=gui-wm/qindaqt-desktop-0.1.0_pre20261002' \
-  --root '=gui-wm/qindaqt-kwin-6.6.6_p1-r2'
+  --root '=gui-wm/qindaqt-kwin-6.6.6_p1-r3'
 ```
 
 This invokes Portage's backtracking resolver in pretend/empty-tree mode with
@@ -295,14 +295,14 @@ There is no background timer. `QINDA_HUB` overrides the SSH host alias if needed
 
 ### Prepared native desktop cutover (2026-10-02)
 
-The new desktop `0.1.0_pre20261002` and fork `6.6.6_p1-r2` recipes are
+The new desktop `0.1.0_pre20261002` and fork `6.6.6_p1-r3` recipes are
 exact manager source freeze candidates, **not release-qualified delivery**.
 Desktop source is `cb58205992bdf35bddc7bb30780482f5695f623d`; fork source is
-`e9bcb4a834a3a817d2bc194f3c4cf488e9111679`. Matching private qinda archives
+`55d1f2738723316fae4686468757aef66ce7590b`. Matching private qinda archives
 and actual new Manifest rows are prepared for independent review. Native/runtime
 qualification, publication and installation remain pending manager gates.
 The held fork p1 recipe/archive are preserved on their original
-branch; p1-r2 retains source ABI serial1 (6.6.6.1) and uses `${PF}.tar.gz`,
+branch; p1-r3 retains source ABI serial1 (6.6.6.1) and uses `${PF}.tar.gz`,
 so new source bytes never replace the held p1 archive.
 
 The profile now derives from the ordinary Gentoo desktop/systemd profile,
@@ -357,3 +357,7 @@ The revision 1 binary is historical build evidence; its native bare-modifier
 parser defect prevents final delivery. Revision 2 awaits coherent native gates
 and recipe acknowledgment. A final desktop revision/source pin is pending;
 no desktop archive is recut under the existing filename.
+
+Final fork revision 3 includes the reviewed native repeat-signal repair.
+Revision 2 archive/recipe records stay immutable. Root authorizes private
+signed build-only after preflight; runtime qualification remains separate.
