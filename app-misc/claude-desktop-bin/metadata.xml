@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <!-- maintainer-needed -->
+  <longdescription lang="en">Anthropic's official Claude desktop application (Linux beta), repackaged from the signed apt repository .deb. Provides the Chat, Cowork and Claude Code tabs and registers the claude:// URL scheme.</longdescription>
+  <use>
+		<flag name="qindaqt">Use native QindaQt portal and Secret Service with the vendor-supported trash-cli helper</flag>
+    <flag name="cowork">Pull in QEMU, virtiofsd and OVMF firmware so the Cowork tab can run its KVM guest</flag>
+  </use>
+</pkgmetadata>

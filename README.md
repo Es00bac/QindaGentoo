@@ -385,3 +385,29 @@ Six focused metadata/source-preparation checks cover native/default behavior.
 Actual builds, QML/app smoke, native Polkit agent registration and reviewed
 per-host world/depclean plans remain manager gates. The earlier exact-root
 PF25 receipts are not relabeled as installed-world closure evidence.
+
+### Prepared native application portal and Secret Service providers
+
+Claude 1.49585.0-r1 keeps its exact vendor archive and launcher while new
+default-OFF qindaqt USE selects Desktop-r2 and supported trash-cli. Pinentry
+1.3.2-r2 retains all GUI/optional caching choices and uses the generic Secret
+Service virtual instead of a hardcoded GTK keyring daemon. Virtual 0-r3 keeps
+the original stock provider alternatives and selects Desktop-r2 in native mode.
+Ten focused source/metadata checks pass; actual selected graph evidence chooses
+native portal/Secret Service and trash providers without KDE portal/cli or
+GNOME/PAM descendants. The graph has an explicit native runtime-provider cycle;
+resolver success is not a no-cycle or installed-readiness claim.
+
+Per-package provenance binds unchanged original archives, patches and launcher.
+No app/data/credential change, build, installation, migration or daemon stop is
+part of this source checkpoint. The manager owns provider-file collision and
+rollback handling before Desktop installation, plus physical application and
+Secret Service registration gates. Matching installed-version build dependencies
+are checked against the installed VDB; do not trigger an unrelated deep newuse
+world upgrade to rebuild these narrow recipes.
+
+Laptop Pinentry1.3.3 uses matching1.3.3-r1; qinda1.3.2 uses1.3.2-r2.
+The same provider-only substitution preserves each installed upstream revision.
+Both versions' required build dependencies are present in qinda's actual VDB,
+allowing manager review of independent signed build-only without a downgrade or
+unrelated KF upgrade. Laptop targets omit qinda-only KDEConnect/LXQt/Gwenview.

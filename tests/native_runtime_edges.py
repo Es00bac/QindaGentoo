@@ -57,6 +57,43 @@ class NativeRuntimeEdges(unittest.TestCase):
         self.assertEqual(with_plasmoid - native, {"kde-plasma/libplasma"})
         self.assertTrue({"dev-libs/kirigami-addons", "net-fs/sshfs"} <= native)
 
+    def test_native_claude_uses_portal_secret_service_and_supported_trash(self):
+        data = METADATA["app-misc/claude-desktop-bin-1.49585.0-r1"]
+        self.assertIn("qindaqt", data["effective_USE"].split())
+        native = atoms(data["RDEPEND"], data["effective_USE"].split())
+        self.assertTrue({"gui-wm/qindaqt-desktop", "app-misc/trash-cli",
+                         "app-crypt/libsecret", "sys-apps/xdg-desktop-portal"} <= native)
+        self.assertFalse({"kde-plasma/xdg-desktop-portal-kde", "kde-plasma/kde-cli-tools",
+                          "gnome-base/gnome-keyring", "kde-frameworks/kwallet"} & native)
+
+    def test_stock_claude_preserves_original_provider_choices(self):
+        data = METADATA["app-misc/claude-desktop-bin-1.49585.0-r1"]
+        self.assertIn("qindaqt", data["IUSE"].split())
+        self.assertNotIn("+qindaqt", data["IUSE"].split())
+        stock = atoms(data["RDEPEND"], ("cowork",))
+        self.assertTrue({"kde-plasma/xdg-desktop-portal-kde", "sys-apps/xdg-desktop-portal-gtk",
+                         "sys-apps/xdg-desktop-portal-gnome", "kde-plasma/kde-cli-tools",
+                         "app-misc/trash-cli", "gnome-base/gvfs",
+                         "gnome-base/gnome-keyring", "kde-frameworks/kwallet"} <= stock)
+        self.assertNotIn("gui-wm/qindaqt-desktop", stock)
+
+    def test_pinentry_retains_gui_and_generic_optional_cache(self):
+        for cpv in ("app-crypt/pinentry-1.3.2-r2", "app-crypt/pinentry-1.3.3-r1"):
+            with self.subTest(cpv=cpv):
+                data = METADATA[cpv]
+                providers = atoms(data["RDEPEND"], ("gtk", "keyring", "qt6", "wayland"))
+                self.assertTrue({"app-crypt/gcr", "app-crypt/libsecret",
+                                 "virtual/secret-service", "dev-qt/qtbase"} <= providers)
+                self.assertNotIn("gnome-base/gnome-keyring", providers)
+                self.assertTrue({"gtk", "keyring", "qt6", "ncurses"} <= set(data["IUSE"].split()))
+    def test_secret_virtual_preserves_stock_and_selects_native_provider(self):
+        data = METADATA["virtual/secret-service-0-r3"]
+        self.assertIn("qindaqt", data["effective_USE"].split())
+        self.assertNotIn("+qindaqt", data["IUSE"].split())
+        self.assertEqual(atoms(data["RDEPEND"], ("qindaqt",)), {"gui-wm/qindaqt-desktop"})
+        self.assertEqual(atoms(data["RDEPEND"]), {"gnome-base/gnome-keyring",
+                         "kde-frameworks/kwallet-runtime", "app-admin/keepassxc"})
+
     def prepare(self, enabled):
         with tarfile.open(ARGS.evidence / "kdeconnect-kde-26.04.3.tar.xz") as archive:
             member = next(x for x in archive.getmembers()
