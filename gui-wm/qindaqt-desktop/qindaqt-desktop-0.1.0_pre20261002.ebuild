@@ -72,7 +72,8 @@ RDEPEND="
 	x11-misc/xkeyboard-config
 "
 PDEPEND=">=media-video/qqmpv-0.1.0_p20260919
-	>=gui-apps/qqterm-0.1.0_p20260920"
+	>=gui-apps/qqterm-0.1.0_p20260920
+	=gui-apps/qindaqt-removable-media-0.1.0_p20260930-r2"
 
 # Plugin and native lock consume the exact co-installable fork ABI.
 DEPEND="${RDEPEND}
@@ -100,6 +101,7 @@ src_configure() {
 		-DQINDAQT_BUILD_PRODUCTION_SHELL=ON
 		-DQINDAQT_BUILD_VIEWER=ON
 		-DQINDAQT_BUILD_SYSTEM_MONITOR=OFF
+		-DQINDAQT_BUILD_REMOVABLE_MEDIA=OFF
 		-DQINDAQT_BUILD_OBS_BRIDGE=OFF
 		-DQINDAQT_KWIN_BUILD_ACTIVITIES=OFF
 		-DQINDAQT_NATIVE_POWER_EXCLUSIVE=ON
