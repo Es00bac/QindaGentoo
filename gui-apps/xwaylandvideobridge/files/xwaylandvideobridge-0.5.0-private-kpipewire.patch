@@ -1,0 +1,31 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -46 +46,4 @@
+-find_package(KPipeWire REQUIRED)
++# AGENT-GUARD: the package owns this immutable dependency privately; never
++# fall back to a global KPipeWire package if its staged config is missing.
++find_package(KPipeWire REQUIRED PATHS "${QINDAQT_PRIVATE_KPIPEWIRE_DIR}" NO_DEFAULT_PATH)
++add_compile_definitions(QINDAQT_PRIVATE_PIPEWIRE_PREFIX="${QINDAQT_PRIVATE_PIPEWIRE_PREFIX}")
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -41,0 +42,12 @@
++    // Package-private imports and catalogs accompany the privately linked ABI.
++    // Materialize QByteArray before Qt view APIs when QStringBuilder is enabled.
++    const QByteArray privatePrefix(QINDAQT_PRIVATE_PIPEWIRE_PREFIX);
++    const QByteArray ambientImports = qgetenv("QML_IMPORT_PATH");
++    QByteArray privateImports = privatePrefix + "/qml";
++    if (!ambientImports.isEmpty()) {
++        privateImports += ':';
++        privateImports += ambientImports;
++    }
++    qputenv("QML_IMPORT_PATH", privateImports);
++    const QByteArray privateLocale = privatePrefix + "/share/locale";
++    KLocalizedString::addDomainLocaleDir("kpipewire6", QString::fromUtf8(privateLocale));
+--- a/qinda-private/kpipewire/src/CMakeLists.txt
++++ b/qinda-private/kpipewire/src/CMakeLists.txt
+@@ -205,0 +206,5 @@
++
++# AGENT-GUARD: private SONAMEs prevent ambient/global KPipeWire ABI resolution.
++set_target_properties(KPipeWire PROPERTIES OUTPUT_NAME XWaylandVideoBridgePipeWire)
++set_target_properties(KPipeWireRecord PROPERTIES OUTPUT_NAME XWaylandVideoBridgePipeWireRecord)
++set_target_properties(KPipeWireDmaBuf PROPERTIES OUTPUT_NAME XWaylandVideoBridgePipeWireDmaBuf)
