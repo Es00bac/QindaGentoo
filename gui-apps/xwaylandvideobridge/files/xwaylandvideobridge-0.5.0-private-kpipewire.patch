@@ -8,14 +8,19 @@
 +add_compile_definitions(QINDAQT_PRIVATE_PIPEWIRE_PREFIX="${QINDAQT_PRIVATE_PIPEWIRE_PREFIX}")
 --- a/src/main.cpp
 +++ b/src/main.cpp
-@@ -41,0 +42,7 @@
+@@ -41,0 +42,12 @@
 +    // Package-private imports and catalogs accompany the privately linked ABI.
-+    // Keep ambient non-KPipeWire QML imports after the owned module directory.
++    // Materialize QByteArray before Qt view APIs when QStringBuilder is enabled.
 +    const QByteArray privatePrefix(QINDAQT_PRIVATE_PIPEWIRE_PREFIX);
 +    const QByteArray ambientImports = qgetenv("QML_IMPORT_PATH");
-+    qputenv("QML_IMPORT_PATH", privatePrefix + "/qml"
-+            + (ambientImports.isEmpty() ? QByteArray() : ":" + ambientImports));
-+    KLocalizedString::addDomainLocaleDir("kpipewire6", QString::fromUtf8(privatePrefix + "/share/locale"));
++    QByteArray privateImports = privatePrefix + "/qml";
++    if (!ambientImports.isEmpty()) {
++        privateImports += ':';
++        privateImports += ambientImports;
++    }
++    qputenv("QML_IMPORT_PATH", privateImports);
++    const QByteArray privateLocale = privatePrefix + "/share/locale";
++    KLocalizedString::addDomainLocaleDir("kpipewire6", QString::fromUtf8(privateLocale));
 --- a/qinda-private/kpipewire/src/CMakeLists.txt
 +++ b/qinda-private/kpipewire/src/CMakeLists.txt
 @@ -205,0 +206,5 @@
