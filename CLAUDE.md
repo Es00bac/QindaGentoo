@@ -100,12 +100,13 @@ package for the same reason. Component packages built from the QindaQt monorepo 
 the whole tree with the shell/KWin plugin switched off, then `cmake_build` only their
 targets and `cmake --install --component` only their component.
 
-**Pinned KDE 6.6.x.** The desktop's KWin plugin is built against a specific KWin ABI, so
-`qindaqt-desktop` hard-pins `=kde-plasma/kwin-6.6.6*` and friends, and `kde-plasma/kwin`
-and `kde-plasma/plasma-activities` are verbatim copies of the Gentoo tree ebuilds kept here
-so those versions survive upstream removal. `kde-plasma/sloom-globalmenu` likewise pins
-`plasma-workspace` to the 6.6 series because it vendors that ABI's headers. Do not bump
-these to track ::gentoo without bumping the desktop's plugin.
+**Exact compositor ABI.** The native cutover uses co-installable
+`gui-wm/qindaqt-kwin-6.6.6_p1-r1`, whose source serial1 exports exact6.6.6.1
+CMake packages. The desktop matches that fork with a subslot dependency.
+Earlier released desktop recipes retain their original stock KWin6.6.6 and
+Plasma requirements; those old recipes and archive records stay immutable.
+The legacy KWin/plasma-activities copies and Sloom ABI packages remain for
+those independent older installations, not as native cutover dependencies.
 
 **Profile.** `profiles/qindaqt/systemd` inherits
 `gentoo:default/linux/amd64/23.0/desktop/systemd` and adds the `@profile` package
