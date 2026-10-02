@@ -71,4 +71,3 @@ src_install() {
 	"${PYTHON}" "${FILESDIR}/verify-image-20261002.py" "${S}" "${ED}" \
 		|| die "Staged runtime image differs from the reviewed source release"
 }
-

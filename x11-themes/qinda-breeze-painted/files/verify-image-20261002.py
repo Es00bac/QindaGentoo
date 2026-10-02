@@ -82,4 +82,3 @@ if __name__ == "__main__":
         main(Path(sys.argv[1]).resolve(), Path(sys.argv[2]).resolve())
     except (OSError, ValueError, KeyError, json.JSONDecodeError) as error:
         sys.exit(str(error))
-
