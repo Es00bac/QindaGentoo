@@ -46,3 +46,5 @@ media-gfx/sloom-studio-bin -globalmenu
 x11-misc/xdg-utils -plasma
 lxqt-base/lxqt-config -monitor
 kde-misc/kdeconnect -plasmoid
+app-misc/claude-desktop-bin qindaqt
+virtual/secret-service qindaqt

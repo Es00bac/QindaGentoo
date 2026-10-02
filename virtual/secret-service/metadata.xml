@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<!-- maintainer-needed -->
+	<stabilize-allarches/>
+	<use>
+		<flag name="qindaqt">Select the native QindaQt session Secret Service provider</flag>
+	</use>
+</pkgmetadata>
