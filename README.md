@@ -411,3 +411,10 @@ The same provider-only substitution preserves each installed upstream revision.
 Both versions' required build dependencies are present in qinda's actual VDB,
 allowing manager review of independent signed build-only without a downgrade or
 unrelated KF upgrade. Laptop targets omit qinda-only KDEConnect/LXQt/Gwenview.
+
+Before its first binary artifact, desktop-r2 carries an install-only downstream
+patch corresponding exactly to upstream8a622b4b76d25d509ca50e8ca7fbf62d62753a4e.
+It installs the actual Keyring `_qml.qmltypes` filename bound by generated
+qmldir. The immutable29f archive and compiled application code are unchanged.
+Retained Portage phase continuation uses independently accepted source and recipe
+changes; package signing and installed qualification remain separate gates.

@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: working — final desktop29f/r2 archive/recipe and exact two-host closure; authorized fork55d/r3 build-only live PID/PGID1781670
+- Status: waiting — exact8a downstream install-only patch/recipe and supported retained-phase plan ready; source/Input+recipe acceptance pending, compiler released
 - Outcome: concrete desktop/fork source freeze recipes/archives, actual two-host dependency closure and qinda signed fork build-only
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -61,3 +61,19 @@
 - 2026-10-02T20:43:04.537792+00:00 — Root HOLD desktop after actual stale release checker deps/kwin.json reference. Cae desktop-r1 archive/recipe already preserved6c168e8 before HOLD, no solver/build/publish/install; propose new r2 once definitive source accepted. Fork r3 remains live624/1418, MemAvailable13535500KiB/no compiler errors observed.
 
 - 2026-10-02T20:49:32.339238+00:00 — Root definitive desktop29f source freeze accepted checker/pin repair+actual protected input receipts; fork55d actualShortcuts8/8PASS. New desktop-r2 archive41389472bytes/10740members/no links and six exact source members. New recipe sourcepin only from retainedr1; forkdep r3 unchanged; actual DIST row/deliveryr2. Proceeding exact two-root closure once each host, no install/publish.
+
+- 2026-10-02T20:50:51.501485+00:00 — Actual exact39321582993a8a1cb3295c92d39517065358a441 final two-root PF25PASS: qinda589/0forbidden/exit0/22.543s, laptop576/0/exit0/27.092s. Lock absent before/after; world/hostprofile unchanged both. Logs preserved separately from805; source-ready finalrecipe/archive handed root, fork signedbuild still live. No installs/publish.
+
+- 2026-10-02T20:57:18.045525+00:00 — Final fork signedbuild-only exit0/965.051s; ownedPGID1781670 ended/compilerlease released, guardinactive/minMemAvailable6642323456bytes, installedforkVDB/world unchanged. MandatoryGPkg fullsignature/decompress PASS0.17s;4,874,240bytes SHA256f98400ba73aff020d5df59da55cfc18ddd2571790c1e2b1bb8998ba0a7a060da,456image entries/nativebinary/exactABI6.6.6.1/authorityheaders/EISplugin. Exact source/archive/closure393 +actualsignedreceipt handedroot; no installs/publish/restart.
+
+- 2026-10-02T20:57:54.688893+00:00 — Root independently accepted393/integrated502/published bothfinalarchives and acknowledgedforkbuild/signature receipt. Prepared exact29f Desktop-r2 privatebuild-only argv8jobs/load24/6GiBguard, observedavailable14372904960bytes. No build started until root confirms nativefork-r3/Gabbeeinstalled coherentheaders. Power owns separate additive installeddependencycleanup, no collision/no sourcearchive recut.
+
+- 2026-10-02T21:04:31.865426+00:00 — Root actualfork-r3/Gabbee signedinstallPASS confirmed. ReadinstalledVDB/nativeheader preflight; startedactualDesktop-r2 signedbuild-only21:03:55Z PID/PGID1833813, startupMemAvailable16579887104bytes,8jobs/load24/6GiBguard/privateenv. Peerrequested different-source review851; isolatedqindareviewWT claimedread-only/no compiler/solver/hostcalls.
+
+- 2026-10-02T21:05:13.651380+00:00 — Desktop actualcompile44/5040, MemAvailable13541216KiB/no CMake or compiler errors observed. Runtimeedge851 acceptance assigned differentworker; stopped duplicate read-only review/no approval, isolated reviewWT unchanged. All focus on signedDesktoppackage, no additional compiler/solver/host work.
+
+- 2026-10-02T21:20:15.920114+00:00 — ActualDesktopbuild live1833813 at3299/5040, MemAvailable10353548KiB/no CMake or compiler errors. Original8job/load24/6GiBguard/frozen393profile unchanged; no other workload. Root integrated128 runtimeedge recipes/disjoint profile flags do not recut source29f or change this private configuration. Existing release/portalboundary staged-image checkers selected; native keyring/PAM/Power/switcher inventory follows signature, no new testharness/runtime launch.
+
+- 2026-10-02T21:33:03.303770+00:00 — ActualDesktopbuild exit1/1670.122s atsrc_install aftercompilecompleted. Missing Keyring qindaqt_settings_keyring.qmltypes; actualgenerated qindaqt_settings_keyring_qml.qmltypes exists864bytes/qmldir binds actual. Narrow103scheduled.qmltypes refs scan finds onlythismissingfile. Guardinactive/min9291984896bytes; DesktopVDB/world unchanged. PGID1833813 ended/8joblease RELEASED. No signedDesktopartifact/falsePASS; source/work/image/log preserved for minimal rootrepair/warm replay.
+
+- 2026-10-02T21:41:18.202910+00:00 — Prepared downstreampatch byte-corresponding root8a one-line CMakefix, parse numstat1+/1-/bash-n/diff-check0; no patch/phase executed. Read actualPortage noauto/marker/eclass semantics. Proposed removeonlyphase markers thenPortageprepare/configure/dryrun/compile/install/package, preserve5040warmbuild. Before-lineage5396sourcefiles/3152compiledoutputs/cache/qmldir/typeinfo hashes savedqinda1.838s. Source29archiveimmutable and no signedr2 existed; awaiting exactacceptance.

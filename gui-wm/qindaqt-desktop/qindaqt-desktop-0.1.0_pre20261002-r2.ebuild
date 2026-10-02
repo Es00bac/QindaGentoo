@@ -11,6 +11,8 @@ HOMEPAGE="https://github.com/Es00bac/QindaQt"
 QINDAQT_COMMIT="29f7174a62175475f6ba54fa7627dc2fd4c8a21f"
 SRC_URI="https://github.com/Es00bac/QindaQt/archive/${QINDAQT_COMMIT}.tar.gz -> ${PF}.tar.gz"
 S="${WORKDIR}/QindaQt-${QINDAQT_COMMIT}"
+# AGENT-CONTRACT: install-only filename fix before the first r2 binary; archive stays immutable.
+PATCHES=( "${FILESDIR}/qindaqt-desktop-29f7174a-keyring-qmltypes-install.patch" )
 
 LICENSE="GPL-3+"
 SLOT="0"
