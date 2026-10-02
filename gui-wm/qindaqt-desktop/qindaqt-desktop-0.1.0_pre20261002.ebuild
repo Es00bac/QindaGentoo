@@ -22,7 +22,7 @@ RESTRICT="fetch"
 # include native-exclusive Power1/session admission and qualified routes.
 RDEPEND="
 	>=x11-themes/qinda-icons-1.0.0_p20260928-r2
-	>=app-accessibility/gabbee-0.1.0_p20260927[qindaqt]
+	>=app-accessibility/gabbee-0.1.0_p20261002[qindaqt]
 	>=media-plugins/swh-plugins-0.4.17
 	>=media-libs/noise-suppression-for-voice-1.10
 	>=media-libs/libsndfile-1.2

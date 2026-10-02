@@ -334,3 +334,17 @@ QindaQt Settings and File Manager Open With already edit MIME app associations.
 See `kde-frameworks/kio/QINDAQT-PROVENANCE.md` for original recipe/patch hashes
 and the standalone utility's broader limits. New closure resolution is held
 during manager desktop/audio recovery; no new graph PASS is asserted.
+
+The Gabbee `0.1.0_p20261002` checkpoint pins integrated source
+`0a232449a64ac54b1c065ec391f6ba53f7fbe95e`, which selects native QindaQt
+KWin scripting endpoints and binds watchdog recovery to the physical native
+compositor/portal pair while preserving independent stock compatibility.
+The new desktop floor selects that snapshot. In `qindaqt` mode its recipe
+installs the frontend physical-session drop-in and native recovery unit
+drop-ins, omitting the obsolete KDE portal backend drop-in; generic stock
+fallback source remains unchanged. This git-r3 recipe retains the existing
+local-hub source workflow and has no source distfile/Manifest digest to invent.
+Build-only signing and manager review precede publication or installation.
+Native watchdog source was independently reviewed and its40 focused fixtures
+passed on qinda. Signed build-only output is package preparation; installed
+physical-session behavior remains a separate manager gate.
