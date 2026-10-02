@@ -121,9 +121,9 @@ prebuilt (`QA_PREBUILT`, `RESTRICT="strip"`); QindaFox's tarball comes from its 
 
 ## Native desktop cutover candidate
 
-New desktop pre20261002 and fork6.6.6_p1-r3 preserve all released recipes and
+New desktop pre20261002-r1 and fork6.6.6_p1-r3 preserve all released recipes and
 old distfile records. Exact manager source freeze candidates are desktop
-cb58205992bdf35bddc7bb30780482f5695f623d and fork
+cae9114ae1e64cd375b6cb79fb206cae8e9c7f1e and fork
 55d1f2738723316fae4686468757aef66ce7590b. Private qinda archives and actual new
 Manifest rows await independent recipe review and native/runtime qualification.
 Do not publish or run qinda-sync installation from this candidate.
@@ -152,12 +152,11 @@ stock kwin_wayland compatibility; root independently reran40 focused fixtures.
 Installed physical-session behavior remains a separate manager gate.
 Signed build-only Portage output does not merge/restart a host or update world.
 
-Corrected fork revision 2 preserves revision 1 recipes and archive records.
-The revision 1 binary is historical build evidence; its native bare-modifier
-parser defect prevents final delivery. Revision 2 awaits coherent native gates
-and recipe acknowledgment. A final desktop revision/source pin is pending;
-no desktop archive is recut under the existing filename.
-
-Final fork revision 3 includes the reviewed native repeat-signal repair.
-Revision 2 archive/recipe records stay immutable. Root authorizes private
-signed build-only after preflight; runtime qualification remains separate.
+Final desktop revision 1 and fork revision 3 preserve all earlier recipes and
+archive records. Historical fork revision 1 has a bare-modifier parser defect;
+revision 2 lacks native repeat activation. Neither is final delivery. Revision 3
+includes both reviewed fixes, retains exact6.6.6.1 ABI, and is undergoing the
+authorized private signed build-only. The final desktop source includes the
+accepted helper regression and release documentation. Exact two-host closure,
+manager runtime acceptance and installs remain separate gates; no old source
+archive is recut under its existing filename.

@@ -130,7 +130,7 @@ placeholders, not a published delivery):
 
 ```sh
 tools/check-plasma-dependencies --resolve \
-  --root '=gui-wm/qindaqt-desktop-0.1.0_pre20261002' \
+  --root '=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r1' \
   --root '=gui-wm/qindaqt-kwin-6.6.6_p1-r3'
 ```
 
@@ -295,9 +295,9 @@ There is no background timer. `QINDA_HUB` overrides the SSH host alias if needed
 
 ### Prepared native desktop cutover (2026-10-02)
 
-The new desktop `0.1.0_pre20261002` and fork `6.6.6_p1-r3` recipes are
+The new desktop `0.1.0_pre20261002-r1` and fork `6.6.6_p1-r3` recipes are
 exact manager source freeze candidates, **not release-qualified delivery**.
-Desktop source is `cb58205992bdf35bddc7bb30780482f5695f623d`; fork source is
+Desktop source is `cae9114ae1e64cd375b6cb79fb206cae8e9c7f1e`; fork source is
 `55d1f2738723316fae4686468757aef66ce7590b`. Matching private qinda archives
 and actual new Manifest rows are prepared for independent review. Native/runtime
 qualification, publication and installation remain pending manager gates.
@@ -335,8 +335,9 @@ each. The narrow matching KIO6.27/6.29-r1 recipes preserve implementation and
 all other dependencies, omitting only that external association editor because
 QindaQt Settings and File Manager Open With already edit MIME app associations.
 See `kde-frameworks/kio/QINDAQT-PROVENANCE.md` for original recipe/patch hashes
-and the standalone utility's broader limits. New closure resolution is held
-during manager desktop/audio recovery; no new graph PASS is asserted.
+and the standalone utility's broader limits. Subsequent805 closure passed589 packages on qinda and576 on qinda-top,
+zero forbidden on both; those receipts remain bound to their original roots.
+Final revision1/revision3 closure must be recorded separately.
 
 The Gabbee `0.1.0_p20261002` checkpoint pins integrated source
 `0a232449a64ac54b1c065ec391f6ba53f7fbe95e`, which selects native QindaQt
@@ -352,12 +353,11 @@ Native watchdog source was independently reviewed and its40 focused fixtures
 passed on qinda. Signed build-only output is package preparation; installed
 physical-session behavior remains a separate manager gate.
 
-Corrected fork revision 2 preserves revision 1 recipes and archive records.
-The revision 1 binary is historical build evidence; its native bare-modifier
-parser defect prevents final delivery. Revision 2 awaits coherent native gates
-and recipe acknowledgment. A final desktop revision/source pin is pending;
-no desktop archive is recut under the existing filename.
-
-Final fork revision 3 includes the reviewed native repeat-signal repair.
-Revision 2 archive/recipe records stay immutable. Root authorizes private
-signed build-only after preflight; runtime qualification remains separate.
+Final desktop revision 1 and fork revision 3 preserve all earlier recipes and
+archive records. Historical fork revision 1 has a bare-modifier parser defect;
+revision 2 lacks native repeat activation. Neither is final delivery. Revision 3
+includes both reviewed fixes, retains exact6.6.6.1 ABI, and is undergoing the
+authorized private signed build-only. The final desktop source includes the
+accepted helper regression and release documentation. Exact two-host closure,
+manager runtime acceptance and installs remain separate gates; no old source
+archive is recut under its existing filename.
