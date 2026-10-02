@@ -1,0 +1,9 @@
+# Signed Gabbee build-only handoff
+
+- Recipe: `2e6e8fb7a0ff4feef2d83acf50fbcce876bb4076`; accepted source: `0a232449a64ac54b1c065ec391f6ba53f7fbe95e`.
+- Qinda process-only repository override and separate PKGDIR. Command: `emerge --buildpkgonly --oneshot --nodeps --usepkg=n =app-accessibility/gabbee-0.1.0_p20261002::qindaqt`; actual exit0,13.296s. Exact argv/config retained in `/home/cabewse/.cache/pf-gabbee-portage-qa-20261002/signed-build-command.json`.
+- Artifact: `/home/cabewse/work_SPaC3/.qa/pf-gabbee-portage-20261002/binpkgs/app-accessibility/gabbee/gabbee-0.1.0_p20261002-1.gpkg.tar`,972800bytes. SHA256 `3c41903672e133d85c3156fd5f347acf5b9a1c206903b1ee652a245b934073dc`; SHA512 `f2adee634c7cc53ec5614f75bb0b2ae32540a9bcf7cc4a11ef2aa9c9e4d548ece7105f30a4fe4fa0cff9ba499625d2f4a5b131faf2c9c0d344b17dd237575b1a`.
+- Actual Portage gpkg mandatory signature and whole-package checksum verification passed; signed metadata PF matches p20261002/buildID1. Image254 files/links contains seven native recovery unit drop-ins plus frontend physical-session drop-in; obsolete KDE-backend drop-in absent. Installed image watchdog matches accepted source bytes.
+- Relevant Gabbee VDB directory/metadata and `/var/lib/portage/world` unchanged before/after; only existing p20260927 installed. No merge, restart, config change, or laptop build.
+- Evidence directory `/home/cabewse/.cache/pf-gabbee-portage-qa-20261002/`: signed-build.log SHA256 `458f2a20047fa1e88239cff4370fd9dc89cddffda37c60b649c88f7870929083`; signed-package-receipt.json `b753d5e1798f52a16f911f89b716c5bd11e7df29bd4dd1a0f7582cac66b321ef`; image-inventory.txt `cf3d0a66bfb125db1a1897adc9b2e935ec0ae8ba88fdadc2b1f4bc212f75bf1f`.
+- Root acknowledged package receipt. Requested next action: manager-owned final installation after coherent desktop qualification. Worker now independently reviews fork1321 and unified broker exact30df source only.
