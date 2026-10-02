@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — root accepted/published final502 recipe/archive; Desktop-r2 signed build-only argv ready, awaiting installed nativefork-r3 header confirmation
+- Status: working — authorized Desktop29f/r2 signed build-only live PID/PGID1833813,8jobs/6GiBguard; independent runtime-edge851 source review read-only
 - Outcome: concrete desktop/fork source freeze recipes/archives, actual two-host dependency closure and qinda signed fork build-only
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -67,3 +67,5 @@
 - 2026-10-02T20:57:18.045525+00:00 — Final fork signedbuild-only exit0/965.051s; ownedPGID1781670 ended/compilerlease released, guardinactive/minMemAvailable6642323456bytes, installedforkVDB/world unchanged. MandatoryGPkg fullsignature/decompress PASS0.17s;4,874,240bytes SHA256f98400ba73aff020d5df59da55cfc18ddd2571790c1e2b1bb8998ba0a7a060da,456image entries/nativebinary/exactABI6.6.6.1/authorityheaders/EISplugin. Exact source/archive/closure393 +actualsignedreceipt handedroot; no installs/publish/restart.
 
 - 2026-10-02T20:57:54.688893+00:00 — Root independently accepted393/integrated502/published bothfinalarchives and acknowledgedforkbuild/signature receipt. Prepared exact29f Desktop-r2 privatebuild-only argv8jobs/load24/6GiBguard, observedavailable14372904960bytes. No build started until root confirms nativefork-r3/Gabbeeinstalled coherentheaders. Power owns separate additive installeddependencycleanup, no collision/no sourcearchive recut.
+
+- 2026-10-02T21:04:31.865426+00:00 — Root actualfork-r3/Gabbee signedinstallPASS confirmed. ReadinstalledVDB/nativeheader preflight; startedactualDesktop-r2 signedbuild-only21:03:55Z PID/PGID1833813, startupMemAvailable16579887104bytes,8jobs/load24/6GiBguard/privateenv. Peerrequested different-source review851; isolatedqindareviewWT claimedread-only/no compiler/solver/hostcalls.
