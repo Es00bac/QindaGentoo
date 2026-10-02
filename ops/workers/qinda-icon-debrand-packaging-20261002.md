@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: working — final desktop29f/r2 + fork55d/r3 closure PASS both hosts; authorized signed fork build-only live PID/PGID1781670
+- Status: waiting — final desktop29f/r2 + fork55d/r3 source/archive/closure and signed fork binary handed off; compiler released, manager owns review/install
 - Outcome: concrete desktop/fork source freeze recipes/archives, actual two-host dependency closure and qinda signed fork build-only
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -63,3 +63,5 @@
 - 2026-10-02T20:49:32.339238+00:00 — Root definitive desktop29f source freeze accepted checker/pin repair+actual protected input receipts; fork55d actualShortcuts8/8PASS. New desktop-r2 archive41389472bytes/10740members/no links and six exact source members. New recipe sourcepin only from retainedr1; forkdep r3 unchanged; actual DIST row/deliveryr2. Proceeding exact two-root closure once each host, no install/publish.
 
 - 2026-10-02T20:50:51.501485+00:00 — Actual exact39321582993a8a1cb3295c92d39517065358a441 final two-root PF25PASS: qinda589/0forbidden/exit0/22.543s, laptop576/0/exit0/27.092s. Lock absent before/after; world/hostprofile unchanged both. Logs preserved separately from805; source-ready finalrecipe/archive handed root, fork signedbuild still live. No installs/publish.
+
+- 2026-10-02T20:57:18.045525+00:00 — Final fork signedbuild-only exit0/965.051s; ownedPGID1781670 ended/compilerlease released, guardinactive/minMemAvailable6642323456bytes, installedforkVDB/world unchanged. MandatoryGPkg fullsignature/decompress PASS0.17s;4,874,240bytes SHA256f98400ba73aff020d5df59da55cfc18ddd2571790c1e2b1bb8998ba0a7a060da,456image entries/nativebinary/exactABI6.6.6.1/authorityheaders/EISplugin. Exact source/archive/closure393 +actualsignedreceipt handedroot; no installs/publish/restart.
