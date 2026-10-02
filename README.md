@@ -130,7 +130,7 @@ placeholders, not a published delivery):
 
 ```sh
 tools/check-plasma-dependencies --resolve \
-  --root '=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r1' \
+  --root '=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r2' \
   --root '=gui-wm/qindaqt-kwin-6.6.6_p1-r3'
 ```
 
@@ -295,9 +295,9 @@ There is no background timer. `QINDA_HUB` overrides the SSH host alias if needed
 
 ### Prepared native desktop cutover (2026-10-02)
 
-The new desktop `0.1.0_pre20261002-r1` and fork `6.6.6_p1-r3` recipes are
+The new desktop `0.1.0_pre20261002-r2` and fork `6.6.6_p1-r3` recipes are
 exact manager source freeze candidates, **not release-qualified delivery**.
-Desktop source is `cae9114ae1e64cd375b6cb79fb206cae8e9c7f1e`; fork source is
+Desktop source is `29f7174a62175475f6ba54fa7627dc2fd4c8a21f`; fork source is
 `55d1f2738723316fae4686468757aef66ce7590b`. Matching private qinda archives
 and actual new Manifest rows are prepared for independent review. Native/runtime
 qualification, publication and installation remain pending manager gates.
@@ -337,7 +337,7 @@ QindaQt Settings and File Manager Open With already edit MIME app associations.
 See `kde-frameworks/kio/QINDAQT-PROVENANCE.md` for original recipe/patch hashes
 and the standalone utility's broader limits. Subsequent805 closure passed589 packages on qinda and576 on qinda-top,
 zero forbidden on both; those receipts remain bound to their original roots.
-Final revision1/revision3 closure must be recorded separately.
+Final revision2/revision3 closure must be recorded separately.
 
 The Gabbee `0.1.0_p20261002` checkpoint pins integrated source
 `0a232449a64ac54b1c065ec391f6ba53f7fbe95e`, which selects native QindaQt
@@ -353,7 +353,7 @@ Native watchdog source was independently reviewed and its40 focused fixtures
 passed on qinda. Signed build-only output is package preparation; installed
 physical-session behavior remains a separate manager gate.
 
-Final desktop revision 1 and fork revision 3 preserve all earlier recipes and
+Final desktop revision 2 and fork revision 3 preserve all earlier recipes and
 archive records. Historical fork revision 1 has a bare-modifier parser defect;
 revision 2 lacks native repeat activation. Neither is final delivery. Revision 3
 includes both reviewed fixes, retains exact6.6.6.1 ABI, and is undergoing the
@@ -361,3 +361,8 @@ authorized private signed build-only. The final desktop source includes the
 accepted helper regression and release documentation. Exact two-host closure,
 manager runtime acceptance and installs remain separate gates; no old source
 archive is recut under its existing filename.
+
+Desktop revision 1 remains a superseded archive/source candidate. Revision 2
+includes the independently accepted native release contract and fork pin
+metadata repair. Root reports actual native Shortcuts 8/8 and protected input
+receipts accepted; package build/signature/installed gates stay separate.

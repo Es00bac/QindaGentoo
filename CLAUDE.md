@@ -121,9 +121,9 @@ prebuilt (`QA_PREBUILT`, `RESTRICT="strip"`); QindaFox's tarball comes from its 
 
 ## Native desktop cutover candidate
 
-New desktop pre20261002-r1 and fork6.6.6_p1-r3 preserve all released recipes and
+New desktop pre20261002-r2 and fork6.6.6_p1-r3 preserve all released recipes and
 old distfile records. Exact manager source freeze candidates are desktop
-cae9114ae1e64cd375b6cb79fb206cae8e9c7f1e and fork
+29f7174a62175475f6ba54fa7627dc2fd4c8a21f and fork
 55d1f2738723316fae4686468757aef66ce7590b. Private qinda archives and actual new
 Manifest rows await independent recipe review and native/runtime qualification.
 Do not publish or run qinda-sync installation from this candidate.
@@ -152,7 +152,7 @@ stock kwin_wayland compatibility; root independently reran40 focused fixtures.
 Installed physical-session behavior remains a separate manager gate.
 Signed build-only Portage output does not merge/restart a host or update world.
 
-Final desktop revision 1 and fork revision 3 preserve all earlier recipes and
+Final desktop revision 2 and fork revision 3 preserve all earlier recipes and
 archive records. Historical fork revision 1 has a bare-modifier parser defect;
 revision 2 lacks native repeat activation. Neither is final delivery. Revision 3
 includes both reviewed fixes, retains exact6.6.6.1 ABI, and is undergoing the
@@ -160,3 +160,8 @@ authorized private signed build-only. The final desktop source includes the
 accepted helper regression and release documentation. Exact two-host closure,
 manager runtime acceptance and installs remain separate gates; no old source
 archive is recut under its existing filename.
+
+Desktop revision 1 remains a superseded archive/source candidate. Revision 2
+includes the independently accepted native release contract and fork pin
+metadata repair. Root reports actual native Shortcuts 8/8 and protected input
+receipts accepted; package build/signature/installed gates stay separate.

@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: working — authorized final55d fork r3 build-only live PID/PGID1781670; desktop cae/r1 superseded, definitive root pin pending, no closure/install
+- Status: working — final desktop29f/r2 archive/recipe and exact two-host closure; authorized fork55d/r3 build-only live PID/PGID1781670
 - Outcome: concrete desktop/fork source freeze recipes/archives, actual two-host dependency closure and qinda signed fork build-only
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -59,3 +59,5 @@
 - 2026-10-02T20:42:09.608209+00:00 — Root supplied final desktop cae9114a freeze and accepted91c forkrecipe. New desktop-r1 archive41376212bytes/10738members/no links, five source members exact Git bytes; new r1 recipe source pin only, forkdependencyr3 retained, deliverydesktopatomr1/new real DIST row. Existing source/archive rows unchanged. Fork build remains live, no interrupt or shared native artifact mutation.
 
 - 2026-10-02T20:43:04.537792+00:00 — Root HOLD desktop after actual stale release checker deps/kwin.json reference. Cae desktop-r1 archive/recipe already preserved6c168e8 before HOLD, no solver/build/publish/install; propose new r2 once definitive source accepted. Fork r3 remains live624/1418, MemAvailable13535500KiB/no compiler errors observed.
+
+- 2026-10-02T20:49:32.339238+00:00 — Root definitive desktop29f source freeze accepted checker/pin repair+actual protected input receipts; fork55d actualShortcuts8/8PASS. New desktop-r2 archive41389472bytes/10740members/no links and six exact source members. New recipe sourcepin only from retainedr1; forkdep r3 unchanged; actual DIST row/deliveryr2. Proceeding exact two-root closure once each host, no install/publish.
