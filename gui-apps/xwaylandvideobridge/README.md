@@ -17,3 +17,7 @@ runtime gate. No installed service/process is restarted by source preparation.
 Immutable source SHA256:
 - bridge0.5.0: f07ec942b17c2134b78af33b7aad9fae8d045c91aacae4b297c33106d2561379
 - KPipeWire6.6.6.1: c357ffb467301b650ee77ff670da33a97a4e203557d2f8790e40449a2173ecd8
+
+The eclass source boundary explicitly sets CMAKE_USE_DIR for both projects; S
+alone does not select the configured project. KDE automatic link-directory
+RPATH appending is disabled for both, retaining only the owned runtime path.

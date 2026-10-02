@@ -53,6 +53,7 @@ src_prepare() {
 
 src_configure() {
  local S="${S}/qinda-private/kpipewire"
+ local CMAKE_USE_DIR="${S}"
  local BUILD_DIR="${WORKDIR}/kpipewire-build"
  local mycmakeargs=(
   -DBUILD_TESTING=OFF
@@ -61,6 +62,8 @@ src_configure() {
   -DKDE_INSTALL_INCLUDEDIR=include
   -DKDE_INSTALL_QMLDIR=qml
   -DKDE_INSTALL_CMAKEPACKAGEDIR=lib/cmake
+  -DKDE_SKIP_RPATH_SETTINGS=ON
+  -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=OFF
   -DCMAKE_INSTALL_RPATH="$(private_prefix)/lib"
  )
  cmake_src_configure
@@ -71,14 +74,18 @@ src_compile() {
  # The NO_DEFAULT_PATH patch makes absent staging a hard error, not stock fallback.
  local bridge_source="${S}" bridge_build="${BUILD_DIR}"
  local S="${bridge_source}/qinda-private/kpipewire"
+ local CMAKE_USE_DIR="${S}"
  local BUILD_DIR="${WORKDIR}/kpipewire-build"
  cmake_src_compile
  DESTDIR="${WORKDIR}/private-stage" cmake --install "${BUILD_DIR}" || die
  S="${bridge_source}"
+ CMAKE_USE_DIR="${bridge_source}"
  BUILD_DIR="${bridge_build}"
  local mycmakeargs=(
   -DQINDAQT_PRIVATE_KPIPEWIRE_DIR="${WORKDIR}/private-stage$(private_prefix)/lib/cmake/KPipeWire"
   -DQINDAQT_PRIVATE_PIPEWIRE_PREFIX="$(private_prefix)"
+  -DKDE_SKIP_RPATH_SETTINGS=ON
+  -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=OFF
   -DCMAKE_INSTALL_RPATH="$(private_prefix)/lib"
  )
  cmake_src_configure
