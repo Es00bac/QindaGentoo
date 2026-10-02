@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: working — adding direct desktop libei dependency and replaying laptop read-only runtime closure after recovery release
+- Status: waiting — direct libei candidate and actual two-host solver receipts handed off; final recipe review/source pins pending
 - Outcome: desktop/fork recipes, native desktop profile, provisional manager source pins and actual Portage resolution; icon delivery complete
 - Base: `8f23e1e90490ab02f49e88d5c99994bbf1f0082b`
 - Branch: `worker/pf-desktop-portage-20261002`
@@ -24,3 +24,4 @@
 - 2026-10-02T18:51:01Z — Manager released qinda-only read-only solver. Actual two-root PF25 at exact 73e5a115c3f2d616529393dce38ff43369f93f16 passed: 586 runtime packages, zero forbidden Plasma packages, exit0/19.369s. Prior KIO failure preserved separately. Laptop replay remains deferred by recovery instruction. Preparing exact final-pin archive/Manifest commands only; source qualification, final archives and installation remain manager-owned.
 - 2026-10-02T18:52:20Z — Recorded actual qinda log hash and ready deterministic archive/Manifest commands for exact future reviewed pins. No archives or dummy hashes generated. Source-ready recipe candidate remains c41a8625f8f087ff63a6c0743f1ea54588c8aa31; current status waits for independent review and final manager source pins, with laptop resolver still recovery-deferred.
 - 2026-10-02T18:55:18Z — Manager requested direct dev-libs/libei dependency matching exact Claude source738340091c6816c7355eb93d9471a2ba93799ac5 and released laptop read-only replay when lock absent. Read exact source CMake pkg_check_modules(libei-1.0 REQUIRED) and target link contract. Laptop lock absent at preflight; no builds/install/config changes authorized.
+- 2026-10-02T18:56:29Z — Additive exact candidate ad800c444b604810b4433e89f51ac2c332580e53 pushed; desktop bash syntax and working diff-check exit0. Actual laptop two-root PF25 passed573 packages/0 forbidden/exit0/20.045s; lock absent before/after, prior failure preserved. Qinda prior pass remains exact73e5/productc41 rather than falsely relabeled ad800. Direct libei was already transitive through fork. No repeated healthy qinda replay or install/build/config changes. Awaiting manager review and final qualified pins.
