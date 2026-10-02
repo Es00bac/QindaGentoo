@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — exactccf private KPipeWire source ACCEPT; immutable signed image pending focused independent inspection, no compiler lease
+- Status: waiting — exactf476 Qt bootstrap successor SOURCE ACCEPT; builder owns cached replay, immutable image inspection next, no compiler lease
 - Outcome: final desktop/fork recipes, two-host dependency closure and verified signed Desktop-r2/Fork-r3 Portage binary candidates
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -91,3 +91,5 @@
 - 2026-10-02T23:12:31.097493+00:00 — Claimed exact7b81 source-only private bridge review in separate sparse qinda worktree/branch at nice19/idleIO. Archive SHA/SIZE/BLAKE2B/SHA512 and license trees verified; capture implementation unchanged. Found CMAKE_USE_DIR wrong-project configuration and ECM automatic staging RPATH leakage; concrete minimal repairs routed original implementer/root. Private monitor QML destination confirmed; no source edits, compile/GPU/install/payload sweep. Waiting exact repaired candidate, then immutable image.
 
 - 2026-10-02T23:14:08.510307+00:00 — Different-worker exactccf source recheck ACCEPT. Separate review WT FF/clean, bash syntax0/diffcheck0; only explicit project-source binding and suppression of automatic staging RPATH appending plus README. Both7b81 blockers closed, archives/Manifest/patch unchanged; no application behavior edits/build/install/GPU. Waiting builder immutable signed image for focused private ELF/QML/locale/export/metadata checks; no runtime/image acceptance claimed.
+
+- 2026-10-02T23:18:04.845576+00:00 — Different review exactf476 clean FF/diffcheck0/bash syntax0: only materialized QByteArray imports/locale before Qt6.11 view APIs, byte/order/capture behavior unchanged. Prior eclass/RPATH fixes intact. Power/root notified immediate SOURCE ACCEPT; prior actual compiler failure preserved by builder. Waiting immutable signed image; no compiler/GPU/install or runtime acceptance.
