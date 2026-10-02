@@ -52,6 +52,7 @@ RDEPEND="
 	x11-libs/libxcb
 	>=media-video/wireplumber-0.5
 	>=net-misc/networkmanager-1.44
+	dev-libs/libei:=
 	>=dev-libs/openssl-3.2:=
 	media-libs/fontconfig
 	net-wireless/bluez
