@@ -101,7 +101,7 @@ the whole tree with the shell/KWin plugin switched off, then `cmake_build` only 
 targets and `cmake --install --component` only their component.
 
 **Exact compositor ABI.** The native cutover uses co-installable
-`gui-wm/qindaqt-kwin-6.6.6_p1-r1`, whose source serial1 exports exact6.6.6.1
+`gui-wm/qindaqt-kwin-6.6.6_p1-r3`, whose source serial1 exports exact6.6.6.1
 CMake packages. The desktop matches that fork with a subslot dependency.
 Earlier released desktop recipes retain their original stock KWin6.6.6 and
 Plasma requirements; those old recipes and archive records stay immutable.
@@ -121,14 +121,19 @@ prebuilt (`QA_PREBUILT`, `RESTRICT="strip"`); QindaFox's tarball comes from its 
 
 ## Native desktop cutover candidate
 
-New desktop pre20261002 and fork6.6.6_p1-r1 preserve all released recipes and
-old distfile records. Source pins are explicitly provisional until manager
-runtime qualification, with new Manifest rows pending final archives. Do not
-run qinda-sync installation from this candidate. Fork serial1 remains the
-exact6.6.6.1 plugin ABI; r1 names a distinct `${PF}` archive. Native shortcuts,
+New desktop pre20261002-r2 and fork6.6.6_p1-r3 preserve all released recipes and
+old distfile records. Exact manager source freeze candidates are desktop
+29f7174a62175475f6ba54fa7627dc2fd4c8a21f and fork
+55d1f2738723316fae4686468757aef66ce7590b. Private qinda archives and actual new
+Manifest rows await independent recipe review and native/runtime qualification.
+Do not publish or run qinda-sync installation from this candidate.
+Fork serial1 remains the
+exact6.6.6.1 plugin ABI; r3 names a distinct `${PF}` archive. Native shortcuts,
 lock and Schedule1 nightlight replace the retired Plasma runtime providers.
-The desktop enables the real `QINDAQT_NATIVE_POWER_EXCLUSIVE` option from
-Power candidate99cfa78e7; final source must contain that reviewed merge.
+The desktop enables the integrated `QINDAQT_NATIVE_POWER_EXCLUSIVE` option
+and its reviewed startup-failure repair. Source routing separates 13 ordinary
+portal interfaces from 5 protected sharing/input interfaces; all 18 rows select
+native owners under defaultnone, pending coherent runtime qualification.
 The ordinary desktop/systemd profile stops selecting replaced Plasma
 services/applets. This does not unmerge independently installed packages or
 change world. Reuse tools/check-plasma-dependencies for actual solver-picked
@@ -146,3 +151,17 @@ watchdog portal/unit selection for physical native qindaqt-kwin and keeps
 stock kwin_wayland compatibility; root independently reran40 focused fixtures.
 Installed physical-session behavior remains a separate manager gate.
 Signed build-only Portage output does not merge/restart a host or update world.
+
+Final desktop revision 2 and fork revision 3 preserve all earlier recipes and
+archive records. Historical fork revision 1 has a bare-modifier parser defect;
+revision 2 lacks native repeat activation. Neither is final delivery. Revision 3
+includes both reviewed fixes, retains exact6.6.6.1 ABI, and is undergoing the
+authorized private signed build-only. The final desktop source includes the
+accepted helper regression and release documentation. Exact two-host closure,
+manager runtime acceptance and installs remain separate gates; no old source
+archive is recut under its existing filename.
+
+Desktop revision 1 remains a superseded archive/source candidate. Revision 2
+includes the independently accepted native release contract and fork pin
+metadata repair. Root reports actual native Shortcuts 8/8 and protected input
+receipts accepted; package build/signature/installed gates stay separate.

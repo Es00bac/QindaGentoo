@@ -130,8 +130,8 @@ placeholders, not a published delivery):
 
 ```sh
 tools/check-plasma-dependencies --resolve \
-  --root '=gui-wm/qindaqt-desktop-0.1.0_pre20261002' \
-  --root '=gui-wm/qindaqt-kwin-6.6.6_p1-r1'
+  --root '=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r2' \
+  --root '=gui-wm/qindaqt-kwin-6.6.6_p1-r3'
 ```
 
 This invokes Portage's backtracking resolver in pretend/empty-tree mode with
@@ -295,13 +295,14 @@ There is no background timer. `QINDA_HUB` overrides the SSH host alias if needed
 
 ### Prepared native desktop cutover (2026-10-02)
 
-The new desktop `0.1.0_pre20261002` and fork `6.6.6_p1-r1` recipes are
-provisional packaging checkpoints, **not release-qualified delivery**. Their
-exact manager source pins will be replaced by final reviewed commits after
-runtime gates. No archive size or digest is fabricated: both matching final
-Manifest entries and source archives remain required before publication or
-installation. The held fork p1 recipe/archive are preserved on their original
-branch; p1-r1 retains source ABI serial1 (6.6.6.1) and uses `${PF}.tar.gz`,
+The new desktop `0.1.0_pre20261002-r2` and fork `6.6.6_p1-r3` recipes are
+exact manager source freeze candidates, **not release-qualified delivery**.
+Desktop source is `29f7174a62175475f6ba54fa7627dc2fd4c8a21f`; fork source is
+`55d1f2738723316fae4686468757aef66ce7590b`. Matching private qinda archives
+and actual new Manifest rows are prepared for independent review. Native/runtime
+qualification, publication and installation remain pending manager gates.
+The held fork p1 recipe/archive are preserved on their original
+branch; p1-r3 retains source ABI serial1 (6.6.6.1) and uses `${PF}.tar.gz`,
 so new source bytes never replace the held p1 archive.
 
 The profile now derives from the ordinary Gentoo desktop/systemd profile,
@@ -312,8 +313,10 @@ explicit PF25 KWayland and LayerShellQt allowances. Native session lock and
 Schedule1 nightlight are fork built-ins; `KWIN_NATIVE_SHORTCUTS=ON` selects
 the reviewed native adapter, Activities are OFF, and the desktop selects
 `QINDAQT_NATIVE_POWER_EXCLUSIVE=ON` with ordinary native QtQuick presentation.
-The Power option is defined by candidate99cfa78e7 and must be present in the
-final manager desktop pin; the present provisional pin precedes that merge.
+The frozen desktop source includes the reviewed native Power option and
+startup-failure repair. Its portal composition exports 13 ordinary interfaces
+and 5 protected sharing/input interfaces, with all 18 selected natively and a
+closed default; source review does not qualify their runtime behavior.
 CUPS and Qt PrintSupport supply the native Print portal's existing FD/spool
 flow.
 
@@ -332,8 +335,9 @@ each. The narrow matching KIO6.27/6.29-r1 recipes preserve implementation and
 all other dependencies, omitting only that external association editor because
 QindaQt Settings and File Manager Open With already edit MIME app associations.
 See `kde-frameworks/kio/QINDAQT-PROVENANCE.md` for original recipe/patch hashes
-and the standalone utility's broader limits. New closure resolution is held
-during manager desktop/audio recovery; no new graph PASS is asserted.
+and the standalone utility's broader limits. Subsequent805 closure passed589 packages on qinda and576 on qinda-top,
+zero forbidden on both; those receipts remain bound to their original roots.
+Final revision2/revision3 closure must be recorded separately.
 
 The Gabbee `0.1.0_p20261002` checkpoint pins integrated source
 `0a232449a64ac54b1c065ec391f6ba53f7fbe95e`, which selects native QindaQt
@@ -348,3 +352,17 @@ Build-only signing and manager review precede publication or installation.
 Native watchdog source was independently reviewed and its40 focused fixtures
 passed on qinda. Signed build-only output is package preparation; installed
 physical-session behavior remains a separate manager gate.
+
+Final desktop revision 2 and fork revision 3 preserve all earlier recipes and
+archive records. Historical fork revision 1 has a bare-modifier parser defect;
+revision 2 lacks native repeat activation. Neither is final delivery. Revision 3
+includes both reviewed fixes, retains exact6.6.6.1 ABI, and is undergoing the
+authorized private signed build-only. The final desktop source includes the
+accepted helper regression and release documentation. Exact two-host closure,
+manager runtime acceptance and installs remain separate gates; no old source
+archive is recut under its existing filename.
+
+Desktop revision 1 remains a superseded archive/source candidate. Revision 2
+includes the independently accepted native release contract and fork pin
+metadata repair. Root reports actual native Shortcuts 8/8 and protected input
+receipts accepted; package build/signature/installed gates stay separate.

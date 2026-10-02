@@ -1,12 +1,12 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: working — pinning accepted Gabbee0a232 source and preparing acknowledged signed build-only package gate
-- Outcome: new Gabbee p20261002 pin/floor and qindaqt native unit packaging; desktop/fork final pins remain manager-owned
+- Status: working — final desktop29f/r2 archive/recipe and exact two-host closure; authorized fork55d/r3 build-only live PID/PGID1781670
+- Outcome: concrete desktop/fork source freeze recipes/archives, actual two-host dependency closure and qinda signed fork build-only
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
 - Worktree: `/home/cabewse/work_space/QindaGentoo-gabbee-portage-20261002`
-- Ownership: new Gabbee recipe, desktop Gabbee floor only, relevant delivery lines/docs, own board/thread; preserve root RemovableMedia OFF/PDEPEND
+- Ownership: final desktop/fork recipe pins/new Manifest rows/qualification docs and own board/thread; preserve Gabbee0a232, root RemovableMedia OFF/PDEPEND, libei/KIO/profile contracts
 - Resource limits: qinda Portage signed build-only after exact review; no laptop heavy/build, host merge/restart/global config/world or icons
 - Provider/model evidence: requested model configuration is not runtime provider/model evidence; no runtime identity assertion
 
@@ -31,3 +31,33 @@
 - 2026-10-02T19:37:57+00:00 — Root deferred signed build after source44 watchdog blocker and transferred bounded Gabbee source repair. Source candidate1aea0b7d969d4aa07c715cc9456cc395a94e0e7d now handed off in Gabbee hub with40 focused tests PASS, py_compile/diff-check0 and exact endpoint/unit fixtures. Independent source review/integration/final pin pending; overlay recipe732cf remains immutable/unbuilt. Portage readonly preview one exact package PASS after moving candidate mirror out of private .cache parent; no chmod/globalconfig/install or host restart.
 
 - 2026-10-02T19:40:46+00:00 — Root independently accepted watchdog1aea and actual40/40 replay0.15s, integrated0a232449 hub/clean checkout. Updating only candidate Gabbee source pin/docs to accepted commit; desktop floor/native unit omission/Media27b unchanged. bash syntax/readonly preview then exact commit acknowledgment before signed build-only; no install/globalrepo/profile/world/restart/laptopheavy.
+
+- 2026-10-02T19:44:10Z — Signed Gabbee build-only at accepted recipe2e6/source0a232 exited0 in13.296s. Portage GPkg mandatory signature/whole-package verification passed; image254 entries, seven native recovery drop-ins and frontend drop-in present, obsolete KDE drop-in absent, watchdog exact source bytes. Gabbee installedVDB and world unchanged. Artifact/command/log hashes preserved in immutable receipt; final installs remain manager-owned.
+
+- 2026-10-02T20:06:39.220785+00:00 — Independently source-accepted repaired native routing d2dac079 paired input e364/fcc and fork1321, exact receiptac2c1c07 in desktop hub. Final overlay product remains accepted2e6 Gabbee0a232, Media27b ownership fix and direct libei. Prepared deterministic qinda archive/layout/hash/newDIST-only workflow below; no final desktop/fork pins, archives or Manifest claims invented. No compiler/native/install/restart/icon work.
+
+- 2026-10-02T20:08:03.431595+00:00 — Manager supplied exact source freeze candidates cb58205992bdf35bddc7bb30780482f5695f623d/a6964310dbfb3a11df06532a32059f4ab9e92ac2. Verified hub objects, fork serial1/native options and protected metadata install. Pins/archive/Manifest preparation authorized; runtime/build/install lease pending. Gabbee0a232/Media27b/libei/KIO/profile unchanged.
+
+- 2026-10-02T20:09:07.609155+00:00 — Actual qinda deterministic candidate archives generated: desktop41323162bytes/10713members, fork15857349bytes/4017members; no links or unsafe paths. Selected source members match exact hub bytes, fork serial1 and native controls present. Actual BLAKE2B/SHA512 new DIST rows appended only; old Manifest bytes preserved. Native/runtime gates and archive publication/build/install lease pending.
+
+- 2026-10-02T20:12:54.894414+00:00 — Root exact805c08bb source/archive review ACCEPT. Actual final two-root closure PASS qinda589/laptop576 packages,0 forbidden, exit0/22.041s and0/24.876s; laptop lock absent before/after. Authorized qinda signed fork build-only live PID/PGID1707763, initial available memory16629764096bytes, private repo/profile/DISTDIR/PKGDIR/tmp. No install or host/world/config change.
+
+- 2026-10-02T20:13:41.109884+00:00 — Initial private-temp setup failure preserved (exit1/5.001s, no phases, VDB/world unchanged). Created only task-local Portage-owned temp directory and retried unchanged source805/command. Actual live owned PID/PGID1709406, startup available memory17134628864bytes; same4-job/6GiB guard.
+
+- 2026-10-02T20:19:29.669662+00:00 — Root actual shortcut gate found production bare-modifier parser defect; root owns repair and final fork pin. Current a696 package is historical/cache warmup only, existing archive immutable. Single four-job lease may finish; no parallel rebuild/publish/install. Proposed new fork-r2 when corrected pin is reviewed, pending manager version decision.
+
+- 2026-10-02T20:30:27.628458+00:00 — Historical r1 build exit0/995.058s; memory guard inactive, minimum7445741568bytes, VDB/world unchanged. Compiler lease released. Root authorized corrected e9 revision2 with immutable new archive/Manifest; final desktop pin and r2 runtime/recipe acknowledgment pending, no rebuild/publish/install.
+
+- 2026-10-02T20:31:38.173821+00:00 — Corrected e9 r2 archive15858433bytes/4017members/no links and six source members exact hub bytes. Two recipe bash syntax checks/diff-check0; r1 recipe/archive/Manifest row unchanged. Historical r1 GPkg mandatory full signature/checksum verification PASS0.17s,456 image entries, exactABI6.6.6.1/twoauthorityheaders; not qualified delivery. Final source/closure receipt preserved for805 only, no r2 solver/build/install/publish claim.
+
+- 2026-10-02T20:38:22.431983+00:00 — Root found native repeat-signal compatibility defect after source-accepting2f; r2 archive remains immutable/nonfinal. Confirmed own historical compiler PGID absent and lease released. Prepared qinda task-local final desktop-r1/fork-r3 recipe/archive/closure and build-only argv from existing workflow; no pins/hashes/recipes fabricated, no command executed. Waiting exact accepted source freezes.
+
+- 2026-10-02T20:40:02.958421+00:00 — Root independently source-accepted final55d repeat repair and granted r3 signed build-only after preflight,4jobs/6GiBguard. New archive15858526bytes/4017members/no links, six source members exactGit/serial1. Existing r1/r2 recipes/archive rows unchanged, desktop dependency/delivery forkatom nowr3; final desktop freeze pending. No publish/install/native artifact mutation.
+
+- 2026-10-02T20:40:34.861823+00:00 — Actual signed build-only started20:40:20Z at exact91c4535/source55d, livePID/PGID1781670, startupMemAvailable16295776256bytes. Existing private process repo/profile/DISTDIR/PKGDIR/tmp;4jobs/load24/6GiBguard, actual command/process/log retained. No runtime qualification/delivery/install claim.
+
+- 2026-10-02T20:42:09.608209+00:00 — Root supplied final desktop cae9114a freeze and accepted91c forkrecipe. New desktop-r1 archive41376212bytes/10738members/no links, five source members exact Git bytes; new r1 recipe source pin only, forkdependencyr3 retained, deliverydesktopatomr1/new real DIST row. Existing source/archive rows unchanged. Fork build remains live, no interrupt or shared native artifact mutation.
+
+- 2026-10-02T20:43:04.537792+00:00 — Root HOLD desktop after actual stale release checker deps/kwin.json reference. Cae desktop-r1 archive/recipe already preserved6c168e8 before HOLD, no solver/build/publish/install; propose new r2 once definitive source accepted. Fork r3 remains live624/1418, MemAvailable13535500KiB/no compiler errors observed.
+
+- 2026-10-02T20:49:32.339238+00:00 — Root definitive desktop29f source freeze accepted checker/pin repair+actual protected input receipts; fork55d actualShortcuts8/8PASS. New desktop-r2 archive41389472bytes/10740members/no links and six exact source members. New recipe sourcepin only from retainedr1; forkdep r3 unchanged; actual DIST row/deliveryr2. Proceeding exact two-root closure once each host, no install/publish.
