@@ -366,3 +366,22 @@ Desktop revision 1 remains a superseded archive/source candidate. Revision 2
 includes the independently accepted native release contract and fork pin
 metadata repair. Root reports actual native Shortcuts 8/8 and protected input
 receipts accepted; package build/signature/installed gates stay separate.
+
+### Prepared installed-application Plasma edge cleanup
+
+The matching installed-version KAuth6.27-r1, Kirigami-addons1.12.1-r1 and
+KDEConnect26.04.3-r4 recipes preserve upstream implementation and licensing.
+KAuth retains its Polkit backend while the native session supplies its agent;
+Kirigami drops an unused Plasma metadata dependency; KDEConnect adds a
+default-on optional Plasma applet without removing its daemon or applications.
+The native profile disables only that applet, Sloom's Plasma panel menu,
+xdg-utils' Plasma integration and LXQt's separate monitor module. The native
+Settings display controls remain the native profile's display route.
+Per-package QINDAQT-PROVENANCE.md binds original recipe/patch and source hashes.
+
+These source/metadata candidates do not unmerge apps, change host world,
+qualify newer upstream versions, or prove installed runtime readiness.
+Six focused metadata/source-preparation checks cover native/default behavior.
+Actual builds, QML/app smoke, native Polkit agent registration and reviewed
+per-host world/depclean plans remain manager gates. The earlier exact-root
+PF25 receipts are not relabeled as installed-world closure evidence.
