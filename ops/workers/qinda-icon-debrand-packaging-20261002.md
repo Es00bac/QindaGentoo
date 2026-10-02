@@ -1,13 +1,13 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — direct libei candidate and actual two-host solver receipts handed off; final recipe review/source pins pending
-- Outcome: desktop/fork recipes, native desktop profile, provisional manager source pins and actual Portage resolution; icon delivery complete
-- Base: `8f23e1e90490ab02f49e88d5c99994bbf1f0082b`
-- Branch: `worker/pf-desktop-portage-20261002`
-- Worktree: `/home/cabewse/work_space/QindaGentoo-desktop-portage-20261002`
-- Ownership: new gui-wm/qindaqt-kwin and qindaqt-desktop recipes, narrow matching KIO recipes/provenance, profile parent/packages/defaults/USE/keywords, metadata delivery and README/CLAUDE; own board/thread only
-- Resource limits: read-only candidate Portage resolution on both hosts; no native source, C++ compile, GPU, install or restart; host configs/world unchanged
+- Status: working — preparing exact Gabbee native snapshot recipe and signed build-only gate; no icon work
+- Outcome: new Gabbee p20261002 pin/floor and qindaqt native unit packaging; desktop/fork final pins remain manager-owned
+- Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
+- Branch: `worker/pf-gabbee-portage-20261002`
+- Worktree: `/home/cabewse/work_space/QindaGentoo-gabbee-portage-20261002`
+- Ownership: new Gabbee recipe, desktop Gabbee floor only, relevant delivery lines/docs, own board/thread; preserve root RemovableMedia OFF/PDEPEND
+- Resource limits: qinda Portage signed build-only after exact review; no laptop heavy/build, host merge/restart/global config/world or icons
 - Provider/model evidence: requested model configuration is not runtime provider/model evidence; no runtime identity assertion
 
 ## Updates
@@ -25,3 +25,5 @@
 - 2026-10-02T18:52:20Z — Recorded actual qinda log hash and ready deterministic archive/Manifest commands for exact future reviewed pins. No archives or dummy hashes generated. Source-ready recipe candidate remains c41a8625f8f087ff63a6c0743f1ea54588c8aa31; current status waits for independent review and final manager source pins, with laptop resolver still recovery-deferred.
 - 2026-10-02T18:55:18Z — Manager requested direct dev-libs/libei dependency matching exact Claude source738340091c6816c7355eb93d9471a2ba93799ac5 and released laptop read-only replay when lock absent. Read exact source CMake pkg_check_modules(libei-1.0 REQUIRED) and target link contract. Laptop lock absent at preflight; no builds/install/config changes authorized.
 - 2026-10-02T18:56:29Z — Additive exact candidate ad800c444b604810b4433e89f51ac2c332580e53 pushed; desktop bash syntax and working diff-check exit0. Actual laptop two-root PF25 passed573 packages/0 forbidden/exit0/20.045s; lock absent before/after, prior failure preserved. Qinda prior pass remains exact73e5/productc41 rather than falsely relabeled ad800. Direct libei was already transitive through fork. No repeated healthy qinda replay or install/build/config changes. Awaiting manager review and final qualified pins.
+
+- 2026-10-02T19:29:04+00:00 — Manager accepted transferred portal repairs after independent6/6 gate. Claimed final Gabbee packaging from exact27b5 after hub fetch, isolated newWT/branch. Copying immutable prior recipe with exact44c857fe pin, new desktop floor and qindaqt-only unit loop omitting KDE backend drop-in. Read source watchdog stillstockbackend/parent assumption and reported manager-owned source qualification caveat; no source edit/install. Preserve RemovableMedia root fix.

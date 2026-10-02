@@ -136,3 +136,12 @@ runtime closure of both exact candidate roots on both hosts. Register the
 worktree/profile through isolated process settings only and preserve logs.
 No installation or final release claim before reviewed source pins, archives,
 Manifest entries and manager runtime gates. See README's prepared cutover.
+
+**Gabbee native checkpoint (2026-10-02).** The new p20261002 recipe pins
+integrated44c857fe and the prepared desktop requires that floor. Copying the
+old recipe preserves Python/Whisper/IBus behavior and generic stock source;
+only the pin and qindaqt-mode obsolete KDE portal drop-in installation change.
+No old recipe or Git source revision is rewritten. Source44 watchdog stock
+backend/parent assumptions remain a native qualification caveat pending
+manager source decision; do not infer full watchdog readiness from packaging.
+Signed build-only Portage output does not merge/restart a host or update world.
