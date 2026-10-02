@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — source-ready Gabbee recipe held for root review/integration of native watchdog1aea0b7; signed build deferred
+- Status: working — pinning accepted Gabbee0a232 source and preparing acknowledged signed build-only package gate
 - Outcome: new Gabbee p20261002 pin/floor and qindaqt native unit packaging; desktop/fork final pins remain manager-owned
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -29,3 +29,5 @@
 - 2026-10-02T19:29:04+00:00 — Manager accepted transferred portal repairs after independent6/6 gate. Claimed final Gabbee packaging from exact27b5 after hub fetch, isolated newWT/branch. Copying immutable prior recipe with exact44c857fe pin, new desktop floor and qindaqt-only unit loop omitting KDE backend drop-in. Read source watchdog stillstockbackend/parent assumption and reported manager-owned source qualification caveat; no source edit/install. Preserve RemovableMedia root fix.
 
 - 2026-10-02T19:37:57+00:00 — Root deferred signed build after source44 watchdog blocker and transferred bounded Gabbee source repair. Source candidate1aea0b7d969d4aa07c715cc9456cc395a94e0e7d now handed off in Gabbee hub with40 focused tests PASS, py_compile/diff-check0 and exact endpoint/unit fixtures. Independent source review/integration/final pin pending; overlay recipe732cf remains immutable/unbuilt. Portage readonly preview one exact package PASS after moving candidate mirror out of private .cache parent; no chmod/globalconfig/install or host restart.
+
+- 2026-10-02T19:40:46+00:00 — Root independently accepted watchdog1aea and actual40/40 replay0.15s, integrated0a232449 hub/clean checkout. Updating only candidate Gabbee source pin/docs to accepted commit; desktop floor/native unit omission/Media27b unchanged. bash syntax/readonly preview then exact commit acknowledgment before signed build-only; no install/globalrepo/profile/world/restart/laptopheavy.

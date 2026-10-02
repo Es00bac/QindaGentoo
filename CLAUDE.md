@@ -138,10 +138,11 @@ No installation or final release claim before reviewed source pins, archives,
 Manifest entries and manager runtime gates. See README's prepared cutover.
 
 **Gabbee native checkpoint (2026-10-02).** The new p20261002 recipe pins
-integrated44c857fe and the prepared desktop requires that floor. Copying the
+integrated0a232449 and the prepared desktop requires that floor. Copying the
 old recipe preserves Python/Whisper/IBus behavior and generic stock source;
 only the pin and qindaqt-mode obsolete KDE portal drop-in installation change.
-No old recipe or Git source revision is rewritten. Source44 watchdog stock
-backend/parent assumptions remain a native qualification caveat pending
-manager source decision; do not infer full watchdog readiness from packaging.
+No old recipe or Git source revision is rewritten. The accepted source fixes
+watchdog portal/unit selection for physical native qindaqt-kwin and keeps
+stock kwin_wayland compatibility; root independently reran40 focused fixtures.
+Installed physical-session behavior remains a separate manager gate.
 Signed build-only Portage output does not merge/restart a host or update world.
