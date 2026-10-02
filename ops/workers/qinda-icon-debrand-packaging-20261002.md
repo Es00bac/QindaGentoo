@@ -1,7 +1,7 @@
-# Qinda icon debrand packaging worker
+# Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: working — preparing desktop Portage cutover and read-only two-host runtime closure
+- Status: waiting — source-ready desktop candidate handed off; solver replay held by manager desktop/audio recovery pause
 - Outcome: desktop/fork recipes, native desktop profile, provisional manager source pins and actual Portage resolution; icon delivery complete
 - Base: `8f23e1e90490ab02f49e88d5c99994bbf1f0082b`
 - Branch: `worker/pf-desktop-portage-20261002`
@@ -20,3 +20,4 @@
 - 2026-10-02T16:28:55Z — Exact recipe/checker candidate12b5e862c2b3168adf89b115cdc3c6dc4a01445f preserved on qinda hub. Private DISTDIR and isolated repository environment used for qinda image replay; painted phase exit0/93.184s, source and staged7310/3291 checks PASS. pkgcheck exit0, only expected retained-old-version warnings.
 - 2026-10-02T16:32:04Z — Handdrawn image replay exit0/84.053s; both7310PNG/3291drawings with all7172 original names +138aliases and exact notices. Independently checked all57 original painted companion files byte-exact in docs. Cloned image missing/tampered/extra/symlink negatives reject and restored image PASS, exit0/6.427s. Posted exact candidate handoff; no installedphase/prefs/world/profile changes, native/installed/signed binary gates still manager-owned.
 - 2026-10-02T18:24:46Z — Manager accepted prior icon delivery; no further icon work. Claimed desktop packaging from exact overlay base after fetch. VDB inspected both hosts: fork uninstalled; desktop laptop pre20260928-r3, qinda pre20260927-r7; stock KWin r2/r1. Frozen manager fork serial1 requires 6.6.6.1 ABI, so proposed new 6.6.6_p1-r1 rather than inventing serial2. Source/archive pins remain provisional until manager release qualification.
+- 2026-10-02T18:41:29Z — Source-ready exact candidate c41a8625f8f087ff63a6c0743f1ea54588c8aa31. Four ebuild syntax checks exit0; matching KIO recipes/patch and two DIST rows independently compared to actual respective Gentoo origins, PASS. Actual pre-KIO PF25 replay: laptop579/qinda592 runtime packages, two forbidden KIO post-dependencies each, exit1. Authorized only-keditfiletype KIO adaptation complete; no new resolver pass after manager recovery hold. Final manager Power/source integration, archive Manifests, exact review and two-host runtime closure remain pending.
