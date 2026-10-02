@@ -324,3 +324,13 @@ Portage graph does not count as delivery. Host configuration is not changed
 by preparation. Laptop resolution waits while its test lock exists. Final
 source qualification, archive publication, integrated runtime gates and install
 remain manager-owned.
+
+The first actual two-host PF25 candidate resolution found KIO's unconditional
+`kde-plasma/keditfiletype` post-dependency (and its `kde-cli-tools-common`):
+579 runtime packages on qinda-top and592 on qinda, two forbidden providers
+each. The narrow matching KIO6.27/6.29-r1 recipes preserve implementation and
+all other dependencies, omitting only that external association editor because
+QindaQt Settings and File Manager Open With already edit MIME app associations.
+See `kde-frameworks/kio/QINDAQT-PROVENANCE.md` for original recipe/patch hashes
+and the standalone utility's broader limits. New closure resolution is held
+during manager desktop/audio recovery; no new graph PASS is asserted.
