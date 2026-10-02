@@ -1,13 +1,13 @@
-# Qinda icon debrand packaging worker
+# Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — exact recipes and package images handed off; awaiting independent review and manager delivery
-- Outcome: versioned Portage delivery of reviewed QindaQt Painted and QindaQt Handdrawn artwork, preserving upgrade tracking and complete compatibility coverage
-- Base: `07ab05d10c20df4ac086430f5d761c57efadf4c7`
-- Branch: `worker/qinda-icon-debrand-packaging-20261002`
-- Worktree: `/home/cabewse/work_space/QindaGentoo-icon-debrand-20261002`
-- Ownership: new versioned recipes/checkers and additive Manifest entries under `x11-themes/qinda-breeze-painted` and `x11-themes/qinda-breeze-handdrawn`; narrowly justified new metadata records; this worker record and new immutable messages
-- Resource limits: read-only source/archive inspection on qinda; no package phases, builds, GPU, emerge or installs until the manager provides exact reviewed source and resource authorization
+- Status: waiting — direct libei candidate and actual two-host solver receipts handed off; final recipe review/source pins pending
+- Outcome: desktop/fork recipes, native desktop profile, provisional manager source pins and actual Portage resolution; icon delivery complete
+- Base: `8f23e1e90490ab02f49e88d5c99994bbf1f0082b`
+- Branch: `worker/pf-desktop-portage-20261002`
+- Worktree: `/home/cabewse/work_space/QindaGentoo-desktop-portage-20261002`
+- Ownership: new gui-wm/qindaqt-kwin and qindaqt-desktop recipes, narrow matching KIO recipes/provenance, profile parent/packages/defaults/USE/keywords, metadata delivery and README/CLAUDE; own board/thread only
+- Resource limits: read-only candidate Portage resolution on both hosts; no native source, C++ compile, GPU, install or restart; host configs/world unchanged
 - Provider/model evidence: requested model configuration is not runtime provider/model evidence; no runtime identity assertion
 
 ## Updates
@@ -19,3 +19,9 @@
 - 2026-10-02T16:19:46Z — Manager supplied reviewed source freeze2efd8795ce9a124106a541f39766cd95c8c0ef54 and CPU package-image phase authorization after exact archive Manifest is known. Read final contract/sourceQA:7310names/3291drawings each,72overrides/30nativeart/138nativealiases/2redirects. Authoring only new versioned recipes/checkers; archive digest remains pending, no installedphase authorized.
 - 2026-10-02T16:28:55Z — Exact recipe/checker candidate12b5e862c2b3168adf89b115cdc3c6dc4a01445f preserved on qinda hub. Private DISTDIR and isolated repository environment used for qinda image replay; painted phase exit0/93.184s, source and staged7310/3291 checks PASS. pkgcheck exit0, only expected retained-old-version warnings.
 - 2026-10-02T16:32:04Z — Handdrawn image replay exit0/84.053s; both7310PNG/3291drawings with all7172 original names +138aliases and exact notices. Independently checked all57 original painted companion files byte-exact in docs. Cloned image missing/tampered/extra/symlink negatives reject and restored image PASS, exit0/6.427s. Posted exact candidate handoff; no installedphase/prefs/world/profile changes, native/installed/signed binary gates still manager-owned.
+- 2026-10-02T18:24:46Z — Manager accepted prior icon delivery; no further icon work. Claimed desktop packaging from exact overlay base after fetch. VDB inspected both hosts: fork uninstalled; desktop laptop pre20260928-r3, qinda pre20260927-r7; stock KWin r2/r1. Frozen manager fork serial1 requires 6.6.6.1 ABI, so proposed new 6.6.6_p1-r1 rather than inventing serial2. Source/archive pins remain provisional until manager release qualification.
+- 2026-10-02T18:41:29Z — Source-ready exact candidate c41a8625f8f087ff63a6c0743f1ea54588c8aa31. Four ebuild syntax checks exit0; matching KIO recipes/patch and two DIST rows independently compared to actual respective Gentoo origins, PASS. Actual pre-KIO PF25 replay: laptop579/qinda592 runtime packages, two forbidden KIO post-dependencies each, exit1. Authorized only-keditfiletype KIO adaptation complete; no new resolver pass after manager recovery hold. Final manager Power/source integration, archive Manifests, exact review and two-host runtime closure remain pending.
+- 2026-10-02T18:51:01Z — Manager released qinda-only read-only solver. Actual two-root PF25 at exact 73e5a115c3f2d616529393dce38ff43369f93f16 passed: 586 runtime packages, zero forbidden Plasma packages, exit0/19.369s. Prior KIO failure preserved separately. Laptop replay remains deferred by recovery instruction. Preparing exact final-pin archive/Manifest commands only; source qualification, final archives and installation remain manager-owned.
+- 2026-10-02T18:52:20Z — Recorded actual qinda log hash and ready deterministic archive/Manifest commands for exact future reviewed pins. No archives or dummy hashes generated. Source-ready recipe candidate remains c41a8625f8f087ff63a6c0743f1ea54588c8aa31; current status waits for independent review and final manager source pins, with laptop resolver still recovery-deferred.
+- 2026-10-02T18:55:18Z — Manager requested direct dev-libs/libei dependency matching exact Claude source738340091c6816c7355eb93d9471a2ba93799ac5 and released laptop read-only replay when lock absent. Read exact source CMake pkg_check_modules(libei-1.0 REQUIRED) and target link contract. Laptop lock absent at preflight; no builds/install/config changes authorized.
+- 2026-10-02T18:56:29Z — Additive exact candidate ad800c444b604810b4433e89f51ac2c332580e53 pushed; desktop bash syntax and working diff-check exit0. Actual laptop two-root PF25 passed573 packages/0 forbidden/exit0/20.045s; lock absent before/after, prior failure preserved. Qinda prior pass remains exact73e5/productc41 rather than falsely relabeled ad800. Direct libei was already transitive through fork. No repeated healthy qinda replay or install/build/config changes. Awaiting manager review and final qualified pins.

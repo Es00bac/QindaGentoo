@@ -1,6 +1,7 @@
 # @profile set: what a QindaQt desktop machine gets by default.
 app-office/obsidian
 gui-wm/qindaqt-desktop
+gui-wm/qindaqt-kwin
 gui-apps/qindaoffice
 gui-apps/qqterm
 gui-apps/qindaqt-system-monitor
@@ -15,13 +16,9 @@ sys-boot/qinda-boot
 net-misc/networkmanager
 media-video/pipewire
 media-video/wireplumber
-kde-plasma/xdg-desktop-portal-kde
-kde-plasma/polkit-kde-agent
 sys-power/power-profiles-daemon
 media-fonts/noto
 media-fonts/noto-emoji
 media-fonts/dejavu
 app-shells/zsh
-kde-plasma/sloom-globalmenu
-kde-plasma/sloom-panelmenu
 media-gfx/sloom-studio-bin

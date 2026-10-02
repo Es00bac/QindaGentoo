@@ -1,6 +1,7 @@
 # The QindaQt overlay packages are ~amd64 checkpoints.
 app-office/obsidian ~amd64
 gui-wm/qindaqt-desktop ~amd64
+gui-wm/qindaqt-kwin ~amd64
 gui-apps/qindaqt-apps ~amd64
 gui-apps/qindaoffice ~amd64
 # The toolkit the whole office suite's UI is built from (D-031); it comes
@@ -29,8 +30,6 @@ dev-util/opencode-bin ~amd64
 dev-util/codex-bin ~amd64
 www-client/qindafox-bin ~amd64
 media-libs/noise-suppression-for-voice ~amd64
-kde-plasma/sloom-globalmenu ~amd64
-kde-plasma/sloom-panelmenu ~amd64
 media-gfx/sloom-studio-bin ~amd64
 media-gfx/qindahane-bin ~amd64
 # OBS Studio is an integrated part of the QindaQt desktop (Streaming route,

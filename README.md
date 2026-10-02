@@ -21,7 +21,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `app-accessibility/gabbee` | `gabbee` (dictation; QindaQt's `org.qindaqt.Voice1` provider) |
 | `x11-themes/qinda-seven` | `QindaThemes` (seven themes, paired decorations, and KDE color schemes) |
 | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | `sloom-studio-gpl` |
-| `kde-plasma/kwin`, `kde-plasma/plasma-activities` | pinned 6.6.x copies the desktop's KWin plugin ABI needs |
+| `kde-plasma/kwin`, `kde-plasma/plasma-activities` | retained pinned 6.6.x copies for older desktop deliveries |
 
 ### Removable media
 
@@ -130,8 +130,8 @@ placeholders, not a published delivery):
 
 ```sh
 tools/check-plasma-dependencies --resolve \
-  --root '=gui-wm/qindaqt-desktop-0.1.0_pre20261001' \
-  --root '=gui-wm/qindaqt-kwin-6.6.6_p2'
+  --root '=gui-wm/qindaqt-desktop-0.1.0_pre20261002' \
+  --root '=gui-wm/qindaqt-kwin-6.6.6_p1-r1'
 ```
 
 This invokes Portage's backtracking resolver in pretend/empty-tree mode with
@@ -235,7 +235,7 @@ machines; the `base-en` and `large-v3-turbo` USE flags add others. The profile
 accepts the `~amd64` Hugging Face packages they need from ::gentoo.
 
 `profiles/qindaqt/systemd` is the desktop profile: parent
-`default/linux/amd64/23.0/desktop/plasma/systemd` plus the QindaQt package set,
+`default/linux/amd64/23.0/desktop/systemd` plus the QindaQt package set,
 USE defaults, keywords and licenses. Select it with
 `eselect profile set qindaqt:qindaqt/systemd`.
 
@@ -292,3 +292,45 @@ Conflicting existing recipes or archive hashes also stop for an explicit version
 bump; the helper does not repair unrelated overlay changes. Updates run when
 invoked, so an offline laptop catches up with one command when it reconnects.
 There is no background timer. `QINDA_HUB` overrides the SSH host alias if needed.
+
+### Prepared native desktop cutover (2026-10-02)
+
+The new desktop `0.1.0_pre20261002` and fork `6.6.6_p1-r1` recipes are
+provisional packaging checkpoints, **not release-qualified delivery**. Their
+exact manager source pins will be replaced by final reviewed commits after
+runtime gates. No archive size or digest is fabricated: both matching final
+Manifest entries and source archives remain required before publication or
+installation. The held fork p1 recipe/archive are preserved on their original
+branch; p1-r1 retains source ABI serial1 (6.6.6.1) and uses `${PF}.tar.gz`,
+so new source bytes never replace the held p1 archive.
+
+The profile now derives from the ordinary Gentoo desktop/systemd profile,
+adds the native fork, and stops selecting KDE portal/polkit and Sloom Plasma
+applet packages. Existing independently installed Plasma packages and user
+world remain untouched. Desktop/fork runtime dependencies keep only the
+explicit PF25 KWayland and LayerShellQt allowances. Native session lock and
+Schedule1 nightlight are fork built-ins; `KWIN_NATIVE_SHORTCUTS=ON` selects
+the reviewed native adapter, Activities are OFF, and the desktop selects
+`QINDAQT_NATIVE_POWER_EXCLUSIVE=ON` with ordinary native QtQuick presentation.
+The Power option is defined by candidate99cfa78e7 and must be present in the
+final manager desktop pin; the present provisional pin precedes that merge.
+CUPS and Qt PrintSupport supply the native Print portal's existing FD/spool
+flow.
+
+Review uses a task-local candidate repository and profile through process
+settings only. Read-only two-root PF25 resolution on **each** host is required;
+a syntax pass, empty synthetic graph, missing source archive or unresolved
+Portage graph does not count as delivery. Host configuration is not changed
+by preparation. Laptop resolution waits while its test lock exists. Final
+source qualification, archive publication, integrated runtime gates and install
+remain manager-owned.
+
+The first actual two-host PF25 candidate resolution found KIO's unconditional
+`kde-plasma/keditfiletype` post-dependency (and its `kde-cli-tools-common`):
+579 runtime packages on qinda-top and592 on qinda, two forbidden providers
+each. The narrow matching KIO6.27/6.29-r1 recipes preserve implementation and
+all other dependencies, omitting only that external association editor because
+QindaQt Settings and File Manager Open With already edit MIME app associations.
+See `kde-frameworks/kio/QINDAQT-PROVENANCE.md` for original recipe/patch hashes
+and the standalone utility's broader limits. New closure resolution is held
+during manager desktop/audio recovery; no new graph PASS is asserted.
