@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — signed Desktop-r2 package and complete image verified; compiler lease released, manager install lane owns next action
+- Status: waiting — exact9df host cutover plan independently accepted; read-only select/deselect gates passed, manager owns execution
 - Outcome: final desktop/fork recipes, two-host dependency closure and verified signed Desktop-r2/Fork-r3 Portage binary candidates
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -81,3 +81,7 @@
 - 2026-10-02T21:46:34.950433+00:00 — Input exact93c SOURCE ACCEPT1c85 and rootrecipe/continuation ACCEPT; GO21:45:55Z actualPID/PGID1956400 startupMemAvailable14183165952bytes. Preservedmarkerstate/copies; normalPortageprepare appliesPATCHES, noauto reload. Source8a correspondence checkedafterprepare; retainedcache/configure thenNinja dryrun, no unpack/clean/sourcearchive recut/hostinstall.
 
 - 2026-10-02T21:57:16.168080+00:00 — Accepted93c retained prepare/configure PASS24.004s; dryrun two regeneration actions, no CXX/link. PID/PGID1961237 compile/install/package all exit0 in28.008s; guard inactive, minimum10,057,854,976bytes, compiler lease released. All3,152 compiled hashes unchanged;5,396 source files only accepted Keyring CMake changed, module metadata unchanged. Mandatory signature/full payload PASS1.742s;60,661,760byte GPkg SHA256b2a82255dbdc02457a5eb4cb1732e584db8f8e6111dac8979572dcd88b642354,2,288 image entries. World/Desktop VDB unchanged. Existing release/portal gates exit0;26 required files,13+5 interfaces,5 switcher files, native-exclusive Power/PAM/typeinfo PASS. Independent complete-image native discovery PASS0/5.645s, receipt2ba2eb5a; eight artifact hashes unchanged and cleanup empty. Complete handoff ready; no host installation/restart.
+
+- 2026-10-02T22:03:35.657015+00:00 — Claimed root exact9756 host cutover review, read actual both-host world/world_sets and qinda KDE set/VDB. Initial Spectacle keeper ambiguity resolved by exact9df descendant/PF16 authorized native Screenshot replacement; seven non-Plasma app roots identified. Installed Portage3.0.81.3 source bytes match both hosts, actual select/deselect pretend commands live; no world/config/VDB mutation or new dependency solver.
+
+- 2026-10-02T22:10:13.256498+00:00 — Exact9df plan ACCEPT after explicit PF16 Spectacle clarification/seven keeper list. Both-host actual roots/profile/VDB inspected;14/11 unique exact targets and normal signed resolver prerequisites verified. Portage3.0.81.3 source matches both hosts. Qinda select pretend0/1.004s/no merges, deselect0/0.613s exactly3entries; laptop deselect0/1.655s exactly2entries; world/set hashes unchanged. Executable keeper-selection and guarded nonempty retired-only depclean commands handed manager; no host mutations or execution-readiness claim.
