@@ -1,0 +1,23 @@
+{
+  "sourceArchive": {
+    "url": "https://dev.gentoo.org/~asturm/distfiles/sddm-0.21.0-pam.tar.xz",
+    "size": 676,
+    "sha256": "6cb32da5f8298c4f70db5616b14d1359fdc2833bbfe83602e6e46b51b0d917f2",
+    "manifestVerification": "SIZE+BLAKE2B+SHA512 PASS"
+  },
+  "checks": {
+    "stock_defaults_unchanged": true,
+    "greeter_identical_stock_native": true,
+    "sddm.pam_authentication_blocks_byte_identical": true,
+    "sddm.pam_native_optional_callbacks": true,
+    "sddm.pam_session_after_system_login": true,
+    "sddm.pam_legacy_callbacks_gone": true,
+    "sddm-autologin.pam_authentication_blocks_byte_identical": true,
+    "sddm-autologin.pam_native_optional_callbacks": true,
+    "sddm-autologin.pam_session_after_system_login": true,
+    "sddm-autologin.pam_legacy_callbacks_gone": true
+  },
+  "exit": 0,
+  "seconds": 0.02932509797392413,
+  "recipeSha256": "cd947e6cb83687b5ae4db8d6bd8734c3e30c9736875b4a248afc196d7a4cd8c8"
+}
