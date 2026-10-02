@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: working — preparing exact Gabbee native snapshot recipe and signed build-only gate; no icon work
+- Status: waiting — source-ready Gabbee recipe held for root review/integration of native watchdog1aea0b7; signed build deferred
 - Outcome: new Gabbee p20261002 pin/floor and qindaqt native unit packaging; desktop/fork final pins remain manager-owned
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -27,3 +27,5 @@
 - 2026-10-02T18:56:29Z — Additive exact candidate ad800c444b604810b4433e89f51ac2c332580e53 pushed; desktop bash syntax and working diff-check exit0. Actual laptop two-root PF25 passed573 packages/0 forbidden/exit0/20.045s; lock absent before/after, prior failure preserved. Qinda prior pass remains exact73e5/productc41 rather than falsely relabeled ad800. Direct libei was already transitive through fork. No repeated healthy qinda replay or install/build/config changes. Awaiting manager review and final qualified pins.
 
 - 2026-10-02T19:29:04+00:00 — Manager accepted transferred portal repairs after independent6/6 gate. Claimed final Gabbee packaging from exact27b5 after hub fetch, isolated newWT/branch. Copying immutable prior recipe with exact44c857fe pin, new desktop floor and qindaqt-only unit loop omitting KDE backend drop-in. Read source watchdog stillstockbackend/parent assumption and reported manager-owned source qualification caveat; no source edit/install. Preserve RemovableMedia root fix.
+
+- 2026-10-02T19:37:57+00:00 — Root deferred signed build after source44 watchdog blocker and transferred bounded Gabbee source repair. Source candidate1aea0b7d969d4aa07c715cc9456cc395a94e0e7d now handed off in Gabbee hub with40 focused tests PASS, py_compile/diff-check0 and exact endpoint/unit fixtures. Independent source review/integration/final pin pending; overlay recipe732cf remains immutable/unbuilt. Portage readonly preview one exact package PASS after moving candidate mirror out of private .cache parent; no chmod/globalconfig/install or host restart.
