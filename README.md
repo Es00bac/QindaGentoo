@@ -405,3 +405,9 @@ rollback handling before Desktop installation, plus physical application and
 Secret Service registration gates. Matching installed-version build dependencies
 are checked against the installed VDB; do not trigger an unrelated deep newuse
 world upgrade to rebuild these narrow recipes.
+
+Laptop Pinentry1.3.3 uses matching1.3.3-r1; qinda1.3.2 uses1.3.2-r2.
+The same provider-only substitution preserves each installed upstream revision.
+Both versions' required build dependencies are present in qinda's actual VDB,
+allowing manager review of independent signed build-only without a downgrade or
+unrelated KF upgrade. Laptop targets omit qinda-only KDEConnect/LXQt/Gwenview.

@@ -78,13 +78,14 @@ class NativeRuntimeEdges(unittest.TestCase):
         self.assertNotIn("gui-wm/qindaqt-desktop", stock)
 
     def test_pinentry_retains_gui_and_generic_optional_cache(self):
-        data = METADATA["app-crypt/pinentry-1.3.2-r2"]
-        providers = atoms(data["RDEPEND"], ("gtk", "keyring", "qt6", "wayland"))
-        self.assertTrue({"app-crypt/gcr", "app-crypt/libsecret",
-                         "virtual/secret-service", "dev-qt/qtbase"} <= providers)
-        self.assertNotIn("gnome-base/gnome-keyring", providers)
-        self.assertTrue({"gtk", "keyring", "qt6", "ncurses"} <= set(data["IUSE"].split()))
-
+        for cpv in ("app-crypt/pinentry-1.3.2-r2", "app-crypt/pinentry-1.3.3-r1"):
+            with self.subTest(cpv=cpv):
+                data = METADATA[cpv]
+                providers = atoms(data["RDEPEND"], ("gtk", "keyring", "qt6", "wayland"))
+                self.assertTrue({"app-crypt/gcr", "app-crypt/libsecret",
+                                 "virtual/secret-service", "dev-qt/qtbase"} <= providers)
+                self.assertNotIn("gnome-base/gnome-keyring", providers)
+                self.assertTrue({"gtk", "keyring", "qt6", "ncurses"} <= set(data["IUSE"].split()))
     def test_secret_virtual_preserves_stock_and_selects_native_provider(self):
         data = METADATA["virtual/secret-service-0-r3"]
         self.assertIn("qindaqt", data["effective_USE"].split())
