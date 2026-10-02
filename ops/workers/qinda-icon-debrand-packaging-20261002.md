@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — exact9df host cutover plan independently accepted; read-only select/deselect gates passed, manager owns execution
+- Status: waiting — exact7ff/9df legacy-provider ordering reviewed; actual import pending, manager owns native activation hold and operator completion
 - Outcome: final desktop/fork recipes, two-host dependency closure and verified signed Desktop-r2/Fork-r3 Portage binary candidates
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -85,3 +85,5 @@
 - 2026-10-02T22:03:35.657015+00:00 — Claimed root exact9756 host cutover review, read actual both-host world/world_sets and qinda KDE set/VDB. Initial Spectacle keeper ambiguity resolved by exact9df descendant/PF16 authorized native Screenshot replacement; seven non-Plasma app roots identified. Installed Portage3.0.81.3 source bytes match both hosts, actual select/deselect pretend commands live; no world/config/VDB mutation or new dependency solver.
 
 - 2026-10-02T22:10:13.256498+00:00 — Exact9df plan ACCEPT after explicit PF16 Spectacle clarification/seven keeper list. Both-host actual roots/profile/VDB inspected;14/11 unique exact targets and normal signed resolver prerequisites verified. Portage3.0.81.3 source matches both hosts. Qinda select pretend0/1.004s/no merges, deselect0/0.613s exactly3entries; laptop deselect0/1.655s exactly2entries; world/set hashes unchanged. Executable keeper-selection and guarded nonempty retired-only depclean commands handed manager; no host mutations or execution-readiness claim.
+
+- 2026-10-02T22:39:00.216338+00:00 — Read-only exact7ff normative import/daemon/PAM and9df cutover review. Existing GNOME pkg_postrm does not stop provider, but Input qinda owner absent/laptop unknown prevents residency continuity claim. Importer absent installed both; no real import occurred. Identified existing --no-keyring/launcher session argument plus independent D-Bus/user-unit/PAM-system activation hold requirements; no single migration flag. Normative complete sealed import/application compatibility must precede provider-name switch. No credentials, secret reads, activation/config/host mutation, build or new harness; durable bounded pending-import conclusion handed root.
