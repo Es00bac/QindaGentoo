@@ -1,12 +1,12 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: working — pinning exact desktop cb582059/fork a6964310 source candidates and preparing private qinda archives/Manifests
-- Outcome: new Gabbee p20261002 pin/floor and qindaqt native unit packaging; desktop/fork final pins remain manager-owned
+- Status: waiting — corrected e9 fork revision2 source-ready; root native gates/recipe acknowledgment and final desktop pin pending; compiler released
+- Outcome: concrete desktop/fork source freeze recipes/archives, actual two-host dependency closure and qinda signed fork build-only
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
 - Worktree: `/home/cabewse/work_space/QindaGentoo-gabbee-portage-20261002`
-- Ownership: new Gabbee recipe, desktop Gabbee floor only, relevant delivery lines/docs, own board/thread; preserve root RemovableMedia OFF/PDEPEND
+- Ownership: final desktop/fork recipe pins/new Manifest rows/qualification docs and own board/thread; preserve Gabbee0a232, root RemovableMedia OFF/PDEPEND, libei/KIO/profile contracts
 - Resource limits: qinda Portage signed build-only after exact review; no laptop heavy/build, host merge/restart/global config/world or icons
 - Provider/model evidence: requested model configuration is not runtime provider/model evidence; no runtime identity assertion
 
@@ -39,3 +39,13 @@
 - 2026-10-02T20:08:03.431595+00:00 — Manager supplied exact source freeze candidates cb58205992bdf35bddc7bb30780482f5695f623d/a6964310dbfb3a11df06532a32059f4ab9e92ac2. Verified hub objects, fork serial1/native options and protected metadata install. Pins/archive/Manifest preparation authorized; runtime/build/install lease pending. Gabbee0a232/Media27b/libei/KIO/profile unchanged.
 
 - 2026-10-02T20:09:07.609155+00:00 — Actual qinda deterministic candidate archives generated: desktop41323162bytes/10713members, fork15857349bytes/4017members; no links or unsafe paths. Selected source members match exact hub bytes, fork serial1 and native controls present. Actual BLAKE2B/SHA512 new DIST rows appended only; old Manifest bytes preserved. Native/runtime gates and archive publication/build/install lease pending.
+
+- 2026-10-02T20:12:54.894414+00:00 — Root exact805c08bb source/archive review ACCEPT. Actual final two-root closure PASS qinda589/laptop576 packages,0 forbidden, exit0/22.041s and0/24.876s; laptop lock absent before/after. Authorized qinda signed fork build-only live PID/PGID1707763, initial available memory16629764096bytes, private repo/profile/DISTDIR/PKGDIR/tmp. No install or host/world/config change.
+
+- 2026-10-02T20:13:41.109884+00:00 — Initial private-temp setup failure preserved (exit1/5.001s, no phases, VDB/world unchanged). Created only task-local Portage-owned temp directory and retried unchanged source805/command. Actual live owned PID/PGID1709406, startup available memory17134628864bytes; same4-job/6GiB guard.
+
+- 2026-10-02T20:19:29.669662+00:00 — Root actual shortcut gate found production bare-modifier parser defect; root owns repair and final fork pin. Current a696 package is historical/cache warmup only, existing archive immutable. Single four-job lease may finish; no parallel rebuild/publish/install. Proposed new fork-r2 when corrected pin is reviewed, pending manager version decision.
+
+- 2026-10-02T20:30:27.628458+00:00 — Historical r1 build exit0/995.058s; memory guard inactive, minimum7445741568bytes, VDB/world unchanged. Compiler lease released. Root authorized corrected e9 revision2 with immutable new archive/Manifest; final desktop pin and r2 runtime/recipe acknowledgment pending, no rebuild/publish/install.
+
+- 2026-10-02T20:31:38.173821+00:00 — Corrected e9 r2 archive15858433bytes/4017members/no links and six source members exact hub bytes. Two recipe bash syntax checks/diff-check0; r1 recipe/archive/Manifest row unchanged. Historical r1 GPkg mandatory full signature/checksum verification PASS0.17s,456 image entries, exactABI6.6.6.1/twoauthorityheaders; not qualified delivery. Final source/closure receipt preserved for805 only, no r2 solver/build/install/publish claim.

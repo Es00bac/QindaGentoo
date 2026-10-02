@@ -36,7 +36,7 @@ RDEPEND="
 	>=dev-libs/qindatk-0.1.0-r12
 	>=app-text/poppler-26.05:=[qt6]
 	>=kde-frameworks/kcalendarcore-6.0:6=
-	=gui-wm/qindaqt-kwin-6.6.6_p1-r1:=
+	=gui-wm/qindaqt-kwin-6.6.6_p1-r2:=
 	=kde-plasma/layer-shell-qt-6.6.6*:6=
 	=kde-plasma/kwayland-6.6.6*:6=
 	>=kde-frameworks/kconfig-6.0:6=

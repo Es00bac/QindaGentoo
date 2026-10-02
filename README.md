@@ -131,7 +131,7 @@ placeholders, not a published delivery):
 ```sh
 tools/check-plasma-dependencies --resolve \
   --root '=gui-wm/qindaqt-desktop-0.1.0_pre20261002' \
-  --root '=gui-wm/qindaqt-kwin-6.6.6_p1-r1'
+  --root '=gui-wm/qindaqt-kwin-6.6.6_p1-r2'
 ```
 
 This invokes Portage's backtracking resolver in pretend/empty-tree mode with
@@ -295,14 +295,14 @@ There is no background timer. `QINDA_HUB` overrides the SSH host alias if needed
 
 ### Prepared native desktop cutover (2026-10-02)
 
-The new desktop `0.1.0_pre20261002` and fork `6.6.6_p1-r1` recipes are
+The new desktop `0.1.0_pre20261002` and fork `6.6.6_p1-r2` recipes are
 exact manager source freeze candidates, **not release-qualified delivery**.
 Desktop source is `cb58205992bdf35bddc7bb30780482f5695f623d`; fork source is
-`a6964310dbfb3a11df06532a32059f4ab9e92ac2`. Matching private qinda archives
+`e9bcb4a834a3a817d2bc194f3c4cf488e9111679`. Matching private qinda archives
 and actual new Manifest rows are prepared for independent review. Native/runtime
 qualification, publication and installation remain pending manager gates.
 The held fork p1 recipe/archive are preserved on their original
-branch; p1-r1 retains source ABI serial1 (6.6.6.1) and uses `${PF}.tar.gz`,
+branch; p1-r2 retains source ABI serial1 (6.6.6.1) and uses `${PF}.tar.gz`,
 so new source bytes never replace the held p1 archive.
 
 The profile now derives from the ordinary Gentoo desktop/systemd profile,
@@ -351,3 +351,9 @@ Build-only signing and manager review precede publication or installation.
 Native watchdog source was independently reviewed and its40 focused fixtures
 passed on qinda. Signed build-only output is package preparation; installed
 physical-session behavior remains a separate manager gate.
+
+Corrected fork revision 2 preserves revision 1 recipes and archive records.
+The revision 1 binary is historical build evidence; its native bare-modifier
+parser defect prevents final delivery. Revision 2 awaits coherent native gates
+and recipe acknowledgment. A final desktop revision/source pin is pending;
+no desktop archive is recut under the existing filename.

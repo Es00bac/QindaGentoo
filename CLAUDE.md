@@ -101,7 +101,7 @@ the whole tree with the shell/KWin plugin switched off, then `cmake_build` only 
 targets and `cmake --install --component` only their component.
 
 **Exact compositor ABI.** The native cutover uses co-installable
-`gui-wm/qindaqt-kwin-6.6.6_p1-r1`, whose source serial1 exports exact6.6.6.1
+`gui-wm/qindaqt-kwin-6.6.6_p1-r2`, whose source serial1 exports exact6.6.6.1
 CMake packages. The desktop matches that fork with a subslot dependency.
 Earlier released desktop recipes retain their original stock KWin6.6.6 and
 Plasma requirements; those old recipes and archive records stay immutable.
@@ -121,14 +121,14 @@ prebuilt (`QA_PREBUILT`, `RESTRICT="strip"`); QindaFox's tarball comes from its 
 
 ## Native desktop cutover candidate
 
-New desktop pre20261002 and fork6.6.6_p1-r1 preserve all released recipes and
+New desktop pre20261002 and fork6.6.6_p1-r2 preserve all released recipes and
 old distfile records. Exact manager source freeze candidates are desktop
 cb58205992bdf35bddc7bb30780482f5695f623d and fork
-a6964310dbfb3a11df06532a32059f4ab9e92ac2. Private qinda archives and actual new
+e9bcb4a834a3a817d2bc194f3c4cf488e9111679. Private qinda archives and actual new
 Manifest rows await independent recipe review and native/runtime qualification.
 Do not publish or run qinda-sync installation from this candidate.
 Fork serial1 remains the
-exact6.6.6.1 plugin ABI; r1 names a distinct `${PF}` archive. Native shortcuts,
+exact6.6.6.1 plugin ABI; r2 names a distinct `${PF}` archive. Native shortcuts,
 lock and Schedule1 nightlight replace the retired Plasma runtime providers.
 The desktop enables the integrated `QINDAQT_NATIVE_POWER_EXCLUSIVE` option
 and its reviewed startup-failure repair. Source routing separates 13 ordinary
@@ -151,3 +151,9 @@ watchdog portal/unit selection for physical native qindaqt-kwin and keeps
 stock kwin_wayland compatibility; root independently reran40 focused fixtures.
 Installed physical-session behavior remains a separate manager gate.
 Signed build-only Portage output does not merge/restart a host or update world.
+
+Corrected fork revision 2 preserves revision 1 recipes and archive records.
+The revision 1 binary is historical build evidence; its native bare-modifier
+parser defect prevents final delivery. Revision 2 awaits coherent native gates
+and recipe acknowledgment. A final desktop revision/source pin is pending;
+no desktop archive is recut under the existing filename.

@@ -1,4 +1,4 @@
-# Native desktop/fork source freeze cb582059/a6964310; candidate archives only.
+# Native desktop/fork source freeze cb582059/e9bcb4a8; candidate archives only.
 # Do not publish/install until runtime gates and independent recipe review pass.
 # Completed desktop, application and screensaver delivery shared by both hosts.
 # Adoption stays an explicit update: qinda-sync installs exactly these atoms.
@@ -17,7 +17,7 @@
 =dev-util/opencode-bin-1.18.32
 =app-office/obsidian-1.13.7-r1
 =gui-wm/qindaqt-desktop-0.1.0_pre20261002
-=gui-wm/qindaqt-kwin-6.6.6_p1-r1
+=gui-wm/qindaqt-kwin-6.6.6_p1-r2
 =gui-apps/qqterm-0.3.0
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r15
