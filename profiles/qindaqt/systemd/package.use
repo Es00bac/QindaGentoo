@@ -1,6 +1,5 @@
-kde-plasma/kwin screencast lock -handbook
-kde-plasma/kwin-x11 lock
-dev-qt/qtbase wayland X gui widgets opengl libinput -accessibility
+gui-wm/qindaqt-kwin screencast systemd -accessibility
+dev-qt/qtbase wayland X gui widgets opengl libinput cups -accessibility
 sys-apps/systemd boot cryptsetup pam policykit
 sys-kernel/installkernel dracut systemd-boot
 sys-kernel/linux-firmware initramfs redistributable unknown-license dist-kernel compress-zstd deduplicate
@@ -8,8 +7,6 @@ x11-misc/sddm systemd -elogind
 sys-auth/polkit systemd
 media-libs/mesa vulkan vaapi zstd
 media-video/pipewire sound-server pipewire-alsa extra-client-tools dbus bluetooth -ffmpeg
-kde-plasma/plasma-login-sessions X wayland
-kde-plasma/plasma-nm networkmanager
 # QindaQt's OBS integration needs obs-websocket (the desktop's control channel),
 # V4L2 output (the virtual camera) and PipeWire/Wayland capture.
 media-video/obs-studio websocket v4l wayland screencast
