@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — exact7b81 private KPipeWire source blocked on two narrow eclass/RPATH repairs; Power owns repair, no compiler/image yet
+- Status: waiting — exactccf private KPipeWire source ACCEPT; immutable signed image pending focused independent inspection, no compiler lease
 - Outcome: final desktop/fork recipes, two-host dependency closure and verified signed Desktop-r2/Fork-r3 Portage binary candidates
 - Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -89,3 +89,5 @@
 - 2026-10-02T22:39:00.216338+00:00 — Read-only exact7ff normative import/daemon/PAM and9df cutover review. Existing GNOME pkg_postrm does not stop provider, but Input qinda owner absent/laptop unknown prevents residency continuity claim. Importer absent installed both; no real import occurred. Identified existing --no-keyring/launcher session argument plus independent D-Bus/user-unit/PAM-system activation hold requirements; no single migration flag. Normative complete sealed import/application compatibility must precede provider-name switch. No credentials, secret reads, activation/config/host mutation, build or new harness; durable bounded pending-import conclusion handed root.
 
 - 2026-10-02T23:12:31.097493+00:00 — Claimed exact7b81 source-only private bridge review in separate sparse qinda worktree/branch at nice19/idleIO. Archive SHA/SIZE/BLAKE2B/SHA512 and license trees verified; capture implementation unchanged. Found CMAKE_USE_DIR wrong-project configuration and ECM automatic staging RPATH leakage; concrete minimal repairs routed original implementer/root. Private monitor QML destination confirmed; no source edits, compile/GPU/install/payload sweep. Waiting exact repaired candidate, then immutable image.
+
+- 2026-10-02T23:14:08.510307+00:00 — Different-worker exactccf source recheck ACCEPT. Separate review WT FF/clean, bash syntax0/diffcheck0; only explicit project-source binding and suppression of automatic staging RPATH appending plus README. Both7b81 blockers closed, archives/Manifest/patch unchanged; no application behavior edits/build/install/GPU. Waiting builder immutable signed image for focused private ELF/QML/locale/export/metadata checks; no runtime/image acceptance claimed.
