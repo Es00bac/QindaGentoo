@@ -1,8 +1,8 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — five-package signed deployment argv and import/PAM/rollback ordering handed manager; actual import and execution remain manager-owned
-- Outcome: prepare final five signed-binary upgrades on both hosts after actual credential import, preserving providers, authentication and applications
+- Status: waiting — stock Waypipe signed Portage binary installed and verified both hosts; manager owns any no-GPU relay/dialog use, no active build or runtime lease
+- Outcome: install stock Waypipe through normal mandatory-signed Portage on both hosts, at most small qinda-only build; no runtime relay
 - Base: `43bcc05648686c3d119a5a7428bff22cb3cda30a`
 - Branch: `worker/pf-gabbee-portage-20261002`
 - Worktree: `/home/cabewse/work_space/QindaGentoo-gabbee-portage-20261002`
@@ -97,3 +97,7 @@
 - 2026-10-02T23:24:43.549780+00:00 — Independent mandatory GPkg signature/full payload verify and focused static image PASS for f476/d0071b06 artifact358,400bytes. Seven ELFs exact private runtime RPATH, three distinct private library SONAMEs/no stock KPipeWire NEEDED, three private QML modules/44catalogs/no global or private development exports. Nine upstream legal files and original public app/autostart byte exact. Signed runtime metadata zero Plasma atoms; no source/image/host mutation, compile/GPU/live runtime or complete transitive graph claim. Root/Power notified immediate image ACCEPT.
 
 - 2026-10-03T00:53:44.305527+00:00 — Fetched both hubs; canonical overlay43bcc05/Desktop5917da5c match assignment, old integrate dc828 is an ancestor. Isolated overlay FF/clean. Read exact accepted cutover/interim/PAM/lock and prior normal command/rollback receipts; both normal default PKGDIRs contain final binaries. Both installed repos3da differ from43 only own ops. No new solver/signature/payload scan, build, install, provider action, credential access or host mutation. Exact five-target commands ready; import/compatibility and target-local complete rollback graph remain manager gates.
+
+- 2026-10-03T01:28:03.877116+00:00 — Claimed bounded Waypipe infrastructure. Hub overlay43bcc05 unchanged. Stock Gentoo0.9.2-r1 recipe present both hosts, MIT/meson; no existing installed Waypipe or local signed package observed. Laptop test lock absent at initial check. Preparing actual normal dependency plan before any build/install; root grant2jobs/load16/6GiB guard qinda only.
+
+- 2026-10-03T01:33:20.841713+00:00 — Actual normal plans both PASS0/one new stock Waypipe/no dependencies. Qinda signed build-only PASS0/18.004s at2jobs/load16, minimum26,039,074,816bytes/no6GiB abort; signature/source recipe match. Exact153,600byte GPkg SHA256ba0c26ac installed mandatory-signed binary-only both hosts, laptop10.544s. Laptop test lock absent before cache import/install. Exact Portage cache injection repaired trusted-index invisibility with no signature/USE-policy changes. Installed0.9.2/owned executable sameMD5both, --no-gpu available. No relay/dialog/secret/provider/SSH action or laptop source build/GPU.
