@@ -137,8 +137,10 @@ settings = portage.config(clone=portage.settings)
 # sandbox; never copy signing keys or alter the host's trusted keyring.
 home = tempfile.mkdtemp(prefix="base-verify-", dir=os.environ["T"])
 source_home = settings["BINPKG_GPG_VERIFY_GPG_HOME"]
-uid = pwd.getpwnam(settings.get("GPG_VERIFY_USER_DROP", "nobody")).pw_uid
-gid = grp.getgrnam(settings.get("GPG_VERIFY_GROUP_DROP", "nogroup")).gr_gid
+settings["GPG_VERIFY_USER_DROP"] = "portage"
+settings["GPG_VERIFY_GROUP_DROP"] = "portage"
+uid = pwd.getpwnam("portage").pw_uid
+gid = grp.getgrnam("portage").gr_gid
 for name in ("pubring.kbx", "pubring.gpg", "trustdb.gpg"):
     source = os.path.join(source_home, name)
     if os.path.isfile(source):
