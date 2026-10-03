@@ -239,6 +239,8 @@ accepts the `~amd64` Hugging Face packages they need from ::gentoo.
 USE defaults, keywords and licenses. Select it with
 `eselect profile set qindaqt:qindaqt/systemd`.
 
+The profile installs `x11-misc/qindaqt-xdg-menu` so KWin can resolve installed application desktop entries for screenshot and portal permissions after Plasma removal.
+
 The profile installs `x11-misc/dotool` for Gabbee's focused-window typing
 route and `x11-themes/qinda-seven` for the appearance catalog. The latter pins
 the source-controlled theme pack in the local Git hub; Portage owns its 21

@@ -1,6 +1,7 @@
 # @profile set: what a QindaQt desktop machine gets by default.
 app-office/obsidian
 gui-wm/qindaqt-desktop
+x11-misc/qindaqt-xdg-menu
 gui-wm/qindaqt-kwin
 gui-apps/qindaoffice
 gui-apps/qqterm
