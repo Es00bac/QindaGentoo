@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: working — live exact accepted KWallet fix/cache/source preparation, one granted qinda2job/load16/6GiB lease; no provider or host installation
+- Status: waiting — exact62 focused build/private import test PASS, testingOFF/full dryrun bounded; exact91c r3 recipe review pending before signed Portage phases, no active compiler
 - Outcome: identify retained Desktop-r2 source/build/image and supported incremental signed repackage prerequisites for a possible tiny keyring fix
 - Base: `43bcc05648686c3d119a5a7428bff22cb3cda30a`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -107,3 +107,5 @@
 - 2026-10-03T02:15:38.285101+00:00 — Claimed accepted exact62acb69 source focused-build and newr3 signed repackage. First resolving actual retained absolute tree/source identity before any mutation/compile; root grants only2jobs/load16/6GiB guard and3focused targets/one test then bounded fullNinja dryrun. Preserve signedr2, no provider/PAM/import/global install/GPU/laptopbuild.
 
 - 2026-10-03T02:22:55.522535+00:00 — Retained absoluteQA confirmed via sudo; normal-user false is permissions. Complete original source/image plus cache/Ninja baseline preserved; exact62 sixfiles source binding and base+8a patch-check0. Temporary testingONconfigure0/54.013s, focused dryrun2regenerationactions,3target build0/13.004s; private import CTest live, memory>22GB. Newr3 recipe keeps29f+8a plus exact62 patch, samebyte41,389,472B newDISTname actualhashes match Manifest; syntax/diff0. No signedr3 yet; exact recipe source candidate for manager review while focusedtest runs.
+
+- 2026-10-03T02:25:43.474259+00:00 — Three focusedtargets exit0/13.004s, private keyring_legacy_import1/1PASS11.34s (guarded12.003s). TestingOFFrestore0/15.015s; fullNinja dryrun0/1.003s only2regenerationchecks/no broadcompile. Minimumguard18,167,238,656bytes/no abort. NormalPortage export of supportedCMAKE_USE_DIR/BUILD_DIR directly verified. No livecompiler; awaiting exact91c recipe acceptance, then normalr3 stages/sourcebinding/signature/image gates.
