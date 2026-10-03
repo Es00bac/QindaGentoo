@@ -15,7 +15,7 @@ EGIT_REPO_URI="file:///home/cabewse/git/gabbee.git
 	file:///home/cabewse/gabbee
 	file:///home/cabewse/work_space/gabbee"
 # AGENT-GUARD: this is an immutable pin. Bump the package version with it.
-EGIT_COMMIT="7b0af2f40bc03f773a2157e009858ce05cc8fa5f"
+EGIT_COMMIT="5d1685d5f491bf5c556d73162c46d705231b949f"
 
 LICENSE="GPL-3+"
 SLOT="0"
