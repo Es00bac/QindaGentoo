@@ -1,9 +1,9 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — exactf476 private bridge source and signed image ACCEPT; manager owns normal resolver/install/live sharing gate, no compiler lease
-- Outcome: final desktop/fork recipes, two-host dependency closure and verified signed Desktop-r2/Fork-r3 Portage binary candidates
-- Base: `27b5c0ff8635d01bd463054e6126c0f24b1ac506`
+- Status: waiting — five-package signed deployment argv and import/PAM/rollback ordering handed manager; actual import and execution remain manager-owned
+- Outcome: prepare final five signed-binary upgrades on both hosts after actual credential import, preserving providers, authentication and applications
+- Base: `43bcc05648686c3d119a5a7428bff22cb3cda30a`
 - Branch: `worker/pf-gabbee-portage-20261002`
 - Worktree: `/home/cabewse/work_space/QindaGentoo-gabbee-portage-20261002`
 - Ownership: final desktop/fork recipe pins/new Manifest rows/qualification docs and own board/thread; preserve Gabbee0a232, root RemovableMedia OFF/PDEPEND, libei/KIO/profile contracts
@@ -95,3 +95,5 @@
 - 2026-10-02T23:18:04.845576+00:00 — Different review exactf476 clean FF/diffcheck0/bash syntax0: only materialized QByteArray imports/locale before Qt6.11 view APIs, byte/order/capture behavior unchanged. Prior eclass/RPATH fixes intact. Power/root notified immediate SOURCE ACCEPT; prior actual compiler failure preserved by builder. Waiting immutable signed image; no compiler/GPU/install or runtime acceptance.
 
 - 2026-10-02T23:24:43.549780+00:00 — Independent mandatory GPkg signature/full payload verify and focused static image PASS for f476/d0071b06 artifact358,400bytes. Seven ELFs exact private runtime RPATH, three distinct private library SONAMEs/no stock KPipeWire NEEDED, three private QML modules/44catalogs/no global or private development exports. Nine upstream legal files and original public app/autostart byte exact. Signed runtime metadata zero Plasma atoms; no source/image/host mutation, compile/GPU/live runtime or complete transitive graph claim. Root/Power notified immediate image ACCEPT.
+
+- 2026-10-03T00:53:44.305527+00:00 — Fetched both hubs; canonical overlay43bcc05/Desktop5917da5c match assignment, old integrate dc828 is an ancestor. Isolated overlay FF/clean. Read exact accepted cutover/interim/PAM/lock and prior normal command/rollback receipts; both normal default PKGDIRs contain final binaries. Both installed repos3da differ from43 only own ops. No new solver/signature/payload scan, build, install, provider action, credential access or host mutation. Exact five-target commands ready; import/compatibility and target-local complete rollback graph remain manager gates.
