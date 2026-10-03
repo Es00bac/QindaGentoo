@@ -355,6 +355,7 @@ Build-only signing and manager review precede publication or installation.
 Native watchdog source was independently reviewed and its40 focused fixtures
 passed on qinda. Signed build-only output is package preparation; installed
 physical-session behavior remains a separate manager gate.
+The r2 Gabbee recipe pins `a8b54c8`: physical login generation changes restart the native portal pair and rebind dictation; two failed Display1 snapshots from one service invocation permit one bounded recovery. The isolated-bus source suite passed 371 tests and 20 subtests.
 
 Final desktop revision 2 and fork revision 3 preserve all earlier recipes and
 archive records. Historical fork revision 1 has a bare-modifier parser defect;
