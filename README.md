@@ -226,6 +226,8 @@ the NASA/Caltech licence `net-wireless/cspice` refers to.
 `app-accessibility/faster-whisper-models` are Gabbee's offline dictation,
 `app-accessibility/gabbee[whisper]`, which is on by default: when online
 recognition fails, the recording is transcribed on the machine itself.
+On QindaQt this offline support is required: a new session may start Voice1
+before the keyring unlocks, and dictation must not produce a mock transcript.
 They are the CTranslate2 engine built on oneDNN for the CPU, faster-whisper
 on top of it, PyAV (a verbatim copy of ::guru's, because this overlay's only
 master is ::gentoo), and Whisper models pinned to upstream revisions and
