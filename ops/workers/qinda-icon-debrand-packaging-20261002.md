@@ -1,8 +1,8 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — stock Waypipe signed Portage binary installed and verified both hosts; manager owns any no-GPU relay/dialog use, no active build or runtime lease
-- Outcome: install stock Waypipe through normal mandatory-signed Portage on both hosts, at most small qinda-only build; no runtime relay
+- Status: waiting — read-only retained Desktop-r2 build preparation handed manager; concrete keyring fix/revision and warm-cache binding require exact source/recipe acceptance, no compiler lease
+- Outcome: identify retained Desktop-r2 source/build/image and supported incremental signed repackage prerequisites for a possible tiny keyring fix
 - Base: `43bcc05648686c3d119a5a7428bff22cb3cda30a`
 - Branch: `worker/pf-gabbee-portage-20261002`
 - Worktree: `/home/cabewse/work_space/QindaGentoo-gabbee-portage-20261002`
@@ -101,3 +101,5 @@
 - 2026-10-03T01:28:03.877116+00:00 — Claimed bounded Waypipe infrastructure. Hub overlay43bcc05 unchanged. Stock Gentoo0.9.2-r1 recipe present both hosts, MIT/meson; no existing installed Waypipe or local signed package observed. Laptop test lock absent at initial check. Preparing actual normal dependency plan before any build/install; root grant2jobs/load16/6GiB guard qinda only.
 
 - 2026-10-03T01:33:20.841713+00:00 — Actual normal plans both PASS0/one new stock Waypipe/no dependencies. Qinda signed build-only PASS0/18.004s at2jobs/load16, minimum26,039,074,816bytes/no6GiB abort; signature/source recipe match. Exact153,600byte GPkg SHA256ba0c26ac installed mandatory-signed binary-only both hosts, laptop10.544s. Laptop test lock absent before cache import/install. Exact Portage cache injection repaired trusted-index invisibility with no signature/USE-policy changes. Installed0.9.2/owned executable sameMD5both, --no-gpu available. No relay/dialog/secret/provider/SSH action or laptop source build/GPU.
+
+- 2026-10-03T02:04:53.828800+00:00 — Read-only qinda retained work/cache/image exists, all six phase markers present, exact source29f +accepted8a installpatch. Installed Portage noauto reload/phase marker semantics and PF-derived workroot confirmed; cmake documented BUILD_DIR override confirmed. Prior actual3152compiledoutputs unchanged/onlytwo Ninja regenerationactions reused. New production bytes require newr3; no automatic r3 cache reuse or permission to replace signedr2. No source/package/marker mutation, scans, build/install/provider/PAM/GUI action.
