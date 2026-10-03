@@ -1,9 +1,9 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — signed Desktop-r3 verified and cached both hosts, normal five-binary pretends PASS; manager owns actual import/host installation/provider transition, compiler released
-- Outcome: deliver minimally repackaged signed Desktop-r3 with accepted KWallet folder compatibility fix and normal both-host five-binary readiness
-- Base: `43bcc05648686c3d119a5a7428bff22cb3cda30a`
+- Status: waiting — signed target-local old-five rollback prerequisite delivered; no live compiler, test or host operation
+- Outcome: prove target-local signed old-five rollback graphs on both hosts without install, provider/PAM changes or builds
+- Base: `2cf07fdb2b44dfd2188528492018d689e7b9de3e`
 - Branch: `worker/pf-gabbee-portage-20261002`
 - Worktree: `/home/cabewse/work_space/QindaGentoo-gabbee-portage-20261002`
 - Ownership: final desktop/fork recipe pins/new Manifest rows/qualification docs and own board/thread; preserve Gabbee0a232, root RemovableMedia OFF/PDEPEND, libei/KIO/profile contracts
@@ -111,3 +111,7 @@
 - 2026-10-03T02:25:43.474259+00:00 — Three focusedtargets exit0/13.004s, private keyring_legacy_import1/1PASS11.34s (guarded12.003s). TestingOFFrestore0/15.015s; fullNinja dryrun0/1.003s only2regenerationchecks/no broadcompile. Minimumguard18,167,238,656bytes/no abort. NormalPortage export of supportedCMAKE_USE_DIR/BUILD_DIR directly verified. No livecompiler; awaiting exact91c recipe acceptance, then normalr3 stages/sourcebinding/signature/image gates.
 
 - 2026-10-03T02:43:27.333299+00:00 — Different Input SOURCE ACCEPT exact91c; granted normalr3 phases complete. First unpack permissionfailure preserved, resolved only cloned taskconfigroot visibility; no hostpermission/config changes. SupportedS2/B2 binding and normalS3 patch-source assertions held. PostPortage fullNinja dryrun2regen/0broadcompile; compile14.004s/installstage13.003s/package3.001s exit0, minimum20,143,558,656bytes/no abort. Mandatory GPkg signature/fullpayload/recipe/deps/USE PASS; only importer code changed,190static .a differences strictly timestampfields/allmembers exact.60,661,760B SHA256bd279969...; defaultcachecopied andsignature-indexed bothhosts, normalfive-targetpretend qinda0/3.463s,laptop0/3.010s,5upgrades/5binaries/0KiB. Testlock absent; nohostmerge/provider/PAM/import/dialog/GPU/laptopbuild, compiler released.
+
+- 2026-10-03T02:50:50.947813+00:00 — Claimed root rollback prerequisite at exact2cf07fd. Inspect existing target-local snapshots/default caches and Portage signing/quickpkg APIs, lowpriority/no parallel compression. No install/unmerge/provider/PAM/global signing config/build/GPU/laptop test authorized.
+
+- 2026-10-03T03:08:11.440770+00:00 — Target-local mandatory-signed rollback prerequisite PASS: six artifacts each host fully verified/installed USE+deps match; ordinary exact old-five --selective=n plans qinda0/2.450s and laptop0/1.639s each5reinstalls/5binaries/0KiB. All28 kde-plasma CPVs and world/world_sets unchanged; original snapshots/images preserved. Standard signed quickpkg laptop3.173s/qinda0.911s, no hostmerge/provider/PAM/build/GPU. Exact argv/paths/SHA256 and config-backup condition in new immutable reply `20261003T030811Z-accept-target-local-signed-old-five-rollback.md`; resource lease released.
