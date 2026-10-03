@@ -1,8 +1,8 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — exact62 focused build/private import test PASS, testingOFF/full dryrun bounded; exact91c r3 recipe review pending before signed Portage phases, no active compiler
-- Outcome: identify retained Desktop-r2 source/build/image and supported incremental signed repackage prerequisites for a possible tiny keyring fix
+- Status: waiting — signed Desktop-r3 verified and cached both hosts, normal five-binary pretends PASS; manager owns actual import/host installation/provider transition, compiler released
+- Outcome: deliver minimally repackaged signed Desktop-r3 with accepted KWallet folder compatibility fix and normal both-host five-binary readiness
 - Base: `43bcc05648686c3d119a5a7428bff22cb3cda30a`
 - Branch: `worker/pf-gabbee-portage-20261002`
 - Worktree: `/home/cabewse/work_space/QindaGentoo-gabbee-portage-20261002`
@@ -109,3 +109,5 @@
 - 2026-10-03T02:22:55.522535+00:00 — Retained absoluteQA confirmed via sudo; normal-user false is permissions. Complete original source/image plus cache/Ninja baseline preserved; exact62 sixfiles source binding and base+8a patch-check0. Temporary testingONconfigure0/54.013s, focused dryrun2regenerationactions,3target build0/13.004s; private import CTest live, memory>22GB. Newr3 recipe keeps29f+8a plus exact62 patch, samebyte41,389,472B newDISTname actualhashes match Manifest; syntax/diff0. No signedr3 yet; exact recipe source candidate for manager review while focusedtest runs.
 
 - 2026-10-03T02:25:43.474259+00:00 — Three focusedtargets exit0/13.004s, private keyring_legacy_import1/1PASS11.34s (guarded12.003s). TestingOFFrestore0/15.015s; fullNinja dryrun0/1.003s only2regenerationchecks/no broadcompile. Minimumguard18,167,238,656bytes/no abort. NormalPortage export of supportedCMAKE_USE_DIR/BUILD_DIR directly verified. No livecompiler; awaiting exact91c recipe acceptance, then normalr3 stages/sourcebinding/signature/image gates.
+
+- 2026-10-03T02:43:27.333299+00:00 — Different Input SOURCE ACCEPT exact91c; granted normalr3 phases complete. First unpack permissionfailure preserved, resolved only cloned taskconfigroot visibility; no hostpermission/config changes. SupportedS2/B2 binding and normalS3 patch-source assertions held. PostPortage fullNinja dryrun2regen/0broadcompile; compile14.004s/installstage13.003s/package3.001s exit0, minimum20,143,558,656bytes/no abort. Mandatory GPkg signature/fullpayload/recipe/deps/USE PASS; only importer code changed,190static .a differences strictly timestampfields/allmembers exact.60,661,760B SHA256bd279969...; defaultcachecopied andsignature-indexed bothhosts, normalfive-targetpretend qinda0/3.463s,laptop0/3.010s,5upgrades/5binaries/0KiB. Testlock absent; nohostmerge/provider/PAM/import/dialog/GPU/laptopbuild, compiler released.
