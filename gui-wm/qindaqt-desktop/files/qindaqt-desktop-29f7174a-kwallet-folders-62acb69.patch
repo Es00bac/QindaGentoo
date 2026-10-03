@@ -1,0 +1,154 @@
+diff --git a/docs/wiki/architecture/keyring-import.md b/docs/wiki/architecture/keyring-import.md
+index e0dcf5507..d417ede61 100644
+--- a/docs/wiki/architecture/keyring-import.md
++++ b/docs/wiki/architecture/keyring-import.md
+@@ -56,6 +56,11 @@ The [primary KWallet public interface](https://invent.kde.org/frameworks/kwallet
+ reader supports the explicitly selected `org.kde.kwalletd6` or `org.kde.kwalletd5`
+ service. It enumerates existing wallets, rechecks each name immediately before
+ `openAsync`, and waits for that transaction's actual-owner `walletAsyncOpened`.
++Repeated strings in KWallet `folderList` replies refer to the same API folder
++identity: each distinct folder is enumerated once per complete pass and rechecked
++as the same sorted identity set. The raw reply remains limited to1024 strings,
++including repeats; wallet names, entry keys and Secret Service paths still reject
++duplicates. This compatibility normalization does not edit the source.
+ It copies folder/key/type and the complete `readEntry` bytes for Password=1,
+ Stream=2 and Map=3. Serialized password/map bytes are preserved without text
+ conversion. Folder/key/type are retained as encrypted item attributes; full
+diff --git a/src/services/keyring/import/legacy_kwallet.cpp b/src/services/keyring/import/legacy_kwallet.cpp
+index 492734afe..0d85076fa 100644
+--- a/src/services/keyring/import/legacy_kwallet.cpp
++++ b/src/services/keyring/import/legacy_kwallet.cpp
+@@ -5,8 +5,8 @@ namespace {
+ constexpr auto Interface="org.kde.KWallet";
+ constexpr auto Application="org.qindaqt.KeyringImport";
+ QString path(const Wire &wire) {return wire.binding().service.endsWith('5')?"/modules/kwalletd5":"/modules/kwalletd6";}
+-QStringList list(Wire &wire,const QString &method,const Append &append={},qsizetype maximum=1024) {
+-    auto reply=wire.call(path(wire),Interface,method,append,"as");auto iter=begin(reply.get());auto result=texts(iter,DBUS_TYPE_STRING,maximum);end(iter);result.sort();return result;
++QStringList list(Wire &wire,const QString &method,const Append &append={},qsizetype maximum=1024,DuplicateText duplicates=DuplicateText::Reject) {
++    auto reply=wire.call(path(wire),Interface,method,append,"as");auto iter=begin(reply.get());auto result=texts(iter,DBUS_TYPE_STRING,maximum,duplicates);end(iter);result.sort();return result;
+ }
+ void arguments(DBusMessageIter &iter,int handle,const QString &folder,const QString &key) {
+     appendInt(iter,handle);appendText(iter,folder);appendText(iter,key);appendText(iter,Application);
+@@ -42,7 +42,9 @@ LegacySnapshot readKWallet(Wire &wire) {
+         },"i");} catch(...) {}}} close{wire,handle};
+         LegacyCollectionSnapshot collection;collection.sourceId=collection.label=wallet;
+         const auto folderArgs=[&](auto &iter){appendInt(iter,handle);appendText(iter,Application);};
+-        const auto folders=list(wire,"folderList",folderArgs);
++        // AGENT-NOTE: Public folderList can repeat the same folder identity; enumerate
++        // each identity once, retaining the raw bound. See docs/wiki/architecture/keyring-import.md.
++        const auto folders=list(wire,"folderList",folderArgs,1024,DuplicateText::Collapse);
+         std::size_t aggregate=4;
+         for(const auto &folder:folders) {
+             const auto entryArgs=[&](auto &iter){appendInt(iter,handle);appendText(iter,folder);appendText(iter,Application);};
+@@ -61,7 +63,7 @@ LegacySnapshot readKWallet(Wire &wire) {
+             }
+             if(list(wire,"entryList",entryArgs)!=entries) throw Failure{CollectionImportError::Conflict};
+         }
+-        if(list(wire,"folderList",folderArgs)!=folders) throw Failure{CollectionImportError::Conflict};
++        if(list(wire,"folderList",folderArgs,1024,DuplicateText::Collapse)!=folders) throw Failure{CollectionImportError::Conflict};
+         snapshot.collections.push_back(std::move(collection));
+     }
+     if(list(wire,"wallets",{},64)!=wallets) throw Failure{CollectionImportError::Conflict};
+diff --git a/src/services/keyring/import/legacy_wire_codec.cpp b/src/services/keyring/import/legacy_wire_codec.cpp
+index c7f5eec0d..b4383c928 100644
+--- a/src/services/keyring/import/legacy_wire_codec.cpp
++++ b/src/services/keyring/import/legacy_wire_codec.cpp
+@@ -44,12 +44,16 @@ bool boolean(DBusMessageIter &iter) {
+     if(dbus_message_iter_get_arg_type(&iter)!=DBUS_TYPE_BOOLEAN) invalid();
+     dbus_bool_t value=0;dbus_message_iter_get_basic(&iter,&value);dbus_message_iter_next(&iter);return value!=0;
+ }
+-QStringList texts(DBusMessageIter &iter,int type,qsizetype maximum) {
++QStringList texts(DBusMessageIter &iter,int type,qsizetype maximum,DuplicateText duplicates) {
+     auto list=child(iter,DBUS_TYPE_ARRAY);
+-    QStringList result;
++    QStringList result;qsizetype observed=0;
+     while(dbus_message_iter_get_arg_type(&list)!=DBUS_TYPE_INVALID) {
+-        if(result.size()>=maximum) throw Failure{CollectionImportError::Capacity};
+-        const auto value=text(list,type);if(result.contains(value)) invalid();result.append(value);
++        // AGENT-GUARD: Normalizing KWallet folder identities must not let repeated
++        // strings bypass the raw reply bound; all other lists remain strict.
++        if(observed++>=maximum) throw Failure{CollectionImportError::Capacity};
++        const auto value=text(list,type);
++        if(result.contains(value)) {if(duplicates==DuplicateText::Reject) invalid();continue;}
++        result.append(value);
+     }
+     return result;
+ }
+diff --git a/src/services/keyring/import/legacy_wire_p.h b/src/services/keyring/import/legacy_wire_p.h
+index d07c3d6af..04ad6d22a 100644
+--- a/src/services/keyring/import/legacy_wire_p.h
++++ b/src/services/keyring/import/legacy_wire_p.h
+@@ -17,7 +17,8 @@ QString text(DBusMessageIter &,int type=DBUS_TYPE_STRING,qsizetype limit=1024);
+ std::uint64_t unsigned64(DBusMessageIter &);
+ int integer(DBusMessageIter &);
+ bool boolean(DBusMessageIter &);
+-QStringList texts(DBusMessageIter &,int type=DBUS_TYPE_STRING,qsizetype count=1024);
++enum class DuplicateText {Reject,Collapse};
++QStringList texts(DBusMessageIter &,int type=DBUS_TYPE_STRING,qsizetype count=1024,DuplicateText duplicates=DuplicateText::Reject);
+ SecureBuffer bytes(DBusMessageIter &,std::size_t maximum=1024*1024);
+ Attributes stringMap(DBusMessageIter &);
+ DBusMessageIter begin(DBusMessage *);
+diff --git a/tests/services/keyring/legacy_fixture_services.py b/tests/services/keyring/legacy_fixture_services.py
+index 6fcedde8c..ba4fbf79b 100644
+--- a/tests/services/keyring/legacy_fixture_services.py
++++ b/tests/services/keyring/legacy_fixture_services.py
+@@ -85,7 +85,9 @@ class Secret(Properties):
+ class Wallet(dbus.service.Object):
+     def __init__(self,fixture): self.fixture=fixture;super().__init__(fixture.kw,"/modules/kwalletd6")
+     @dbus.service.method(KW,in_signature="",out_signature="as")
+-    def wallets(self): self.fixture.calls.append("wallets");return ["kdewallet"]
++    def wallets(self):
++        self.fixture.calls.append("wallets")
++        return ["kdewallet"]*(2 if self.fixture.mode=="kw-duplicate-wallets" else 1)
+     @dbus.service.method(KW,in_signature="sxsb",out_signature="i")
+     def openAsync(self,wallet,window,application,session):
+         f=self.fixture;f.calls.append("openAsync");f.opened+=1;transaction=f.opened;handle=100+transaction
+@@ -94,9 +96,15 @@ class Wallet(dbus.service.Object):
+     @dbus.service.signal(KW,signature="ii")
+     def walletAsyncOpened(self,transaction,handle): pass
+     @dbus.service.method(KW,in_signature="is",out_signature="as")
+-    def folderList(self,handle,application): self.fixture.calls.append("folderList");return sorted(self.fixture.folders)
++    def folderList(self,handle,application):
++        f=self.fixture;f.calls.append("folderList");folders=sorted(f.folders)
++        if f.mode=="kw-folder-capacity": return [folders[0]]*1025
++        if f.mode=="kw-folder-mutation" and f.calls.count("folderList")>1: return folders[:-1]*2
++        return folders*2 if f.mode in ("kw-duplicate-folders","kw-folder-mutation") else folders
+     @dbus.service.method(KW,in_signature="iss",out_signature="as")
+-    def entryList(self,handle,folder,application): self.fixture.calls.append("entryList");return sorted(self.fixture.folders[str(folder)])
++    def entryList(self,handle,folder,application):
++        self.fixture.calls.append("entryList");entries=sorted(self.fixture.folders[str(folder)])
++        return entries*2 if self.fixture.mode=="kw-duplicate-entries" else entries
+     @dbus.service.method(KW,in_signature="isss",out_signature="i")
+     def entryType(self,handle,folder,key,application): self.fixture.calls.append("entryType");return self.fixture.folders[str(folder)][str(key)][0]
+     @dbus.service.method(KW,in_signature="isss",out_signature="ay")
+diff --git a/tests/services/keyring/test_legacy_import.py b/tests/services/keyring/test_legacy_import.py
+index a0d35a50b..26b5504d9 100644
+--- a/tests/services/keyring/test_legacy_import.py
++++ b/tests/services/keyring/test_legacy_import.py
+@@ -74,6 +74,26 @@ class ImportTest(unittest.TestCase):
+             with self.subTest(kind=kind):
+                 self.storage=self.root/("native-"+kind);code,output,error=self.run_import(kind);self.assertEqual(code,0,error.decode())
+                 self.assertEqual(subprocess.run([str(VERIFY),str(self.storage),kind],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode,0)
++    def test_repeated_kwallet_folders_copy_complete_entries_once_per_pass(self):
++        self.fixture.mode="kw-duplicate-folders"
++        code,output,error=self.run_import("kwallet");self.assertEqual(code,0,error.decode());self.assertIn(b"2 collections, 5 items",output)
++        self.assertEqual(subprocess.run([str(VERIFY),str(self.storage),"kwallet"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode,0)
++        self.assertEqual(self.fixture.calls.count("readEntry"),8)
++        self.assertEqual(self.fixture.calls.count("entryType"),8)
++        self.assertEqual(self.fixture.calls.count("entryList"),4*len(self.fixture.folders))
++        self.assertEqual(self.fixture.calls.count("openAsync"),self.fixture.calls.count("close"))
++    def test_kwallet_raw_folder_capacity_and_other_list_uniqueness(self):
++        for mode,kind,expected in (("kw-folder-capacity","kwallet",2),("kw-duplicate-wallets","kwallet",1),
++                ("kw-duplicate-entries","kwallet",1),("duplicate","secret",1)):
++            with self.subTest(mode=mode):
++                self.fixture.mode=mode;self.fixture.calls.clear();self.storage=self.root/mode
++                code,output,error=self.run_import(kind);self.assertNotEqual(code,0);self.assertFalse(output)
++                self.assertIn(("code "+str(expected)).encode(),error);self.assertFalse(self.storage.exists())
++                self.assertNotIn("readEntry",self.fixture.calls)
++    def test_kwallet_unique_folder_mutation_still_refuses(self):
++        self.fixture.mode="kw-folder-mutation"
++        code,output,error=self.run_import("kwallet");self.assertNotEqual(code,0);self.assertFalse(output)
++        self.assertIn(b"code 3",error);self.assertFalse(self.storage.exists())
+     def test_owned_unlock_and_cancel_or_failure(self):
+         self.fixture.locked=True;code,output,error=self.run_import("secret");self.assertEqual(code,0,error.decode());self.assertIn("Prompt",self.fixture.calls)
+     def test_foreign_replies_and_completed_never_publish(self):

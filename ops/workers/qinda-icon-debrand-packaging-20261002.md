@@ -1,7 +1,7 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — read-only retained Desktop-r2 build preparation handed manager; concrete keyring fix/revision and warm-cache binding require exact source/recipe acceptance, no compiler lease
+- Status: working — live exact accepted KWallet fix/cache/source preparation, one granted qinda2job/load16/6GiB lease; no provider or host installation
 - Outcome: identify retained Desktop-r2 source/build/image and supported incremental signed repackage prerequisites for a possible tiny keyring fix
 - Base: `43bcc05648686c3d119a5a7428bff22cb3cda30a`
 - Branch: `worker/pf-gabbee-portage-20261002`
@@ -103,3 +103,7 @@
 - 2026-10-03T01:33:20.841713+00:00 — Actual normal plans both PASS0/one new stock Waypipe/no dependencies. Qinda signed build-only PASS0/18.004s at2jobs/load16, minimum26,039,074,816bytes/no6GiB abort; signature/source recipe match. Exact153,600byte GPkg SHA256ba0c26ac installed mandatory-signed binary-only both hosts, laptop10.544s. Laptop test lock absent before cache import/install. Exact Portage cache injection repaired trusted-index invisibility with no signature/USE-policy changes. Installed0.9.2/owned executable sameMD5both, --no-gpu available. No relay/dialog/secret/provider/SSH action or laptop source build/GPU.
 
 - 2026-10-03T02:04:53.828800+00:00 — Read-only qinda retained work/cache/image exists, all six phase markers present, exact source29f +accepted8a installpatch. Installed Portage noauto reload/phase marker semantics and PF-derived workroot confirmed; cmake documented BUILD_DIR override confirmed. Prior actual3152compiledoutputs unchanged/onlytwo Ninja regenerationactions reused. New production bytes require newr3; no automatic r3 cache reuse or permission to replace signedr2. No source/package/marker mutation, scans, build/install/provider/PAM/GUI action.
+
+- 2026-10-03T02:15:38.285101+00:00 — Claimed accepted exact62acb69 source focused-build and newr3 signed repackage. First resolving actual retained absolute tree/source identity before any mutation/compile; root grants only2jobs/load16/6GiB guard and3focused targets/one test then bounded fullNinja dryrun. Preserve signedr2, no provider/PAM/import/global install/GPU/laptopbuild.
+
+- 2026-10-03T02:22:55.522535+00:00 — Retained absoluteQA confirmed via sudo; normal-user false is permissions. Complete original source/image plus cache/Ninja baseline preserved; exact62 sixfiles source binding and base+8a patch-check0. Temporary testingONconfigure0/54.013s, focused dryrun2regenerationactions,3target build0/13.004s; private import CTest live, memory>22GB. Newr3 recipe keeps29f+8a plus exact62 patch, samebyte41,389,472B newDISTname actualhashes match Manifest; syntax/diff0. No signedr3 yet; exact recipe source candidate for manager review while focusedtest runs.
