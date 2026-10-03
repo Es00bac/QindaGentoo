@@ -240,6 +240,7 @@ USE defaults, keywords and licenses. Select it with
 `eselect profile set qindaqt:qindaqt/systemd`.
 
 The profile installs `x11-misc/qindaqt-xdg-menu` so KWin can resolve installed application desktop entries for screenshot and portal permissions after Plasma removal.
+The r6 desktop package holds exclusive native power composition off until its physical login receipts are qualified; Power1 remains installed and active while the session uses the nonexclusive path.
 
 The profile installs `x11-misc/dotool` for Gabbee's focused-window typing
 route and `x11-themes/qinda-seven` for the appearance catalog. The latter pins
