@@ -1,9 +1,9 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — laptop actual cleanup verified; qinda26 pending; current PF25/rollback52 preserved, no live process
-- Outcome: verify actual laptop retired26 cleanup/current boundary and retained signed rollback52; report qinda pending separately
-- Base: `796c876513fbdd8f8c3a7200741a3461d801e7c8`
+- Status: waiting — actual cleanup verified both hosts; persistent Login unlock/physical PAM pending; no live process
+- Outcome: verify final qinda zero-retired/PF25 and nonactivating native-owner metadata; persistent unlock/PAM remains pending
+- Base: `d718a4a2d68c3cf5f05ac84f3370923d55541d77`
 - Branch: `worker/pf-gabbee-portage-20261002`
 - Worktree: `/home/cabewse/work_space/QindaGentoo-gabbee-portage-20261002`
 - Ownership: final desktop/fork recipe pins/new Manifest rows/qualification docs and own board/thread; preserve Gabbee0a232, root RemovableMedia OFF/PDEPEND, libei/KIO/profile contracts
@@ -127,3 +127,7 @@
 - 2026-10-03T04:07:45.904051+00:00 — Claimed bounded actual laptop cleanup verification exact796. Fetch/ownWTclean. Read-only current VDB/manager aggregate result, existing installed PF25 once per currenthost and compressed rollback52 SHA preservation; no installedfile scan/decompression/provider/UI/install/compile/source changes. Qinda retirement pending, must not claim bothcomplete.
 
 - 2026-10-03T04:10:46.582312+00:00 — Actual laptop VDB1359/retired0/allowed2; manager normal26depclean0/protected1359removed0/worldunchanged. Current installed PF25 laptop0/573nodes2.329s,qinda0/586nodes3.277s/0forbiddenboth. Qinda actualVDB1567/retired26 remains pending. All52compressed signedrollbackpath/size/SHA unchanged (<1s each), no decompression/installedpayload/signaturesweep. Immutable `20261003T041046Z-verify-actual-laptop-cleanup-qinda-pending.md` aggregate-only evidence; no provider/UI/config/emerge/build/GPU/productmutation;waiting/resourcesreleased.
+
+- 2026-10-03T04:14:48.569511+00:00 — Claimed final small qinda closure exactd718. Fetch/ownWTclean. Verify actualguarded26removal aggregate/currentVDB/PF25 once and NO_AUTO_STARTnativeowner UID/PID/exe metadata only. No repeatpayload/signature/rollbackhash, no laptopheavy/GUI/provider/password/install/build. PersistentLoginUnlockVerified false and freshphysical/PAMpending mustremainexplicit.
+
+- 2026-10-03T04:17:05.066049+00:00 — Final actualqindaVDB1541/retired0/allowed2; exact26removed/protected1541removed0/worldunchangedmatchesguardedmanager0/64.668s. Afterchange installedtwo-rootPF25exit0/2.330s586nodes0forbidden. NativeNO_AUTO_STARTownerstableUID1000/PID491214/actualinstalledexeSHAaccepted;0secretcalls. PersistentLoginUnlockVerifiedFALSE/freshphysicalPAMpendingexplicit. Immutable `20261003T041705Z-accept-final-qinda-actual-cleanup-persistent-unlock-pending.md`; no repeatrollback/payload/signaturehash/laptopwork/hostmutation;waiting/resourcefree.
