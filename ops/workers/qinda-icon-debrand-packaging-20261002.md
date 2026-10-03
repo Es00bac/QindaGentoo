@@ -1,9 +1,9 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — installed final five/PAM/two-root PF25 PASS delivered; no live compiler, test or host operation
-- Outcome: verify actual installed final five/PAM and installed two-root PF25 on both hosts, then release resources
-- Base: `2f538f7550e7cf1c49494a743b9f4e0f6b9c799c`
+- Status: waiting — retired26 signed rollback and complete32-binary restoration graphs delivered; no live process/resource lease
+- Outcome: preserve signed rollback snapshots for exactly26 retired CPVs each host and qualify old-five plus GNOME plus26 normal restoration
+- Base: `647b871adba07e87933668d72e76493a8c90ed1e`
 - Branch: `worker/pf-gabbee-portage-20261002`
 - Worktree: `/home/cabewse/work_space/QindaGentoo-gabbee-portage-20261002`
 - Ownership: final desktop/fork recipe pins/new Manifest rows/qualification docs and own board/thread; preserve Gabbee0a232, root RemovableMedia OFF/PDEPEND, libei/KIO/profile contracts
@@ -119,3 +119,7 @@
 - 2026-10-03T03:22:26.981763+00:00 — Claimed bounded post-cutover verification at exact2f538f7. Hub fetched/ownWT clean. Waiting for actual installationPassed before VDB/files/installed PF25 checks; preparing reuse of accepted payload receipts only. No build/install/provider/PAM/session action.
 
 - 2026-10-03T03:30:11.392851+00:00 — Manager actual final-five-installationPassed verified both. Installed5 exactCPVs/source/signedmetadata/direct5709files+7links each PASS; all3PAMSHAs exactboth/customlaptop01gentoo hash retained. Only pending packageddefault ._cfg0000_01gentoo.conf; nocriticalauthdiff. Existing installed TWO-rootPF25 laptop0/573nodes,qinda0/586nodes, zeroforbidden. First strict inventory-normalization/parser/config-protect flags preserved and exactboundedqualificationPASS, no repeatedpayloadsweep. New immutable reply `20261003T033011Z-accept-installed-final-five-pam-two-root-pf25.md`; no host mutation/build/provider/UI/GPU/secrets; statuswaiting/resourcesreleased.
+
+- 2026-10-03T03:35:28.090507+00:00 — Claimed root bounded retired26 rollback readiness at exact647. Initial cache/VDB name inventory only before expensive work; prefer existing valid signed binaries, capture only missing with normalPortage/T1/sequential/nice19/idleIO/lockrespect. No removal/install/build/provider/PAM/globalconfig or icons.
+
+- 2026-10-03T03:40:57.216117+00:00 — Removal rollback prerequisite PASS: exact26signedtarget-local artifacts each/fullsignature+installedUSEdepsmatch; reused6qinda/5laptop,capturedonly20/21 normalquickpkg6.730s/7.477s sequentialT1/lockabsent. Completeoldfive+GNOME+26 normalmandatorysignedbinary graph qinda0/3.454s,laptop0/3.271s, exactly32binaries/0KiB/noextras;world/retiredVDBunchanged. Concrete GNOME-before-oldDesktop alias execution constraint reported root; manager owns native lifetime/package alias release before actualrestore. Immutable `20261003T034057Z-accept-retired-26-signed-restoration-graphs.md` contains52paths/hashes/exactargv. No install/unmerge/provider/PAM/sourcebuild/GPU;resourcesreleased.
