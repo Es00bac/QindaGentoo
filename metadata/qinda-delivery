@@ -16,7 +16,7 @@
 # 2026-09-24: OpenCode 1.18.32 is the current official Linux CLI release.
 =dev-util/opencode-bin-1.18.32
 =app-office/obsidian-1.13.7-r1
-=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r4
+=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r5
 =gui-wm/qindaqt-kwin-6.6.6_p1-r3
 =gui-apps/qqterm-0.3.0
 =media-video/qqmpv-0.1.0_p20260920
