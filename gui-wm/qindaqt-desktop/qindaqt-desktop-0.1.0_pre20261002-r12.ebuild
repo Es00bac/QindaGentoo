@@ -130,14 +130,38 @@ src_install() {
 	# package continues to own every file. Only compiled affected artifacts
 	# replace it, with the same Qt/KWin ABI and dependency set.
 	python3 - "${DISTDIR}/${PF}.base.gpkg.tar" "${D}" <<'PYBASE' || die "base image extraction failed"
-import sys, portage
+import os, sys, portage, shutil, tempfile, pwd, grp
 from portage.gpkg import gpkg
-gpkg(portage.settings, gpkg_file=sys.argv[1], verify_signature=True).decompress(sys.argv[2])
+settings = portage.config(clone=portage.settings)
+# Verification may write public trust bookkeeping. Keep that inside the
+# sandbox; never copy signing keys or alter the host's trusted keyring.
+home = tempfile.mkdtemp(prefix="base-verify-", dir=os.environ["T"])
+source_home = settings["BINPKG_GPG_VERIFY_GPG_HOME"]
+uid = pwd.getpwnam(settings.get("GPG_VERIFY_USER_DROP", "nobody")).pw_uid
+gid = grp.getgrnam(settings.get("GPG_VERIFY_GROUP_DROP", "nogroup")).gr_gid
+for name in ("pubring.kbx", "pubring.gpg", "trustdb.gpg"):
+    source = os.path.join(source_home, name)
+    if os.path.isfile(source):
+        target = os.path.join(home, name)
+        shutil.copyfile(source, target)
+        os.chown(target, uid, gid)
+        os.chmod(target, 0o600)
+os.chown(home, uid, gid)
+settings["BINPKG_GPG_VERIFY_GPG_HOME"] = home
+try:
+    gpkg(settings, gpkg_file=sys.argv[1], verify_signature=True).decompress(sys.argv[2])
+finally:
+    shutil.rmtree(home)
 PYBASE
 	local directory
 	for directory in src/controllers src/apps/settings/input src/apps/settings_center; do
 		DESTDIR="${D}" "${CMAKE_BINARY}" --install "${BUILD_DIR}/${directory}" || die "focused install failed"
 	done
+	# Qt retains loaded module code. A new filename gives the running KWin
+	# a fresh factory without restarting the graphical session. KCoreAddons
+	# derives C++ plugin IDs from the filename; Controllers1 stays unchanged.
+	local plugin_dir="${ED}/usr/$(get_libdir)/qt6/plugins/qindaqt-kwin/plugins"
+	mv "${plugin_dir}/qindaqt_controllers.so" "${plugin_dir}/qindaqt_controllers_r12.so" || die
 	if [[ -d "${ED}/usr/share/doc/qindaqt-desktop-0.1.0_pre20261002-r11" ]]; then
 		mv "${ED}/usr/share/doc/qindaqt-desktop-0.1.0_pre20261002-r11" "${ED}/usr/share/doc/${PF}" || die
 	fi
