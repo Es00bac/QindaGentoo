@@ -1,9 +1,9 @@
 # Qinda desktop packaging worker
 
 - Identity: qinda-icon-debrand-packaging-20261002
-- Status: waiting — signed target-local old-five rollback prerequisite delivered; no live compiler, test or host operation
-- Outcome: prove target-local signed old-five rollback graphs on both hosts without install, provider/PAM changes or builds
-- Base: `2cf07fdb2b44dfd2188528492018d689e7b9de3e`
+- Status: waiting — installed final five/PAM/two-root PF25 PASS delivered; no live compiler, test or host operation
+- Outcome: verify actual installed final five/PAM and installed two-root PF25 on both hosts, then release resources
+- Base: `2f538f7550e7cf1c49494a743b9f4e0f6b9c799c`
 - Branch: `worker/pf-gabbee-portage-20261002`
 - Worktree: `/home/cabewse/work_space/QindaGentoo-gabbee-portage-20261002`
 - Ownership: final desktop/fork recipe pins/new Manifest rows/qualification docs and own board/thread; preserve Gabbee0a232, root RemovableMedia OFF/PDEPEND, libei/KIO/profile contracts
@@ -115,3 +115,7 @@
 - 2026-10-03T02:50:50.947813+00:00 — Claimed root rollback prerequisite at exact2cf07fd. Inspect existing target-local snapshots/default caches and Portage signing/quickpkg APIs, lowpriority/no parallel compression. No install/unmerge/provider/PAM/global signing config/build/GPU/laptop test authorized.
 
 - 2026-10-03T03:08:11.440770+00:00 — Target-local mandatory-signed rollback prerequisite PASS: six artifacts each host fully verified/installed USE+deps match; ordinary exact old-five --selective=n plans qinda0/2.450s and laptop0/1.639s each5reinstalls/5binaries/0KiB. All28 kde-plasma CPVs and world/world_sets unchanged; original snapshots/images preserved. Standard signed quickpkg laptop3.173s/qinda0.911s, no hostmerge/provider/PAM/build/GPU. Exact argv/paths/SHA256 and config-backup condition in new immutable reply `20261003T030811Z-accept-target-local-signed-old-five-rollback.md`; resource lease released.
+
+- 2026-10-03T03:22:26.981763+00:00 — Claimed bounded post-cutover verification at exact2f538f7. Hub fetched/ownWT clean. Waiting for actual installationPassed before VDB/files/installed PF25 checks; preparing reuse of accepted payload receipts only. No build/install/provider/PAM/session action.
+
+- 2026-10-03T03:30:11.392851+00:00 — Manager actual final-five-installationPassed verified both. Installed5 exactCPVs/source/signedmetadata/direct5709files+7links each PASS; all3PAMSHAs exactboth/customlaptop01gentoo hash retained. Only pending packageddefault ._cfg0000_01gentoo.conf; nocriticalauthdiff. Existing installed TWO-rootPF25 laptop0/573nodes,qinda0/586nodes, zeroforbidden. First strict inventory-normalization/parser/config-protect flags preserved and exactboundedqualificationPASS, no repeatedpayloadsweep. New immutable reply `20261003T033011Z-accept-installed-final-five-pam-two-root-pf25.md`; no host mutation/build/provider/UI/GPU/secrets; statuswaiting/resourcesreleased.
