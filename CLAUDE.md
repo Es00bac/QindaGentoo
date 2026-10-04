@@ -180,6 +180,8 @@ packages are independently accepted and installed on both hosts; the contained
 real greeter gate passes with the installed pair. Existing sessions remain open
 and adopt the repaired code at the next owner login. Do not restart a desktop
 from qinda-sync. Native QtKeychain keyring support is enabled and rebuilt on both
-hosts; legacy Mail credential compatibility and sign-in UI are separate active
-Office repairs, not completed by that build feature alone. Preserve all earlier
+hosts; Office p20261004/source f1f3492b now delivers the independently reviewed typed
+native Password adapter and owning-window sign-in/error handling. Both-host
+only-Office binary installs and all 68 file checks pass; live collection unlock
+and server/browser sign-in remain per-user adoption checks. Preserve all earlier
 recipes and distfiles. See README for the bounded Network disk-fallback caveat.

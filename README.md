@@ -455,3 +455,31 @@ It installs the actual Keyring `_qml.qmltypes` filename bound by generated
 qmldir. The immutable29f archive and compiled application code are unchanged.
 Retained Portage phase continuation uses independently accepted source and recipe
 changes; package signing and installed qualification remain separate gates.
+
+
+### October 4 installed Mail recovery package
+
+Office `0.1.0_p20261004` pins integrated source `f1f3492b` through
+`QINDAOFFICE_COMMIT` and requires QtKeychain's native `keyring` feature. Mail's
+Sign in action opens the owning window's account dialog and displays errors.
+The native adapter reads a unique preserved KWallet Password import only after
+primary NotFound, through a pinned Secret Service owner and bounded typed
+QString decoding. Primary writes and immutable original imports retain their
+separate namespaces; removal reports when a preserved credential remains.
+
+Reciprocal source reviews and the manager's 12/12 Mail CTests (246 Qt checks,
+zero failures/skips) pass. Independent laptop/qinda archives match SHA256
+`1023366d211de2d94329ad5fd8b9386f74903a980255896dcce78f1bb094bf83`.
+The full Portage build exits zero with the configured compiler limits unchanged;
+required-signature, exact recipe/source and static library-closure review accept
+package SHA256 `7b5aadf100fad4bdb33fe3f57d60143a8648bb2934b27e3d7c186c1375adc672`.
+Exact binary-only installation exits zero on both hosts. All 68 installed files
+verify, Mail matches accepted SHA256
+`23a8136a7bbc146cba50b2f872fcb3397b52e80168b51fc7e7e660121c081f82`, and
+world/world_sets remain unchanged. The approved delivery changes only Office's
+atom; every older recipe/archive remains available.
+
+Live collection unlock and actual server authentication are separate adoption
+checks. Google browser sign-in requires a per-user desktop OAuth client from the
+intended app's Google project; its consent branding is a project setting, and
+Office ships no client credentials. Existing desktop sessions stay open.
