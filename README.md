@@ -394,6 +394,13 @@ PF25 receipts are not relabeled as installed-world closure evidence.
 
 ### Prepared native application portal and Secret Service providers
 
+The native profile enables `dev-libs/qtkeychain[keyring]`. QtKeychain 0.17.0
+otherwise omits its libsecret backend and falls back to an activatable KWallet
+daemon even when QindaQt owns `org.freedesktop.secrets`. Rebuild QtKeychain
+through Portage after syncing this profile, then reopen password-using apps;
+backend selection is cached for each application process. This changes backend
+availability, without migrating or deleting existing credentials.
+
 Claude 1.49585.0-r1 keeps its exact vendor archive and launcher while new
 default-OFF qindaqt USE selects Desktop-r2 and supported trash-cli. Pinentry
 1.3.2-r2 retains all GUI/optional caching choices and uses the generic Secret
