@@ -392,6 +392,23 @@ Actual builds, QML/app smoke, native Polkit agent registration and reviewed
 per-host world/depclean plans remain manager gates. The earlier exact-root
 PF25 receipts are not relabeled as installed-world closure evidence.
 
+### October 4 native permission-list repair candidate
+
+Fork `6.6.6_p1-r6` pins independently accepted `24d0c6a6`, a descendant of
+installed r5 `dd74a6c1`; it preserves the deployed shortcut release and
+introspection repairs. Public interface lookup and private locker/capture
+launch checks now decode native desktop-entry fields as XDG string lists.
+Native-only permission and launcher trust checks remain in force; source and
+plugin ABI stay `6.6.6.1`. The fork archive verifies all 3,417 source files.
+
+Desktop `0.1.0_pre20261002-r13` pins incident source `ab7fc8f3` over deployed
+r12 `2b5db406` and requires this exact r6 fork. It uses the full source recipe,
+rebuilding every desktop consumer against the matched staged r6 SDK rather
+than layering onto an old signed image. Both old recipes and distfiles remain.
+Package signatures, collision/runtime checks and a contained real native
+greeter launch are adoption gates, distinct from the accepted 32 focused Qt
+checks. No source checkpoint restarts a live desktop or qualifies real PAM.
+
 ### Prepared native application portal and Secret Service providers
 
 The native profile enables `dev-libs/qtkeychain[keyring]`. QtKeychain 0.17.0
