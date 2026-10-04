@@ -171,3 +171,15 @@ patch corresponding exactly to upstream8a622b4b76d25d509ca50e8ca7fbf62d62753a4e.
 It installs the actual Keyring `_qml.qmltypes` filename bound by generated
 qmldir. The immutable29f archive and compiled application code are unchanged.
 Retained Portage phase continuation waits exact source/recipe acceptance.
+
+## October 4 installed lock recovery
+
+Current approved delivery is Desktop pre20261002-r13 (source ab7fc8f3) and
+fork 6.6.6_p1-r6 (source 24d0c6a6), exact ABI 6.6.6.1. Both signed full-source
+packages are independently accepted and installed on both hosts; the contained
+real greeter gate passes with the installed pair. Existing sessions remain open
+and adopt the repaired code at the next owner login. Do not restart a desktop
+from qinda-sync. Native QtKeychain keyring support is enabled and rebuilt on both
+hosts; legacy Mail credential compatibility and sign-in UI are separate active
+Office repairs, not completed by that build feature alone. Preserve all earlier
+recipes and distfiles. See README for the bounded Network disk-fallback caveat.

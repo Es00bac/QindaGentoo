@@ -1,5 +1,7 @@
-# Native desktop/fork source freeze 29f7174a/55d1f273; candidate archives only.
-# Do not publish/install until runtime gates and independent recipe review pass.
+# October 4 installed lock repair: desktop ab7fc8f3 / fork 24d0c6a6.
+# Exact r13/r6 signed artifacts, independent review and contained greeter gates pass.
+# Both hosts have this pair; existing desktops adopt it at the next owner login.
+# Physical/PAM authentication remains separate from the software-only proof.
 # Completed desktop, application and screensaver delivery shared by both hosts.
 # Adoption stays an explicit update: qinda-sync installs exactly these atoms.
 #
@@ -16,9 +18,9 @@
 # 2026-09-24: OpenCode 1.18.32 is the current official Linux CLI release.
 =dev-util/opencode-bin-1.18.32
 =app-office/obsidian-1.13.7-r1
-=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r8
+=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r13
 =x11-misc/qindaqt-xdg-menu-1.0.0
-=gui-wm/qindaqt-kwin-6.6.6_p1-r4
+=gui-wm/qindaqt-kwin-6.6.6_p1-r6
 =gui-apps/qqterm-0.3.0
 =media-video/qqmpv-0.1.0_p20260920
 =dev-libs/qindatk-0.1.0-r15

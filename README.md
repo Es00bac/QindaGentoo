@@ -392,7 +392,7 @@ Actual builds, QML/app smoke, native Polkit agent registration and reviewed
 per-host world/depclean plans remain manager gates. The earlier exact-root
 PF25 receipts are not relabeled as installed-world closure evidence.
 
-### October 4 native permission-list repair candidate
+### October 4 installed native permission-list repair
 
 Fork `6.6.6_p1-r6` pins independently accepted `24d0c6a6`, a descendant of
 installed r5 `dd74a6c1`; it preserves the deployed shortcut release and
@@ -405,9 +405,16 @@ Desktop `0.1.0_pre20261002-r13` pins incident source `ab7fc8f3` over deployed
 r12 `2b5db406` and requires this exact r6 fork. It uses the full source recipe,
 rebuilding every desktop consumer against the matched staged r6 SDK rather
 than layering onto an old signed image. Both old recipes and distfiles remain.
-Package signatures, collision/runtime checks and a contained real native
-greeter launch are adoption gates, distinct from the accepted 32 focused Qt
-checks. No source checkpoint restarts a live desktop or qualifies real PAM.
+Both full Portage builds, exact signed artifact review and software-only real
+greeter gates pass, including a repeat with the installed r13 greeter. The pair
+is installed on both hosts; all 456 fork and 2,291 desktop files/links verify
+with world selections unchanged. The current desktop stays open at the owner's
+request and adopts the repair at the next login. Physical presentation and PAM
+authentication remain unqualified by the contained test. The approved delivery
+now names this exact pair, preserving every unrelated atom. The independent
+consumer review preserves a bounded Network nested disk-fallback contract gap:
+preferred compiled resources are present and static closure passes, but the
+disk-only authenticator fails and requires a separate install-path repair.
 
 ### Prepared native application portal and Secret Service providers
 
