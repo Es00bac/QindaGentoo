@@ -15,8 +15,10 @@
 # under active development, so this file keeps naming the versions both hosts
 # already run rather than a moving head. media-plugins/obs-qindaqt is absent
 # because qinda-top has no OBS.
-# 2026-09-24: OpenCode 1.18.32 is the current official Linux CLI release.
-=dev-util/opencode-bin-1.18.32
+# 2026-10-05: official stable coding CLIs, all installed and updated by Portage.
+=dev-util/codex-bin-0.160.1
+=dev-util/claude-code-2.1.289
+=dev-util/opencode-bin-1.18.34
 =app-office/obsidian-1.13.7-r1
 =gui-wm/qindaqt-desktop-0.1.0_pre20261002-r13
 =x11-misc/qindaqt-xdg-menu-1.0.0

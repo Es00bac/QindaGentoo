@@ -9,6 +9,8 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `gui-apps/qindaoffice` | `QindaOffice` |
 | `gui-apps/qqterm` | `QindaQt_Apps` |
 | `www-client/qindafox-bin` | `QindaQt_Apps/QindaFox` |
+| `dev-util/codex-bin` | OpenAI Codex official Linux musl bundle, packaged through Portage |
+| `dev-util/claude-code` | Anthropic Claude Code official native release, packaged through Portage |
 | `dev-util/opencode-bin` | OpenCode official Linux release, packaged through Portage |
 | `gui-wm/qindastudio` | `QindaStudio` |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
@@ -185,8 +187,26 @@ They are developer tooling and are not entries in `metadata/qinda-delivery`.
 
 `app-office/obsidian` packages Obsidian's official Linux release tarball and Debian metadata archive through Portage; its ebuild, license text, and checksums are tracked here.
 
-`dev-util/opencode-bin` packages the official OpenCode Linux CLI release through
-Portage so the version and release checksum are shared by both Qinda hosts.
+`dev-util/codex-bin`, `dev-util/claude-code`, and `dev-util/opencode-bin`
+package the official native CLI releases through Portage, with versioned recipes
+and release checksums shared through qinda. The October 5 update selects Codex
+0.160.1, Claude Code 2.1.289, and OpenCode 1.18.34. Codex retains its upstream
+musl bundle under `/opt/codex`; Claude retains `/opt/bin/claude`; OpenCode is
+installed under `/usr/bin`. All three commands are available under `/usr/bin`.
+
+Claude's packaged `/etc/claude-code/managed-settings.json` disables its automatic
+updater and installation checks and selects the system certificate store, so
+updates remain Portage-owned. The Qinda recipe preserves the installed native
+settings and the `/usr/bin/claude` compatibility symlink from the former
+`sloom-private` package. OpenCode's packaged `/etc/opencode/opencode.json`
+disables automatic updates at the managed configuration tier, keeping release
+changes under Portage as well. These developer tools are optional;
+install or update only the three selected tools with:
+
+```sh
+qinda-sync packages '=dev-util/codex-bin-0.160.1' \
+  '=dev-util/claude-code-2.1.289' '=dev-util/opencode-bin-1.18.34'
+```
 
 `sci-ml/qinda-llm-server` and `sci-ml/gguf-coding-models` are qinda's local
 coding-model service. `qinda-llm.service` runs llama.cpp's `llama-server`
