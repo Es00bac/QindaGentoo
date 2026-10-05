@@ -15,7 +15,8 @@
 # under active development, so this file keeps naming the versions both hosts
 # already run rather than a moving head. media-plugins/obs-qindaqt is absent
 # because qinda-top has no OBS.
-# 2026-10-05: official stable coding CLIs, all installed and updated by Portage.
+# 2026-10-05: official stable coding CLIs, installed and verified on qinda-top.
+# The shared recipes are available for explicit adoption on qinda.
 =dev-util/codex-bin-0.160.1
 =dev-util/claude-code-2.1.289
 =dev-util/opencode-bin-1.18.34

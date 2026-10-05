@@ -208,6 +208,12 @@ qinda-sync packages '=dev-util/codex-bin-0.160.1' \
   '=dev-util/claude-code-2.1.289' '=dev-util/opencode-bin-1.18.34'
 ```
 
+Installed acceptance on qinda-top (2026-10-05): all three version and help checks
+passed, all 48 regular files and 3 symlinks matched Portage's CONTENTS records,
+and OpenCode's resolved configuration confirmed `autoupdate: false`. Claude's
+managed updater and installation checks remained disabled. Only these three
+packages were upgraded; qinda adoption uses the explicit package command above.
+
 `sci-ml/qinda-llm-server` and `sci-ml/gguf-coding-models` are qinda's local
 coding-model service. `qinda-llm.service` runs llama.cpp's `llama-server`
 (::guru's `sci-misc/llama-cpp[vulkan]`, on the RX 5700 XT through RADV) in
