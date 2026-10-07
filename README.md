@@ -550,3 +550,19 @@ signed full-source build-only and artifact review precede manager-owned
 publication/installation. Installed fresh-login, owner-entered authentication,
 physical battery/AC transitions and complete native power parity remain separate
 gates. Current delivery metadata and existing sessions are unchanged.
+
+## Prepared AI usage desktop revision 16
+
+Desktop pre20261002-r16 pins reviewed runtime source
+2188d8e0e339ce4b56acb841a4b570f58a3002cc. It includes the compiled AI
+usage applet, QtCore report publisher/public SDK, manifest and all eleven stock
+profiles, retaining native ED-01–03 fixes and repaired Network disk fallback.
+Exact fork r6/ABI 6.6.6.1, lock-PAM >=1 and NativePowerExclusive OFF remain. No
+Python runtime dependency is added. Reproducible archive: 39,011,614 bytes,
+SHA256
+6b8eab5eebb2859cadf4c5be0b45486c64d967e473072ca799dfa60d6cfbbe94; all 9,431
+tracked blobs verified. Earlier recipes/distfiles, especially held immutable
+r15, remain unchanged. Exact recipe review precedes private signed full-source
+build-only and independent artifact/image review. Preparation changes no
+normal binhost or installed delivery metadata; manager owns later Portage
+installation and installed-session qualification.
