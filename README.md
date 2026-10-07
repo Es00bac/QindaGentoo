@@ -528,3 +528,25 @@ optional native keyring notification, so it creates no new login/logind
 session and keyring failure cannot grant or withhold authentication. No
 credentials or existing login PAM files are changed. Portage owns the new
 root-owned mode-0644 configuration and applies normal CONFIG_PROTECT.
+
+### Prepared everyday reliability desktop revision 15
+
+Desktop `0.1.0_pre20261002-r15` pins reviewed runtime source `bef80e861680f6d7bd53a556c39e13d97ff9e742`
+and the existing exact fork `6.6.6_p1-r6`/ABI `6.6.6.1`. It requires
+`sys-auth/qindaqt-lock-pam-1`, contains accepted dormant UPower activation and
+native keyring owner replacement recovery, and includes the reviewed six-file
+Network QML disk-fallback installation repair. ADR-0345's nonexclusive power
+default remains OFF; no authentication or compositor authority is relaxed.
+
+The exact-prefix source archive was cut twice with `git archive` and `gzip -n`;
+all 9,329 tracked blobs match the pin. Its 38,909,120 bytes have SHA256
+`cc2ff5806006890d76ddea6a41af6563b078a2b11ad079c747198b9f0b8d512a`.
+Earlier recipes and Manifest rows remain unchanged. Source/private acceptance
+passes lock 3/3, Power1 9/9 and supervisor/keyring 5/5; source release contract
+checks require the lock PAM package and preserve the accepted OFF policy.
+
+This is a prepared recipe/archive candidate. Independent exact recipe review,
+signed full-source build-only and artifact review precede manager-owned
+publication/installation. Installed fresh-login, owner-entered authentication,
+physical battery/AC transitions and complete native power parity remain separate
+gates. Current delivery metadata and existing sessions are unchanged.
