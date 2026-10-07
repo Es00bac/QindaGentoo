@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<longdescription lang="en">Provides the qindaqt-lock PAM service used by
+	the native QindaQt lock authentication worker. Authentication and account
+	policy remain with Gentoo pambase; native keyring session notification is
+	optional and does not open another login session.</longdescription>
+</pkgmetadata>

@@ -509,3 +509,22 @@ Live collection unlock and actual server authentication are separate adoption
 checks. Google browser sign-in requires a per-user desktop OAuth client from the
 intended app's Google project; its consent branding is a project setting, and
 Office ships no client credentials. Existing desktop sessions stay open.
+
+### Native lock PAM policy — October 7
+
+`sys-auth/qindaqt-lock-pam-1` owns `/etc/pam.d/qindaqt-lock`, the fixed
+service named by the desktop's real-UID authentication worker. The installed
+r13 desktop supplied the executables and keyring module without this policy;
+Gentoo's `other` stack therefore denied authentication without a conversation,
+and the greeter never revealed its password field. The profile and exact
+delivery select the small policy package so the existing locker can use it
+without restarting the desktop. Future desktop snapshots must also require
+it as a runtime dependency.
+
+Authentication and account checks use the site's `system-auth` substack,
+including its normal password and failed-attempt policy. Password changes are
+denied. The worker's session hook contains only a required `pam_permit` and
+optional native keyring notification, so it creates no new login/logind
+session and keyring failure cannot grant or withhold authentication. No
+credentials or existing login PAM files are changed. Portage owns the new
+root-owned mode-0644 configuration and applies normal CONFIG_PROTECT.

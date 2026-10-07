@@ -100,3 +100,6 @@ sci-ml/onnx ~amd64
 
 # Independently verified complete hand-rendered sibling; selection is user-owned.
 =x11-themes/qinda-breeze-handdrawn-1.0.0_p20261001 ~amd64
+
+# Fixed native locker PAM service; authentication remains in pambase.
+sys-auth/qindaqt-lock-pam ~amd64

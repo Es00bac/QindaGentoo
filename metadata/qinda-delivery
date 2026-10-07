@@ -156,3 +156,7 @@
 # Portage build and independent artifact review pass. Binary-only installation
 # on both hosts verifies all 68 package files with world selections unchanged.
 # Live keyring unlock and server/browser sign-in remain per-user adoption checks.
+
+# October 7: supply the native locker service; missing PAM policy fell back
+# to Gentoo deny-all without a password prompt. No desktop restart required.
+=sys-auth/qindaqt-lock-pam-1

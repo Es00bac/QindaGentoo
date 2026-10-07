@@ -17,6 +17,7 @@ media-plugins
 media-video
 net-wireless
 sci-ml
+sys-auth
 sys-boot
 www-client
 x11-misc

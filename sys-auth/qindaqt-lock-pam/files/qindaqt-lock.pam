@@ -1,0 +1,12 @@
+#%PAM-1.0
+# AGENT-CONTRACT: qindaqt-lock-pam authenticates and checks the real session
+# account through Gentoo's policy; keyring notification never grants unlock.
+auth        substack    system-auth
+-auth       optional    pam_qindaqt_keyring.so
+
+account     substack    system-auth
+
+# The locker cannot change passwords or establish another login/logind session.
+password    required    pam_deny.so
+session     required    pam_permit.so
+-session    optional    pam_qindaqt_keyring.so
