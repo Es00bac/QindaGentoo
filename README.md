@@ -566,3 +566,38 @@ r15, remain unchanged. Exact recipe review precedes private signed full-source
 build-only and independent artifact/image review. Preparation changes no
 normal binhost or installed delivery metadata; manager owns later Portage
 installation and installed-session qualification.
+
+### October 8 prepared compact Audio and Viewer delivery: r19
+
+Desktop revision 0.1.0_pre20261002-r19 pins manager source
+`e884c310d009b5c45b1c82aec81c1a554febbd1d`. It adds reviewed two-line common
+Audio device controls with Details disclosure and Viewer bounded PDF text/find,
+keyboard actions and actual displayed-frame publication. It retains all r18
+core services, public SDKs, AgentUsage publisher/profiles, Network fallback,
+exact fork r6/ABI6.6.6.1, lock-PAM>=1 and native power exclusivity OFF.
+The recipe changes only the source pin and descriptive comments; dependency
+and whole-tree build/install policy remain identical to r18.
+
+The reproducible Git archive plus gzip-n contains 9,803 tracked regular blobs
+(32 executable), 39,521,461 bytes, SHA256
+`a7158408158d8fd756c2481aae521add97a86c778e2a1ff4e147ca9ba08e42dc`.
+Two independent cuts match, every Git blob/tar mode is verified, and matching
+new recipe/DIST rows mirror across desktop and isolated overlay. Each historic
+Manifest prefix is preserved; r18 and earlier rollback packages are immutable.
+
+Manager Audio owning strict7/nineCTest/full57Qt and Viewer strict7/eightCTest/
+full44Qt pass; exact independent source/private-native review and wide/compact
+normal/2x captures are preserved. A source gate does not establish installed
+usability. Source release tests7/7, recipe syntax and release contract pass.
+One first checker invocation used an unsupported option and was rejected;
+its raw result is retained separately from the corrected passing invocation.
+
+Independent recipe/archive review precedes a separately granted private signed
+Portage full-source build. Require actual resolver selection and full signature/
+image closure; retain r18 AgentUsage, Network, Audio and Bluetooth installed-only
+SDK/required-header-poison/restoration checks, compositor/plugin ABI and unit/
+activation checks. Check Viewer executable, compiled QML and Poppler linkage,
+plus compiled Audio Details QML, in the new image. Artifact acceptance and
+Portage installation are separate gates. R18 remains installed; do not restart
+the owner's session. Physical audio, full mixer, provider feeds and all remaining
+ED/Android/Windows journeys remain open.
