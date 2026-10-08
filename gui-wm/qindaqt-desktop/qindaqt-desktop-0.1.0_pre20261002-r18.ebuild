@@ -61,7 +61,6 @@ RDEPEND="
 	media-libs/fontconfig
 	net-wireless/bluez
 	sys-apps/dbus
-	dev-libs/dbus
 	sys-apps/systemd
 	>=sys-apps/xdg-desktop-portal-1.20.4
 	net-print/cups
@@ -83,7 +82,7 @@ PDEPEND=">=media-video/qqmpv-0.1.0_p20260919
 
 # Plugin and native lock consume the exact co-installable fork ABI.
 DEPEND="${RDEPEND}
-	dev-libs/dbus
+	sys-apps/dbus
 	dev-libs/wayland
 	dev-libs/wayland-protocols
 	dev-util/wayland-scanner
