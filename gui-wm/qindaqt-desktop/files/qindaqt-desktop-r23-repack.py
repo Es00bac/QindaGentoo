@@ -15,7 +15,7 @@ home.chmod(0o700)
 for name in ("pubring.kbx","trustdb.gpg"):
  shutil.copyfile(Path("/etc/portage/gnupg")/name,home/name)
 settings=portage.config()
-settings["BINPKG_GPG_DIR"]=str(home)
+settings["BINPKG_GPG_VERIFY_GPG_HOME"]=str(home)
 settings.features.discard("binpkg-ignore-signature")
 settings.features.add("binpkg-request-signature")
 pkg=portage.gpkg.gpkg(settings,gpkg_file=str(archive),verify_signature=True)
