@@ -26,7 +26,9 @@
 =gui-wm/qindaqt-kwin-6.6.6_p1-r6
 =gui-apps/qqterm-0.3.0
 =media-video/qqmpv-0.1.0_p20260920
-=dev-libs/qindatk-0.1.0-r15
+# 2026-10-09: qindatk r17 = r16 (scoped Read SDK) + the Scroll focus-reveal fix
+# (QindaTK 30ac606, D-309): a focused page no longer jumps the view to its edge.
+=dev-libs/qindatk-0.1.0-r17
 =gui-apps/qindaoffice-0.1.0_p20261004
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
