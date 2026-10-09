@@ -53,7 +53,8 @@ its full signature, exact recipe/source and all 2,622 image paths, then stages
 that unchanged image. No compile or stripping is allowed; the newly signed
 R24 metadata changes the media post-dependency without a desktop code or
 compositor ABI change. The abandoned source-build recipe remains in Git
-history, with its bounded attempt retained. Install the pair through
+history, with its bounded attempt retained. [The signed-image checkpoint ADR](docs/adr/0001-signed-image-dependency-checkpoints.md)
+records the exact trust/image-parity checks and Portage rollback contract. Install the pair through
 Portage so the previous exact r2 dependency does not block the new component.
 
 ### Supplied Breeze Painted icon family
