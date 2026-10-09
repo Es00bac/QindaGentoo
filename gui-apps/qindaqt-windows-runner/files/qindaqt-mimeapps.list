@@ -1,0 +1,4 @@
+[Default Applications]
+application/vnd.microsoft.portable-executable=org.qindaqt.WindowsRunner.desktop;
+application/x-ms-dos-executable=org.qindaqt.WindowsRunner.desktop;
+application/x-msdownload=org.qindaqt.WindowsRunner.desktop;
