@@ -1,14 +1,21 @@
 # Verify and stage one immutable signed Portage image; never write a live root.
-import hashlib,json,os,stat,sys
+import hashlib,json,os,stat,sys,tempfile,shutil
 from pathlib import Path
 import portage,portage.gpkg
-archive,ledger,destination=map(Path,sys.argv[1:])
+archive,ledger,destination,temporary=map(Path,sys.argv[1:])
 assert archive.stat().st_size==62279680
 assert hashlib.sha256(archive.read_bytes()).hexdigest()=="5e04a27ec93abec2ed2ec1b2a4c42e97b05b1d72ca6c4c7942aa51d47f050b51"
 assert hashlib.sha256(ledger.read_bytes()).hexdigest()=="39d651d641783e5dec824abd9a6a118e62a24bca08ae63e449201cc3b7c72fb3"
 assert destination.is_absolute() and destination!=Path("/")
 assert not destination.exists() or not any(destination.iterdir())
+# Only trusted public verification material enters the sandbox-writable home.
+# GPG may create random_seed there; the system keyring and secrets stay untouched.
+home=Path(tempfile.mkdtemp(prefix="r23-public-gpg-",dir=temporary))
+home.chmod(0o700)
+for name in ("pubring.kbx","trustdb.gpg"):
+ shutil.copyfile(Path("/etc/portage/gnupg")/name,home/name)
 settings=portage.config()
+settings["BINPKG_GPG_DIR"]=str(home)
 settings.features.discard("binpkg-ignore-signature")
 settings.features.add("binpkg-request-signature")
 pkg=portage.gpkg.gpkg(settings,gpkg_file=str(archive),verify_signature=True)

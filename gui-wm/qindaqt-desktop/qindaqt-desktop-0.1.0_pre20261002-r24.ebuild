@@ -97,6 +97,6 @@ src_compile() { :; }
 src_install() {
     python3 "${FILESDIR}/qindaqt-desktop-r23-repack.py" \
         "${DISTDIR}/qindaqt-desktop-0.1.0_pre20261002-r23-1.gpkg.tar" \
-        "${FILESDIR}/qindaqt-desktop-r23-image-ledger.json" "${D}" \
+        "${FILESDIR}/qindaqt-desktop-r23-image-ledger.json" "${D}" "${T}" \
         || die "Signed R23 image verification/staging failed"
 }
