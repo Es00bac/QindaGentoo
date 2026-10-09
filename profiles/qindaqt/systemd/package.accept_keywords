@@ -103,3 +103,7 @@ sci-ml/onnx ~amd64
 
 # Fixed native locker PAM service; authentication remains in pambase.
 sys-auth/qindaqt-lock-pam ~amd64
+
+# Native PhotoCraft and its pure QML toolkit companion.
+media-gfx/qindaphotocraft ~amd64
+dev-libs/qindatk-raster ~amd64

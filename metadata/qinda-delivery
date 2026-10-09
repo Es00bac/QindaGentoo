@@ -160,3 +160,7 @@
 # October 7: supply the native locker service; missing PAM policy fell back
 # to Gentoo deny-all without a password prompt. No desktop restart required.
 =sys-auth/qindaqt-lock-pam-1
+
+# Native QindaPhotoCraft; source builds stay on qinda-top while the game server runs.
+=dev-libs/qindatk-raster-0.1.0
+=media-gfx/qindaphotocraft-0.1.0
