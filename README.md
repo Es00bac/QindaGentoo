@@ -57,6 +57,8 @@ history, with its bounded attempt retained. [The signed-image checkpoint ADR](do
 records the exact trust/image-parity checks and Portage rollback contract. Install the pair through
 Portage so the previous exact r2 dependency does not block the new component.
 
+Desktop pre20261002-r25 repairs display Apply admission using the existing native lock receipt monitor. Portage verifies the same signed R23 image, rebuilds only the display service and its private runtime archive from reviewed source `927039197`, and replaces those two image files. The rest of the R24 image, media dependency and compositor ABI are retained.
+
 ### Supplied Breeze Painted icon family
 
 `x11-themes/qinda-breeze-painted-1.0.0_p20260929` installs the complete supplied
