@@ -91,7 +91,7 @@ pkg_nofetch() {
     eerror "Provide the reviewed signed R23 gpkg named in SRC_URI."
 }
 src_unpack() { :; }
-src_prepare() { :; }
+src_prepare() { default; }
 src_configure() { :; }
 src_compile() { :; }
 src_install() {
