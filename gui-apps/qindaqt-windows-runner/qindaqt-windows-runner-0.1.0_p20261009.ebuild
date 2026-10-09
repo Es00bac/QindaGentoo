@@ -31,7 +31,7 @@ src_compile() {
     cmake_build qindaqt-windows-runner
 }
 src_install() {
-    DESTDIR="${D}" cmake --install "${S}_build" --component WindowsRunner         || die "Could not stage Windows Program Runner"
+    DESTDIR="${D}" cmake --install "${CMAKE_USE_DIR}_build" --component WindowsRunner         || die "Could not stage Windows Program Runner"
     # A new CONFIG_PROTECT-owned file; never replace R23's /usr/share default
     # list, File Manager, shared library or existing user MIME preferences.
     insinto /etc/xdg

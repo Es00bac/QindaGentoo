@@ -96,7 +96,7 @@ QindaQt tree, including the global-menu and settings-client static archives and 
 that `qqterm`, `qindaoffice`, `qindastudio` and `qindaqt-system-monitor` link against via
 `find_library`. Those packages therefore `RDEPEND` on a minimum `qindaqt-desktop` and must
 not install a second copy of the runtime; the desktop blocks the old `gui-apps/qindaqt-apps`
-package for the same reason. Component packages built from the QindaQt monorepo configure
+package for the same reason. Most component packages built from the QindaQt monorepo configure
 the whole tree with the shell/KWin plugin switched off, then `cmake_build` only their
 targets and `cmake --install --component` only their component.
 
@@ -185,3 +185,5 @@ native Password adapter and owning-window sign-in/error handling. Both-host
 only-Office binary installs and all 68 file checks pass; live collection unlock
 and server/browser sign-in remain per-user adoption checks. Preserve all earlier
 recipes and distfiles. See README for the bounded Network disk-fallback caveat.
+
+The Windows Program Runner component is the focused exception: `CMAKE_USE_DIR=${S}/src/apps/windows_runner` configures only its static Core/launcher closure and concrete executable. The actual default build tree is `${CMAKE_USE_DIR}_build`, which the component install uses explicitly; never substitute `${S}_build` for this owning route.

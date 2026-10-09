@@ -5,7 +5,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | Package | Source project |
 | --- | --- |
 | `gui-wm/qindaqt-desktop` | `container-wm` |
-| `gui-apps/qindaqt-apps`, `gui-apps/qindaqt-system-monitor`, `gui-apps/qindaqt-removable-media` | `container-wm` |
+| `gui-apps/qindaqt-apps`, `gui-apps/qindaqt-system-monitor`, `gui-apps/qindaqt-removable-media`, `gui-apps/qindaqt-windows-runner` | `container-wm` |
 | `gui-apps/qindaoffice` | `QindaOffice` |
 | `gui-apps/qqterm` | `QindaQt_Apps` |
 | `www-client/qindafox-bin` | `QindaQt_Apps/QindaFox` |
@@ -620,3 +620,7 @@ plus compiled Audio Details QML, in the new image. Artifact acceptance and
 Portage installation are separate gates. R18 remains installed; do not restart
 the owner's session. Physical audio, full mixer, provider feeds and all remaining
 ED/Android/Windows journeys remain open.
+
+### Focused Windows Program Runner component
+
+`gui-apps/qindaqt-windows-runner` configures only `src/apps/windows_runner` from its immutable source pin. It installs only the compiled handler/desktop entry, its docs and a new CONFIG_PROTECT `/etc/xdg/qindaqt-mimeapps.list` with three PE defaults. Installed R23 File Manager/shared libraries and `/usr/share/applications/qindaqt-mimeapps.list` are unchanged; XDG user overrides retain priority. Future desktop recipes disable `QINDAQT_BUILD_WINDOWS_RUNNER` to avoid duplicate ownership. Actual Wine/installed journey qualification remains separate from source/package evidence.
