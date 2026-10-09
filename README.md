@@ -45,6 +45,12 @@ component through Portage, then sign out and back in; never restart or mutate
 a user's devices as a package-check side effect. The source's synthetic
 `--check-devices-contract` qualifies the staged component's actual exported
 snapshot without connecting to UDisks or submitting a device action.
+Desktop pre20261002-r24 is a packaging-only partner: the same reviewed R23
+source `1a5359e4894700a00b545e80e624e3b3a12952be`, configure flags and runtime
+APIs, with its exact removable-media post-dependency changed from r2 to r3.
+The R24 distfile is an identical-byte alias of R23's commit-prefixed archive;
+no desktop code or compositor ABI changes in this pair. Install the pair through
+Portage so the previous exact r2 dependency does not block the new component.
 
 ### Supplied Breeze Painted icon family
 
