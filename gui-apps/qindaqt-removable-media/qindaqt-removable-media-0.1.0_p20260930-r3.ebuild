@@ -61,7 +61,9 @@ src_compile() {
 	cmake_build qindaqt-removable-media
 }
 src_install() {
-	DESTDIR="${D}" cmake --install "${BUILD_DIR}" --component RemovableMedia \
+	# AGENT-NOTE: BUILD_DIR can revert to S in a resumed install phase.
+	# This recipe configures the default out-of-source directory S_build.
+	DESTDIR="${D}" cmake --install "${S}_build" --component RemovableMedia \
 		|| die "Could not stage removable media"
 	# Compatibility for installed sessions predating the supervisor child.
 	# The session-bus singleton makes a second --watch invocation inert.
