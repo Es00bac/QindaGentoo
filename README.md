@@ -48,8 +48,12 @@ snapshot without connecting to UDisks or submitting a device action.
 Desktop pre20261002-r24 is a packaging-only partner: the same reviewed R23
 source `1a5359e4894700a00b545e80e624e3b3a12952be`, configure flags and runtime
 APIs, with its exact removable-media post-dependency changed from r2 to r3.
-The R24 distfile is an identical-byte alias of R23's commit-prefixed archive;
-no desktop code or compositor ABI changes in this pair. Install the pair through
+R24 repack consumes the immutable signed R23 gpkg through Portage, verifies
+its full signature, exact recipe/source and all 2,622 image paths, then stages
+that unchanged image. No compile or stripping is allowed; the newly signed
+R24 metadata changes the media post-dependency without a desktop code or
+compositor ABI change. The abandoned source-build recipe remains in Git
+history, with its bounded attempt retained. Install the pair through
 Portage so the previous exact r2 dependency does not block the new component.
 
 ### Supplied Breeze Painted icon family

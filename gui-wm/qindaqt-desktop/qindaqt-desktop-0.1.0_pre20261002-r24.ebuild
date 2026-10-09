@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake xdg
+inherit xdg
 
 DESCRIPTION="QindaQt Wayland desktop, services and bundled applications"
 HOMEPAGE="https://github.com/Es00bac/QindaQt"
@@ -12,14 +12,16 @@ HOMEPAGE="https://github.com/Es00bac/QindaQt"
 # Preserve complete compact Audio, Viewer, core SDKs and Network fallback.
 # Preserve the accepted r6 ABI and nonexclusive physical-session power policy.
 QINDAQT_COMMIT="1a5359e4894700a00b545e80e624e3b3a12952be"
-SRC_URI="https://github.com/Es00bac/QindaQt/archive/${QINDAQT_COMMIT}.tar.gz -> ${PF}.tar.gz"
-S="${WORKDIR}/QindaQt-${QINDAQT_COMMIT}"
+# Dependency-only checkpoint of the fully verified signed R23 image.
+SRC_URI="qindaqt-desktop-0.1.0_pre20261002-r23-1.gpkg.tar"
+S="${WORKDIR}"
 # SDL3 controller input is an independent plugin over the installed compositor SDK.
 
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="~amd64"
-RESTRICT="fetch"
+RESTRICT="fetch strip"
+QA_PREBUILT="*"
 
 # Candidate native cutover: own fork/lock/nightlight/shortcuts, Power1,
 # polkit agent, screenshot and portal helpers. The physical login keeps native
@@ -81,45 +83,20 @@ PDEPEND=">=media-video/qqmpv-0.1.0_p20260919
 	>=gui-apps/qqterm-0.1.0_p20260920
 	=gui-apps/qindaqt-removable-media-0.1.0_p20260930-r3"
 
-# Plugin and native lock consume the exact co-installable fork ABI.
-DEPEND="${RDEPEND}
-	sys-apps/dbus
-	dev-libs/wayland
-	dev-libs/wayland-protocols
-	dev-util/wayland-scanner
-	sys-libs/pam
-"
-
-BDEPEND="
-	>=kde-frameworks/extra-cmake-modules-6.0:0
-	virtual/pkgconfig
-"
+# The signed input already contains the compiled SDK/runtime; this recipe
+# stages it through Portage and changes only the media post-dependency.
+BDEPEND="sys-apps/portage app-crypt/gnupg"
 
 pkg_nofetch() {
-	eerror "Create ${PF}.tar.gz from Git commit ${QINDAQT_COMMIT} using git archive"
-	eerror "with prefix QindaQt-${QINDAQT_COMMIT}/, then place it in DISTDIR."
+    eerror "Provide the reviewed signed R23 gpkg named in SRC_URI."
 }
-
-src_configure() {
-	local mycmakeargs=(
-		-DBUILD_TESTING=OFF
-		-DQINDAQT_BUILD_KWIN_PLUGIN=ON
-		-DQINDAQT_BUILD_SHELL=ON
-		-DQINDAQT_BUILD_PRODUCTION_SHELL=ON
-		-DQINDAQT_BUILD_VIEWER=ON
-		-DQINDAQT_BUILD_SYSTEM_MONITOR=OFF
-		-DQINDAQT_BUILD_REMOVABLE_MEDIA=OFF
-		-DQINDAQT_BUILD_OBS_BRIDGE=OFF
-		-DQINDAQT_KWIN_BUILD_ACTIVITIES=OFF
-		-DQINDAQT_NATIVE_POWER_EXCLUSIVE=OFF
-		-DKDE_INSTALL_LIBEXECDIR=libexec
-		-DQINDAQT_ENABLE_HOST_UINPUT_TESTS=OFF
-		-DQINDAQT_ENABLE_STRICT_WARNINGS=OFF
-	)
-	cmake_src_configure
-}
-
+src_unpack() { :; }
+src_prepare() { :; }
+src_configure() { :; }
+src_compile() { :; }
 src_install() {
-	cmake_src_install
-	dodoc README.md
+    python3 "${FILESDIR}/qindaqt-desktop-r23-repack.py" \
+        "${DISTDIR}/qindaqt-desktop-0.1.0_pre20261002-r23-1.gpkg.tar" \
+        "${FILESDIR}/qindaqt-desktop-r23-image-ledger.json" "${D}" \
+        || die "Signed R23 image verification/staging failed"
 }
