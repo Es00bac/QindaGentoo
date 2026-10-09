@@ -11,7 +11,11 @@ The earlier source-build R24 recipe and stopped attempt remain in Git/evidence.
 The input is pinned by the committed Manifest and SHA256. Portage must verify
 its complete GPG signature, exact embedded R23 recipe/source and all 2,622
 image path/type/mode/content records before staging into its private image.
-No compiler runs, no stripping is allowed, and the new signed package must
+For this exact SHA/Manifest-pinned immutable input only, GPG verification runs
+as the ebuild user inside the unchanged Portage sandbox. Its writable temporary
+home contains only the trusted public ring/trustdb; nobody cannot traverse
+Portage's private T. No secret keys, system-keyring writes or arbitrary input
+are admitted. No compiler runs, no stripping is allowed, and the new signed package must
 match that image ledger again. Unverified inputs or parity failures stop the
 package; missing trust is never bypassed. Runtime dependencies, license, SLOT
 and compositor ABI retain the reviewed image's contract.

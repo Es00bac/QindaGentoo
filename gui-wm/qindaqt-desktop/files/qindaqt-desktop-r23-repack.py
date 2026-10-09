@@ -16,6 +16,10 @@ for name in ("pubring.kbx","trustdb.gpg"):
  shutil.copyfile(Path("/etc/portage/gnupg")/name,home/name)
 settings=portage.config()
 settings["BINPKG_GPG_VERIFY_GPG_HOME"]=str(home)
+# This exact SHA/Manifest-pinned signed input is verified as the ebuild user.
+# Nobody cannot traverse Portage's private T; sandbox and signatures remain on.
+settings["GPG_VERIFY_USER_DROP"]=""
+settings["GPG_VERIFY_GROUP_DROP"]=""
 settings.features.discard("binpkg-ignore-signature")
 settings.features.add("binpkg-request-signature")
 pkg=portage.gpkg.gpkg(settings,gpkg_file=str(archive),verify_signature=True)
