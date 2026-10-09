@@ -37,6 +37,14 @@ makes the compatibility autostart's second `--watch` invocation inert.
 UDisks and the FAT/exFAT/ext4 providers are Portage dependencies. The initial
 unreleased, rejected recipe is masked; r2 is in the shared delivery. Its dependency floor is the current shared
 pre20260927-r7 desktop; the component also runs on the laptop's newer desktop.
+The r3 recipe pairs with the reviewed pre20261002-r23 desktop and includes the
+Devices-v1 exporter required by File Manager's automatic device sidebar and
+public safe-removal action. Updating the desktop alone or signing in again
+while r2 remains installed cannot add that exporter. Adopt the matching
+component through Portage, then sign out and back in; never restart or mutate
+a user's devices as a package-check side effect. The source's synthetic
+`--check-devices-contract` qualifies the staged component's actual exported
+snapshot without connecting to UDisks or submitting a device action.
 
 ### Supplied Breeze Painted icon family
 
