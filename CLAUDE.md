@@ -187,3 +187,9 @@ and server/browser sign-in remain per-user adoption checks. Preserve all earlier
 recipes and distfiles. See README for the bounded Network disk-fallback caveat.
 
 The Windows Program Runner component is the focused exception: `CMAKE_USE_DIR=${S}/src/apps/windows_runner` configures only its static Core/launcher closure and concrete executable. The actual default build tree is `${CMAKE_USE_DIR}_build`, which the component install uses explicitly; never substitute `${S}_build` for this owning route.
+
+
+The Android Applications component is another focused product-owned CMake
+route at src/apps/android_manager/component. Its configured out-of-source
+build tree is ${CMAKE_USE_DIR}_build; install only component AndroidApplications.
+The menu becomes visible only with the package's QindaPortage dependency.

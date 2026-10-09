@@ -624,3 +624,14 @@ ED/Android/Windows journeys remain open.
 ### Focused Windows Program Runner component
 
 `gui-apps/qindaqt-windows-runner` configures only `src/apps/windows_runner` from its immutable source pin. It installs only the compiled handler/desktop entry, its docs and a new CONFIG_PROTECT `/etc/xdg/qindaqt-mimeapps.list` with three PE defaults. Installed R23 File Manager/shared libraries and `/usr/share/applications/qindaqt-mimeapps.list` are unchanged; XDG user overrides retain priority. Future desktop recipes disable `QINDAQT_BUILD_WINDOWS_RUNNER` to avoid duplicate ownership. Actual Wine/installed journey qualification remains separate from source/package evidence.
+
+
+### Focused Android Applications component
+
+The separate gui-apps/qindaqt-android-applications recipe configures only the
+manager, native collector and their static dependencies. It owns the manager
+executable, component-only setup menu entry, libexec collector and fixed
+root-owned recipe, and requires QindaPortage for visible setup actions. A
+verified native helper reports Unavailable until guest image/package/task
+facts are admitted; package presence is not an Android-app launch claim.
+The desktop package and its existing files are not replaced.
