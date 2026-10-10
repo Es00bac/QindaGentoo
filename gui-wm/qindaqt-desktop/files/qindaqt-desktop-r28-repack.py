@@ -12,12 +12,11 @@ assert not destination.exists() or not any(destination.iterdir())
 # GPG may create random_seed there; the system keyring and secrets stay untouched.
 home=Path(tempfile.mkdtemp(prefix="r28-public-gpg-",dir=temporary))
 home.chmod(0o700)
-for name in ("pubring.kbx","trustdb.gpg"):
- shutil.copyfile(Path("/etc/portage/gnupg")/name,home/name)
-# R28 was signed on the laptop; import only its pinned public verification key.
+# Only this SHA-pinned laptop PUBLIC certificate can verify the fixed R28 input.
+# Dearmor writes a public keyring directly, without spawning a signing agent.
 key=ledger.with_name("qindaqt-r28-signing-key.asc")
 assert hashlib.sha256(key.read_bytes()).hexdigest()=="bb6f433c1643aab09bd9fff0d74602ac7b2fa1cbcb6cadb990d41fc425fd134f"
-subprocess.run(["/usr/bin/gpg","--batch","--no-autostart","--homedir",str(home),"--import",str(key)],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+subprocess.run(["/usr/bin/gpg","--batch","--no-autostart","--yes","--dearmor","--output",str(home/"pubring.gpg"),str(key)],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 settings=portage.config()
 settings["BINPKG_GPG_VERIFY_GPG_HOME"]=str(home)
 # This exact SHA/Manifest-pinned signed input is verified as the ebuild user.
