@@ -107,3 +107,6 @@ sys-auth/qindaqt-lock-pam ~amd64
 # Native PhotoCraft and its pure QML toolkit companion.
 media-gfx/qindaphotocraft ~amd64
 dev-libs/qindatk-raster ~amd64
+
+# Original standalone CyberPengu and Ducké platform adventure.
+games-action/afterbliss ~amd64

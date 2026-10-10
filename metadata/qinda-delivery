@@ -168,3 +168,7 @@
 =media-gfx/qindaphotocraft-0.1.0-r1
 # 2026-10-09: qindaoffice p20261009 (QindaOffice b84c4b1, M60-M87): Office
 #   interchange (docx/xlsx/pptx/vsdx/accdb), QindaBase, QindaPlan, QindaDiagram.
+
+# Afterbliss: native 72-stage campaign, SomeQindaWorld 5e75fed.
+# Eight distinct regions, 72 location paintings; native mechanics and UI checks pass.
+=games-action/afterbliss-0.1.0_p20261010
