@@ -59,7 +59,7 @@ Portage so the previous exact r2 dependency does not block the new component.
 
 Desktop pre20261002-r25 repairs display Apply admission using the existing native lock receipt monitor. Portage verifies the same signed R23 image, rebuilds only the display service and its private runtime archive from reviewed source `927039197`, and replaces those two image files. The rest of the R24 image, media dependency and compositor ABI are retained.
 
-Desktop pre20261002-r29 is a focused overview selection candidate. It pins source `42ec5bfa87721dbba05157fdf6030071e71da5d6`, applying the independently reviewed Gather pointer repair to the exact R23 shell source retained by R28. Portage verifies the complete immutable signed R28 image and its 2,622-path ledger, builds only the shell, stages its installed RPATH, and replaces only `/usr/bin/qindaqt-shell`. Existing display/keyring repairs, shared libraries and services remain at R28 bytes. Signed artifact, actual raise/focus and installed adoption are separate pending gates; the shared delivery atom is unchanged.
+Desktop pre20261002-r29 is a focused overview selection candidate. It pins source `42ec5bfa87721dbba05157fdf6030071e71da5d6`, applying the independently reviewed Gather pointer repair to the exact R23 shell source retained by R28. Portage verifies the complete immutable signed R28 image and its 2,622-path ledger, builds the shell and the generated plugin required for staging, stages the installed RPATH, and replaces only `/usr/bin/qindaqt-shell`. Existing display/keyring repairs, shared libraries and services remain at R28 bytes. Signed artifact, actual raise/focus and installed adoption are separate pending gates; the shared delivery atom is unchanged.
 
 ### Supplied Breeze Painted icon family
 
