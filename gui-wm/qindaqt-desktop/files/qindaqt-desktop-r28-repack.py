@@ -1,5 +1,5 @@
 # Verify and stage one immutable signed Portage image; never write a live root.
-import hashlib,json,os,stat,sys,tempfile,shutil
+import hashlib,json,os,stat,sys,tempfile,shutil,subprocess
 from pathlib import Path
 import portage,portage.gpkg
 archive,ledger,destination,temporary=map(Path,sys.argv[1:])
@@ -14,6 +14,10 @@ home=Path(tempfile.mkdtemp(prefix="r28-public-gpg-",dir=temporary))
 home.chmod(0o700)
 for name in ("pubring.kbx","trustdb.gpg"):
  shutil.copyfile(Path("/etc/portage/gnupg")/name,home/name)
+# R28 was signed on the laptop; import only its pinned public verification key.
+key=ledger.with_name("qindaqt-r28-signing-key.asc")
+assert hashlib.sha256(key.read_bytes()).hexdigest()=="bb6f433c1643aab09bd9fff0d74602ac7b2fa1cbcb6cadb990d41fc425fd134f"
+subprocess.run(["/usr/bin/gpg","--batch","--homedir",str(home),"--import",str(key)],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 settings=portage.config()
 settings["BINPKG_GPG_VERIFY_GPG_HOME"]=str(home)
 # This exact SHA/Manifest-pinned signed input is verified as the ebuild user.
