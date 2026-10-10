@@ -17,6 +17,8 @@ home.chmod(0o700)
 key=ledger.with_name("qindaqt-r28-signing-key.asc")
 assert hashlib.sha256(key.read_bytes()).hexdigest()=="bb6f433c1643aab09bd9fff0d74602ac7b2fa1cbcb6cadb990d41fc425fd134f"
 subprocess.run(["/usr/bin/gpg","--batch","--no-autostart","--yes","--dearmor","--output",str(home/"pubring.gpg"),str(key)],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+# Trust only the SHA-pinned certificate in this disposable verification ring.
+subprocess.run(["/usr/bin/gpg","--batch","--no-autostart","--homedir",str(home),"--import-ownertrust"],input=b"D17754527D48BA5C24E3CC57179DF9EBE9792BCB:6:\n",check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 settings=portage.config()
 settings["BINPKG_GPG_VERIFY_GPG_HOME"]=str(home)
 # This exact SHA/Manifest-pinned signed input is verified as the ebuild user.
