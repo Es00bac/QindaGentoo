@@ -103,7 +103,9 @@ src_configure() {
  )
  cmake_src_configure
 }
-src_compile() { cmake_build qindaqt-shell; }
+# The install component also stages the generated StartMenu plugin even though
+# the executable links its backing library directly. Build that staging input.
+src_compile() { cmake_build qindaqt-shell qindaqt_start_menu_qmlplugin; }
 src_install() {
  python3 "${FILESDIR}/qindaqt-desktop-r28-repack.py" \
   "${DISTDIR}/qindaqt-desktop-0.1.0_pre20261002-r28-1.gpkg.tar" \
