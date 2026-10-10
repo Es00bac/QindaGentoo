@@ -112,7 +112,7 @@ src_install() {
  # Stage the compiled shell with its installed RPATH, then replace only it.
  # All shared libraries and application/service files stay at signed R28 bytes.
  DESTDIR="${T}/reviewed-shell" cmake -DCMAKE_INSTALL_PREFIX=/usr \
-  -DCMAKE_INSTALL_COMPONENT=QindaQt -DCMAKE_INSTALL_LOCAL_ONLY=TRUE \
+  -DCMAKE_INSTALL_COMPONENT=TaskListAppletRuntime -DCMAKE_INSTALL_LOCAL_ONLY=TRUE \
   -P "${BUILD_DIR}/src/shell/cmake_install.cmake" \
   || die "reviewed shell staging failed"
  exeinto /usr/bin
