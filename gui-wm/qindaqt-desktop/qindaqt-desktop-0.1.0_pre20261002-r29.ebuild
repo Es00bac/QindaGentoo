@@ -111,8 +111,10 @@ src_install() {
   || die "signed R28 image verification failed"
  # Stage the compiled shell with its installed RPATH, then replace only it.
  # All shared libraries and application/service files stay at signed R28 bytes.
- DESTDIR="${T}/reviewed-shell" cmake --install "${BUILD_DIR}" \
-  --prefix /usr --component QindaQt || die "reviewed shell staging failed"
+ DESTDIR="${T}/reviewed-shell" cmake -DCMAKE_INSTALL_PREFIX=/usr \
+  -DCMAKE_INSTALL_COMPONENT=QindaQt -DCMAKE_INSTALL_LOCAL_ONLY=TRUE \
+  -P "${BUILD_DIR}/src/shell/cmake_install.cmake" \
+  || die "reviewed shell staging failed"
  exeinto /usr/bin
  doexe "${T}/reviewed-shell/usr/bin/qindaqt-shell"
 }
