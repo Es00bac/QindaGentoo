@@ -5,3 +5,7 @@
 
 # Unreleased first media build: independently reproduced late-reply races.
 =gui-apps/qindaqt-removable-media-0.1.0_p20260930
+
+# Superseded first Afterbliss snapshot required an uninstalled private shared library.
+# r1 explicitly links the private engine into the executable.
+=games-action/afterbliss-0.1.0_p20261010
