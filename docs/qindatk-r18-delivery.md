@@ -1,10 +1,10 @@
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
 # QindaTK r18 coordinated delivery
 
-The candidate pins QindaTK e6837dc5a501739bd35730f4f567cea4158426cb,
+This delivery pins QindaTK e6837dc5a501739bd35730f4f567cea4158426cb,
 with the Office controls and mail batch, a D-Bus build dependency, and
-subslot 0/18. The exact shared delivery remains r17 until the Office
-integration and the installed consumer closure are qualified together.
+subslot 0/18. The shared delivery advanced from r17 after the Office
+integration and the installed consumer closure passed qualification.
 
 The source qualification records 1123 passing QML cases and a successful
 standalone CMake consumer configure, compile, link and run. The initial full CTest run passed 378/384; after correcting its QML regression,
@@ -14,17 +14,17 @@ require an unavailable graphics context, and one example requires the
 separately packaged QindaTK.Raster module. Office qualification uses the
 same frozen headers, library and QML via the source's build-tree package.
 
-The release must rebuild C++ consumers against r18 before replacing the
+The release rebuilt C++ consumers against r18 before replacing the
 installed toolkit. A dependency slot operator alone cannot rebuild a
 binary-only package or a recipe that reuses an older desktop image.
-Inspect those recipes explicitly; preserve their installed source choices
-and runtime services. Build package artifacts through Portage on qinda's
-archive drive with configured MAKEOPTS unchanged. Deliver the matching
-binary package set to both machines, without restarting the live desktop.
+The recipes were inspected explicitly, preserving their installed source
+choices and runtime services. Portage built package artifacts on qinda's
+archive drive with configured MAKEOPTS unchanged and delivered the matching
+binary package set to both machines without restarting the live desktop.
 
-Consumer inventory and exact package qualification will be appended here
-before metadata/qinda-delivery advances. Candidate source and package
-artifacts are immutable once their Manifest has been published.
+The consumer inventory and exact package qualification below preceded the
+`metadata/qinda-delivery` advance. Source and package artifacts remain
+immutable after their Manifest was published.
 
 ## Installed consumer inventory (2026-10-10)
 
@@ -38,7 +38,7 @@ The directly imported non-Office C++ classes are TerminalSession (QQTerm),
 CommandContext/CommandRegistry/ShortcutMap (QindaWeb), and the stylus
 signals/sample (QindaHane). Their public headers are byte-identical between
 installed r17 source 30ac60604a97a09006459f15e642c4342103fd3b and this
-candidate. Final dynamic-symbol and runtime-QML checks remain required;
+candidate. Dynamic-symbol and runtime-QML checks passed below;
 this inventory avoids treating an unchanged QML-only desktop image as an
 ABI-sensitive source build. Office uses changed layouts and is rebuilt.
 
@@ -69,9 +69,10 @@ A fresh `git archive` plus `gzip -n` from the pinned hub commit reproduces those
 bytes. The packaged library SHA256 is
 `1ed23a6716913c6152914ae66e5ad852430dec84227a55b201ebfc8559c4bf08`.
 
-Package artifacts are private on qinda under
-`/mnt/archive/cabewse/qindatk/r18-binpkgs-qualification/`; none was installed or
-published to the active delivery. Each path below is relative to that directory.
+The signed package artifacts are retained on qinda under
+`/mnt/archive/cabewse/qindatk/r18-binpkgs-qualification/`. The selected
+artifacts were installed through Portage on both hosts; each path below is
+relative to that directory.
 
 | Artifact | Bytes | SHA256 |
 | --- | ---: | --- |
@@ -119,16 +120,14 @@ also remain in `~/scratch/qqo/` as `qindatk-r18-package-resume.log`,
 `qqterm-r18-package.log`, `qindaweb-r18-package.log` and
 `qindahane-r18-package.log`. The initial QindaWeb failure is preserved separately.
 
-Both hosts still report installed `dev-libs/qindatk-0.1.0-r17`; its library hash
-is unchanged:
+Before adoption, both hosts reported installed `dev-libs/qindatk-0.1.0-r17`;
+its library hash was unchanged:
 `02b99ea493dfa19cafd181dca504cbccfe1761b83957de81f85d94bc9b990fc8`.
-The deployed QindaWrite hotfix remains on that runtime. The Office r18 consumer
-package, whole delivery resolver/co-installation checks, and coordinated
-Portage adoption remain with the Office integration owner. These artifacts
-qualify the non-Office direct consumer set; they do not authorize an isolated
-toolkit upgrade or claim physical tablet/GPU/browser/session acceptance.
+The QindaWrite long-document fix is carried into the Office r2 source. These
+artifacts qualify the non-Office direct consumer set; physical
+tablet/GPU/browser/session acceptance remains a separate manual gate.
 
-## Integrated Office r18 candidate
+## Integrated Office r18 delivery
 
 `gui-apps/qindaoffice-0.1.0_p20261010-r1` pins QindaOffice
 `be79420cf18a432a5979fc693148334536b73a45` and depends on toolkit
@@ -139,8 +138,8 @@ display repair, and the Books employee/time IIF migration. The exact
 both SHA256 digests are
 `75b405405295882b5aafe775779aa8cf76fc25d2c822e1c3557d4c1b2e5e4aae`.
 The archive carries the reviewed `.dist-commit` and QXlsx submodule source.
-Its new Manifest line is private to this candidate until combined Office
-tests, the Portage package and installed consumer closure are qualified.
+Its Manifest line and package remain an immutable qualification checkpoint;
+r2 is the selected delivery.
 
 The final test-source correction has its own, immutable
 `gui-apps/qindaoffice-0.1.0_p20261010-r2` snapshot rather than replacing
@@ -171,3 +170,23 @@ and all ten ELF binaries have no private build or home-directory RUNPATH.
 Package metadata requires QindaTK `>=0.1.0-r18:0/18`. The audit record is
 `/mnt/archive/cabewse/qindaoffice/r18-office-r2-package-audit.json` on qinda.
 The preceding r1 checkpoint also passed the same audit but is not delivered.
+
+## Coordinated adoption (2026-10-10 MDT / 2026-10-11 UTC)
+
+Portage installed the exact audited binaries on both hosts: QindaTK r18,
+QindaOffice `0.1.0_p20261010-r2`, QQTerm `0.3.0-r1`, and QindaWeb
+`0.1.0_alpha1-r1`. The laptop also installed QindaHane r25. The private
+binary-only resolver planned four upgrades on qinda and five on the laptop,
+without a source rebuild. QQTerm and QindaWeb were built with `USE=test` for
+their qualifying CTests while the hosts default to `-test`; adoption used
+Portage's explicit `--binpkg-respect-use=n` for this known difference.
+
+Both installed QindaWrite binaries have SHA256
+`b67edb396318d2071eac195c1a637d2c2ce017b0c206de0d6a3dc01ab9555619`;
+both installed QindaTK libraries have SHA256
+`1ed23a6716913c6152914ae66e5ad852430dec84227a55b201ebfc8559c4bf08`.
+The installed Office, QQTerm and QindaWeb metadata requires toolkit subslot
+`0/18`, as does QindaHane on the laptop. Dynamic linking reports no missing
+libraries or unresolved symbols for those binaries. Portage's
+`@preserved-rebuild` set is empty on both hosts. No live desktop process was
+restarted; physical tablet/GPU/browser/session checks remain manual.
