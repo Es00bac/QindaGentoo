@@ -23,7 +23,7 @@ RESTRICT="!test? ( test )"
 # Pin this candidate to the qualified ABI even during package-only builds
 # while r17 remains installed. A later ABI requires a revised recipe/rebuild.
 RDEPEND="
-	>=dev-libs/qindatk-0.1.0-r18:0/18=[qindaqt]
+	>=dev-libs/qindatk-0.1.0-r18:0/18[qindaqt]
 	dev-libs/wayland
 	>=dev-qt/qtbase-6.11:6=[dbus,gui,network,opengl,ssl,wayland]
 	>=dev-qt/qtdeclarative-6.11:6=

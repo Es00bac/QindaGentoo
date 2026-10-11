@@ -43,7 +43,8 @@ this inventory avoids treating an unchanged QML-only desktop image as an
 ABI-sensitive source build. Office uses changed layouts and is rebuilt.
 
 QQTerm 0.3.0-r1 and QindaWeb alpha1-r1 retain their installed source pins,
-raise the toolkit floor and bind the candidate package to subslot 0/18.
+raise the toolkit floor and bind the candidate package to subslot 0/18 with an explicit subslot
+dependency (without the built-only `=` suffix).
 The explicit subslot is necessary for package-only qualification while r17
 remains installed: Portage cannot infer r18 from the live installed database.
 A future toolkit ABI needs a new recipe revision and a rebuilt package.
