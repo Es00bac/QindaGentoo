@@ -40,3 +40,11 @@ installed r17 source 30ac60604a97a09006459f15e642c4342103fd3b and this
 candidate. Final dynamic-symbol and runtime-QML checks remain required;
 this inventory avoids treating an unchanged QML-only desktop image as an
 ABI-sensitive source build. Office uses changed layouts and is rebuilt.
+
+QQTerm 0.3.0-r1 and QindaWeb alpha1-r1 retain their installed source pins,
+raise the toolkit floor and add the slot operator for future rebuilds.
+QindaHane r25 is an explicit ABI metadata checkpoint over the unchanged r24
+archive: all six imported toolkit symbols resolve and StylusSample's layout
+is unchanged. Its binary dependency locks subslot 0/18, because rebuilding
+a binary-only recipe cannot repair a future incompatible interface. No
+QindaHane source or proprietary payload is republished by this change.
