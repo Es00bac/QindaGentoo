@@ -1,0 +1,14 @@
+[Unit]
+Description=AdGuard system-wide filtering
+Documentation=https://adguard.com/kb/adguard-for-linux/
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/adguard-cli start
+ExecStop=/usr/bin/adguard-cli stop
+PIDFile=%h/.local/share/adguard-cli/adguard.pid
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
