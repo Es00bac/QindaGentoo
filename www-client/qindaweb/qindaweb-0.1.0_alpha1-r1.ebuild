@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # Copyright 2026 QindaQt contributors
 # Distributed under the terms of the GNU General Public License v2
 
@@ -19,9 +20,10 @@ RESTRICT="!test? ( test )"
 # This installed preview uses ordinary windows. The strict native candidate
 # stays .ebuild.in until the desktop's package-owned placement SDK is released.
 # No development/staged SDK is linked or installed by this recipe.
-# Bind future toolkit ABI changes to a Portage rebuild. Source is unchanged.
+# Pin this candidate to the qualified ABI even during package-only builds
+# while r17 remains installed. A later ABI requires a revised recipe/rebuild.
 RDEPEND="
-	>=dev-libs/qindatk-0.1.0-r18:0=[qindaqt]
+	>=dev-libs/qindatk-0.1.0-r18:0/18=[qindaqt]
 	dev-libs/wayland
 	>=dev-qt/qtbase-6.11:6=[dbus,gui,network,opengl,ssl,wayland]
 	>=dev-qt/qtdeclarative-6.11:6=

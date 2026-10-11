@@ -24,10 +24,11 @@ RESTRICT="!test? ( test )"
 # The desktop owns the QindaQt.Tokens QML module and global-menu archives.
 # Qt private headers require slot operators so Qt updates rebuild the app.
 # A compact CJK font provides fallback for double-width terminal glyphs.
-# Bind future toolkit ABI changes to a Portage rebuild. Source is unchanged.
+# Pin this candidate to the qualified ABI even during package-only builds
+# while r17 remains installed. A later ABI requires a revised recipe/rebuild.
 RDEPEND="
 	>=gui-wm/qindaqt-desktop-0.1.0_pre20260907-r1
-	>=dev-libs/qindatk-0.1.0-r18:0=
+	>=dev-libs/qindatk-0.1.0-r18:0/18=
 	>=dev-qt/qtbase-6.11:6=[dbus,gui,wayland]
 	>=dev-qt/qtdeclarative-6.11:6=
 	>=kde-frameworks/kwindowsystem-6.0:6=

@@ -7,8 +7,9 @@ subslot 0/18. The exact shared delivery remains r17 until the Office
 integration and the installed consumer closure are qualified together.
 
 The source qualification records 1123 passing QML cases and a successful
-standalone CMake consumer configure, compile, link and run. The complete
-toolkit CTest audit passes 379 of 384 targets: four offscreen RHI cases
+standalone CMake consumer configure, compile, link and run. The initial full CTest run passed 378/384; after correcting its QML regression,
+the final QML rerun passed all 1123 cases. These combined gates qualify
+379 of 384 targets: four offscreen RHI cases
 require an unavailable graphics context, and one example requires the
 separately packaged QindaTK.Raster module. Office qualification uses the
 same frozen headers, library and QML via the source's build-tree package.
@@ -42,7 +43,10 @@ this inventory avoids treating an unchanged QML-only desktop image as an
 ABI-sensitive source build. Office uses changed layouts and is rebuilt.
 
 QQTerm 0.3.0-r1 and QindaWeb alpha1-r1 retain their installed source pins,
-raise the toolkit floor and add the slot operator for future rebuilds.
+raise the toolkit floor and bind the candidate package to subslot 0/18.
+The explicit subslot is necessary for package-only qualification while r17
+remains installed: Portage cannot infer r18 from the live installed database.
+A future toolkit ABI needs a new recipe revision and a rebuilt package.
 QindaHane r25 is an explicit ABI metadata checkpoint over the unchanged r24
 archive: all six imported toolkit symbols resolve and StylusSample's layout
 is unchanged. Its binary dependency locks subslot 0/18, because rebuilding
