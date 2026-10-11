@@ -141,3 +141,24 @@ both SHA256 digests are
 The archive carries the reviewed `.dist-commit` and QXlsx submodule source.
 Its new Manifest line is private to this candidate until combined Office
 tests, the Portage package and installed consumer closure are qualified.
+
+The final test-source correction has its own, immutable
+`gui-apps/qindaoffice-0.1.0_p20261010-r2` snapshot rather than replacing
+the r1 archive. It pins QindaOffice
+`9b5b18493569fdfa8b16228d1d4b264623109604`; the application sources
+are the same, while the Mail Quick Steps host catalogue expectation and a
+Qt moc-readable mixed Word regression are corrected. Laptop and qinda cuts
+of the 8,236,588-byte r2 archive match SHA256
+`15477c73343d740e32bc251baa97186bb18837cde168ed82aa3e0aafdedaf110`.
+Its `.dist-commit` matches the pin, QXlsx is vendored, and the separate r2
+Manifest line is recorded. The r1 candidate remains private and is not the
+selected delivery.
+
+The integrated r18 source passed a 28-target affected-workflow CTest batch:
+**28/28 targets, 381 Qt checks passed, zero failed, two optional owner-corpus
+skips**. This covers DOCX, math, Write, Show, Books and Mail on the frozen
+toolkit. The exact r2 source then passed all **8/8 focused CTests and 81/81
+Qt checks**, with zero failures, skips or Qt warnings. The final-source
+qualification record is at
+`/mnt/archive/cabewse/qindaoffice/r18-qualification-final-9b5b184/` on qinda.
+The r2 Portage artifact review remains before adoption.
