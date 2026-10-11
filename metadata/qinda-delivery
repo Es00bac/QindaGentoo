@@ -169,6 +169,6 @@
 # 2026-10-09: qindaoffice p20261009 (QindaOffice b84c4b1, M60-M87): Office
 #   interchange (docx/xlsx/pptx/vsdx/accdb), QindaBase, QindaPlan, QindaDiagram.
 
-# Afterbliss: native 72-stage campaign, SomeQindaWorld c6bf340 (static private engine).
-# Eight distinct regions, 72 location paintings; native mechanics and UI checks pass.
-=games-action/afterbliss-0.1.0_p20261010-r1
+# Afterbliss: SomeQindaWorld 1820c54, authored routes, painted UI and rescue crew.
+# 72 physical routes pass for both heroes; crate access and native dialogue verified.
+=games-action/afterbliss-0.1.0_p20261010-r2
