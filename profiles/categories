@@ -16,6 +16,7 @@ licenses
 media-gfx
 media-plugins
 media-video
+net-misc
 net-wireless
 sci-ml
 sys-auth

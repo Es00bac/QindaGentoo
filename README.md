@@ -211,6 +211,11 @@ They are developer tooling and are not entries in `metadata/qinda-delivery`.
 
 `app-office/obsidian` packages Obsidian's official Linux release tarball and Debian metadata archive through Portage; its ebuild, license text, and checksums are tracked here.
 
+`net-misc/adguard-cli-bin` packages AdGuard's signed Linux CLI release through
+Portage. The ebuild pins the archive checksum and keeps the proprietary binary
+out of the binhost. Per-user settings and license activation remain outside the
+package.
+
 `dev-util/codex-bin`, `dev-util/claude-code`, and `dev-util/opencode-bin`
 package the official native CLI releases through Portage, with versioned recipes
 and release checksums shared through qinda. The October 5 update selects Codex
