@@ -173,6 +173,6 @@
 #   D-109): Word sections and bounded painting for long documents. QindaTK
 #   r17 remains the installed toolkit floor; no desktop restart is needed.
 
-# Afterbliss: SomeQindaWorld 0c5a5d6, authored routes, painted UI and rescue crew.
-# 72 physical routes pass for both heroes; dialogue prompts match interaction range.
-=games-action/afterbliss-0.1.0_p20261010-r3
+# Afterbliss: SomeQindaWorld 3caca7e, 52 ElevenLabs music and effect assets.
+# All 72 physical routes and native UI pass; audio decodes and changes scenes.
+=games-action/afterbliss-0.1.0_p20261011
