@@ -51,7 +51,14 @@ src_configure() {
 }
 
 src_test() {
-	cmake_src_test
+	# Wayland test sockets include QTemporaryDir's path and must fit sun_path.
+	# Portage's T can exceed that limit on an archive-backed build volume.
+	local test_tmp
+	test_tmp=$(mktemp -d /tmp/qindaweb-test.XXXXXX) || die
+	addwrite "${test_tmp}"
+	TMPDIR="${test_tmp}" XDG_RUNTIME_DIR="${test_tmp}" \
+		QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software cmake_src_test
+	rm -rf "${test_tmp}" || die
 }
 
 pkg_postinst() {
