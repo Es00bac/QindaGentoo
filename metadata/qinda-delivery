@@ -173,6 +173,6 @@
 #   D-109): Word sections and bounded painting for long documents. QindaTK
 #   r17 remains the installed toolkit floor; no desktop restart is needed.
 
-# Afterbliss: SomeQindaWorld 27bbbdf, full audio and gamepad-only play.
-# SNES receiver, crew interaction, two-pad switching and all 72 routes pass.
-=games-action/afterbliss-0.1.0_p20261011-r1
+# Afterbliss: SomeQindaWorld 002dead, mission-driven stages and useful crew.
+# New foes and jobs, SNES controls, audio; all 72 routes pass for both heroes.
+=games-action/afterbliss-0.1.0_p20261011-r2
