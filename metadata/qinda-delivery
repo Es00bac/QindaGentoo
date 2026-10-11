@@ -29,7 +29,7 @@
 # 2026-10-09: qindatk r17 = r16 (scoped Read SDK) + the Scroll focus-reveal fix
 # (QindaTK 30ac606, D-309): a focused page no longer jumps the view to its edge.
 =dev-libs/qindatk-0.1.0-r17
-=gui-apps/qindaoffice-0.1.0_p20261009
+=gui-apps/qindaoffice-0.1.0_p20261010
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
 =x11-themes/qinda-seven-1.0.0_p20260922
@@ -168,6 +168,9 @@
 =media-gfx/qindaphotocraft-0.1.0-r1
 # 2026-10-09: qindaoffice p20261009 (QindaOffice b84c4b1, M60-M87): Office
 #   interchange (docx/xlsx/pptx/vsdx/accdb), QindaBase, QindaPlan, QindaDiagram.
+# 2026-10-10: qindaoffice p20261010 (QindaOffice 0ce1cca, M88/D-096 and
+#   D-109): Word sections and bounded painting for long documents. QindaTK
+#   r17 remains the installed toolkit floor; no desktop restart is needed.
 
 # Afterbliss: SomeQindaWorld 0c5a5d6, authored routes, painted UI and rescue crew.
 # 72 physical routes pass for both heroes; dialogue prompts match interaction range.
