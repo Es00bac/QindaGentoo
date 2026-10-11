@@ -127,3 +127,17 @@ package, whole delivery resolver/co-installation checks, and coordinated
 Portage adoption remain with the Office integration owner. These artifacts
 qualify the non-Office direct consumer set; they do not authorize an isolated
 toolkit upgrade or claim physical tablet/GPU/browser/session acceptance.
+
+## Integrated Office r18 candidate
+
+`gui-apps/qindaoffice-0.1.0_p20261010-r1` pins QindaOffice
+`be79420cf18a432a5979fc693148334536b73a45` and depends on toolkit
+`>=0.1.0-r18:0/18`. It combines Word sections, graphics, references and
+equations, Calc and Show work, Note/Base/Mail work, the bounded long-document
+display repair, and the Books employee/time IIF migration. The exact
+8,236,484-byte source archive was cut independently on the laptop and qinda;
+both SHA256 digests are
+`75b405405295882b5aafe775779aa8cf76fc25d2c822e1c3557d4c1b2e5e4aae`.
+The archive carries the reviewed `.dist-commit` and QXlsx submodule source.
+Its new Manifest line is private to this candidate until combined Office
+tests, the Portage package and installed consumer closure are qualified.

@@ -24,12 +24,13 @@
 =gui-wm/qindaqt-desktop-0.1.0_pre20261002-r13
 =x11-misc/qindaqt-xdg-menu-1.0.0
 =gui-wm/qindaqt-kwin-6.6.6_p1-r6
-=gui-apps/qqterm-0.3.0
+=gui-apps/qqterm-0.3.0-r1
 =media-video/qqmpv-0.1.0_p20260920
-# 2026-10-09: qindatk r17 = r16 (scoped Read SDK) + the Scroll focus-reveal fix
-# (QindaTK 30ac606, D-309): a focused page no longer jumps the view to its edge.
-=dev-libs/qindatk-0.1.0-r17
-=gui-apps/qindaoffice-0.1.0_p20261010
+# 2026-10-10: coordinated QindaTK r18 (Office controls and mail adapters)
+# with the rebuilt Office integration. The r17 Scroll focus-reveal repair
+# remains in this toolkit source; Office also paints long pages in bounded tiles.
+=dev-libs/qindatk-0.1.0-r18
+=gui-apps/qindaoffice-0.1.0_p20261010-r1
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
 =x11-themes/qinda-seven-1.0.0_p20260922
@@ -147,7 +148,7 @@
 # QtWayland r2 delivers input to both GTK/Mozilla keyboard resources; public ABI unchanged.
 # Automatic container tabs/splits await the desktop's released placement SDK.
 =dev-qt/qtwayland-6.11.1-r2
-=www-client/qindaweb-0.1.0_alpha1
+=www-client/qindaweb-0.1.0_alpha1-r1
 
 # 2026-09-30: reviewed graphical removable-media handler; compatibility login
 # autostart for the installed desktop, with per-media mount/read-only choices.
