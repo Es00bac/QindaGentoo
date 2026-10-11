@@ -161,4 +161,13 @@ toolkit. The exact r2 source then passed all **8/8 focused CTests and 81/81
 Qt checks**, with zero failures, skips or Qt warnings. The final-source
 qualification record is at
 `/mnt/archive/cabewse/qindaoffice/r18-qualification-final-9b5b184/` on qinda.
-The r2 Portage artifact review remains before adoption.
+
+The r2 Portage package completed with the configured qinda
+`MAKEOPTS=-j24 -l24` unchanged. Its signed gpkg is 43,212,800 bytes,
+SHA256 `7e158610f235a562a0a1f45226c55473b9653391d9b665b9c9914600fc0b1ef9`.
+The full gpkg signature and digest audit passed; its embedded recipe matches
+this revision, all 68 installed regular files match Portage's staged image,
+and all ten ELF binaries have no private build or home-directory RUNPATH.
+Package metadata requires QindaTK `>=0.1.0-r18:0/18`. The audit record is
+`/mnt/archive/cabewse/qindaoffice/r18-office-r2-package-audit.json` on qinda.
+The preceding r1 checkpoint also passed the same audit but is not delivered.
