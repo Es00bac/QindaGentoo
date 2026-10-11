@@ -24,3 +24,19 @@ binary package set to both machines, without restarting the live desktop.
 Consumer inventory and exact package qualification will be appended here
 before metadata/qinda-delivery advances. Candidate source and package
 artifacts are immutable once their Manifest has been published.
+
+## Installed consumer inventory (2026-10-10)
+
+Portage NEEDED.ELF.2 on both hosts identifies Office, QQTerm and QindaWeb
+as direct shared-library consumers. QindaHane is also a direct consumer on
+the laptop. The desktop, system monitor, Android applications, Portage UI,
+LlamaWatch, Studio, PhotoCraft, QQmpv and Venus Pro declare a runtime QML
+dependency but do not link libqindatk in their installed ELF images.
+
+The directly imported non-Office C++ classes are TerminalSession (QQTerm),
+CommandContext/CommandRegistry/ShortcutMap (QindaWeb), and the stylus
+signals/sample (QindaHane). Their public headers are byte-identical between
+installed r17 source 30ac60604a97a09006459f15e642c4342103fd3b and this
+candidate. Final dynamic-symbol and runtime-QML checks remain required;
+this inventory avoids treating an unchanged QML-only desktop image as an
+ABI-sensitive source build. Office uses changed layouts and is rebuilt.
