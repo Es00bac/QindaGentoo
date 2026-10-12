@@ -15,6 +15,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `dev-util/codex-bin` | OpenAI Codex official Linux musl bundle, packaged through Portage |
 | `dev-util/claude-code` | Anthropic Claude Code official native release, packaged through Portage |
 | `dev-util/opencode-bin` | OpenCode official Linux release, packaged through Portage |
+| `dev-util/ghidra-bin` | NSA Ghidra official release build (`/opt/ghidra`), the native backend for REA analysis |
 | `media-gfx/qindastudio` | `QindaStudio` |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
 | `app-office/obsidian` | Obsidian public Linux desktop release, packaged through Portage |
