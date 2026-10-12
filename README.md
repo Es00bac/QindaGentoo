@@ -326,6 +326,16 @@ skips SDDM and the desktop and shows the `qinda-llm-top` console on tty1. It
 runs on qinda only, so it is not in `metadata/qinda-delivery`; qinda-top's
 coding agents reach it over Tailscale.
 
+`sci-ml/trellis2-cpp-bin`, `sci-ml/trellis2-q4-models`, and
+`sci-ml/trellis2-studio-bin` provide local image-to-3D generation on qinda.
+The pinned Vulkan runtime uses the RX 5700 XT; the Q4 512-resolution weights
+are Portage-owned under `/mnt/void/ai-models/trellis2-q4` on the HDD.
+`/mnt/void` must be mounted for model installation. Run
+`trellis2 input.png output.glb` for the 512-resolution CLI workflow, or
+launch Trellis Studio with per-user config pointing to the same server and
+weights. These packages are optional and are not in the cross-machine profile
+package set.
+
 `sci-ml/qinda-notes-llm` is the laptop's offline notes model for QindaNote's
 live notes: Qwen3.5-4B (unsloth UD-Q4_K_XL, pinned; USE=vision adds the
 image projector) under `/usr/share/gguf`, served by the same

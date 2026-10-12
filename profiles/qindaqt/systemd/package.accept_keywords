@@ -115,3 +115,8 @@ dev-libs/qindatk-raster ~amd64
 
 # Original standalone CyberPengu and Ducké platform adventure.
 games-action/afterbliss ~amd64
+
+# Optional local 3D generation; installed on qinda only.
+sci-ml/trellis2-cpp-bin ~amd64
+sci-ml/trellis2-q4-models ~amd64
+sci-ml/trellis2-studio-bin ~amd64
