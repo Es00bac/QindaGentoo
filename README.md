@@ -17,6 +17,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `dev-util/opencode-bin` | OpenCode official Linux release, packaged through Portage |
 | `dev-util/ghidra-bin` | NSA Ghidra official release build (`/opt/ghidra`), the native backend for REA analysis |
 | `media-gfx/qindastudio` | `QindaStudio` |
+| `media-gfx/qindapaint` | `QindaPaint` (native Rust brush engine and QindaTK painting interface; optional preview package) |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
 | `app-office/obsidian` | Obsidian public Linux desktop release, packaged through Portage |
 | `sys-boot/qinda-boot` | `QindaBoot` (graphical boot menu and Plymouth splash) |
