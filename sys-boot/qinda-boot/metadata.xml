@@ -12,4 +12,7 @@
 		kernels by a kernel-install hook; and the qindaqt Plymouth splash.
 		systemd-boot remains installed as the fallback.
 	</longdescription>
+	<upstream>
+		<remote-id type="github">Es00bac/QindaBoot</remote-id>
+	</upstream>
 </pkgmetadata>

@@ -30,8 +30,8 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 
 The [complete non-game project coverage map](docs/first-party-coverage.md)
 includes existing toolkit, media, artwork and screensaver packages, plus the
-optional QindaFoxAgent, QindaTK agent guide, JevReader and QindaDeck host companions. Package
-availability does not add a component to the default desktop delivery or
+optional QindaFoxAgent, QindaTK agent guide, JevReader and QindaDeck host
+companions. Package availability does not add a component to the default desktop delivery or
 activate it. Historical source pins, distfiles and fetch restrictions remain
 unchanged when a repository becomes public.
 

@@ -8,7 +8,7 @@
 	<longdescription lang="en">
 		Host-only deckctl helper and protocol documentation for QindaDeck.
 		No firmware flashing, Android installation, or device activation occurs.
-		The pinned source has no project-wide license grant.
+		Original host code is GPL-3+; source third-party notices remain intact.
 	</longdescription>
 	<use>
 		<flag name="zeroconf">Use Python mDNS discovery when no device address is given</flag>

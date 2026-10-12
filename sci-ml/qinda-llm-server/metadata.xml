@@ -13,4 +13,7 @@
 		the qinda-llm-top console on tty1. Adds the "LLM Server" row to the
 		QindaQt boot menu.
 	</longdescription>
+	<upstream>
+		<remote-id type="github">Es00bac/QindaLLM</remote-id>
+	</upstream>
 </pkgmetadata>
