@@ -1,0 +1,4 @@
+--- a/dist/ghidra/GhidraLauncher.js
++++ b/dist/ghidra/GhidraLauncher.js
+@@ -264,0 +265 @@
++        ...(process.env.REA_GHIDRA_NO_ANALYSIS === "1" ? ["-noanalysis"] : []),
