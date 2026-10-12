@@ -164,6 +164,9 @@
 # to Gentoo deny-all without a password prompt. No desktop restart required.
 =sys-auth/qindaqt-lock-pam-1
 
+# Independent printing defaults; adopts without a desktop or Office rebuild.
+=net-print/qindaqt-printing-1
+
 # Native QindaPhotoCraft; source builds stay on qinda-top while the game server runs.
 =dev-libs/qindatk-raster-0.1.0
 =media-gfx/qindaphotocraft-0.1.0-r1

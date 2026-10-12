@@ -1,5 +1,12 @@
 gui-wm/qindaqt-kwin screencast systemd accessibility
 dev-qt/qtbase wayland X gui widgets opengl libinput cups accessibility
+# The independent printing component supplies filters, drivers and discovery.
+net-print/cups dbus systemd usb zeroconf
+net-print/cups-browsed zeroconf
+net-print/libcupsfilters poppler postscript
+net-print/gutenprint cups
+net-dns/avahi dbus systemd
+app-admin/system-config-printer policykit
 sys-apps/systemd boot cryptsetup pam policykit
 sys-kernel/installkernel dracut systemd-boot
 sys-kernel/linux-firmware initramfs redistributable unknown-license dist-kernel compress-zstd deduplicate

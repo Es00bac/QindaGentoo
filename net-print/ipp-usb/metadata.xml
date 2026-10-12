@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<longdescription lang="en">Makes compatible USB printers available to
+	CUPS through IPP and DNS-SD using OpenPrinting's IPP-over-USB transport.
+	Upstream udev rules activate the service on demand; the supplied default
+	listens only on loopback.</longdescription>
+	<upstream>
+		<remote-id type="github">OpenPrinting/ipp-usb</remote-id>
+	</upstream>
+</pkgmetadata>

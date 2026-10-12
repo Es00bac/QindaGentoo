@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<longdescription lang="en">Provides the QindaQt desktop printing stack,
+	graphical printer and job management, driverless discovery, common legacy
+	drivers, and first-install systemd activation policy. CUPS configuration
+	and printer queues remain administrator-owned.</longdescription>
+</pkgmetadata>

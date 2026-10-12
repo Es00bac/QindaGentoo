@@ -1,0 +1,3 @@
+# QindaQt distribution policy; an earlier administrator preset takes priority.
+# Only the printing target is enabled: existing member-unit policy stays intact.
+enable qindaqt-printing.target

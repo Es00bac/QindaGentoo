@@ -8,6 +8,8 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `gui-wm/qindaqt-desktop` | `container-wm` |
 | `gui-apps/qindaqt-apps`, `gui-apps/qindaqt-system-monitor`, `gui-apps/qindaqt-removable-media`, `gui-apps/qindaqt-windows-runner` | `container-wm` |
 | `gui-apps/qindaoffice` | `QindaOffice` |
+| `net-print/qindaqt-printing` | QindaQt printing defaults (CUPS and packaged drivers) |
+| `net-print/ipp-usb` | OpenPrinting driverless USB transport |
 | `gui-apps/qqterm` | `QindaQt_Apps` |
 | `www-client/qindafox-bin` | `QindaQt_Apps/QindaFox` |
 | `dev-util/codex-bin` | OpenAI Codex official Linux musl bundle, packaged through Portage |
@@ -25,6 +27,69 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `x11-themes/qinda-seven` | `QindaThemes` (seven themes, paired decorations, and KDE color schemes) |
 | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | `sloom-studio-gpl` |
 | `kde-plasma/kwin`, `kde-plasma/plasma-activities` | retained pinned 6.6.x copies for older desktop deliveries |
+
+### Printing
+
+`net-print/qindaqt-printing-1` is the desktop profile's independent printing
+component. Install or update it without rebuilding QindaQt or QindaOffice:
+
+```sh
+qinda-sync packages '=net-print/qindaqt-printing-1'
+```
+
+It supplies CUPS with USB and DNS-SD support, PDF/PostScript filters,
+`cups-browsed` for discovered local-network print queues, `ipp-usb` for modern
+IPP-over-USB printers, Gutenprint for common older printers, and Splix for
+Samsung SPL printers including the ML-2160/ML-216x family. The Splix 2.0.2
+floor includes upstream's missing-page cache-race repair and additional
+printer definitions; physical Samsung qualification remains a separate gate.
+The existing
+Settings **Printers & scanners** route opens `system-config-printer`, including
+its PolicyKit administration helper, printer setup, job controls and USB
+automatic-setup rules. Qt's CUPS support remains a profile default.
+
+The component owns `qindaqt-printing.target` and a vendor preset, not a second
+print daemon. The target starts the standard CUPS socket/path, Avahi and
+`cups-browsed`; the latter requires the CUPS service. Gentoo's cups-browsed
+2.1.1 defaults to DNS-SD discovery, without enabling the old UDP browsing
+protocol. CUPS server policy, saved printers, jobs and existing Avahi settings
+stay administrator-owned. No printer is shared with the network by this
+package. Existing administrator configuration can independently enable sharing.
+
+Only the component's first installation applies its target preset, then starts
+the target when installing into the running system. Image/chroot installations
+only establish boot policy. Earlier administrator preset rules and unit masks
+take priority. Upgrades neither re-enable a disabled target nor restart the
+providers. `systemctl disable qindaqt-printing.target` opts out of this boot
+default; it does not stop an ongoing job. To prohibit a particular provider
+from all activation paths, mask that provider's unit. A member's standalone
+`disable` does not block activation through the printing target. This is
+ordinary systemd dependency behavior.
+
+If CUPS was already running when the filters were first installed, it can retain
+its previous MIME/filter database and reject a supported document format.
+Let existing print jobs finish, then run `systemctl restart cups.service` once.
+The package does not guess that an active queue is safe to interrupt, and
+ordinary component upgrades never restart CUPS.
+
+`ipp-usb-0.9.34` is packaged here because neither configured upstream repository
+supplies it. Its source archive includes the BSD-2 `goipp` dependency, so
+Portage builds offline from the pinned Manifest. Upstream's udev rules start
+the service only for supported IPP-over-USB devices; its default HTTP listener
+is loopback-only. The original configuration is installed under `/etc/ipp-usb`
+with Portage configuration protection. Reconnect a USB printer already attached
+during first installation so its normal setup rule runs. Legacy Samsung SPL
+models use CUPS and Splix; they do not need IPP-over-USB support.
+
+Package acceptance includes offline systemd preset fixtures for fresh install,
+administrator opt-out, masks, upgrades and image roots:
+
+```sh
+python3 -m unittest discover -s tests -p test_printing_defaults.py -v
+```
+
+These fixtures do not print or alter the running machine. A physical test page
+and a QindaWrite document are separate installed-printer acceptance checks.
 
 ### Removable media
 

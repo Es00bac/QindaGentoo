@@ -1,0 +1,10 @@
+[Unit]
+Description=QindaQt desktop printing
+Documentation=man:cupsd(8) man:cups-browsed(8)
+# AGENT-CONTRACT: Portage supplies these providers. Keep queue management and
+# printer configuration in CUPS and system-config-printer, outside the shell.
+Wants=cups.socket cups.path avahi-daemon.service cups-browsed.service
+After=cups.socket cups.path avahi-daemon.service cups-browsed.service
+
+[Install]
+WantedBy=multi-user.target
