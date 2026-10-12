@@ -1,0 +1,17 @@
+--- a/bridge/ghidra/ReaGhidraApplySeeds.java
++++ b/bridge/ghidra/ReaGhidraApplySeeds.java
+@@ -15,0 +16 @@
++import java.util.Map;
+@@ -34,0 +36,12 @@
++        }
++        String disabled = System.getenv("REA_GHIDRA_DISABLED_ANALYZERS");
++        if (disabled != null && !disabled.isBlank()) {
++            Map<String, String> options = getCurrentAnalysisOptionsAndValues(currentProgram);
++            for (String entry : disabled.split(",")) {
++                String name = entry.trim();
++                if (!options.containsKey(name)) {
++                    throw new IllegalArgumentException("Unknown Ghidra analyzer: " + name);
++                }
++                setAnalysisOption(currentProgram, name, "false");
++                println("REA disabled Ghidra analyzer: " + name);
++            }
