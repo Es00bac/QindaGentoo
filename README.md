@@ -30,11 +30,11 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 
 ### Printing
 
-`net-print/qindaqt-printing-1` is the desktop profile's independent printing
+`net-print/qindaqt-printing-1-r1` is the desktop profile's independent printing
 component. Install or update it without rebuilding QindaQt or QindaOffice:
 
 ```sh
-qinda-sync packages '=net-print/qindaqt-printing-1'
+qinda-sync packages '=net-print/qindaqt-printing-1-r1'
 ```
 
 It supplies CUPS with USB and DNS-SD support, PDF/PostScript filters,
@@ -65,6 +65,13 @@ default; it does not stop an ongoing job. To prohibit a particular provider
 from all activation paths, mask that provider's unit. A member's standalone
 `disable` does not block activation through the printing target. This is
 ordinary systemd dependency behavior.
+
+Revision 1-r1 normalizes EAPI 8's empty real-root value before activation and
+uses `EROOT` for presets, so Prefix/image installs cannot start host services.
+The original version enabled boot policy but skipped immediate activation;
+an already installed system can start it with
+`systemctl start qindaqt-printing.target`. Upgrades still preserve a deliberate
+administrative disable rather than guessing that every inactive target is a bug.
 
 If CUPS was already running when the filters were first installed, it can retain
 its previous MIME/filter database and reject a supported document format.

@@ -10,7 +10,7 @@ import unittest
 
 REPO = Path(__file__).resolve().parents[1]
 PACKAGE = REPO / "net-print/qindaqt-printing"
-EBUILD = PACKAGE / "qindaqt-printing-1.ebuild"
+EBUILD = PACKAGE / "qindaqt-printing-1-r1.ebuild"
 SYSTEMCTL = shutil.which("systemctl")
 
 
@@ -55,7 +55,7 @@ class PrintingPresetTests(unittest.TestCase):
             source "$EBUILD"
             pkg_postinst
         '''
-        env = dict(os.environ, ROOT=str(self.root), REPLACING_VERSIONS=replacing,
+        env = dict(os.environ, ROOT=str(self.root), EROOT=str(self.root), REPLACING_VERSIONS=replacing,
                    EBUILD=str(EBUILD), CALLS=str(self.calls), REAL_SYSTEMCTL=SYSTEMCTL)
         result = subprocess.run(["bash", "-c", script], env=env, capture_output=True,
                                 text=True, timeout=10)
@@ -109,7 +109,8 @@ class PrintingPresetTests(unittest.TestCase):
 
 
 class PrintingActivationTests(unittest.TestCase):
-    def run_policy(self, *, replacing="", booted=True, enabled=True, preset_ok=True):
+    def run_policy(self, *, replacing="", booted=True, enabled=True, preset_ok=True,
+                   root="", eroot=None):
         # Live-root paths are evaluated only against this fake systemctl. The
         # disposable-root cases above exercise the real preset implementation.
         script = r'''
@@ -130,7 +131,10 @@ class PrintingActivationTests(unittest.TestCase):
             source "$EBUILD"
             pkg_postinst
         '''
-        env = dict(os.environ, ROOT="/", REPLACING_VERSIONS=replacing,
+        # Portage's EAPI 8 environment represents the real root as "". An
+        # explicit image/prefix EROOT must never start the host's providers.
+        env = dict(os.environ, ROOT=root, EROOT=root if eroot is None else eroot,
+                   REPLACING_VERSIONS=replacing,
                    EBUILD=str(EBUILD), BOOTED="yes" if booted else "no",
                    ENABLED="yes" if enabled else "no",
                    PRESET_OK="yes" if preset_ok else "no")
@@ -139,12 +143,20 @@ class PrintingActivationTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         return result.stdout.splitlines()
 
-    def test_enabled_first_install_starts_after_reload(self):
+    def test_eapi8_empty_root_starts_after_reload(self):
         calls = self.run_policy()
         self.assertEqual(calls, [
             "--root=/ --preset-mode=enable-only preset qindaqt-printing.target",
             "--quiet is-enabled qindaqt-printing.target",
             "daemon-reload", "start qindaqt-printing.target",
+        ])
+
+    def test_slash_root_starts_after_reload(self):
+        self.assertEqual(self.run_policy(root="/"), self.run_policy())
+
+    def test_prefixed_install_does_not_start_host_services(self):
+        self.assertEqual(self.run_policy(root="", eroot="/opt/gentoo"), [
+            "--root=/opt/gentoo --preset-mode=enable-only preset qindaqt-printing.target",
         ])
 
     def test_unbooted_system_does_not_start_services(self):
