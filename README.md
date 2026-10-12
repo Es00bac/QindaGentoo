@@ -15,7 +15,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `dev-util/codex-bin` | OpenAI Codex official Linux musl bundle, packaged through Portage |
 | `dev-util/claude-code` | Anthropic Claude Code official native release, packaged through Portage |
 | `dev-util/opencode-bin` | OpenCode official Linux release, packaged through Portage |
-| `gui-wm/qindastudio` | `QindaStudio` |
+| `media-gfx/qindastudio` | `QindaStudio` |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
 | `app-office/obsidian` | Obsidian public Linux desktop release, packaged through Portage |
 | `sys-boot/qinda-boot` | `QindaBoot` (graphical boot menu and Plymouth splash) |
@@ -27,6 +27,13 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `x11-themes/qinda-seven` | `QindaThemes` (seven themes, paired decorations, and KDE color schemes) |
 | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | `sloom-studio-gpl` |
 | `kde-plasma/kwin`, `kde-plasma/plasma-activities` | retained pinned 6.6.x copies for older desktop deliveries |
+
+The [complete non-game project coverage map](docs/first-party-coverage.md)
+includes existing toolkit, media, artwork and screensaver packages, plus the
+optional QindaFoxAgent, QindaTK agent guide, JevReader and QindaDeck host companions. Package
+availability does not add a component to the default desktop delivery or
+activate it. Historical source pins, distfiles and fetch restrictions remain
+unchanged when a repository becomes public.
 
 ### Printing
 

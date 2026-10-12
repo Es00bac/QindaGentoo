@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription lang="en">
+		Host-only deckctl helper and protocol documentation for QindaDeck.
+		No firmware flashing, Android installation, or device activation occurs.
+		The pinned source has no project-wide license grant.
+	</longdescription>
+	<use>
+		<flag name="zeroconf">Use Python mDNS discovery when no device address is given</flag>
+	</use>
+	<upstream><remote-id type="github">Es00bac/QindaDeck</remote-id></upstream>
+</pkgmetadata>

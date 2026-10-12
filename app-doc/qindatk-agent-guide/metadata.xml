@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription lang="en">Static narrated guide with fictional local simulations and preserved source/media provenance. No HTTP server or hosting configuration is installed.</longdescription>
+	<upstream>
+		<remote-id type="github">Es00bac/QindaTK-agent-guide</remote-id>
+	</upstream>
+</pkgmetadata>

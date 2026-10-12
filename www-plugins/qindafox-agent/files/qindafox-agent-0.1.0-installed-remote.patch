@@ -1,0 +1,19 @@
+From: QindaQt contributors
+Subject: Use the Portage-owned helper for optional remote Jev calls
+
+The remote host must have the same optional package installed. Never rely on
+an application checkout or install another copy below a user's home.
+
+--- a/plugins/qindafox-browser/scripts/browser.py
++++ b/plugins/qindafox-browser/scripts/browser.py
+@@ -66,8 +66,8 @@ class Jev:
+             raise ValueError('Jev request exceeds 64KB budget; narrow the observation')
+         if not self.proc or self.proc.poll() is not None:
+             remote = os.environ.get('QINDAFOX_JEV_HOST', 'local' if socket.gethostname().split('.')[0] == 'qinda' else 'qinda')
+-            remote_script = 'work_SPaC3/QindaFoxAgent/plugins/qindafox-browser/scripts/jev_remote.py'
+-            command = [sys.executable, str(Path(__file__).with_name('jev_remote.py'))] if remote == 'local' else ['ssh','-T','-o','BatchMode=yes','-o','ConnectTimeout=5',remote,'python3',remote_script]
++            remote_script = 'qindafox-agent-jev'
++            command = [sys.executable, str(Path(__file__).with_name('jev_remote.py'))] if remote == 'local' else ['ssh','-T','-o','BatchMode=yes','-o','ConnectTimeout=5',remote,remote_script]
+             self.proc = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+         start = time.perf_counter()
+         try:

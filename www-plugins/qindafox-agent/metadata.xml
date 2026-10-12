@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription lang="en">Optional native messaging bridge and unsigned extension for Firefox and QindaFox. Profiles and agent registrations remain user-owned.</longdescription>
+	<use>
+		<flag name="launcher">Install the isolated-browser launcher and require geckodriver</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">Es00bac/QindaFoxAgent</remote-id>
+	</upstream>
+</pkgmetadata>

@@ -1,4 +1,5 @@
 app-accessibility
+app-doc
 app-emulation
 app-misc
 app-office
@@ -23,5 +24,6 @@ sci-ml
 sys-auth
 sys-boot
 www-client
+www-plugins
 x11-misc
 x11-themes
