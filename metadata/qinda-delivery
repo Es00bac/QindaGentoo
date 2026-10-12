@@ -30,7 +30,7 @@
 # with the rebuilt Office integration. The r17 Scroll focus-reveal repair
 # remains in this toolkit source; Office also paints long pages in bounded tiles.
 =dev-libs/qindatk-0.1.0-r18
-=gui-apps/qindaoffice-0.1.0_p20261010-r2
+=gui-apps/qindaoffice-0.1.0_p20261010-r3
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
 =x11-themes/qinda-seven-1.0.0_p20260922
