@@ -343,6 +343,15 @@ qinda-sync packages '=dev-util/codex-bin-0.162.1' \
 Do not run upstream installers or let a second package manager replace these
 Portage-owned files.
 
+Installed acceptance on qinda-top (2026-10-13): all 44 Codex files and 2
+symlinks and all 3,544 desktop files matched Portage's CONTENTS records. Codex
+version/help checks passed. The desktop executable, bundled Node runtime and
+TPM device-key addon resolved their runtime libraries. A new XWayland window
+appeared and the app ran for 18 seconds using a separate profile. Dependency
+builds used a per-invocation `FEATURES=-distcc` fallback with the configured
+build parallelism retained. Both verified upstream archives are published in
+qinda's distfile cache; app adoption on qinda remains the explicit command above.
+
 `sci-ml/qinda-llm-server` and `sci-ml/gguf-coding-models` are qinda's local
 coding-model service. `qinda-llm.service` runs llama.cpp's `llama-server`
 (::guru's `sci-misc/llama-cpp[vulkan]`, on the RX 5700 XT through RADV) in
