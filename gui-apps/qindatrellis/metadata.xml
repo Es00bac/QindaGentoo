@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>jarrodmcary@gmail.com</email>
+    <name>Jarrod C</name>
+  </maintainer>
+  <use>
+    <flag name="gui">Install the native Qt client and desktop launcher</flag>
+    <flag name="backend">Require the packaged TRELLIS.2 generator on this host</flag>
+  </use>
+</pkgmetadata>

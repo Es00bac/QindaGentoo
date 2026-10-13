@@ -121,6 +121,7 @@ games-action/afterbliss ~amd64
 sci-ml/trellis2-cpp-bin ~amd64
 sci-ml/trellis2-q4-models ~amd64
 sci-ml/trellis2-studio-bin ~amd64
+gui-apps/qindatrellis ~amd64
 
 # Optional developer companions; none is selected by @profile or delivery.
 www-plugins/qindafox-agent ~amd64
