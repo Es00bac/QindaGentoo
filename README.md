@@ -13,6 +13,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `gui-apps/qqterm` | `QindaQt_Apps` |
 | `www-client/qindafox-bin` | `QindaQt_Apps/QindaFox` |
 | `dev-util/codex-bin` | OpenAI Codex official Linux musl bundle, packaged through Portage |
+| `app-misc/chatgpt-desktop` | OpenAI official Linux desktop RPM, packaged through Portage |
 | `dev-util/claude-code` | Anthropic Claude Code official native release, packaged through Portage |
 | `dev-util/opencode-bin` | OpenCode official Linux release, packaged through Portage |
 | `dev-util/ghidra-bin` | NSA Ghidra official release build (`/opt/ghidra`), the native backend for REA analysis |
@@ -325,6 +326,22 @@ passed, all 48 regular files and 3 symlinks matched Portage's CONTENTS records,
 and OpenCode's resolved configuration confirmed `autoupdate: false`. Claude's
 managed updater and installation checks remained disabled. Only these three
 packages were upgraded; qinda adoption uses the explicit package command above.
+
+The October 13 OpenAI update selects Codex 0.162.1 and ChatGPT Desktop
+26.1007.21434. Codex keeps the upstream standalone musl bundle. ChatGPT uses
+OpenAI's versioned x86_64 RPM and retains the existing GTK startup workaround.
+Both verify their embedded version; their Manifests pin the exact upstream
+payloads checked against OpenAI's release/repository SHA256 metadata. ChatGPT
+remains an optional selection, outside the default desktop delivery. Update only
+these two tools with:
+
+```sh
+qinda-sync packages '=dev-util/codex-bin-0.162.1' \
+  '=app-misc/chatgpt-desktop-26.1007.21434'
+```
+
+Do not run upstream installers or let a second package manager replace these
+Portage-owned files.
 
 `sci-ml/qinda-llm-server` and `sci-ml/gguf-coding-models` are qinda's local
 coding-model service. `qinda-llm.service` runs llama.cpp's `llama-server`

@@ -128,3 +128,4 @@ www-plugins/qindafox-agent ~amd64
 app-doc/qindatk-agent-guide ~amd64
 dev-util/jevreader ~amd64
 app-misc/qindadeck-tools ~amd64
+app-misc/chatgpt-desktop ~amd64

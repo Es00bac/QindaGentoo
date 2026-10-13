@@ -1,0 +1,13 @@
+#!/bin/sh
+# Hold GTK desktop modules for the process lifetime: unloading them during
+# Chromium startup can leave queued GIO callbacks pointing into unloaded code.
+for module in colorreload-gtk-module window-decorations-gtk-module appmenu-gtk-module; do
+	if [ -f "/usr/lib64/gtk-3.0/modules/lib${module}.so" ]; then
+		case ":${GTK_MODULES-}:" in
+			*":${module}:"*) ;;
+			*) GTK_MODULES="${GTK_MODULES:+${GTK_MODULES}:}${module}" ;;
+		esac
+	fi
+done
+export GTK_MODULES
+exec /opt/chatgpt/ChatGPT "$@"
