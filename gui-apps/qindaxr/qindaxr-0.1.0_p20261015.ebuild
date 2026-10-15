@@ -74,5 +74,5 @@ pkg_postinst() {
 	elog "  install -Dm644 /usr/share/qindaxr/wivrn/config.json ~/.config/wivrn/config.json"
 	elog "  systemctl --user enable --now wivrn"
 	elog "Then start WiVRn on the Quest and connect; QindaXR starts automatically."
-	elog "Desktop preview: qindaxr --preview (see /usr/share/doc//README.md*)."
+	elog "Desktop preview: qindaxr --preview (see /usr/share/doc/${PF}/README.md*)."
 }
