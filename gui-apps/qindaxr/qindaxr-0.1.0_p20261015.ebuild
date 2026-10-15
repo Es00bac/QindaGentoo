@@ -44,8 +44,8 @@ RDEPEND="
 	voice? (
 		media-video/pipewire
 		app-accessibility/faster-whisper-models
+		dev-python/faster-whisper[${PYTHON_SINGLE_USEDEP}]
 		$(python_gen_cond_dep '
-			dev-python/faster-whisper[${PYTHON_USEDEP}]
 			dev-python/numpy[${PYTHON_USEDEP}]
 		')
 	)
