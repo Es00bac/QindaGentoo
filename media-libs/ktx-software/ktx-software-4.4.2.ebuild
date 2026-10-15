@@ -33,6 +33,10 @@ src_configure() {
 		-DKTX_FEATURE_GL_UPLOAD=OFF
 		-DKTX_FEATURE_VK_UPLOAD=OFF
 		-DKTX_FEATURE_ETC_UNPACK=OFF
+		# basisu's SSE kernel refuses to build once -march enables AVX.
+		-DBASISU_SUPPORT_SSE=OFF
+		# Upstream's -Werror trips on newer compilers' warnings.
+		-DASTCENC_WERROR=OFF
 	)
 	cmake_src_configure
 }
