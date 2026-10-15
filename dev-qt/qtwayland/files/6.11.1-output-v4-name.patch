@@ -1,0 +1,57 @@
+wl_output version 4: release, name and description.
+
+Qt advertised wl_output version 2. Version 3 adds the release request and 4
+the output name and description events; xwayland-satellite (X11 apps on a
+Wayland compositor) needs the name of the output a window is on.
+
+diff --git a/src/compositor/compositor_api/qwaylandoutput.cpp b/src/compositor/compositor_api/qwaylandoutput.cpp
+index 7139eef..c960154 100644
+--- a/src/compositor/compositor_api/qwaylandoutput.cpp
++++ b/src/compositor/compositor_api/qwaylandoutput.cpp
+@@ -84,9 +84,23 @@ void QWaylandOutputPrivate::output_bind_resource(Resource *resource)
+         sendMode(resource, mode);
+ 
+     maybeSendScale(resource, scaleFactor);
++
++    // Version 4: a name unique among the compositor's outputs, and a description.
++    if (resource->version() >= 4) {
++        const int index = compositor ? compositor->outputs().indexOf(q_func()) : -1;
++        send_name(resource->handle, QStringLiteral("QT-%1").arg(index + 1));
++        const QString description = QString(manufacturer + u' ' + model).trimmed();
++        send_description(resource->handle,
++                         description.isEmpty() ? QStringLiteral("Qt Wayland output") : description);
++    }
+     maybeSendDone(resource);
+ }
+ 
++void QWaylandOutputPrivate::output_release(Resource *resource)
++{
++    wl_resource_destroy(resource->handle);
++}
++
+ void QWaylandOutputPrivate::_q_handleMaybeWindowPixelSizeChanged()
+ {
+     if (!window)
+@@ -326,7 +340,9 @@ void QWaylandOutput::initialize()
+         QObjectPrivate::connect(d->window, &QObject::destroyed, d, &QWaylandOutputPrivate::_q_handleWindowDestroyed);
+     }
+ 
+-    d->init(d->compositor->display(), 2);
++    // Version 3 adds release, 4 the output name and description; clients such as
++    // xwayland-satellite rely on the name.
++    d->init(d->compositor->display(), 4);
+ 
+     d->initialized = true;
+ }
+diff --git a/src/compositor/compositor_api/qwaylandoutput_p.h b/src/compositor/compositor_api/qwaylandoutput_p.h
+index fa6b1e6..10318da 100644
+--- a/src/compositor/compositor_api/qwaylandoutput_p.h
++++ b/src/compositor/compositor_api/qwaylandoutput_p.h
+@@ -82,6 +82,7 @@ public:
+ 
+ protected:
+     void output_bind_resource(Resource *resource) override;
++    void output_release(Resource *resource) override;
+ 
+ private:
+     void _q_handleMaybeWindowPixelSizeChanged();

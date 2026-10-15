@@ -1,0 +1,21 @@
+xdg-shell: advertise xdg_wm_base version 2.
+
+Version 2 only adds the tiled toplevel states, which a compositor may simply
+never send. xwayland-satellite (X11 apps on a Wayland compositor) refuses
+version 1.
+
+diff --git a/src/compositor/extensions/qwaylandxdgshell.cpp b/src/compositor/extensions/qwaylandxdgshell.cpp
+index 77a28f4..aa453a7 100644
+--- a/src/compositor/extensions/qwaylandxdgshell.cpp
++++ b/src/compositor/extensions/qwaylandxdgshell.cpp
+@@ -169,7 +169,9 @@ void QWaylandXdgShell::initialize()
+         qWarning() << "Failed to find QWaylandCompositor when initializing QWaylandXdgShell";
+         return;
+     }
+-    d->init(compositor->display(), 1);
++    // Version 2 only adds the tiled toplevel states, which clients may simply
++    // not receive; xwayland-satellite and others require at least 2.
++    d->init(compositor->display(), 2);
+ 
+     handleSeatChanged(compositor->defaultSeat(), nullptr);
+ 
