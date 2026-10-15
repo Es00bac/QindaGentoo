@@ -9,5 +9,6 @@
 		<flag name="gamepad">Gamepad control (DualSense, DualShock 4, Xbox, Stratus+) through <pkg>media-libs/libsdl3</pkg></flag>
 		<flag name="voice">Push-to-talk dictation with <pkg>dev-python/faster-whisper</pkg> (reuses gabbee's text processing when installed)</flag>
 		<flag name="wivrn">Stream to standalone headsets with <pkg>media-libs/wivrn</pkg></flag>
+		<flag name="x11">Show X11-only programs as panels through <pkg>gui-apps/xwayland-satellite</pkg></flag>
 	</use>
 </pkgmetadata>
