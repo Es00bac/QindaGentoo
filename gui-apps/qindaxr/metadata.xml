@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>jarrodmcary@gmail.com</email>
+		<name>Jarrod C</name>
+	</maintainer>
+	<use>
+		<flag name="gamepad">Gamepad control (DualSense, DualShock 4, Xbox, Stratus+) through <pkg>media-libs/libsdl3</pkg></flag>
+		<flag name="voice">Push-to-talk dictation with <pkg>dev-python/faster-whisper</pkg> (reuses gabbee's text processing when installed)</flag>
+		<flag name="wivrn">Stream to standalone headsets with <pkg>media-libs/wivrn</pkg></flag>
+	</use>
+</pkgmetadata>
