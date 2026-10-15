@@ -1,0 +1,73 @@
+xdg-shell item integration: maximize and fullscreen without an output.
+
+A ShellSurfaceItem created inside a Qt Quick 3D scene gets its window, and so
+its output, only on the next frame. Clients that ask to be maximized in their
+first requests (Firefox) made the integration dereference the missing output.
+Fall back to the compositor's default output, or ignore the request.
+
+diff --git a/src/compositor/extensions/qwaylandxdgshellintegration.cpp b/src/compositor/extensions/qwaylandxdgshellintegration.cpp
+index 643ad65..e1fab75 100644
+--- a/src/compositor/extensions/qwaylandxdgshellintegration.cpp
++++ b/src/compositor/extensions/qwaylandxdgshellintegration.cpp
+@@ -131,6 +131,17 @@ void XdgToplevelIntegration::handleStartResize(QWaylandSeat *seat, Qt::Edges edg
+     resizeState.initialized = false;
+ }
+ 
++// The output whose geometry sizes a maximized or fullscreen window: the view's, or the
++// compositor's default while the item is not on any output yet. An item just created inside a
++// Qt Quick 3D scene gets its window, and so its output, only on the next frame, and clients may
++// ask to be maximized in their very first requests.
++static QWaylandOutput *sizingOutput(QWaylandQuickShellSurfaceItem *item)
++{
++    if (QWaylandOutput *output = item->view()->output())
++        return output;
++    return item->surface() ? item->surface()->compositor()->defaultOutput() : nullptr;
++}
++
+ void XdgToplevelIntegration::handleSetMaximized()
+ {
+     if (!m_item->view()->isPrimary())
+@@ -145,7 +156,11 @@ void XdgToplevelIntegration::handleSetMaximized()
+ 
+     // Any prior output-resize handlers are irrelevant at this point.
+     disconnect(nonwindowedState.sizeChangedConnection);
+-    nonwindowedState.output = m_item->view()->output();
++    nonwindowedState.output = sizingOutput(m_item);
++    if (!nonwindowedState.output) {
++        qCWarning(qLcWaylandCompositor) << "No output to maximize to, ignoring the request";
++        return;
++    }
+     nonwindowedState.sizeChangedConnection = connect(nonwindowedState.output, &QWaylandOutput::availableGeometryChanged, this, &XdgToplevelIntegration::handleMaximizedSizeChanged);
+     handleMaximizedSizeChanged();
+ }
+@@ -154,7 +169,7 @@ void XdgToplevelIntegration::handleMaximizedSizeChanged()
+ {
+     // Insurance against handleToplevelDestroyed() not managing to disconnect this
+     // handler in time.
+-    if (m_toplevel == nullptr)
++    if (m_toplevel == nullptr || nonwindowedState.output == nullptr)
+         return;
+ 
+     m_toplevel->sendMaximized(nonwindowedState.output->availableGeometry().size() / nonwindowedState.output->scaleFactor());
+@@ -201,7 +216,11 @@ void XdgToplevelIntegration::handleSetFullscreen()
+ 
+     // Any prior output-resize handlers are irrelevant at this point.
+     disconnect(nonwindowedState.sizeChangedConnection);
+-    nonwindowedState.output = m_item->view()->output();
++    nonwindowedState.output = sizingOutput(m_item);
++    if (!nonwindowedState.output) {
++        qCWarning(qLcWaylandCompositor) << "No output to make fullscreen on, ignoring the request";
++        return;
++    }
+     nonwindowedState.sizeChangedConnection = connect(nonwindowedState.output, &QWaylandOutput::geometryChanged, this, &XdgToplevelIntegration::handleFullscreenSizeChanged);
+     handleFullscreenSizeChanged();
+ }
+@@ -210,7 +229,7 @@ void XdgToplevelIntegration::handleFullscreenSizeChanged()
+ {
+     // Insurance against handleToplevelDestroyed() not managing to disconnect this
+     // handler in time.
+-    if (m_toplevel == nullptr)
++    if (m_toplevel == nullptr || nonwindowedState.output == nullptr)
+         return;
+ 
+     m_toplevel->sendFullscreen(nonwindowedState.output->geometry().size() / nonwindowedState.output->scaleFactor());
