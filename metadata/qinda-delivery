@@ -144,12 +144,12 @@
 # 2026-09-29: qqterm 0.3.0: terminal modes, cell rendering and styled history,
 # selection/search/export, IME, validated profiles and session/window cleanup.
 
-# 2026-09-30: experimental ordinary-window Gecko/QindaTK browser preview.
-# Built/signed through Portage on qinda; installed from binaries on qinda-top.
-# QtWayland r2 delivers input to both GTK/Mozilla keyboard resources; public ABI unchanged.
-# Automatic container tabs/splits await the desktop's released placement SDK.
-=dev-qt/qtwayland-6.11.1-r2
-=www-client/qindaweb-0.1.0_alpha1-r1
+# 2026-10-16: native Gecko/QindaTK browser with ad/tracker blocking, private
+# windows, file flows and corrected fractional/touch/precision input. Public
+# placement and native browsing checks pass at 100/150 percent. Qt r8 preserves
+# earlier input/XR patches; framed pointers are opt-in on the private display.
+=dev-qt/qtwayland-6.11.1-r8
+=www-client/qindaweb-0.3.0_alpha1-r1
 
 # 2026-09-30: reviewed graphical removable-media handler; compatibility login
 # autostart for the installed desktop, with per-media mount/read-only choices.
