@@ -55,6 +55,7 @@ lxqt-base/lxqt-config -monitor
 kde-misc/kdeconnect -plasmoid
 app-misc/claude-desktop-bin qindaqt
 virtual/secret-service qindaqt
+virtual/notification-daemon qindaqt
 # QtKeychain must compile its Secret Service backend to use QindaQt Keyring;
 # otherwise non-KDE desktops still fall back to the activatable KWallet daemon.
 dev-libs/qtkeychain keyring
