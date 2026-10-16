@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<longdescription lang="en">Platform power defaults for QindaQt laptops,
+	used while QindaQt's native power policy is not exclusive. A short power
+	press suspends and a long press powers off. Closing the lid on battery
+	suspends, then hibernates when the battery runs low or after 90 minutes.
+	User sessions are not frozen during sleep, so FUSE network locations
+	cannot hang suspend. See container-wm ADR-0378.</longdescription>
+</pkgmetadata>

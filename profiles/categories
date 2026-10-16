@@ -24,6 +24,7 @@ net-wireless
 sci-ml
 sys-auth
 sys-boot
+sys-power
 www-client
 www-plugins
 x11-misc

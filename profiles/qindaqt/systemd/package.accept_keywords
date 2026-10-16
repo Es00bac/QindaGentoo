@@ -129,3 +129,4 @@ app-doc/qindatk-agent-guide ~amd64
 dev-util/jevreader ~amd64
 app-misc/qindadeck-tools ~amd64
 app-misc/chatgpt-desktop ~amd64
+sys-power/qindaqt-power-defaults ~amd64
