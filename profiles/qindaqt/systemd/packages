@@ -2,7 +2,6 @@
 app-office/obsidian
 gui-wm/qindaqt-desktop
 sys-auth/qindaqt-lock-pam
-sys-power/qindaqt-power-defaults
 x11-misc/qindaqt-xdg-menu
 gui-wm/qindaqt-kwin
 gui-apps/qindaoffice
