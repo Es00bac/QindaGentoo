@@ -1,0 +1,135 @@
+From: QindaWeb maintainers
+Subject: [PATCH] compositor: opt-in framed pointer protocol and precise axis values
+
+QindaWeb needs wl_pointer v5 source/frame/stop to forward real touchpad
+pixels. Frame every existing pointer primitive and late binding before
+allowing that version. Other compositors retain v4 unless explicitly
+opting in through QT_WAYLAND_COMPOSITOR_POINTER_FRAMES=1. Keep release
+semantics and all per-client listeners independent. No public ABI change.
+
+--- a/src/compositor/compositor_api/qwaylandpointer.cpp
++++ b/src/compositor/compositor_api/qwaylandpointer.cpp
+@@ -25,8 +25,11 @@
+     wl_client *client = q->mouseFocus()->surface()->waylandClient();
+     uint32_t time = compositor()->currentTimeMsecs();
+     uint32_t serial = compositor()->nextSerial();
+-    for (auto resource : resourceMap().values(client))
++    for (auto resource : resourceMap().values(client)) {
+         send_button(resource->handle, serial, time, q->toWaylandButton(button), state);
++        if (resource->version() >= WL_POINTER_FRAME_SINCE_VERSION)
++            send_frame(resource->handle);
++    }
+     return serial;
+ }
+ 
+@@ -36,8 +39,11 @@
+     uint32_t time = compositor()->currentTimeMsecs();
+     wl_fixed_t x = wl_fixed_from_double(localPosition.x());
+     wl_fixed_t y = wl_fixed_from_double(localPosition.y());
+-    for (auto resource : resourceMap().values(enteredSurface->waylandClient()))
++    for (auto resource : resourceMap().values(enteredSurface->waylandClient())) {
+         wl_pointer_send_motion(resource->handle, time, x, y);
++        if (resource->version() >= WL_POINTER_FRAME_SINCE_VERSION)
++            send_frame(resource->handle);
++    }
+ }
+ 
+ void QWaylandPointerPrivate::sendEnter(QWaylandSurface *surface)
+@@ -51,8 +57,11 @@
+ 
+     wl_fixed_t x = wl_fixed_from_double(localPosition.x());
+     wl_fixed_t y = wl_fixed_from_double(localPosition.y());
+-    for (auto resource : resourceMap().values(surface->waylandClient()))
++    for (auto resource : resourceMap().values(surface->waylandClient())) {
+         send_enter(resource->handle, enterSerial, surface->resource(), x, y);
++        if (resource->version() >= WL_POINTER_FRAME_SINCE_VERSION)
++            send_frame(resource->handle);
++    }
+ 
+     enteredSurface = surface;
+     enteredSurfaceDestroyListener.listenForDestruction(surface->resource());
+@@ -62,8 +71,11 @@
+ {
+     Q_ASSERT(enteredSurface);
+     uint32_t serial = compositor()->nextSerial();
+-    for (auto resource : resourceMap().values(enteredSurface->waylandClient()))
++    for (auto resource : resourceMap().values(enteredSurface->waylandClient())) {
+         send_leave(resource->handle, serial, enteredSurface->resource());
++        if (resource->version() >= WL_POINTER_FRAME_SINCE_VERSION)
++            send_frame(resource->handle);
++    }
+     localPosition = QPointF();
+     enteredSurfaceDestroyListener.reset();
+     enteredSurface = nullptr;
+@@ -243,8 +255,15 @@
+     uint32_t axis = orientation == Qt::Horizontal ? WL_POINTER_AXIS_HORIZONTAL_SCROLL
+                                                   : WL_POINTER_AXIS_VERTICAL_SCROLL;
+ 
+-    for (auto resource : d->resourceMap().values(d->enteredSurface->waylandClient()))
+-        d->send_axis(resource->handle, time, axis, wl_fixed_from_int(-delta / 12));
++    for (auto resource : d->resourceMap().values(d->enteredSurface->waylandClient())) {
++        if (resource->version() >= WL_POINTER_AXIS_SOURCE_SINCE_VERSION)
++            d->send_axis_source(resource->handle, WL_POINTER_AXIS_SOURCE_WHEEL);
++        d->send_axis(resource->handle, time, axis, wl_fixed_from_double(-delta / 12.0));
++        if (resource->version() >= WL_POINTER_AXIS_DISCRETE_SINCE_VERSION && delta / 120)
++            d->send_axis_discrete(resource->handle, axis, -delta / 120);
++        if (resource->version() >= WL_POINTER_FRAME_SINCE_VERSION)
++            d->send_frame(resource->handle);
++    }
+ }
+ 
+ /*!
+@@ -303,6 +322,8 @@
+         d->send_enter(resource, d->enterSerial, d->enteredSurface->resource(),
+                       wl_fixed_from_double(d->localPosition.x()),
+                       wl_fixed_from_double(d->localPosition.y()));
++        if (wl_resource_get_version(resource) >= WL_POINTER_FRAME_SINCE_VERSION)
++            d->send_frame(resource);
+     }
+ }
+ 
+@@ -333,6 +354,8 @@
+     Q_D(QWaylandPointer);
+     uint32_t serial = d->compositor()->nextSerial();
+     d->send_button(resource, serial, time, toWaylandButton(button), state);
++    if (wl_resource_get_version(resource) >= WL_POINTER_FRAME_SINCE_VERSION)
++        d->send_frame(resource);
+     return serial;
+ }
+ 
+--- a/src/compositor/compositor_api/qwaylandseat.cpp
++++ b/src/compositor/compositor_api/qwaylandseat.cpp
+@@ -85,6 +85,11 @@
+ //    cleanupDataDeviceForClient(resource->client(), true);
+ }
+ 
++void QWaylandSeatPrivate::seat_release(wl_seat::Resource *resource)
++{
++    wl_resource_destroy(resource->handle);
++}
++
+ void QWaylandSeatPrivate::seat_bind_resource(wl_seat::Resource *resource)
+ {
+     if (resource->version() >= WL_SEAT_NAME_SINCE_VERSION)
+@@ -185,7 +190,10 @@
+ void QWaylandSeat::initialize()
+ {
+     Q_D(QWaylandSeat);
+-    d->init(d->compositor->display(), 4);
++    // Opt in only after the compositor implements framed precision axis events.
++    // Existing compositors retain their v4 protocol contract by default.
++    const int version = qEnvironmentVariableIntValue("QT_WAYLAND_COMPOSITOR_POINTER_FRAMES") == 1 ? 5 : 4;
++    d->init(d->compositor->display(), version);
+ 
+     if (d->capabilities & QWaylandSeat::Pointer)
+         d->pointer.reset(QWaylandCompositorPrivate::get(d->compositor)->callCreatePointerDevice(this));
+--- a/src/compositor/compositor_api/qwaylandseat_p.h
++++ b/src/compositor/compositor_api/qwaylandseat_p.h
+@@ -76,6 +76,7 @@
+                         uint32_t id) override;
+ 
+     void seat_destroy_resource(wl_seat::Resource *resource) override;
++    void seat_release(wl_seat::Resource *resource) override;
+ 
+ private:
+     bool isInitialized = false;
