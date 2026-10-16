@@ -1,0 +1,21 @@
+From: QindaWeb contributors
+Subject: [PATCH] compositor: do not retain GTK clipboard-manager pseudo-target
+
+GTK offers SAVE_TARGETS for clipboard persistence. It is a manager request,
+not a data MIME target; retaining it prevents completion of real clipboard
+data. Keep the source offers intact while skipping it in the retention loop.
+
+--- a/src/compositor/wayland_wrapper/qwldatadevicemanager.cpp
++++ b/src/compositor/wayland_wrapper/qwldatadevicemanager.cpp
+@@ -69,6 +69,11 @@
+ {
+     QList<QString> offers = m_current_selection_source->mimeTypes();
+     finishReadFromClient();
++    // SAVE_TARGETS is a clipboard-manager request, not transferable data.
++    // GTK cannot finish this request while the manager is retaining it.
++    while (m_retainedReadIndex < offers.size()
++           && offers.at(m_retainedReadIndex) == QLatin1String("SAVE_TARGETS"))
++        ++m_retainedReadIndex;
+     if (m_retainedReadIndex >= offers.size()) {
+         QWaylandCompositorPrivate::get(m_compositor)->feedRetainedSelectionData(&m_retainedData);
+         return;

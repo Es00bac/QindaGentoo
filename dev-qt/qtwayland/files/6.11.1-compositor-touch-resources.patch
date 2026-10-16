@@ -1,0 +1,149 @@
+From: QindaWeb contributors
+Subject: [PATCH] compositor: deliver touch sequences to all same-client listeners
+
+GTK and Mozilla bind wl_touch separately on one wl_client. Deliver complete
+sequences to every listener that received down. Late bindings do not receive
+unmatched motion/up/frame events. Release and cancel withdraw contact state;
+the public Qt ABI is unchanged.
+
+--- a/src/compositor/compositor_api/qwaylandtouch.cpp
++++ b/src/compositor/compositor_api/qwaylandtouch.cpp
+@@ -22,42 +22,53 @@
+     wl_resource_destroy(resource->handle);
+ }
+ 
++void QWaylandTouchPrivate::touch_destroy_resource(Resource *resource)
++{
++    activeContacts.remove(resource);
++    pendingFrames.remove(resource);
++}
++
+ uint QWaylandTouchPrivate::sendDown(QWaylandSurface *surface, uint32_t time, int touch_id, const QPointF &position)
+ {
+-    Q_Q(QWaylandTouch);
+-    auto focusResource = resourceMap().value(surface->client()->client());
+-    if (!focusResource)
++    const auto resources = resourceMap().values(surface->client()->client());
++    if (resources.isEmpty())
+         return 0;
+-
+-    uint32_t serial = q->compositor()->nextSerial();
+-
+-    wl_touch_send_down(focusResource->handle, serial, time, surface->resource(), touch_id,
+-                       wl_fixed_from_double(position.x()), wl_fixed_from_double(position.y()));
++    const uint32_t serial = compositor()->nextSerial();
++    for (Resource *resource : resources) {
++        activeContacts[resource].insert(touch_id);
++        pendingFrames.insert(resource);
++        wl_touch_send_down(resource->handle, serial, time, surface->resource(), touch_id,
++                           wl_fixed_from_double(position.x()), wl_fixed_from_double(position.y()));
++    }
+     return serial;
+ }
+ 
+ uint QWaylandTouchPrivate::sendUp(QWaylandClient *client, uint32_t time, int touch_id)
+ {
+-    auto focusResource = resourceMap().value(client->client());
+-
+-    if (!focusResource)
+-        return 0;
+-
+-    uint32_t serial = compositor()->nextSerial();
+-
+-    wl_touch_send_up(focusResource->handle, serial, time, touch_id);
++    uint32_t serial = 0;
++    for (Resource *resource : resourceMap().values(client->client())) {
++        auto active = activeContacts.find(resource);
++        if (active == activeContacts.end() || !active.value().remove(touch_id))
++            continue;
++        if (!serial)
++            serial = compositor()->nextSerial();
++        pendingFrames.insert(resource);
++        wl_touch_send_up(resource->handle, serial, time, touch_id);
++        if (active.value().isEmpty())
++            activeContacts.erase(active);
++    }
+     return serial;
+ }
+ 
+ void QWaylandTouchPrivate::sendMotion(QWaylandClient *client, uint32_t time, int touch_id, const QPointF &position)
+ {
+-    auto focusResource = resourceMap().value(client->client());
+-
+-    if (!focusResource)
+-        return;
+-
+-    wl_touch_send_motion(focusResource->handle, time, touch_id,
+-                         wl_fixed_from_double(position.x()), wl_fixed_from_double(position.y()));
++    for (Resource *resource : resourceMap().values(client->client())) {
++        if (!activeContacts.value(resource).contains(touch_id))
++            continue;
++        pendingFrames.insert(resource);
++        wl_touch_send_motion(resource->handle, time, touch_id,
++                             wl_fixed_from_double(position.x()), wl_fixed_from_double(position.y()));
++    }
+ }
+ 
+ int QWaylandTouchPrivate::toSequentialWaylandId(int touchId)
+@@ -149,9 +160,9 @@
+ void QWaylandTouch::sendFrameEvent(QWaylandClient *client)
+ {
+     Q_D(QWaylandTouch);
+-    auto focusResource = d->resourceMap().value(client->client());
+-    if (focusResource)
+-        d->send_frame(focusResource->handle);
++    for (auto *resource : d->resourceMap().values(client->client()))
++        if (d->pendingFrames.remove(resource))
++            d->send_frame(resource->handle);
+ }
+ 
+ /*!
+@@ -160,9 +171,11 @@
+ void QWaylandTouch::sendCancelEvent(QWaylandClient *client)
+ {
+     Q_D(QWaylandTouch);
+-    auto focusResource = d->resourceMap().value(client->client());
+-    if (focusResource)
+-        d->send_cancel(focusResource->handle);
++    for (auto *resource : d->resourceMap().values(client->client())) {
++        if (d->activeContacts.remove(resource))
++            d->send_cancel(resource->handle);
++        d->pendingFrames.remove(resource);
++    }
+ }
+ 
+ /*!
+@@ -176,6 +189,8 @@
+     Q_D(QWaylandTouch);
+     if (event->type() == QEvent::TouchCancel) {
+         sendCancelEvent(surface->client());
++        for (auto &id : d->ids)
++            id = -1;
+         return;
+     }
+ 
+--- a/src/compositor/compositor_api/qwaylandtouch_p.h
++++ b/src/compositor/compositor_api/qwaylandtouch_p.h
+@@ -24,6 +24,8 @@
+ #include <QtWaylandCompositor/QWaylandCompositor>
+ 
+ #include <QtCore/QPoint>
++#include <QtCore/QHash>
++#include <QtCore/QSet>
+ #include <QtCore/qvarlengtharray.h>
+ #include <QtCore/private/qobject_p.h>
+ 
+@@ -45,10 +47,13 @@
+ 
+ private:
+     void touch_release(Resource *resource) override;
++    void touch_destroy_resource(Resource *resource) override;
+     int toSequentialWaylandId(int touchId);
+ 
+     QWaylandSeat *seat = nullptr;
+     QVarLengthArray<int, 10> ids;
++    QHash<Resource *, QSet<int>> activeContacts;
++    QSet<Resource *> pendingFrames;
+ };
+ 
+ QT_END_NAMESPACE

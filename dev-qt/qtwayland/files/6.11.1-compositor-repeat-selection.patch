@@ -1,0 +1,19 @@
+From: QindaWeb contributors
+Subject: [PATCH] compositor: preserve a reoffered clipboard source
+
+GTK adds SAVE_TARGETS and submits the same wl_data_source again. Cancelling
+that still-current source makes Firefox destroy it before retained clipboard
+data arrives. Keep it alive while refreshing offers and retention. A different
+source, or clearing the selection, still cancels the previous owner.
+
+--- a/src/compositor/wayland_wrapper/qwldatadevice.cpp
++++ b/src/compositor/wayland_wrapper/qwldatadevice.cpp
+@@ -161,7 +161,7 @@
+ 
+     DataSource *dataSource = source ? DataSource::fromResource(source) : nullptr;
+ 
+-    if (m_selectionSource)
++    if (m_selectionSource && m_selectionSource != dataSource)
+         m_selectionSource->cancel();
+ 
+     m_selectionSource = dataSource;
