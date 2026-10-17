@@ -764,3 +764,44 @@ root-owned recipe, and requires QindaPortage for visible setup actions. A
 verified native helper reports Unavailable until guest image/package/task
 facts are admitted; package presence is not an Android-app launch claim.
 The desktop package and its existing files are not replaced.
+
+
+### October 16 stability round: desktop r30, fork r7
+
+Desktop `0.1.0_pre20261002-r30` is one full build of integrated container-wm commit `4930c053f6f0877ff4bd70eb1240a0b3de7f6cc3`. It ends the
+R23/R25/R28/R29 repack chain. The six stability lanes (ADR-0377..0396) contribute:
+
+- event-driven, self-healing session liveness;
+- coalesced compositor title updates and per-window visibility degradation;
+- lock authentication that starts on input, and a greeter that survives recoverable faults;
+- shell task-list, catalog, audio-meter lease and Settings teardown repairs;
+- capture-backend exit reasons;
+- the session-bus `OOMPolicy=continue` drop-in;
+- header isolation (ADR-0388): every `<qindaqt/...>` include must resolve inside the tree. Earlier builds on
+  qinda compiled the power service and keyring daemon against the installed desktop's older headers, so
+  they disagreed with their own libraries about class layout.
+
+Native power exclusivity stays OFF. The Windows program runner and the Android Applications manager and
+collector are left to `gui-apps/qindaqt-windows-runner` and `gui-apps/qindaqt-android-applications`, which own
+those files. The desktop requires the exact fork `6.6.6_p1-r7`, `gabbee-0.1.0_p20261002-r7`,
+QindaTK r18 and `qindaqt-removable-media-0.1.0_p20260930-r3`.
+
+Fork `6.6.6_p1-r7` pins qindaqt-kwin `d3d54af3d844507748f352ee540389624f6eae07`:
+
+- permission checks never walk network, FUSE or autofs mounts;
+- display power follows bus owner changes;
+- the locker and capture broker are relaunched with backoff;
+- children keep their inherited core limit.
+
+Public types and the plugin ABI serial are unchanged.
+
+Both archives were cut twice with `git archive` and `gzip -n -9`, and the cuts are byte-identical. Their sizes and
+hashes are in the Manifests.
+
+`sys-power/qindaqt-power-defaults-1` is installed per machine, not through the profile set. On the laptop:
+`qinda-sync packages =sys-power/qindaqt-power-defaults-1`, then `sudo emerge --noreplace
+sys-power/qindaqt-power-defaults` to record it in world, then
+`systemctl daemon-reload && systemctl reload systemd-logind`.
+
+`virtual/notification-daemon-0-r1[qindaqt]` is satisfied by the desktop's own notification host, so
+`x11-misc/notification-daemon` can be depcleaned.
