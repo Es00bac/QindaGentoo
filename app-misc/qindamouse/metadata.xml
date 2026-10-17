@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person"><email>cabewse@users.noreply.github.com</email><name>QindaQt contributors</name></maintainer>
+  <use>
+    <flag name="gui">Install the QindaTK configuration window</flag>
+    <flag name="input-service">Install the optional per-user input service, uinput configuration and supported USB input access rules</flag>
+  </use>
+</pkgmetadata>
