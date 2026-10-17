@@ -22,6 +22,9 @@
 =dev-util/claude-code-2.1.289
 =dev-util/opencode-bin-1.18.34
 =app-office/obsidian-1.13.7-r1
+# 2026-10-17: r31 repairs selected-radio helper bus visibility; Gabbee r8
+# verifies both ends of native shortcut sessions. Receiver adoption remains
+# explicit; this pin does not claim a running session or sleep qualification.
 # 2026-10-16 stability round: desktop r30 is one full build of integrated
 # container-wm main (ADR-0377..0396) with the exact fork r7, Gabbee r7 (no
 # restart drop-ins on QindaQt units) and the QindaQt notification host
@@ -29,7 +32,7 @@
 # removable-media lines now name what both hosts already run, so a plain run
 # no longer downgrades them. sys-power/qindaqt-power-defaults is per machine
 # (the laptop), not part of this shared list.
-=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r30
+=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r31
 =virtual/notification-daemon-0-r1
 =x11-misc/qindaqt-xdg-menu-1.0.0
 =gui-wm/qindaqt-kwin-6.6.6_p1-r7
@@ -90,7 +93,7 @@
 # The screensavers follow their newest releases instead of the 2026-09-23
 # pins, and qinda gains what only qinda-top had: Gabbee's offline Whisper
 # dictation, VenusPro, SDRangel, QindaStudio's and OBS's plugins, QindaFox.
-=app-accessibility/gabbee-0.1.0_p20261002-r7
+=app-accessibility/gabbee-0.1.0_p20261002-r8
 =app-accessibility/faster-whisper-models-20260922
 =dev-python/av-17.0.1
 =app-misc/venusprolinux-0.3.0_p20260918-r1
