@@ -191,3 +191,6 @@
 # Afterbliss: SomeQindaWorld 002dead, mission-driven stages and useful crew.
 # New foes and jobs, SNES controls, audio; all 72 routes pass for both heroes.
 =games-action/afterbliss-0.3.0_p20261011
+
+# Origin beta-20261017.1: validated portable launcher; private channels remain user configuration.
+=games-util/origin-beta-bin-0.2.0_p20261017

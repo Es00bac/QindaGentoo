@@ -1,0 +1,5 @@
+#!/bin/sh
+# Keep the portable Qt runtime separate from the desktop's Qt/QindaTK plugins.
+unset QT_PLUGIN_PATH QT_QPA_PLATFORM_PLUGIN_PATH QML_IMPORT_PATH QML2_IMPORT_PATH
+export LD_LIBRARY_PATH=/opt/origin-beta/lib
+exec /opt/origin-beta/origin-beta "$@"

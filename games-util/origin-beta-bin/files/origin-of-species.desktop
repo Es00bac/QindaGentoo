@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Origin Beta
+Comment=Qind Qompany: Origin of Species — private multiplayer beta
+Exec=origin-beta
+Icon=applications-games
+Terminal=false
+Categories=Game;
+StartupNotify=true
+StartupWMClass=origin-beta
