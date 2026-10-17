@@ -21,6 +21,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `media-gfx/qindastudio` | `QindaStudio` |
 | `media-gfx/qindapaint` | `QindaPaint` (native Rust brush engine and QindaTK painting interface; optional preview package) |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
+| `app-misc/qindamouse` | `QindaMouse` (optional multi-family mouse configuration and host bindings; [candidate notes](app-misc/qindamouse/README.md)) |
 | `games-util/origin-beta-bin` | Qind Qompany: Origin of Species private beta launcher; validated binary from qinda |
 | `app-office/obsidian` | Obsidian public Linux desktop release, packaged through Portage |
 | `sys-boot/qinda-boot` | `QindaBoot` (graphical boot menu and Plymouth splash) |
