@@ -28,7 +28,8 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "logind reads its new defaults when it next starts. To apply them"
-	elog "without a reboot, run: systemctl reload systemd-logind"
-	elog "The sleep and freeze settings apply to the next suspend."
+	elog "To apply these defaults without a reboot, run:"
+	elog "  systemctl daemon-reload && systemctl reload systemd-logind"
+	elog "daemon-reload loads the no-freeze drop-ins into the sleep services;"
+	elog "the sleep settings apply from the next suspend."
 }
