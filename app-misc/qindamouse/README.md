@@ -1,4 +1,39 @@
-# QindaMouse integration and illustration candidate
+# QindaMouse package
+
+## USB connection update, 2026-10-18
+
+`qindamouse-0.1.0_p20261017-r4` pins source commit
+`a183188157d8325ca465e4b452e89780a80c8782`, branch
+`fix/hotplug-basilisk-20261018`, in qinda's QindaMouse hub. It adds the wired
+Razer Basilisk V3 (1532:0099), its own three-view SVG, source-derived current
+profile bindings/Hypershift, X/Y DPI, polling and wheel controls. All six
+Razer definitions now select the vendor-established feature capability and
+prefer the documented configuration interface. Shared discovery recovers
+pairing, access races and reconnects, and serializes configuration traffic.
+
+The package refreshes udev access for already attached supported USB devices.
+r4 fixes the live-root guard for EAPI 7+ (empty EROOT); r3 remains available
+for historical reproduction. It loads uinput with the optional service USE
+flag but does not enable the user service.
+
+The final source passed 530 offline checks. The staged and installed payloads
+match all 353 runtime source files, with 128 distinct model definitions/SVGs.
+The r4 image is 26.5 MiB. Installed verification on qinda-top reads the actual
+Basilisk as the normal desktop user, on the same USB/HID generation, without
+replugging or configuration writes. Firmware 1.2, 1600 DPI, 1000 Hz, both
+binding layers and wheel settings read successfully; the installed GUI render
+shows the connected mouse. Portage merged r4 with `gui input-service -test`;
+explicit source checks supply the test results. The optional input service
+remains disabled. Full profile/RGB serialization and advanced codecs remain
+named gaps rather than hardware-confirmation gates.
+
+Source evidence and validation are recorded in QindaMouse's
+`docs/verification/device-connections-20261018.md`,
+`docs/protocols/razer-basilisk-v3.md`, and `artifacts/detection-20261018/`.
+This remains an optional package; desktop profiles and delivery metadata are
+unchanged.
+
+## Earlier r2 illustration update
 
 `qindamouse-0.1.0_p20261017-r2` pins QindaMouse runtime commit
 `a2d6f3e29f1283bd3725cf5a5e9f260f8fe7313b` from
