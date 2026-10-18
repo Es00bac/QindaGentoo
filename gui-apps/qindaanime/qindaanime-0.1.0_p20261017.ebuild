@@ -41,5 +41,6 @@ src_test() {
 pkg_nofetch() {
 	einfo "Supply the immutable source archive from QindaAnime commit ${QINDAANIME_COMMIT}."
 	einfo "From a synchronized QindaAnime checkout:"
-	einfo "git -c tar.umask=022 archive --format=tar --prefix=QindaAnime-${QINDAANIME_COMMIT}/ ${QINDAANIME_COMMIT} | gzip -n > ${DISTDIR}/${PF}.tar.gz"
+	einfo "git -c tar.umask=022 archive --format=tar --prefix=QindaAnime-${QINDAANIME_COMMIT}/ ${QINDAANIME_COMMIT} | gzip -n > ${PF}.tar.gz"
+	einfo "Place ${PF}.tar.gz in Portage's configured distfiles directory."
 }
