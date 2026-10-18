@@ -32,7 +32,7 @@
 # removable-media lines now name what both hosts already run, so a plain run
 # no longer downgrades them. sys-power/qindaqt-power-defaults is per machine
 # (the laptop), not part of this shared list.
-=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r31
+=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r32
 =virtual/notification-daemon-0-r1
 =x11-misc/qindaqt-xdg-menu-1.0.0
 =gui-wm/qindaqt-kwin-6.6.6_p1-r7

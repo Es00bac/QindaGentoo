@@ -153,6 +153,14 @@ running compositor can load fresh code without restarting. The r31 dependencies,
 ABI, profiles and other program bytes are retained. This is the existing bounded
 repair mechanism; unrelated source changes still require a full release build.
 
+The signed r32 artifact is 63,313,920 bytes (SHA-256
+`83637df1d16e3af764a4a87027093f1b80ec5475682c5cfc3d2b08ec6b84f5ca`).
+Signature, embedded recipe and retained-image parity pass. Laptop Portage install
+and all 2,374 installed file/symlink comparisons pass; the fresh plugin loads
+in the original compositor with saved profiles unchanged. Its normal-priority
+worker is live. The final trace has no long stalls; the controller disconnected
+between traces, so connected-device playback is not inferred from that sample.
+
 Desktop pre20261002-r29 is a focused overview selection candidate. It pins source `42ec5bfa87721dbba05157fdf6030071e71da5d6`, applying the independently reviewed Gather pointer repair to the exact R23 shell source retained by R28. Portage verifies the complete immutable signed R28 image and its 2,622-path ledger, builds the shell and the generated plugin required for staging, stages the installed RPATH, and replaces only `/usr/bin/qindaqt-shell`. Existing display/keyring repairs, shared libraries and services remain at R28 bytes. The signed 63,600,640-byte R29 artifact (SHA-256 d1700908f34a690850132e58c76fc1a179ceaf93451a6da80864097496c16a3b) passes full signature, embedded recipe and image parity on both machines. Exact-artifact private mouse/touch ordinary-window raise/focus and laptop Portage/supervised-shell adoption pass, preserving KWin and 19 other tracked processes. The old shell also passes the private ordinary cases; physical confirmation of the owner’s hot-corner failure remains open. The shared delivery atom is unchanged.
 
 ### Supplied Breeze Painted icon family
