@@ -127,6 +127,13 @@ hub. Its nine offline test programs include real synthetic HLS download/playback
 with the fetcher disconnected. It is explicitly selectable and is not added to
 the desktop's default package set.
 
+Revision 0.1.0_p20261018-r1 pins `b4d830c` and fixes native player creation under
+the desktop's en_US.utf8 numeric locale. libmpv requires C numeric parsing;
+terminal LC overrides had concealed that requirement. Fatal initialization
+errors now remain visible and prevent episode authentication or silent queuing.
+The native regressions and an eight-start GUI probe exercise the desktop locale.
+Historical archives and recipes remain unchanged.
+
 ### Removable media
 
 `gui-apps/qindaqt-removable-media` owns the removable-media executable, launcher
