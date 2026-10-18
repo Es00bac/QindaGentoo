@@ -116,10 +116,11 @@ and a QindaWrite document are separate installed-printer acceptance checks.
 `gui-apps/qindaanime` is an optional native QindaTK anime.nexus catalog and mpv
 player. It keeps watchlists, favorites, ordered playlists and watch progress in
 local SQLite, with no site account. It uses the site's anonymous verification,
-filler flags and WebVTT intro/outro chapters. The initial snapshot pins
-`5c80bcdd89ec6277d56a67cf808664ae2ea86c5c`; its immutable fetch-restricted
-archive is reproducible from the QindaAnime hub. It is explicitly selectable and
-is not added to the desktop's default package set.
+filler flags and WebVTT intro/outro chapters. Revision r2 pins
+`23e10e7693e04ef5c95a8026ee814b72eb2ec439` and reports stalled video startup, including errors
+in fullscreen and video-only mode. Its immutable fetch-restricted archive is
+reproducible from the QindaAnime hub. It is explicitly selectable and is not
+added to the desktop's default package set.
 
 ### Removable media
 
