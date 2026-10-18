@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>qindaqt@example.invalid</email>
+    <name>QindaQt contributors</name>
+  </maintainer>
+  <longdescription>
+    QindaTK catalog browsing and local watchlists, favorites, ordered playlists
+    and watch progress for anime.nexus, with native libmpv rendering.
+  </longdescription>
+</pkgmetadata>

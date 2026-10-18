@@ -8,6 +8,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `gui-wm/qindaqt-desktop` | `container-wm` |
 | `gui-apps/qindaqt-apps`, `gui-apps/qindaqt-system-monitor`, `gui-apps/qindaqt-removable-media`, `gui-apps/qindaqt-windows-runner` | `container-wm` |
 | `gui-apps/qindaoffice` | `QindaOffice` |
+| `gui-apps/qindaanime` | `QindaAnime` |
 | `net-print/qindaqt-printing` | QindaQt printing defaults (CUPS and packaged drivers) |
 | `net-print/ipp-usb` | OpenPrinting driverless USB transport |
 | `gui-apps/qqterm` | `QindaQt_Apps` |
@@ -109,6 +110,16 @@ python3 -m unittest discover -s tests -p test_printing_defaults.py -v
 
 These fixtures do not print or alter the running machine. A physical test page
 and a QindaWrite document are separate installed-printer acceptance checks.
+
+### QindaAnime
+
+`gui-apps/qindaanime` is an optional native QindaTK anime.nexus catalog and mpv
+player. It keeps watchlists, favorites, ordered playlists and watch progress in
+local SQLite, with no site account. It uses the site's anonymous verification,
+filler flags and WebVTT intro/outro chapters. The initial snapshot pins
+`5c80bcdd89ec6277d56a67cf808664ae2ea86c5c`; its immutable fetch-restricted
+archive is reproducible from the QindaAnime hub. It is explicitly selectable and
+is not added to the desktop's default package set.
 
 ### Removable media
 
