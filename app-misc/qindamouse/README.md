@@ -28,9 +28,15 @@ in `docs/verification/completion-20261017.md` and
 `artifacts/verification-20261017/`.
 
 This package is optional and does not alter `metadata/qinda-delivery` or the
-desktop profile. This continuation stages an image only: no host merge or
-input-service activation occurred. The service is installed only with
-`input-service` USE and is enabled separately by the user.
+desktop profile. The service is installed only with `input-service` USE and
+is enabled separately by the user.
+
+On 2026-10-18, qinda-top installed r2 through Portage with `gui input-service
+-test` and Python 3.14. All 348 installed runtime source files match the
+pinned commit. The installed CLI, desktop entry and user-unit validation
+passed, and the installed launcher rendered the Venus Pro demo outside the
+source checkout. No supported mouse was connected; the optional input service
+remains disabled and inactive.
 
 Model protocol coverage remains 127 audited, one at full Windows parity and
 126 with named gaps. Implemented vendor-derived operations do not require
