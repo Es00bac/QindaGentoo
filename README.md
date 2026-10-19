@@ -8,7 +8,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `gui-wm/qindaqt-desktop` | `container-wm` |
 | `gui-apps/qindaqt-apps`, `gui-apps/qindaqt-system-monitor`, `gui-apps/qindaqt-removable-media`, `gui-apps/qindaqt-windows-runner` | `container-wm` |
 | `gui-apps/qindaoffice` | `QindaOffice` |
-| `gui-apps/qindaanime` | `QindaAnime` |
+| `gui-apps/qindaanime` | `QindaAnime` (QindaStream) |
 | `net-print/qindaqt-printing` | QindaQt printing defaults (CUPS and packaged drivers) |
 | `net-print/ipp-usb` | OpenPrinting driverless USB transport |
 | `gui-apps/qqterm` | `QindaQt_Apps` |
@@ -112,10 +112,11 @@ python3 -m unittest discover -s tests -p test_printing_defaults.py -v
 These fixtures do not print or alter the running machine. A physical test page
 and a QindaWrite document are separate installed-printer acceptance checks.
 
-### QindaAnime
+### QindaStream
 
-`gui-apps/qindaanime` is an optional native QindaTK anime.nexus catalog and mpv
-player. It keeps watchlists, favorites, ordered playlists and watch progress in
+`gui-apps/qindaanime` delivers QindaStream, an optional native QindaTK streaming
+player for movies, TV and anime from anime.nexus and SolarMovies.
+It keeps watchlists, favorites, ordered playlists and watch progress in
 local SQLite, with no site account. It uses the site's anonymous verification,
 filler flags and WebVTT intro/outro chapters. Snapshot 0.1.0_p20261018 adds offline
 episode downloads with queue/cancel/resume/remove controls and next-episode
@@ -133,6 +134,14 @@ terminal LC overrides had concealed that requirement. Fatal initialization
 errors now remain visible and prevent episode authentication or silent queuing.
 The native regressions and an eight-start GUI probe exercise the desktop locale.
 Historical archives and recipes remain unchanged.
+
+Snapshot 0.1.0_p20261019 pins `d8dc1cf` and renames the app to QindaStream,
+with a scalable play/screen/broadcast icon bundled into the window and header
+and installed for the desktop launcher. The package atom, internal storage
+identity and library backup format remain compatible with QindaAnime;
+`qindaanime` and the previous desktop shortcut launch `qindastream`.
+All eleven offline tests pass, with visual checks at 1320×820 and 940×620
+and launcher checks under X11. This optional package remains explicitly selected.
 
 ### Removable media
 

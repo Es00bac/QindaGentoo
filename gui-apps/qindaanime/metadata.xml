@@ -6,7 +6,10 @@
     <name>QindaQt contributors</name>
   </maintainer>
   <longdescription>
-    QindaTK catalog browsing and local watchlists, favorites, ordered playlists
-    and watch progress for anime.nexus, with native libmpv rendering.
+    QindaStream streams movies, TV and anime from anime.nexus and SolarMovies
+    with a native QindaTK interface and libmpv player. Local watchlists,
+    favorites, ordered playlists, downloads and watch progress work without
+    a site account. Previously named QindaAnime; the package identity is kept
+    for compatible upgrades.
   </longdescription>
 </pkgmetadata>
