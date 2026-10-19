@@ -847,3 +847,12 @@ sys-power/qindaqt-power-defaults` to record it in world, then
 
 `virtual/notification-daemon-0-r1[qindaqt]` is satisfied by the desktop's own notification host, so
 `x11-misc/notification-daemon` can be depcleaned.
+
+### Desktop harmony candidate (2026-10-19)
+
+`gui-wm/qindaqt-desktop-0.1.0_pre20261002-r33` pins source
+`011a523b713e3a0f54690a1ef27d248a2fbfa46c` for a full source-built
+runtime/theme candidate. It preserves the existing native-power cutover setting
+and leaves unfinished Neon artwork outside the ordinary desktop image.
+Build/install and sleep/presentation receipts are separate gates; this recipe
+does not claim an installed or film-quality release.
