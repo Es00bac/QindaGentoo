@@ -42,7 +42,7 @@
 # with the rebuilt Office integration. The r17 Scroll focus-reveal repair
 # remains in this toolkit source; Office also paints long pages in bounded tiles.
 =dev-libs/qindatk-0.1.0-r18
-=gui-apps/qindaoffice-0.1.0_p20261015
+=gui-apps/qindaoffice-0.1.0_p20261019
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
 =x11-themes/qinda-seven-1.0.0_p20260928-r2
@@ -190,6 +190,9 @@
 # 2026-10-15: qindaoffice p20261015 (QindaOffice 141dd45, D-111/D-112): Mail
 #   reads imported KWallet 6 passwords (UTF-8), so imported IMAP accounts sync
 #   and HTML mail renders again; a Gmail app-password account is mail only.
+# 2026-10-19: qindaoffice p20261019 (QindaOffice c3b1765, D-113): dialogs no
+#   longer close themselves after Test and save or a save error, so a Gmail
+#   app password saves; 45 dialogs suite-wide.
 
 # Afterbliss: SomeQindaWorld 002dead, mission-driven stages and useful crew.
 # New foes and jobs, SNES controls, audio; all 72 routes pass for both heroes.
