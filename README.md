@@ -863,3 +863,9 @@ legacy keyboard and saver-preview suites pass. The optional
 `gui-apps/qindaqt-neon-confluence-preview-0.1.0_p20261019-r1` owns only its
 scene directory and remains a limited-animation preview. Signed build,
 installed readback and running-session adoption are distinct gates.
+
+Desktop r35 pins `89e341e468f398ae3ce1ae6a26bd89a7cdf30877` and also restores the
+Settings1 title-shape enum constraint. Its rejection assertion fails before
+the schema fix and passes afterward. R34 was stopped before producing any
+binary artifact; neither its committed archive nor its Manifest was recut.
+R35 preserves native-power exclusivity OFF and the independently owned preview.
