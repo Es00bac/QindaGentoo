@@ -856,3 +856,10 @@ runtime/theme candidate. It preserves the existing native-power cutover setting
 and leaves unfinished Neon artwork outside the ordinary desktop image.
 Build/install and sleep/presentation receipts are separate gates; this recipe
 does not claim an installed or film-quality release.
+
+Desktop r34 pins `da2a20f4c4a0276163943ac82c368466c6f9bcb7` and repairs the native Power page
+constructing hidden legacy controls without a policy port. Source regression,
+legacy keyboard and saver-preview suites pass. The optional
+`gui-apps/qindaqt-neon-confluence-preview-0.1.0_p20261019-r1` owns only its
+scene directory and remains a limited-animation preview. Signed build,
+installed readback and running-session adoption are distinct gates.

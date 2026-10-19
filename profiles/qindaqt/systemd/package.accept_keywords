@@ -133,3 +133,6 @@ app-misc/qindadeck-tools ~amd64
 app-misc/chatgpt-desktop ~amd64
 sys-power/qindaqt-power-defaults ~amd64
 games-util/origin-beta-bin ~amd64
+
+# Optional native animation preview; never selected by @profile.
+gui-apps/qindaqt-neon-confluence-preview ~amd64
