@@ -44,7 +44,7 @@
 # 2026-10-19: qindatk r19 (QindaTK 1802043, D-353): a Gmail inbox of 158k
 # messages syncs in seconds; same ABI as r18.
 =dev-libs/qindatk-0.1.0-r19
-=gui-apps/qindaoffice-0.1.0_p20261019
+=gui-apps/qindaoffice-0.1.0_p20261020
 =gui-apps/qindaqt-system-monitor-0.1.0_pre20260919-r2
 =x11-misc/dotool-1.6
 =x11-themes/qinda-seven-1.0.0_p20260928-r2
@@ -195,6 +195,9 @@
 # 2026-10-19: qindaoffice p20261019 (QindaOffice c3b1765, D-113): dialogs no
 #   longer close themselves after Test and save or a save error, so a Gmail
 #   app password saves; 45 dialogs suite-wide.
+# 2026-10-20: qindaoffice p20261020 (QindaOffice 12f2328, D-114): one Google
+#   sign-in covers mail, calendar, contacts, Tasks and Drive; Drive Open/Save
+#   in every document app.
 
 # Afterbliss: SomeQindaWorld 002dead, mission-driven stages and useful crew.
 # New foes and jobs, SNES controls, audio; all 72 routes pass for both heroes.
