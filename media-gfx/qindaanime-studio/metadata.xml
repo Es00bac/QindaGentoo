@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>jarrodmcary@gmail.com</email>
+    <name>Jarrod C</name>
+  </maintainer>
+  <use>
+    <flag name="codex">Install Codex for subscription-backed serial image generation</flag>
+    <flag name="video">Install ffmpeg with H.264 encoding for MP4 export</flag>
+  </use>
+</pkgmetadata>
