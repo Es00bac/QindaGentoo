@@ -1,0 +1,85 @@
+--- a/src/pipeline/diffusion_engine.cpp
++++ b/src/pipeline/diffusion_engine.cpp
+@@ -7,6 +7,7 @@
+ #include <list>
+ #include <mutex>
+ #include <set>
++#include <sstream>
+ #include <tuple>
+ #include <type_traits>
+ #include <unordered_set>
+@@ -2451,6 +2452,26 @@
+     float img_cfg_scale = guidance.img_cfg;
+     float slg_scale     = guidance.slg.scale;
+     bool slg_uncond     = sd::guidance::parse_skip_layer_guidance_uncond_arg(extra_sample_args);
++    // Match the official MOSS pipeline: configurable negative-branch skipping,
++    // independent from standard SLG, within a half-open denoising interval.
++    std::vector<int> moss_uncond_layers = {22};
++    for (const auto& entry : parse_key_value_args(extra_sample_args, "extra sample arg")) {
++        if (entry.first != "moss_uncond_layers") continue;
++        moss_uncond_layers.clear();
++        if (entry.second == "none") continue;
++        std::istringstream indices(entry.second);
++        std::string token;
++        while (std::getline(indices, token, ':')) {
++            size_t consumed = 0;
++            int index = -1;
++            try { index = std::stoi(token, &consumed); } catch (...) {}
++            if (consumed != token.size() || index < 0 || index >= 42) {
++                LOG_ERROR("Invalid MOSS layer index: %s", token.c_str());
++                return {};
++            }
++            moss_uncond_layers.push_back(index);
++        }
++    }
+ 
+     std::vector<float> guidance_schedule = sd::guidance::parse_guidance_schedule(extra_sample_args);
+     if (!guidance_schedule.empty() && guidance_schedule.size() != sigmas.size() - 1) {
+@@ -2617,7 +2638,12 @@
+         sd::guidance::GuidanceInput step_guidance_input;
+         step_guidance_input.step          = step;
+         step_guidance_input.schedule_size = sigmas.size();
+-        bool is_skiplayer_step            = skip_layer_guidance.is_enabled_for_step(step_guidance_input);
++        const float moss_progress = static_cast<float>(std::max(0, step - 1)) / steps;
++        const bool moss_skip_active = moss_progress >= guidance.slg.layer_start &&
++                                       moss_progress < guidance.slg.layer_end;
++        bool is_skiplayer_step = version == VERSION_MOSS_IMAGE
++                                     ? has_skiplayer && moss_skip_active
++                                     : skip_layer_guidance.is_enabled_for_step(step_guidance_input);
+ 
+         compute_sample_controls(control_image,
+                                 noised_input,
+@@ -2882,12 +2908,11 @@
+         if (uncond_out.empty() && !uncond.empty()) {
+             if (!skip_uncond) {
+                 const std::vector<int>* uncond_skip_layers = nullptr;
+-                const std::vector<int> moss_skip_layers    = {22};
+                 if (is_skiplayer_step && slg_uncond) {
+                     LOG_VERBOSE("Skipping layers at uncond step %d\n", step);
+                     uncond_skip_layers = &skip_layer_guidance.layers();
+-                } else if (version == VERSION_MOSS_IMAGE) {
+-                    uncond_skip_layers = &moss_skip_layers;
++                } else if (version == VERSION_MOSS_IMAGE && moss_skip_active) {
++                    uncond_skip_layers = &moss_uncond_layers;
+                 }
+                 uncond_out = run_condition(uncond,
+                                            uncond.c_concat.empty() ? nullptr : &uncond.c_concat,
+@@ -2939,7 +2964,17 @@
+             }
+         }
+ 
+-        guided = skip_layer_guidance.forward(guidance_input, std::move(guided));
++        if (version == VERSION_MOSS_IMAGE) {
++            if (is_skiplayer_step && slg_scale != 0.f && guidance_input.predict_skip_layer) {
++                auto skipped = guidance_input.predict_skip_layer();
++                if (skipped.empty()) return {};
++                // Without CFG, official MOSS starts from the skipped prediction.
++                const float correction = uncond_out.empty() ? slg_scale - 1.f : slg_scale;
++                guided.pred += (cond_out - skipped) * correction;
++            }
++        } else {
++            guided = skip_layer_guidance.forward(guidance_input, std::move(guided));
++        }
+         if (guided.pred.empty()) {
+             return {};
+         }
