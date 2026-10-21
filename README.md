@@ -912,3 +912,17 @@ The r42 QML-only follow-up owns confirmation dialogs on demand and disposes
 them after closing. It retains the same signed r40 base and controller runtime;
 the complete application opening/shutdown checks are the adoption gate for both
 Controllers and Macros. Source fixtures also verify both cancellation lifetimes.
+
+The final r42 delivery is Portage-installed on qinda-top. Its signed artifact is
+87,674,880 bytes, SHA-256
+`2533aade6b725d94b50995a0519a68191a3dae524045ecd5de62b5bd4095e92c`.
+The exact embedded recipe/signature and complete image verify; 2,699 r40 base
+paths remain unchanged and only four Input paths change. All 2,420 installed
+files/symlinks match. Three complete application opening/shutdown cycles per
+Controllers/Macros destination and both final installed probes are warning-free.
+The owning source implementation is `0c1e29fb3`; 14 focused groups / 128 QtTest
+results pass without failures or skips. Live native macro assignment, wait-only
+playback and cleanup pass. The original compositor/shell and r40 controller
+plugin remain running; five DualSense profiles are updated and five other
+profiles plus saved motion speeds are preserved. The shared r32 catalog remains
+unchanged. No model worker or independent model review was launched.
