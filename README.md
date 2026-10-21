@@ -878,3 +878,20 @@ Settings1 title-shape enum constraint. Its rejection assertion fails before
 the schema fix and passes afterward. R34 was stopped before producing any
 binary artifact; neither its committed archive nor its Manifest was recut.
 R35 preserves native-power exclusivity OFF and the independently owned preview.
+
+### Programmable controller and shared macro update
+
+`gui-wm/qindaqt-desktop-0.1.0_pre20261002-r40` is an explicit laptop update over
+the signed r39 image. It adds controller keyboard/mouse combinations, Unicode
+text blocks, named RGB profiles, held layers, contact gyro and a shared macro
+editor with native keyboard and physical mouse triggers. Fullscreen media alone
+no longer yields desktop control. The installed Harmony Settings source remains
+the packaging baseline; unrelated desktop programs are retained from the
+authenticated r39 image. The shared delivery catalog remains at its existing
+r32 baseline. This recipe does not select a system-wide new desktop baseline.
+
+Its source `645fb4dfc89d47cd63fc897723217478ba9e4402` carries verified input
+candidate `8ae1a235f` plus the installed source prerequisite. Fourteen focused
+CTest groups (126 QtTest results) and strict source documentation checks pass.
+The repack helper pins and authenticates every r39 image path before staging,
+and the new plugin filename permits session adoption without restarting KWin.
