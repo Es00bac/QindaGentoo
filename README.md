@@ -907,3 +907,8 @@ r40 image. It gives confirmation dialogs a positive wrapping width while their
 overlay is being sized or destroyed. The controller plugin remains r40, with
 its current services/profiles and all other programs preserved. The immutable
 r40 source archive is reused with a tracked QML patch, not recut.
+
+The r42 QML-only follow-up owns confirmation dialogs on demand and disposes
+them after closing. It retains the same signed r40 base and controller runtime;
+the complete application opening/shutdown checks are the adoption gate for both
+Controllers and Macros. Source fixtures also verify both cancellation lifetimes.
