@@ -1,15 +1,16 @@
 # SPDX-License-Identifier: GPL-2.0-only
 # Copyright 2026 QindaQt contributors
 EAPI=8
-inherit cmake xdg
+PYTHON_COMPAT=( python3_{11..14} )
+inherit cmake python-any-r1 xdg
 
 DESCRIPTION="Native QindaTK anime posing, facial animation and layered drawing studio"
 HOMEPAGE="https://github.com/Es00bac"
 QINDAANIME_COMMIT="0084a972f1ec9b29d8573f57f36ae1e68e5dd87c"
 SRC_URI="${PF}.tar.gz"
 S="${WORKDIR}/QindaAnimeStudio-${QINDAANIME_COMMIT}"
-RESTRICT="fetch !test? ( test )"
 LICENSE="LGPL-3+"
+RESTRICT="fetch !test? ( test )"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+codex +video test"
@@ -28,8 +29,14 @@ BDEPEND="
 	app-alternatives/ninja
 	>=dev-qt/qtshadertools-6.8:6
 	virtual/pkgconfig
-	test? ( >=dev-lang/python-3.11 )
+	test? ( ${PYTHON_DEPS} )
 "
+
+pkg_setup() {
+	if use test; then
+		python-any-r1_pkg_setup
+	fi
+}
 
 src_configure() {
 	local mycmakeargs=(
@@ -50,5 +57,5 @@ src_install() {
 
 pkg_nofetch() {
 	einfo "Supply the immutable source archive from QindaAnimeStudio commit ${QINDAANIME_COMMIT}:"
-	einfo "git -c tar.umask=022 archive --format=tar --prefix=QindaAnimeStudio-${QINDAANIME_COMMIT}/ ${QINDAANIME_COMMIT} | gzip -n > ${DISTDIR}/${PF}.tar.gz"
+	einfo "git -c tar.umask=022 archive --format=tar --prefix=QindaAnimeStudio-${QINDAANIME_COMMIT}/ ${QINDAANIME_COMMIT} | gzip -n > ${PF}.tar.gz"
 }
