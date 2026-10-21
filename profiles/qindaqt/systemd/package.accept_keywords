@@ -137,3 +137,8 @@ games-util/origin-beta-bin ~amd64
 
 # Optional native animation preview; never selected by @profile.
 gui-apps/qindaqt-neon-confluence-preview ~amd64
+
+# Optional native MOSS image studio and qinda generation backend
+media-gfx/qindamoss ~amd64
+sci-ml/stable-diffusion-cpp ~amd64
+sci-ml/moss-image-models ~amd64
