@@ -14,6 +14,7 @@ QINDAQT_COMMIT="645fb4dfc89d47cd63fc897723217478ba9e4402"
 SRC_URI="https://github.com/Es00bac/QindaQt/archive/${QINDAQT_COMMIT}.tar.gz -> ${PF}.tar.gz
  qindaqt-desktop-0.1.0_pre20261002-r39-1.gpkg.tar"
 S="${WORKDIR}/QindaQt-${QINDAQT_COMMIT}"
+PATCHES=( "${FILESDIR}/qindaqt-desktop-r40-shortcuts-pic.patch" )
 # SDL3 controller input is an independent plugin over the installed compositor SDK.
 
 LICENSE="GPL-3+"

@@ -895,3 +895,9 @@ candidate `8ae1a235f` plus the installed source prerequisite. Fourteen focused
 CTest groups (126 QtTest results) and strict source documentation checks pass.
 The repack helper pins and authenticates every r39 image path before staging,
 and the new plugin filename permits session adoption without restarting KWin.
+
+The r40 recipe additionally applies its tracked shortcut-client PIC patch: the
+production static client is also linked into the resident controller module.
+The focused source fixture now builds that actual target rather than a test
+substitute. The immutable source archive is retained; incremental packaging
+reuses the completed compilation after applying this build-only correction.

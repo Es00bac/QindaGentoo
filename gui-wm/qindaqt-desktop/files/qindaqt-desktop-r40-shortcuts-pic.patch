@@ -1,0 +1,23 @@
+diff --git a/src/services/shortcuts_client/CMakeLists.txt b/src/services/shortcuts_client/CMakeLists.txt
+index ba4d81f15..f6ab3dc4d 100644
+--- a/src/services/shortcuts_client/CMakeLists.txt
++++ b/src/services/shortcuts_client/CMakeLists.txt
+@@ -1,13 +1,17 @@
+ # SPDX-License-Identifier: GPL-3.0-or-later
+ qt_add_library(qindaqt_shortcuts_client STATIC)
+ add_library(QindaQt::ShortcutsClient ALIAS qindaqt_shortcuts_client)
++# Resident integrations link this client into compositor modules as well as executables.
++set_target_properties(qindaqt_shortcuts_client PROPERTIES POSITION_INDEPENDENT_CODE ON)
+ target_sources(qindaqt_shortcuts_client PRIVATE transport.cpp shortcut_lease.cpp
+     PUBLIC FILE_SET HEADERS BASE_DIRS include FILES include/qindaqt/services/shortcuts_client/transport.h include/qindaqt/services/shortcuts_client/shortcut_lease.h)
+ target_include_directories(qindaqt_shortcuts_client PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+ target_compile_features(qindaqt_shortcuts_client PUBLIC cxx_std_20)
+ target_compile_definitions(qindaqt_shortcuts_client PRIVATE QT_NO_KEYWORDS)
+ target_link_libraries(qindaqt_shortcuts_client PUBLIC Qt6::Core Qt6::Gui Qt6::DBus)
+-qindaqt_enable_warnings(qindaqt_shortcuts_client)
++if(COMMAND qindaqt_enable_warnings)
++    qindaqt_enable_warnings(qindaqt_shortcuts_client)
++endif()
+ 
+ install(TARGETS qindaqt_shortcuts_client EXPORT QindaQtTargets
+     ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT QindaQtPortalP0
