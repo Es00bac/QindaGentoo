@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-only
 # Copyright 2026 QindaQt contributors
 EAPI=8
-PYTHON_COMPAT=( python3_{11..14} )
+PYTHON_COMPAT=( python3_{11..15} )
 inherit cmake python-any-r1 xdg
 
 DESCRIPTION="Native QindaTK anime posing, facial animation and layered drawing studio"
@@ -10,11 +10,11 @@ QINDAANIME_COMMIT="0084a972f1ec9b29d8573f57f36ae1e68e5dd87c"
 SRC_URI="${PF}.tar.gz"
 S="${WORKDIR}/QindaAnimeStudio-${QINDAANIME_COMMIT}"
 LICENSE="LGPL-3+"
-RESTRICT="fetch !test? ( test )"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+codex +video test"
 REQUIRED_USE="test? ( video )"
+RESTRICT="fetch !test? ( test )"
 
 RDEPEND="
 	>=dev-libs/qindatk-0.1.0-r19[quick3d]
