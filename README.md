@@ -901,3 +901,9 @@ production static client is also linked into the resident controller module.
 The focused source fixture now builds that actual target rather than a test
 substitute. The immutable source archive is retained; incremental packaging
 reuses the completed compilation after applying this build-only correction.
+
+The r41 follow-up compiles only Settings Input QML over the authenticated signed
+r40 image. It gives confirmation dialogs a positive wrapping width while their
+overlay is being sized or destroyed. The controller plugin remains r40, with
+its current services/profiles and all other programs preserved. The immutable
+r40 source archive is reused with a tracked QML patch, not recut.

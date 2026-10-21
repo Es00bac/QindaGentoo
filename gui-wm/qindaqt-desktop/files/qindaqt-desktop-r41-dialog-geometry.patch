@@ -1,0 +1,32 @@
+diff --git a/src/apps/settings/input/qml/ControllerPagesSection.qml b/src/apps/settings/input/qml/ControllerPagesSection.qml
+index 26f204019..5be06ff08 100644
+--- a/src/apps/settings/input/qml/ControllerPagesSection.qml
++++ b/src/apps/settings/input/qml/ControllerPagesSection.qml
+@@ -118,9 +118,11 @@ ColumnLayout {
+     }
+     InputEditorDialog {
+         id: remove
++        objectName: "controllerDeleteProfile"
+         parent: T.Overlay.overlay
+         anchors.centerIn: parent
+-        width: Math.min(440, parent ? parent.width - 32 : 440)
++        // Keep wrapping geometry valid before the overlay is sized and during teardown.
++        width: Math.max(320, Math.min(440, parent ? parent.width - 32 : 440))
+         modal: true
+         focus: true
+         title: qsTr("Delete button profile?")
+diff --git a/src/apps/settings/input/qml/InputMacrosSection.qml b/src/apps/settings/input/qml/InputMacrosSection.qml
+index 8608aa364..c982c6285 100644
+--- a/src/apps/settings/input/qml/InputMacrosSection.qml
++++ b/src/apps/settings/input/qml/InputMacrosSection.qml
+@@ -70,7 +70,9 @@ ColumnLayout {
+     }
+     InputEditorDialog {
+         id:remove
+-        width:Math.min(440, parent ? parent.width - 32 : 440)
++        objectName:"inputMacroDelete"
++        // Keep wrapping geometry valid before the overlay is sized and during teardown.
++        width:Math.max(320, Math.min(440, parent ? parent.width - 32 : 440))
+         parent:T.Overlay.overlay; anchors.centerIn:parent
+         modal:true; title:qsTr("Delete macro?"); standardButtons:T.Dialog.Cancel | T.Dialog.Ok
+         contentItem:Label { text:qsTr("Controller bindings referencing this macro will stop running it."); wrapMode:Text.Wrap }
