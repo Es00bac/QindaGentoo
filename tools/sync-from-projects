@@ -6,6 +6,7 @@ O="$(cd "$(dirname "$0")/.." && pwd)"
 W="$(dirname "$O")"
 for src in "$W"/container-wm/packaging/gentoo "$W"/QindaOffice/packaging/gentoo \
            "$W"/QindaAnime/packaging/gentoo \
+           "$W"/QindaMOSS/packaging/gentoo \
            "$W"/QindaQt_Apps/packaging/gentoo "$W"/QindaStudio/packaging/portage \
            "$W"/sloom-studio-gpl/packaging/gentoo "$W"/QindaVenusPro/packaging/gentoo; do
   [ -d "$src" ] || continue

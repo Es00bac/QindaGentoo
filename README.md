@@ -21,6 +21,8 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `dev-util/ghidra-bin` | NSA Ghidra official release build (`/opt/ghidra`), the native backend for REA analysis |
 | `media-gfx/qindastudio` | `QindaStudio` |
 | `media-gfx/qindapaint` | `QindaPaint` (native Rust brush engine and QindaTK painting interface; optional preview package) |
+| `media-gfx/qindamoss` | `QindaMOSS` (native QindaTK MOSS Image studio) |
+| `sci-ml/stable-diffusion-cpp`, `sci-ml/moss-image-models` | Pinned native Vulkan runtime and MOSS Base/SFT model data |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
 | `app-misc/qindamouse` | `QindaMouse` (optional multi-family mouse configuration and host bindings; [candidate notes](app-misc/qindamouse/README.md)) |
 | `games-util/origin-beta-bin` | Qind Qompany: Origin of Species private beta launcher; validated binary from qinda |
@@ -931,3 +933,25 @@ playback and cleanup pass. The original compositor/shell and r40 controller
 plugin remain running; five DualSense profiles are updated and five other
 profiles plus saved motion speeds are preserved. The shared r32 catalog remains
 unchanged. No model worker or independent model review was launched.
+
+## MOSS Image native studio (2026-10-20)
+
+The optional `media-gfx/qindamoss-0.1.0_p20261020-r4` is installed on qinda
+and qinda-top. qinda also has `sci-ml/stable-diffusion-cpp-0.0.20261020` and
+`sci-ml/moss-image-models-20261020-r1`. The native QindaTK application uses
+SSH for generation; it has no web frontend or listening daemon. These
+packages are keyworded for explicit selection and do not enter the default
+desktop delivery or profile package set.
+
+The user freed SSD space during installation. Model r1 installs the approximately
+12 GiB Base/SFT Q4, Qwen3.5-9B Q4_K_M, FLUX.2 VAE and tokenizer bundle under
+`/usr/share/moss-image`; the original `/mnt/void/ai-models/moss-image` file
+paths remain as relative compatibility symlinks. Historical recipes and
+Manifest entries remain immutable.
+
+The RX 5700 XT Vulkan path, laptop SSH transfer and native display are verified.
+Real tests cover SFT generation, a 1024-square capacity check, masked editing,
+and a two-image Base batch with standard SLG and negative skipping disabled.
+The 512-square, eight-step SFT example took 228.77 seconds. Sixteen focused
+UI/protocol/validation tests pass. See the QindaMOSS repository's
+`docs/verification-20261020.md` for exact evidence and scope.
