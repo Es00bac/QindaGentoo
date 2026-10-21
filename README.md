@@ -4,6 +4,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 
 | Package | Source project |
 | --- | --- |
+| `media-gfx/qindaanime-studio` | `QindaAnimeStudio` (native pose, face, reference and layered animation studio) |
 | `games-action/afterbliss` | `Games/SomeQindaWorld` (native CyberPengu / Ducké adventure) |
 | `gui-wm/qindaqt-desktop` | `container-wm` |
 | `gui-apps/qindaqt-apps`, `gui-apps/qindaqt-system-monitor`, `gui-apps/qindaqt-removable-media`, `gui-apps/qindaqt-windows-runner` | `container-wm` |
