@@ -395,6 +395,10 @@ qinda-sync packages '=dev-util/codex-bin-0.162.1' \
 Do not run upstream installers or let a second package manager replace these
 Portage-owned files.
 
+The October 20 Codex update adds official stable release 0.163.0 with the same
+standalone musl bundle layout. Update it independently with
+`qinda-sync packages '=dev-util/codex-bin-0.163.0'`.
+
 Installed acceptance on qinda-top (2026-10-13): all 44 Codex files and 2
 symlinks and all 3,544 desktop files matched Portage's CONTENTS records. Codex
 version/help checks passed. The desktop executable, bundled Node runtime and
