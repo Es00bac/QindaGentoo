@@ -19,9 +19,11 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `dev-util/claude-code` | Anthropic Claude Code official native release, packaged through Portage |
 | `dev-util/opencode-bin` | OpenCode official Linux release, packaged through Portage |
 | `dev-util/ghidra-bin` | NSA Ghidra official release build (`/opt/ghidra`), the native backend for REA analysis |
+| `dev-util/electron-bin` | Electron official Linux release archive, one slot per major (`/opt/electron-bin-44`, `electron-44` launcher, setuid `chrome-sandbox`); optional runtime for Electron desktop apps |
 | `media-gfx/qindastudio` | `QindaStudio` |
 | `media-gfx/qindapaint` | `QindaPaint` (native Rust brush engine and QindaTK painting interface; optional preview package) |
 | `media-gfx/qindamoss` | `QindaMOSS` (native QindaTK MOSS Image studio) |
+| `media-gfx/animator` | `Animator` (agent-operated animation studio as an Electron desktop app; live ebuild of the hub's `main`, reads the `~/git/Animator.git` mirror; optional, keyworded `**` in the profile) |
 | `sci-ml/stable-diffusion-cpp`, `sci-ml/moss-image-models` | Pinned native Vulkan runtime and MOSS Base/SFT model data |
 | `app-misc/venusprolinux` | `QindaVenusPro` (Venus Pro mouse utility with the QindaTK interface) |
 | `app-misc/qindamouse` | `QindaMouse` (optional multi-family mouse configuration and host bindings; [candidate notes](app-misc/qindamouse/README.md)) |
