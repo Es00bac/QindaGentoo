@@ -146,3 +146,8 @@ sci-ml/moss-image-models ~amd64
 # Optional Electron runtime for desktop applications (one slot per major);
 # never selected by @profile or delivery.
 dev-util/electron-bin ~amd64
+
+# Optional agent-operated animation studio: a live ebuild of the Animator hub's
+# main branch. Live ebuilds carry no KEYWORDS, hence **; never selected by
+# @profile or delivery.
+=media-gfx/animator-9999 **

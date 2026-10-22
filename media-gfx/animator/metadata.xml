@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription lang="en">Animator is an agent-operated animation studio: a localhost Python server, a browser interface, an MCP server that lets Claude Code or Codex direct it, and Codex image workers, wrapped in an Electron desktop application. This live ebuild installs the head of the main branch of the Animator hub under /usr/share/animator with the animator launcher, which runs the shell on dev-util/electron-bin.</longdescription>
+</pkgmetadata>
