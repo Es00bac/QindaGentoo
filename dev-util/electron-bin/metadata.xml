@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>support@sloom.studio</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<longdescription lang="en">The official prebuilt Electron runtime (linux-x64 release archive), one slot per major version so applications can pin the major they were built for. Installs /opt/electron-bin-MAJOR, the electron-MAJOR launcher and a setuid-root chrome-sandbox. It supplies no application and registers no service.</longdescription>
+	<upstream>
+		<remote-id type="github">electron/electron</remote-id>
+	</upstream>
+</pkgmetadata>

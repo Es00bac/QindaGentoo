@@ -142,3 +142,7 @@ gui-apps/qindaqt-neon-confluence-preview ~amd64
 media-gfx/qindamoss ~amd64
 sci-ml/stable-diffusion-cpp ~amd64
 sci-ml/moss-image-models ~amd64
+
+# Optional Electron runtime for desktop applications (one slot per major);
+# never selected by @profile or delivery.
+dev-util/electron-bin ~amd64
