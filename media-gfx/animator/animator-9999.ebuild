@@ -46,7 +46,7 @@ BDEPEND="${PYTHON_DEPS}"
 # Everything src_install takes from electron/ (the desktop shell lives in the
 # Animator repository and is added there separately from this recipe).
 ANIMATOR_SHELL_FILES=(
-	main.cjs preload.cjs package.json animator.desktop icons/animator.svg
+	main.cjs preload.cjs package.json run.sh animator.desktop icons/animator.svg
 	icons/animator-{16,32,48,64,128,256,512}.png
 )
 
@@ -88,9 +88,12 @@ src_install() {
 	done < <(find animator web electron -type f -perm -u+x -print0)
 	python_optimize "${ED}${root}"
 
+	# electron/run.sh carries the launch rules: --ozone-platform=x11 on the command line (Electron 38+ picks
+	# Wayland before the app's own code runs, and QindaQt's global menu bar takes Electron menus only from X11
+	# windows) and the GTK_MODULES crash guard the other Electron launchers here use.
 	newbin - animator <<-EOF
 		#!/bin/sh
-		ANIMATOR_ROOT=${root} exec /usr/bin/electron-${ELECTRON_SLOT} ${root}/electron "\$@"
+		ANIMATOR_ROOT=${root} ELECTRON=/usr/bin/electron-${ELECTRON_SLOT} exec ${root}/electron/run.sh "\$@"
 	EOF
 
 	domenu electron/animator.desktop
