@@ -6,3 +6,6 @@ sci-ml/qinda-llm-server all-rights-reserved
 app-misc/chatgpt-desktop all-rights-reserved
 games-util/origin-beta-bin all-rights-reserved
 media-gfx/animator all-rights-reserved
+
+# Optional Fresh Start desktop client; explicit installation only.
+gui-apps/fscc-native all-rights-reserved

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <!-- maintainer-needed -->
+  <longdescription>
+    Experimental Qt 6 and QindaTK desktop client for the Fresh Start Command
+    Center. Uses the existing server API for synthetic case-management data,
+    native forms, electronic signatures and signed PDF downloads.
+  </longdescription>
+</pkgmetadata>

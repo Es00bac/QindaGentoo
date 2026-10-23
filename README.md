@@ -957,3 +957,19 @@ and a two-image Base batch with standard SLG and negative skipping disabled.
 The 512-square, eight-step SFT example took 228.77 seconds. Sixteen focused
 UI/protocol/validation tests pass. See the QindaMOSS repository's
 `docs/verification-20261020.md` for exact evidence and scope.
+
+## Fresh Start desktop client (2026-10-23)
+
+`gui-apps/fscc-native-0.2.0` packages the native Fresh Start Command Center
+client, including the forms and e-signature workspace. It is an optional,
+fetch-restricted private source snapshot with an input hash inventory in
+`SOURCE-STATE.json`. It is not added to the default desktop delivery or profile
+package set. FSCC remains a separate business and repository; this recipe
+only supplies Portage installation and dependency tracking. The application
+and its tests use synthetic data only.
+
+The source snapshot is based on `7778c937264d4f1b69a0bb0242d45d18fba1e409`
+plus the validated 0.2.0 native forms, Windows packaging and PDF updates.
+Four Linux test suites and four Windows suites passed, with synthetic signing
+tours for password and mock IAP. The original FSCC source repository is not
+pushed as part of this package publication.
