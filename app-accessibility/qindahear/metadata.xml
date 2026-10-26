@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>qindaqt@example.invalid</email>
+    <name>QindaHear maintainers</name>
+  </maintainer>
+  <upstream><remote-id type="github">Es00bac/QindaGentoo</remote-id></upstream>
+  <longdescription lang="en">Local microphone monitoring with neural speech noise reduction,
+  amplification, shared and per-ear EQ, compression, automatic gain and an output peak ceiling.</longdescription>
+</pkgmetadata>

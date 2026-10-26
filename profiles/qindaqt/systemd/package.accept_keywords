@@ -154,3 +154,6 @@ dev-util/electron-bin ~amd64
 
 # Optional Fresh Start desktop client; explicit installation only.
 gui-apps/fscc-native ~amd64
+
+# Optional local microphone sound amplifier; monitoring starts stopped.
+app-accessibility/qindahear ~amd64

@@ -24,6 +24,7 @@ Publishing a repository does not change those contracts.
 | `QindaThemes` | `x11-themes/qinda-seven`, `x11-themes/qinda-icons` | Appearance data; user selection remains separate. |
 | `QindaIconArt` | `x11-themes/qinda-breeze-painted`, `x11-themes/qinda-breeze-handdrawn` | Independent artwork families and provenance; original archives remain immutable. |
 | `gabbee` | `app-accessibility/gabbee` | Dictation service with existing dependency/activation policy. |
+| `QindaHear` (qinda hub) | `app-accessibility/qindahear` | Optional native microphone sound amplifier; no recording, network service or automatic monitoring. |
 | `sloom-studio-gpl` | `kde-plasma/sloom-globalmenu`, `kde-plasma/sloom-panelmenu`, `media-gfx/sloom-studio-bin` | Existing Plasma integrations and Studio binary delivery. |
 | `QindaVenusPro` | `app-misc/venusprolinux` | Mouse utility; device qualification remains separate. |
 | `screensaver-suite` | `x11-misc/circuit-reef`, `qinda-patrol`, `prism-circuit`, `prism-brawl`, `starward-reimagined` | Screensavers built from the integrated suite, including legacy standalone project names. |
