@@ -1,0 +1,4 @@
+# QindaQt contributors <qindaqt@example.invalid> (2026-10-26)
+# Initial recipe omits the internal shared DSP library, so the app cannot start.
+# Use 0.1.0-r1, which links the DSP into the executable.
+=app-accessibility/qindahear-0.1.0
