@@ -974,3 +974,30 @@ plus the validated 0.2.0 native forms, Windows packaging and PDF updates.
 Four Linux test suites and four Windows suites passed, with synthetic signing
 tours for password and mock IAP. The original FSCC source repository is not
 pushed as part of this package publication.
+
+## Audio stability desktop revision 44 — prepared
+
+`gui-wm/qindaqt-desktop-0.1.0_pre20261002-r44` pins `f0f875f5ccc58271a2b50e2f295969aaa0f6d33c`.
+It carries the verified October 21 and October 29 Audio1/client, Audio Settings
+and nonblocking Wayland notifier repairs over the installed r43 delivery base.
+All 47 changed production/test files match accepted main; other desktop paths,
+KWin r7 ABI, dependencies and the r40/r42 packaging patches are retained.
+The guarded console-gain path remains disabled. Older recipes and archives
+stay immutable, and the shared delivery catalog is unchanged.
+
+The source/archive/recipe can be selected explicitly with:
+
+```sh
+sudo -v && qinda-sync packages '=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r44'
+```
+
+Independently cut laptop and qinda source archives match: 354,137,332 bytes,
+SHA-256 `6a821ca31f2e6c124d88b3604201a3531170cbda1b07f20dca631a73bf20f4c7`.
+The Portage-generated Manifest retains every earlier archive entry.
+
+This is a source-build delivery until a signed binary has been produced. The
+command asks Portage to build/install when no matching binary exists; it does
+not restart the desktop. Log out and back in to adopt the new shell/services.
+The existing saved EQ rack was previously refused: its boost may become audible
+after adoption, so lower the output volume before the new login. Full Portage
+package build, signature/image verification and installed acceptance are pending.
