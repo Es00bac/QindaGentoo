@@ -7,11 +7,6 @@ DESCRIPTION="Virtual to depend on any Distribution Kernel"
 SLOT="0/${PVR}"
 KEYWORDS="~amd64"
 
-RDEPEND="
-	|| (
-		~sys-kernel/gentoo-kernel-${PV}
-		~sys-kernel/gentoo-kernel-bin-${PV}
-		~sys-kernel/vanilla-kernel-${PV%_p*}
-		~sys-kernel/gentoo-kernel-modprep-${PV}
-	)
-"
+# This overlay currently supplies only the source-built 7.3.1 provider.
+# Do not advertise binary/modprep/vanilla versions that do not exist yet.
+RDEPEND="~sys-kernel/gentoo-kernel-${PV}"
