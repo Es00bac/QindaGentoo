@@ -1,0 +1,66 @@
+diff --git a/src/services/keyring/CMakeLists.txt b/src/services/keyring/CMakeLists.txt
+index d645049e3..cf3ea5f4f 100644
+--- a/src/services/keyring/CMakeLists.txt
++++ b/src/services/keyring/CMakeLists.txt
+@@ -50,6 +50,8 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/qindaqt-keyring.service" data/qindaqt
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.secrets.service"
+     "${CMAKE_CURRENT_BINARY_DIR}/org.qindaqt.Keyring1.service"
+     DESTINATION "${CMAKE_INSTALL_DATADIR}/dbus-1/services" COMPONENT QindaQtKeyring)
++install(PROGRAMS data/qindaqt-keyring-activate
++    DESTINATION "${KDE_INSTALL_LIBEXECDIR}" COMPONENT QindaQtKeyring)
+ 
+ add_subdirectory(pam)
+ 
+diff --git a/src/services/keyring/data/org.freedesktop.secrets.service.in b/src/services/keyring/data/org.freedesktop.secrets.service.in
+index 6e1b488fa..23f6e89df 100644
+--- a/src/services/keyring/data/org.freedesktop.secrets.service.in
++++ b/src/services/keyring/data/org.freedesktop.secrets.service.in
+@@ -1,5 +1,7 @@
+ # SPDX-License-Identifier: GPL-3.0-or-later
++# AGENT-CONTRACT (ADR-0430): no SystemdService= here. dbus-daemon runs the
++# helper itself so a refusal before login fails the caller at once; the helper
++# starts qindaqt-keyring.service only beside a live compositor.
+ [D-BUS Service]
+ Name=org.freedesktop.secrets
+-Exec=@CMAKE_INSTALL_FULL_BINDIR@/qindaqt-keyring
+-SystemdService=qindaqt-keyring.service
++Exec=@KDE_INSTALL_FULL_LIBEXECDIR@/qindaqt-keyring-activate
+diff --git a/src/services/keyring/data/qindaqt-keyring-activate b/src/services/keyring/data/qindaqt-keyring-activate
+new file mode 100755
+index 000000000..42f23ac5b
+--- /dev/null
++++ b/src/services/keyring/data/qindaqt-keyring-activate
+@@ -0,0 +1,33 @@
++#!/bin/sh
++# SPDX-License-Identifier: GPL-3.0-or-later
++# D-Bus activation helper for org.freedesktop.secrets (ADR-0430).
++#
++# AGENT-CONTRACT: pam_qindaqt_keyring starts the trusted
++# qindaqt-keyring@UID.service while PAM opens the session, before the
++# compositor creates its Wayland socket. Ordinary activation therefore starts
++# the prompt-only user daemon only beside a live compositor. Starting it before
++# login lets it own org.freedesktop.secrets first; the trusted owner then exits
++# 3 and the login password is never delivered (keyring-pam.md).
++#
++# AGENT-GUARD: refuse by exiting. dbus-daemon fails the caller at once when the
++# process it spawned exits, but a SystemdService= unit that is skipped or fails
++# leaves the caller waiting service_start_timeout (120 s on the session bus).
++set -u
++PATH=/usr/bin:/bin
++display=${WAYLAND_DISPLAY:-}
++[ -n "$display" ] || exit 1
++case $display in
++    /*) socket=$display ;;
++    *) [ -n "${XDG_RUNTIME_DIR:-}" ] || exit 1; socket=$XDG_RUNTIME_DIR/$display ;;
++esac
++lock=$socket.lock
++[ -S "$socket" ] && [ -f "$lock" ] || exit 1
++# AGENT-NOTE: libwayland flocks the lock file for the compositor's lifetime;
++# a socket left by a crashed compositor has no holder. Read the holder from
++# /proc/locks rather than taking the lock: a held probe lock would make a
++# compositor starting at that instant fail to bind its socket.
++device=$(stat -c %d -- "$lock") && inode=$(stat -c %i -- "$lock") || exit 1
++id=$(printf '%02x:%02x:%s' $(((device >> 8) & 0xfff)) \
++    $(((device & 0xff) | ((device >> 12) & 0xfff00))) "$inode")
++grep -Eq "^[0-9]+: FLOCK +ADVISORY +WRITE +[0-9]+ $id " /proc/locks || exit 1
++exec systemctl --user start qindaqt-keyring.service

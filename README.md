@@ -1001,3 +1001,37 @@ not restart the desktop. Log out and back in to adopt the new shell/services.
 The existing saved EQ rack was previously refused: its boost may become audible
 after adoption, so lower the output volume before the new login. Full Portage
 package build, signature/image verification and installed acceptance are pending.
+
+## Keyring activation desktop revision 45 — prepared
+
+`gui-wm/qindaqt-desktop-0.1.0_pre20261002-r45` keeps r44's source pin
+`f0f875f5ccc58271a2b50e2f295969aaa0f6d33c` and archive bytes (354,137,332 bytes,
+SHA-256 `6a821ca31f2e6c124d88b3604201a3531170cbda1b07f20dca631a73bf20f4c7`) and
+adds `files/qindaqt-desktop-r45-keyring-activation.patch`: exactly the
+`src/services/keyring` part of container-wm `a40cb9f60` (ADR-0430). D-Bus
+activation of `org.freedesktop.secrets` now runs
+`/usr/libexec/qindaqt-keyring-activate`, which starts the prompt-only user
+keyring only beside a live compositor. Lingering user timers that ask for a
+secret before login can no longer take the bus name ahead of the trusted
+`qindaqt-keyring@UID.service`, so the login password unlocks the login
+collection again. Callers before login fail at once instead of waiting 120 s.
+
+The source/archive/recipe can be selected explicitly with:
+
+```sh
+sudo -v && qinda-sync packages '=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r45'
+```
+
+The source is a container-wm candidate, branch
+`fix/keyring-activation-ownership-20261030` (head `eee0a23c8`, source unchanged
+from `a40cb9f60`), not yet integrated into main: the independent review's only
+blocking finding is that no real login has been observed yet. The patch applies
+cleanly to the r44 source; pkgcheck reports exactly r44's existing findings; an
+unprivileged qinda plan is one r42-to-r45 upgrade with no downloads or
+dependency changes. r45 carries every r44 caveat: it is a
+source-build delivery, adoption needs a new login, and the output volume should
+be lowered before that login because of the saved EQ rack. The trusted PAM
+owner has not yet completed a real login on qinda; that first login is the
+acceptance check (`journalctl -b -u qindaqt-keyring@1000.service` shows the
+owner running, not `status=3`). The shared delivery catalog is unchanged and
+the archive is not yet published for the laptop.
