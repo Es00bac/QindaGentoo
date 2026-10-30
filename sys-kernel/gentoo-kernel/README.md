@@ -33,4 +33,47 @@ also verifies kernel.org's signed checksums with the Portage-managed kernel
 signing keys. `USE=test` with `FEATURES=test` runs Gentoo's QEMU boot test
 before installation. The laptop's external v4l2loopback module must be
 rebuilt against the new headers; `USE=dist-kernel` enables future automatic
-rebuilds. Build and installation results are recorded after completion.
+rebuilds.
+
+## qinda-top installation, 2026-10-30
+
+The full Portage build and its QEMU boot test passed. All nine Gentoo patches
+applied without modification. Installed packages are `gentoo-kernel-7.3.1`,
+`virtual/dist-kernel-7.3.1`, `linux-firmware-20261019`, and
+`v4l2loopback-0.15.4`. The kernel release is `7.3.1-gentoo-dist`.
+
+Final verification checked the following:
+
+- The EFI boot image matches the installed kernel image byte for byte.
+- The Qinda menu and systemd-boot select 7.3.1 and retain the 6.18.48 entry.
+- Twelve required modules have the new kernel's version magic, and the
+  attached PCI/USB devices retain module coverage across 23 device entries.
+- The existing RTL8852BE configuration is present in the new initramfs.
+- Both CVE-2026-98432 fix sites are present. The stable update and all nine
+  Gentoo patches leave those two files unchanged from the signed 7.3 base.
+
+The installed image's SHA-256 is
+`8beb3c595e7232c675cdc438026e8c8e2729733bc1e38a9d73a578ae16e8e7d3`.
+The full receipts are in
+`~/.local/state/kernel-upgrade-20261030/verification.json` on qinda-top,
+with a copy under `~/.local/state/qinda-top-kernel-upgrade-20261030/` on qinda.
+The original boot files are backed up on qinda-top at
+`/var/lib/kernel-upgrade/20261030-7.3.1/boot-before.tar`.
+
+The full debug build exceeded the initial 29 GiB of space available to
+unprivileged processes. Its follow-up virtual package hit ENOSPC after the
+kernel had installed. The completed build tree was cleaned and the remaining
+packages installed successfully; approximately 27 GiB was free afterward.
+Archive source evidence before installation: the eclass removes source files
+that are not needed by the installed external-module build support.
+
+`/usr/src/linux` now selects the new source-built kernel. The world atom is
+the unpinned `sys-kernel/gentoo-kernel`, with package-scoped `~amd64` acceptance
+for it and `virtual/dist-kernel`, so normal Portage updates can follow newer
+upstream stable releases. Kernel source signature verification and automatic
+external-module rebuilds are enabled.
+
+`pkgcheck` completed with advisory notes for the single-provider virtual and
+newer Python compatibility in the inherited eclass. This host uses Python
+3.14. Native boot adoption remains pending: the running kernel at handoff is
+6.18.48, and the security fix takes effect after rebooting into 7.3.1.
