@@ -208,4 +208,6 @@
 
 # QindaFirewall 08c7064: journal break-in alerts in plain English, ufw/nftables helper
 # (security-reviewed; 9 test suites pass on both hosts).
-=gui-apps/qindafirewall-0.1.0_p20261031
+# r1 eff1687: Devices page (known devices, per-kind behaviour checks), no false
+# port-scan alerts for SSDP/Tailscale, reviewed safe defaults for discovery replies.
+=gui-apps/qindafirewall-0.1.0_p20261031-r1
