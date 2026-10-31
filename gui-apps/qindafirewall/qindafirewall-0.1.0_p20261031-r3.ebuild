@@ -27,7 +27,8 @@ EGIT_REPO_URI="file:///home/cabewse/git/QindaFirewall.git
 # prompt-free helper verbs autoblock/autounblock, polkit rule names them);
 # honest status when another firewall layer runs first (otherLayers);
 # timed ufw blocks enable the expiry timer. 17 test suites pass.
-EGIT_COMMIT="c70230cd86c3bde6dc17ad5c799636d8b0a95814"
+# r3 (a44249a): ufw6-* chains are no longer reported as another layer.
+EGIT_COMMIT="a44249a50f88bf1b6e9c9be7828b4801e13466bf"
 
 LICENSE="GPL-3+"
 SLOT="0"
