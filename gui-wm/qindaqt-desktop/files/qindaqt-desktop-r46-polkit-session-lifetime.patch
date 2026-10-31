@@ -1,0 +1,97 @@
+diff --git a/src/apps/polkit_agent/polkit_attempt_controller.cpp b/src/apps/polkit_agent/polkit_attempt_controller.cpp
+index ae95be17b..16c18bdad 100644
+--- a/src/apps/polkit_agent/polkit_attempt_controller.cpp
++++ b/src/apps/polkit_agent/polkit_attempt_controller.cpp
+@@ -35,6 +35,13 @@ void PolkitAttemptController::start()
+ 
+ void PolkitAttemptController::beginAttempt()
+ {
++    // AGENT-GUARD: a retry runs inside the failed attempt's completed()
++    // emission; destroying it here (unique_ptr reassignment) frees the object
++    // that is still emitting. Retire it through the event loop instead.
++    if (m_attempt) {
++        m_attempt->disconnect(this);
++        m_attempt.release()->deleteLater();
++    }
+     m_attempt = m_factory(m_identities.at(m_selectedIndex).token);
+     connect(m_attempt.get(), &AuthenticationAttempt::request, this,
+            &PolkitAttemptController::promptRequested);
+diff --git a/src/apps/polkit_agent/polkit_attempt_controller.h b/src/apps/polkit_agent/polkit_attempt_controller.h
+index 30f03f43e..8b2686170 100644
+--- a/src/apps/polkit_agent/polkit_attempt_controller.h
++++ b/src/apps/polkit_agent/polkit_attempt_controller.h
+@@ -73,6 +73,8 @@ private:
+     QList<AgentIdentity> m_identities;
+     int m_selectedIndex;
+     AttemptFactory m_factory;
++    // AGENT-GUARD: never destroyed synchronously while it may be emitting;
++    // see beginAttempt().
+     std::unique_ptr<AuthenticationAttempt> m_attempt;
+     bool m_started = false;
+     bool m_finished = false;
+diff --git a/src/apps/polkit_agent/polkit_listener.cpp b/src/apps/polkit_agent/polkit_listener.cpp
+index 484c8e887..9f620ca68 100644
+--- a/src/apps/polkit_agent/polkit_listener.cpp
++++ b/src/apps/polkit_agent/polkit_listener.cpp
+@@ -77,16 +77,40 @@ public:
+                [this](const QString &text) { Q_EMIT showInfo(text); });
+         connect(&m_session, &PolkitQt1::Agent::Session::showError, this,
+                [this](const QString &text) { Q_EMIT showError(text); });
++        // AGENT-GUARD: queued, never direct. polkit-qt's
++        // Session::Private::completed() emits completed() and THEN unrefs
++        // session->d->polkitAgentSession; a direct connection lets the
++        // controller/queue destroy this attempt (and m_session) inside that
++        // emission, so polkit-qt writes through a freed Session and the agent
++        // segfaults -- polkitd then reports "Not authorized" to every pkexec
++        // caller (2026-10-31, core dumps of qindaqt-polkit-agent on qinda-top).
++        // A queued call is dropped if this attempt is gone by delivery time.
+         connect(&m_session, &PolkitQt1::Agent::Session::completed, this,
+-               [this](bool gained) { Q_EMIT completed(gained); });
++               [this](bool gained) { Q_EMIT completed(gained); }, Qt::QueuedConnection);
++        // polkit-qt has already released its glib session by the time the
++        // queued completed() arrives; a response or cancel in that window
++        // would hand libpolkit-agent a null session.
++        connect(&m_session, &PolkitQt1::Agent::Session::completed, this,
++               [this](bool) { m_done = true; });
+         m_session.initiate();
+     }
+ 
+-    void respond(const QString &response) override { m_session.setResponse(response); }
+-    void cancel() override { m_session.cancel(); }
++    void respond(const QString &response) override
++    {
++        if (!m_done) {
++            m_session.setResponse(response);
++        }
++    }
++    void cancel() override
++    {
++        if (!m_done) {
++            m_session.cancel();
++        }
++    }
+ 
+ private:
+     PolkitQt1::Agent::Session m_session;
++    bool m_done = false;
+ };
+ 
+ } // namespace
+diff --git a/src/apps/polkit_agent/polkit_request_queue.cpp b/src/apps/polkit_agent/polkit_request_queue.cpp
+index 504e4f961..5f2525979 100644
+--- a/src/apps/polkit_agent/polkit_request_queue.cpp
++++ b/src/apps/polkit_agent/polkit_request_queue.cpp
+@@ -32,7 +32,12 @@ void PolkitRequestQueue::activateNext()
+     // than leaving the queue permanently stuck on a controller that can
+     // never complete.
+     connect(m_active.get(), &PolkitAttemptController::completed, this, [this](bool) {
+-        m_active.reset();
++        // AGENT-GUARD: this runs inside the controller's completed(), itself
++        // inside its attempt's completed(); reset() would destroy both while
++        // they are still emitting. deleteLater() keeps them alive until the
++        // emission has unwound.
++        m_active->disconnect(this);
++        m_active.release()->deleteLater();
+         if (m_pending.empty()) {
+             Q_EMIT queueIdle();
+         } else {
