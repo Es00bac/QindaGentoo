@@ -32,6 +32,7 @@ Repository name: `qindaqt`. One overlay for everything developed here:
 | `sys-boot/qinda-boot` | `QindaBoot` (graphical boot menu and Plymouth splash) |
 | `sci-ml/qinda-llm-server` | `QindaLLM` (LLM Server mode, qinda only) |
 | `gui-apps/qindallamawatch` | `QindaLlamaWatch` (desktop monitor for a remote llama.cpp server; counterpart of `qinda-llm-top`) |
+| `gui-apps/qindafirewall` | `QindaFirewall` (firewall settings and break-in alerts in plain English; pkexec helper over ufw or its own nftables table) |
 | `gui-apps/qindatrellis` | `QindaTrellis` (native image-to-3D client for the desktop's TRELLIS.2 runtime, with all controls and live hardware warnings) |
 | `app-portage/qindaportage` | `LocalAiPortage` (QindaPortage: Portage manager with a local LLM, dependency graph, impact previews, qinda-local overlay for URL installs) |
 | `media-gfx/qindahane-bin` | `QindaHane` (Tiltmark painting app; proprietary prebuilt archive cut by its `tools/package-gentoo-bin`, fetch-restricted) |

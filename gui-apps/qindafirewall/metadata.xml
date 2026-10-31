@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>qindaqt@example.invalid</email>
+		<name>QindaQt contributors</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">Es00bac/QindaQt</remote-id>
+	</upstream>
+	<longdescription>
+		A QindaTK desktop app that follows the system journal in real time for
+		break-in attempts (password guessing over SSH, logins after failed
+		guesses, port scans, wrong administrator and lock-screen passwords, new
+		accounts and administrator rights) and explains each in plain English
+		with what to do. Manages ufw or its own nftables table through a small
+		pkexec helper that cannot lock the owner out.
+	</longdescription>
+</pkgmetadata>

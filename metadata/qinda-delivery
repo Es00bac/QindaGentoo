@@ -205,3 +205,7 @@
 
 # Origin beta-20261017.1: validated portable launcher; private channels remain user configuration.
 =games-util/origin-beta-bin-0.2.0_p20261017
+
+# QindaFirewall 08c7064: journal break-in alerts in plain English, ufw/nftables helper
+# (security-reviewed; 9 test suites pass on both hosts).
+=gui-apps/qindafirewall-0.1.0_p20261031
