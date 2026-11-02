@@ -1,0 +1,799 @@
+QindaQt keyring request review
+Product commit: 539aecf5adf1b870d6ef97253e39a7c93177d4f0
+Base: r47 immutable source plus its existing r40/r42/r45/r46 patches.
+Deploy daemon, importer and prompt together; QMP1/QMP2 mismatches fail closed.
+
+diff --git a/src/services/keyring/CMakeLists.txt b/src/services/keyring/CMakeLists.txt
+index d645049e3..bd86e6ae4 100644
+--- a/src/services/keyring/CMakeLists.txt
++++ b/src/services/keyring/CMakeLists.txt
+@@ -26,6 +26,7 @@ target_link_libraries(qindaqt_keyring_import_store PUBLIC QindaQt::KeyringStorag
+ qindaqt_enable_warnings(qindaqt_keyring_import_store)
+ 
+ add_library(qindaqt_keyring_service STATIC
++    daemon/requester_identity.cpp
+     daemon/session_crypto.cpp daemon/secret_service.cpp daemon/service_methods.cpp
+     daemon/control_server.cpp daemon/item_methods.cpp daemon/properties.cpp daemon/prompts.cpp daemon/process_prompt_provider.cpp daemon/session_display_binding.cpp daemon/native_item_methods.cpp daemon/native_consolidation_methods.cpp daemon/prompt_password_change.cpp daemon/portal_methods.cpp daemon/metadata_receipts.cpp)
+ target_link_libraries(qindaqt_keyring_service PUBLIC QindaQt::KeyringStorage QindaQt::KeyringProtocol Qt6::Core Qt6::DBus PRIVATE QindaQt::KeyringImportStore OpenSSL::Crypto QindaQt::CompositorNames QindaQt::SecretPortalPolicy)
+diff --git a/src/services/keyring/daemon/process_prompt_provider.cpp b/src/services/keyring/daemon/process_prompt_provider.cpp
+index 691e6d1f6..54786785c 100644
+--- a/src/services/keyring/daemon/process_prompt_provider.cpp
++++ b/src/services/keyring/daemon/process_prompt_provider.cpp
+@@ -39,7 +39,9 @@ quint64 ProcessPromptProvider::begin(PromptRequest request, PromptCompletion don
+     active->maximum = request.action == "change-password" ? 8200 : 4096;
+     try {
+         active->input = SecureBuffer(active->maximum + 1);
+-        active->metadata = protocol::encodePromptMetadata({request.label,request.caller});
++        request.metadata.label = request.label;
++        request.metadata.caller = request.caller;
++        active->metadata = protocol::encodePromptMetadata(request.metadata);
+     }
+     catch (const std::exception &) {
+         QTimer::singleShot(0,this,[done=std::move(done)]() mutable { done(SecureBuffer{},true); }); return 0;
+@@ -90,7 +92,7 @@ quint64 ProcessPromptProvider::begin(PromptRequest request, PromptCompletion don
+     connect(process,&QProcess::errorOccurred,this,[this,id](QProcess::ProcessError) { finish(id,true); });
+     active_.emplace(id,std::move(active));
+     process->start(executable_,{"--action",request.action,"--collection",request.collection});
+-    QTimer::singleShot(30000,this,[this,id] { finish(id,true); });
++    QTimer::singleShot(180000,this,[this,id] { finish(id,true); });
+     return id;
+ }
+ void ProcessPromptProvider::finish(quint64 id,bool cancelled) {
+diff --git a/src/services/keyring/daemon/prompt_provider.h b/src/services/keyring/daemon/prompt_provider.h
+index a4bf1c029..d1304b1ce 100644
+--- a/src/services/keyring/daemon/prompt_provider.h
++++ b/src/services/keyring/daemon/prompt_provider.h
+@@ -1,11 +1,15 @@
+ // SPDX-License-Identifier: GPL-3.0-or-later
+ #pragma once
+ #include <qindaqt/services/keyring/secure_buffer.h>
++#include <qindaqt/services/keyring_protocol/prompt_metadata.h>
+ #include <QObject>
+ #include <QString>
+ #include <functional>
+ namespace qindaqt::keyring::service {
+-struct PromptRequest { QString action, collection, label, caller, window; };
++struct PromptRequest {
++    QString action, collection, label, caller, window;
++    protocol::PromptMetadata metadata;
++};
+ using PromptCompletion = std::function<void(SecureBuffer, bool)>;
+ // GUI-independent asynchronous seam. Completion must never run inline from
+ // begin; exactly once or cancelled. IDs/caller contain no password. Caller
+diff --git a/src/services/keyring/daemon/prompts.cpp b/src/services/keyring/daemon/prompts.cpp
+index 6615a01d1..9176cbf3d 100644
+--- a/src/services/keyring/daemon/prompts.cpp
++++ b/src/services/keyring/daemon/prompts.cpp
+@@ -6,6 +6,7 @@
+ #include <QScopeGuard>
+ namespace qindaqt::keyring::service {
+ QString SecretService::addPrompt(Prompt prompt) {
++    prompt.requester = identifyRequester(bus_, prompt.owner);
+     // A queued portal request has not unlocked anything to restore on cancel.
+     if (prompt.action == "portal-unlock") prompt.relockOnCancel = false;
+     int owned = 0;
+@@ -13,7 +14,7 @@ QString SecretService::addPrompt(Prompt prompt) {
+     if (prompts_.size() >= 32 || owned >= 4) throw std::runtime_error("Prompt limit");
+     const auto path = QString(Root) + "/prompt/p" + QUuid::createUuid().toString(QUuid::Id128);
+     prompts_.emplace(path,std::move(prompt));
+-    QTimer::singleShot(60000,this,[this,path] { finishPrompt(path,true); });
++    QTimer::singleShot(300000,this,[this,path] { finishPrompt(path,true); });
+     return path;
+ }
+ void SecretService::finishPrompt(const QString &path, bool dismissed) {
+@@ -93,11 +94,18 @@ void SecretService::startPrompt(const QString &path) {
+     activePrompt_ = path;
+     const auto requestedId = initialPrompt.action == "create" ? QString() : initialPrompt.collections.value(initialPrompt.next);
+     const auto c = repository_.find(requestedId);
+-    PromptRequest request{initialPrompt.action=="portal-create"?QString("create"):initialPrompt.action=="portal-unlock"?QString("unlock"):initialPrompt.action,requestedId,(initialPrompt.action == "create" || initialPrompt.action == "portal-create" || initialPrompt.action == "confirm-delete") ? initialPrompt.label : c ? c->label : requestedId,initialPrompt.owner,{}};
++    PromptRequest request{initialPrompt.action=="portal-create"?QString("create"):initialPrompt.action=="portal-unlock"?QString("unlock"):initialPrompt.action,requestedId,(initialPrompt.action == "create" || initialPrompt.action == "portal-create" || initialPrompt.action == "confirm-delete") ? initialPrompt.label : c ? c->label : requestedId,initialPrompt.owner,{}, {}};
++    describeRequester(request.metadata, initialPrompt.requester);
++    request.metadata.operation = initialPrompt.action;
++    request.metadata.application = initialPrompt.portalApplication;
+     // Rate-limit admission globally in the repository; paced prompts avoid
+     // bursts and keep private password bytes absent during the wait.
+     QTimer::singleShot(550,this,[this,path,request] {
+         const auto pending = prompts_.find(path); if (pending == prompts_.end()) return;
++        // AGENT-GUARD: retain the requester captured at admission; a queued
++        // request must not present a replacement executable as its initiator.
++        if (pending->second.requester.started
++            && !requesterUnchanged(bus_, pending->second.owner, pending->second.requester)) {finishPrompt(path,true);return;}
+         if((pending->second.action=="reveal" || pending->second.action.startsWith("portal-")) && !nativeDisclosureAllowed()) {finishPrompt(path,true);return;}
+         if ((pending->second.action == "unlock" || pending->second.action == "portal-unlock")
+             && !repository_.locked(request.collection)) { startPrompt(path); return; }
+@@ -105,6 +113,7 @@ void SecretService::startPrompt(const QString &path) {
+         pending->second.ticket = promptsProvider_.begin(request,[this,path](SecureBuffer password,bool cancelled) {
+             const auto found = prompts_.find(path); if (found == prompts_.end()) return;
+             auto &p = found->second; p.ticket = 0;
++            if (!requesterUnchanged(bus_, p.owner, p.requester)) {finishPrompt(path,true);return;}
+             const std::size_t maximum = p.action == "change-password" ? 8200 : 4096;
+             if (cancelled || password.size() == 0 || password.size() > maximum) { finishPrompt(path,true); return; }
+             try {
+diff --git a/src/services/keyring/daemon/requester_identity.cpp b/src/services/keyring/daemon/requester_identity.cpp
+new file mode 100644
+index 000000000..082ca1f07
+--- /dev/null
++++ b/src/services/keyring/daemon/requester_identity.cpp
+@@ -0,0 +1,86 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++#include "requester_identity.h"
++#include <QDBusConnectionInterface>
++#include <QFile>
++#include <QFileInfo>
++#include <QSet>
++#include <unistd.h>
++namespace qindaqt::keyring::service {
++namespace {
++struct Process { quint32 parent = 0; quint64 started = 0; QString executable; };
++Process process(quint32 pid) {
++    if (!pid) return {};
++    const auto base = QStringLiteral("/proc/%1/").arg(pid);
++    QFile stat(base + "stat");
++    if (!stat.open(QIODevice::ReadOnly)) return {};
++    const auto bytes = stat.read(4097);
++    if (bytes.size() > 4096) return {};
++    const auto end = bytes.lastIndexOf(')');
++    if (end < 0) return {};
++    const auto fields = bytes.mid(end + 2).split(' ');
++    if (fields.size() < 20) return {};
++    bool validParent = false, validStart = false;
++    Process result;
++    result.parent = fields[1].toUInt(&validParent);
++    result.started = fields[19].toULongLong(&validStart);
++    const auto path = QFile::encodeName(base + "exe");
++    char target[4097];
++    const auto size = readlink(path.constData(), target, sizeof(target));
++    if (!validParent || !validStart || !result.started) return {};
++    // Protected same-user processes can hide /proc/PID/exe. Their bus PID/UID
++    // and non-ptrace-gated start time remain usable; never invent a path/name.
++    if (size <= 0 || size > 4096) return result;
++    const QByteArray executable(target, static_cast<qsizetype>(size));
++    result.executable = QString::fromUtf8(executable);
++    if (result.executable.toUtf8() != executable || !result.executable.startsWith('/')) result.executable.clear();
++    return result;
++}
++RequesterIdentity identify(quint32 pid, quint32 uid) {
++    RequesterIdentity result;
++    result.pid = pid; result.uid = uid;
++    const auto before = process(pid);
++    if (!before.started) return result;
++    result.started = before.started; result.executable = before.executable;
++    QSet<quint32> seen{pid};
++    auto parent = before.parent;
++    for (int depth = 0; parent > 1 && depth < 6 && !seen.contains(parent); ++depth) {
++        seen.insert(parent);
++        // Parentage is observed context, never proof of which agent/task
++        // authorized the request. Do not cross into another user's processes.
++        if (QFileInfo(QStringLiteral("/proc/%1").arg(parent)).ownerId() != uid) break;
++        const auto value = process(parent);
++        const auto checked = process(parent);
++        if (!value.started || value.executable.isEmpty() || value.started != checked.started || value.executable != checked.executable) break;
++        const auto description = QStringLiteral("%1 (PID %2)").arg(value.executable).arg(parent);
++        if (description.toUtf8().size() > 1024) break;
++        result.parents.append(description);
++        parent = value.parent;
++    }
++    const auto after = process(pid);
++    if (after.started != before.started || after.executable != before.executable) {
++        result.started = 0; result.executable.clear(); result.parents.clear();
++    }
++    return result;
++}
++}
++RequesterIdentity identifyRequester(const QDBusConnection &bus, const QString &owner) {
++    if (!bus.interface() || !owner.startsWith(':')) return {};
++    const auto pid = bus.interface()->servicePid(owner);
++    const auto uid = bus.interface()->serviceUid(owner);
++    if (!pid.isValid() || !uid.isValid() || uid.value() != geteuid()) return {};
++    return identify(pid.value(), uid.value());
++}
++RequesterIdentity identifyLocalRequester() { return identify(static_cast<quint32>(getpid()), geteuid()); }
++bool requesterUnchanged(const QDBusConnection &bus, const QString &owner, const RequesterIdentity &expected) {
++    if (!expected.started || !bus.interface()) return false;
++    const auto pid = bus.interface()->servicePid(owner);
++    const auto uid = bus.interface()->serviceUid(owner);
++    if (!pid.isValid() || !uid.isValid() || pid.value() != expected.pid || uid.value() != expected.uid) return false;
++    const auto current = process(expected.pid);
++    return current.started == expected.started && current.executable == expected.executable;
++}
++void describeRequester(protocol::PromptMetadata &metadata, const RequesterIdentity &requester) {
++    metadata.processId = requester.started ? requester.pid : 0; metadata.userId = requester.uid;
++    metadata.executable = requester.executable; metadata.parents = requester.parents;
++}
++}
+diff --git a/src/services/keyring/daemon/requester_identity.h b/src/services/keyring/daemon/requester_identity.h
+new file mode 100644
+index 000000000..d1c684d9c
+--- /dev/null
++++ b/src/services/keyring/daemon/requester_identity.h
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: GPL-3.0-or-later
++#pragma once
++#include <qindaqt/services/keyring_protocol/prompt_metadata.h>
++#include <QDBusConnection>
++namespace qindaqt::keyring::service {
++struct RequesterIdentity {
++    quint32 pid = 0, uid = 0;
++    quint64 started = 0;
++    QString executable;
++    QStringList parents;
++};
++// Same-thread, bounded /proc reads and bus credentials. No argv, environment,
++// script contents or secrets. Failed lookup never falls back to caller labels.
++RequesterIdentity identifyRequester(const QDBusConnection &, const QString &owner);
++RequesterIdentity identifyLocalRequester();
++bool requesterUnchanged(const QDBusConnection &, const QString &owner, const RequesterIdentity &);
++void describeRequester(protocol::PromptMetadata &, const RequesterIdentity &);
++}
+diff --git a/src/services/keyring/daemon/secret_service.h b/src/services/keyring/daemon/secret_service.h
+index 3ffc9fa6c..280c8b4a2 100644
+--- a/src/services/keyring/daemon/secret_service.h
++++ b/src/services/keyring/daemon/secret_service.h
+@@ -3,6 +3,7 @@
+ #include "collection_repository.h"
+ #include "session_crypto.h"
+ #include "prompt_provider.h"
++#include "requester_identity.h"
+ #include "lock_policy.h"
+ #include <QPointer>
+ #include <QDBusVirtualObject>
+@@ -14,6 +15,7 @@
+ namespace qindaqt::keyring::service {
+ struct Session { QString owner; SessionCrypto crypto; };
+ struct Prompt {
++    RequesterIdentity requester;
+     QString owner, action, label, alias;
+     QStringList collections;
+     Paths objects, completed;
+diff --git a/src/services/keyring/import/import_passwords.cpp b/src/services/keyring/import/import_passwords.cpp
+index d1c613341..0dadbc8af 100644
+--- a/src/services/keyring/import/import_passwords.cpp
++++ b/src/services/keyring/import/import_passwords.cpp
+@@ -1,5 +1,6 @@
+ // SPDX-License-Identifier: GPL-3.0-or-later
+ #include "import_passwords_p.h"
++#include "../daemon/requester_identity.h"
+ #include <QCoreApplication>
+ #include <QElapsedTimer>
+ #include <QEventLoop>
+@@ -58,7 +59,10 @@ ImportPassword Passwords::take(const QString &id,const QString &label,bool exist
+         return {CollectionImportError::None,std::move(password)};
+     }
+     QEventLoop wait;SecureBuffer password;bool cancelled=true,completed=false;
+-    const auto token=provider_.begin({existing?"unlock":"create",id,label,"QindaQt one-time keyring import",{}},
++    service::PromptRequest request{existing?"unlock":"create",id,label,"QindaQt one-time keyring import",{}, {}};
++    service::describeRequester(request.metadata, service::identifyLocalRequester());
++    request.metadata.operation = existing ? "import-unlock" : "import-create";
++    const auto token=provider_.begin(std::move(request),
+         [&](SecureBuffer value,bool refused){password=std::move(value);cancelled=refused;completed=true;wait.quit();});
+     QTimer lifetime;QObject::connect(&lifetime,&QTimer::timeout,&wait,[&]{if(!admitted_()) wait.quit();});lifetime.start(100);
+     if(!completed) wait.exec();
+diff --git a/src/services/keyring/prompt/Main.qml b/src/services/keyring/prompt/Main.qml
+index 90b35e542..0ae60d74b 100644
+--- a/src/services/keyring/prompt/Main.qml
++++ b/src/services/keyring/prompt/Main.qml
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-3.0-or-later
+ import QtQuick
+ import QtQuick.Layouts
++import QtQuick.Controls as Controls
+ import QindaTK as Tk
+ 
+ Window {
+@@ -8,84 +9,160 @@ Window {
+     objectName: "keyringPromptWindow"
+     visible: false
+     color: "transparent"
+-    title: qsTr("Passwords & Keys")
++    title: qsTr("QindaQt — Keyring access request")
+     onClosing: prompt.cancel()
+     function focusInitialField() {
+-        if (prompt.confirming) approveButton.forceActiveFocus()
++        if (!prompt.reviewed || prompt.confirming) denyButton.forceActiveFocus()
+         else if (prompt.changing) oldPassword.forceActiveFocus()
+         else password.forceActiveFocus()
+     }
+     onActiveChanged: { if (active) focusInitialField() }
++    component RequestText: Tk.Label {
++        Layout.fillWidth: true
++        textFormat: Text.PlainText
++        wrapMode: Text.Wrap
++    }
+     Rectangle {
+         anchors.fill: parent
+         color: Tk.Theme.color.bg
+         focus: true
+         Keys.onEscapePressed: prompt.cancel()
+         Accessible.role: Accessible.Dialog
+-        Accessible.name: prompt.confirming ? qsTr("Delete this saved item?") : prompt.changing ? qsTr("Change keyring password") : prompt.revealing ? qsTr("Authenticate to reveal secret") : prompt.creation ? qsTr("Create keyring") : qsTr("Unlock keyring")
++        Accessible.name: qsTr("Review keyring access request")
++        Accessible.description: prompt.requester + ". " + prompt.operation + " " + prompt.scope
+         Rectangle {
+             anchors.centerIn: parent
+-            width: Math.min(parent.width - Tk.Theme.space.lg * 2, 420)
+-            height: content.implicitHeight + Tk.Theme.space.lg * 2
++            width: Math.min(parent.width - Tk.Theme.space.lg * 2, 720)
++            height: Math.min(parent.height - Tk.Theme.space.lg * 2,
++                             content.implicitHeight + footer.implicitHeight + Tk.Theme.space.lg * 3)
+             color: Tk.Theme.color.panel
+             ColumnLayout {
+-                id: content
+                 anchors.fill: parent
+                 anchors.margins: Tk.Theme.space.lg
+                 spacing: Tk.Theme.space.md
+-                Tk.Label {
+-                    Layout.fillWidth: true
+-                    text: prompt.confirming ? qsTr("Delete this saved item?") : prompt.changing ? qsTr("Change keyring password") : prompt.revealing ? qsTr("Authenticate to reveal your secret") : prompt.creation ? qsTr("Create a keyring") : qsTr("Unlock your keyring")
+-                    font.bold: true
+-                }
+-                Tk.Label { Layout.fillWidth: true; text: prompt.label; textFormat: Text.PlainText; wrapMode: Text.Wrap }
+-                Tk.TextField {
+-                    id: oldPassword
+-                    objectName: "keyringOldPasswordField"
++                Controls.ScrollView {
++                    id: scroll
++                    objectName: "keyringRequestScroll"
+                     Layout.fillWidth: true
+-                    visible: prompt.changing
+-                    echoMode: TextInput.Password
+-                    maximumLength: 4096
+-                    placeholderText: qsTr("Current password")
+-                    Accessible.name: qsTr("Current keyring password")
+-                    onAccepted: password.forceActiveFocus()
+-                }
+-                Tk.TextField {
+-                    id: password
+-                    visible: !prompt.confirming
+-                    objectName: "keyringPasswordField"
+-                    Layout.fillWidth: true
+-                    echoMode: TextInput.Password
+-                    maximumLength: 4096
+-                    placeholderText: prompt.changing ? qsTr("New password") : qsTr("Password")
+-                    Accessible.name: qsTr("Keyring password")
+-                    Component.onCompleted: { if (prompt.changing) oldPassword.forceActiveFocus(); else forceActiveFocus() }
+-                    onAccepted: {
+-                        if (prompt.creation || prompt.changing) confirmation.forceActiveFocus()
+-                        else prompt.approve(text, "")
++                    Layout.fillHeight: true
++                    clip: true
++                    contentWidth: availableWidth
++                    ColumnLayout {
++                        id: content
++                        width: scroll.availableWidth
++                        spacing: Tk.Theme.space.md
++                        RequestText {
++                            text: qsTr("Review keyring access request")
++                            font.bold: true
++                        }
++                        RequestText { text: qsTr("Requesting program"); font.bold: true }
++                        RequestText {
++                            objectName: "keyringRequester"
++                            text: prompt.requester
++                            font.bold: true
++                        }
++                        RequestText { objectName: "keyringRequesterDetails"; text: prompt.requesterDetails }
++                        RequestText {
++                            objectName: "keyringIdentityWarning"
++                            visible: prompt.requesterKnown && !prompt.executableKnown
++                            text: qsTr("The operating system did not expose this program's executable. Protected applications can hide it. Its program name and safety have not been verified.")
++                            font.bold: true
++                        }
++                        RequestText { text: qsTr("Parent processes (observed context)"); font.bold: true }
++                        RequestText { objectName: "keyringParentContext"; text: prompt.parentContext }
++                        RequestText {
++                            text: qsTr("These details come from the session bus and operating system. They do not verify the program's safety or the agent's intent.")
++                        }
++                        RequestText { text: qsTr("Why this appeared"); font.bold: true }
++                        RequestText { objectName: "keyringOperation"; text: prompt.operation }
++                        RequestText {
++                            objectName: "keyringTaskReason"
++                            text: qsTr("Agent task / reason: not supplied. Continue only if this request matches an action you intended.")
++                        }
++                        RequestText {
++                            visible: prompt.application.length > 0
++                            text: qsTr("Application reported by the portal: %1").arg(prompt.application)
++                        }
++                        RequestText {
++                            objectName: "keyringTarget"
++                            text: (prompt.confirming ? qsTr("Saved item label: %1") : qsTr("Keyring label: %1")).arg(prompt.label)
++                        }
++                        RequestText { text: qsTr("What approval permits"); font.bold: true }
++                        RequestText { objectName: "keyringAccessScope"; text: prompt.scope }
++                        Tk.TextField {
++                            id: oldPassword
++                            objectName: "keyringOldPasswordField"
++                            Layout.fillWidth: true
++                            visible: prompt.reviewed && prompt.changing
++                            enabled: visible
++                            echoMode: TextInput.Password
++                            maximumLength: 4096
++                            placeholderText: qsTr("Current password")
++                            Accessible.name: qsTr("Current keyring password")
++                            onActiveFocusChanged: {
++                                if (activeFocus) scroll.contentItem.contentY = Math.max(0, y + height - scroll.availableHeight)
++                            }
++                            onAccepted: password.forceActiveFocus()
++                        }
++                        Tk.TextField {
++                            id: password
++                            objectName: "keyringPasswordField"
++                            Layout.fillWidth: true
++                            visible: prompt.reviewed && !prompt.confirming
++                            enabled: visible
++                            echoMode: TextInput.Password
++                            maximumLength: 4096
++                            placeholderText: prompt.changing ? qsTr("New password") : qsTr("Keyring password")
++                            Accessible.name: qsTr("Keyring password")
++                            onActiveFocusChanged: {
++                                if (activeFocus) scroll.contentItem.contentY = Math.max(0, y + height - scroll.availableHeight)
++                            }
++                            onAccepted: {
++                                if (prompt.creation || prompt.changing) confirmation.forceActiveFocus()
++                                else prompt.approve(text, "")
++                            }
++                        }
++                        Tk.TextField {
++                            id: confirmation
++                            objectName: "keyringConfirmationField"
++                            Layout.fillWidth: true
++                            visible: prompt.reviewed && (prompt.creation || prompt.changing)
++                            enabled: visible
++                            echoMode: TextInput.Password
++                            maximumLength: 4096
++                            placeholderText: qsTr("Confirm password")
++                            Accessible.name: qsTr("Confirm keyring password")
++                            onActiveFocusChanged: {
++                                if (activeFocus) scroll.contentItem.contentY = Math.max(0, y + height - scroll.availableHeight)
++                            }
++                            onAccepted: prompt.approve(password.text, text, oldPassword.text)
++                        }
++                        RequestText { text: prompt.status; visible: text.length > 0 }
+                     }
+                 }
+-                Tk.TextField {
+-                    id: confirmation
+-                    objectName: "keyringConfirmationField"
+-                    Layout.fillWidth: true
+-                    visible: prompt.creation || prompt.changing
+-                    echoMode: TextInput.Password
+-                    maximumLength: 4096
+-                    placeholderText: qsTr("Confirm password")
+-                    Accessible.name: qsTr("Confirm keyring password")
+-                    onAccepted: prompt.approve(password.text, text, oldPassword.text)
+-                }
+-                Tk.Label { Layout.fillWidth: true; text: prompt.status; visible: text.length > 0; wrapMode: Text.Wrap }
+                 RowLayout {
++                    id: footer
+                     Layout.alignment: Qt.AlignRight
+-                    Tk.Button { text: qsTr("Cancel"); onClicked: prompt.cancel() }
++                    Tk.Button {
++                        id: denyButton
++                        objectName: "keyringDenyButton"
++                        text: qsTr("Deny request")
++                        onClicked: prompt.cancel()
++                    }
++                    Tk.Button {
++                        id: reviewButton
++                        objectName: "keyringReviewButton"
++                        visible: !prompt.reviewed
++                        enabled: prompt.requesterKnown
++                        text: prompt.requesterKnown && !prompt.executableKnown ? qsTr("Continue without executable identity") : qsTr("Continue")
++                        onClicked: { if (prompt.review()) root.focusInitialField() }
++                    }
+                     Tk.Button {
+                         id: approveButton
+                         objectName: "keyringApproveButton"
+-                        Component.onCompleted: { if (prompt.confirming) forceActiveFocus() }
+-                        text: prompt.confirming ? qsTr("Delete") : prompt.changing ? qsTr("Change password") : prompt.revealing ? qsTr("Reveal") : prompt.creation ? qsTr("Create") : qsTr("Unlock")
+-                        enabled: prompt.confirming || password.length > 0 && (!(prompt.creation || prompt.changing) || confirmation.length > 0) && (!prompt.changing || oldPassword.length > 0)
++                        visible: prompt.reviewed
++                        text: prompt.confirming ? qsTr("Delete item") : prompt.changing ? qsTr("Change password") : prompt.revealing ? qsTr("Reveal secret") : prompt.creation ? qsTr("Create keyring") : qsTr("Unlock keyring")
++                        enabled: prompt.reviewed && (prompt.confirming || password.length > 0 && (!(prompt.creation || prompt.changing) || confirmation.length > 0) && (!prompt.changing || oldPassword.length > 0))
+                         onClicked: prompt.approve(password.text, confirmation.text, oldPassword.text)
+                     }
+                 }
+diff --git a/src/services/keyring/prompt/main.cpp b/src/services/keyring/prompt/main.cpp
+index 70ac57a2b..7ed7b879d 100644
+--- a/src/services/keyring/prompt/main.cpp
++++ b/src/services/keyring/prompt/main.cpp
+@@ -21,7 +21,7 @@ using QindaQt::AuthenticationOverlay::OverlaySurface;
+ using qindaqt::keyring::service::PromptController;
+ namespace {
+ qindaqt::keyring::protocol::PromptMetadata metadataFromPipe() {
+-    QByteArray frame(1289,Qt::Uninitialized);
++    QByteArray frame(qindaqt::keyring::protocol::MaxPromptMetadataBytes + 1,Qt::Uninitialized);
+     qsizetype used=0;
+     QElapsedTimer deadline; deadline.start();
+     while(used<frame.size()) {
+@@ -53,7 +53,7 @@ int main(int argc,char **argv) {
+     controller.changing = parser.value("action") == "change-password";
+     controller.revealing = parser.value("action") == "reveal";
+     controller.confirming = parser.value("action") == "confirm-delete";
+-    try { controller.label = metadataFromPipe().label; }
++    try { if (!controller.setRequest(parser.value("action"), metadataFromPipe())) return 2; }
+     catch (const std::exception &) { return 2; }
+     QQmlApplicationEngine engine;
+     engine.rootContext()->setContextProperty("prompt",&controller);
+@@ -62,6 +62,6 @@ int main(int argc,char **argv) {
+     auto *window = qobject_cast<QQuickWindow *>(engine.rootObjects().first());
+     if (!window || !OverlaySurface::configure(*window,"qindaqt-keyring-prompt")) return 2;
+     window->show();
+-    QTimer::singleShot(30000,&controller,&PromptController::cancel);
++    QTimer::singleShot(180000,&controller,&PromptController::cancel);
+     return app.exec();
+ }
+diff --git a/src/services/keyring/prompt/prompt_controller.cpp b/src/services/keyring/prompt/prompt_controller.cpp
+index 824e120d9..e2abd05f6 100644
+--- a/src/services/keyring/prompt/prompt_controller.cpp
++++ b/src/services/keyring/prompt/prompt_controller.cpp
+@@ -4,17 +4,65 @@
+ #include <qindaqt/services/keyring/secure_buffer.h>
+ #include <algorithm>
+ #include <QCoreApplication>
++#include <QFileInfo>
+ #include <openssl/crypto.h>
+ #include <unistd.h>
+ #include <cerrno>
+ 
+ namespace qindaqt::keyring::service {
++bool PromptController::setRequest(const QString &action, const protocol::PromptMetadata &value) {
++    auto expected = value.operation;
++    if (expected == "portal-unlock" || expected == "import-unlock") expected = "unlock";
++    if (expected == "portal-create" || expected == "import-create") expected = "create";
++    if (action != expected || (action != "unlock" && action != "create" && action != "reveal"
++        && action != "change-password" && action != "confirm-delete")) return false;
++    creation = action == "create"; changing = action == "change-password";
++    revealing = action == "reveal"; confirming = action == "confirm-delete";
++    label = protocol::promptDisplayText(value.label);
++    application = protocol::promptDisplayText(value.application);
++    requesterKnown = value.processId > 0;
++    executableKnown = value.executable.startsWith('/');
++    requester = requesterKnown
++        ? (executableKnown
++            ? tr("%1 (PID %2)").arg(protocol::promptDisplayText(QFileInfo(value.executable).fileName())).arg(value.processId)
++            : tr("Executable identity unavailable (PID %1)").arg(value.processId))
++        : tr("Requester identity unavailable — approval is disabled");
++    requesterDetails = tr("Executable: %1\nUser ID: %2 · Connection: %3")
++        .arg(value.executable.isEmpty() ? tr("Unavailable") : protocol::promptDisplayText(value.executable))
++        .arg(requesterKnown ? QString::number(value.userId) : tr("Unavailable")).arg(protocol::promptDisplayText(value.caller));
++    QStringList parents;
++    for (const auto &parent : value.parents) parents.append(protocol::promptDisplayText(parent));
++    parentContext = parents.isEmpty() ? tr("Parent process context unavailable.") : parents.join('\n');
++    if (value.operation.startsWith("import-"))
++        operation = tr("The keyring importer needs this password to import saved credentials into the native keyring.");
++    else if (value.operation.startsWith("portal-"))
++        operation = tr("The desktop portal requested an application secret for the application shown below.");
++    else if (creation) operation = tr("This program asked to create a keyring for saved credentials.");
++    else if (changing) operation = tr("This program asked to change this keyring's password.");
++    else if (revealing) operation = tr("This program asked to read a saved secret using fresh authentication.");
++    else if (confirming) operation = tr("This program asked to permanently delete the saved item shown below.");
++    else operation = tr("This program asked to unlock a keyring so it can access saved credentials.");
++    if (confirming) scope = tr("Approval permanently deletes this saved item.");
++    else if (value.operation.startsWith("import-"))
++        scope = tr("Approval allows the importer to decrypt or create this collection and write imported credentials to it.");
++    else {
++        scope = tr("The unlocked keyring is available to other programs running as you. This is not permission for just this program or agent task.");
++        if (value.operation == "unlock") scope += tr(" Other keyrings using the same password may also unlock.");
++        if (revealing) scope += tr(" The requested secret will be returned to this program.");
++        if (changing) scope += tr(" The new password replaces the current keyring password.");
++    }
++    return true;
++}
++bool PromptController::review() {
++    if (!requesterKnown) return false;
++    reviewed_ = true; Q_EMIT reviewChanged(); return true;
++}
+ bool PromptController::approve(QString password, QString confirmation, QString oldPassword) {
+     auto bytes = password.toUtf8(), repeated = confirmation.toUtf8(), old = oldPassword.toUtf8();
+-    const bool valid = confirming || (!bytes.isEmpty() && bytes.size() <= 4096 && (!(creation || changing) ||
++    const bool valid = reviewed_ && requesterKnown && (confirming || (!bytes.isEmpty() && bytes.size() <= 4096 && (!(creation || changing) ||
+         (bytes.size() == repeated.size() && CRYPTO_memcmp(bytes.constData(),repeated.constData(),
+                                                        static_cast<std::size_t>(bytes.size())) == 0))
+-        && (!changing || (!old.isEmpty() && old.size() <= 4096)));
++        && (!changing || (!old.isEmpty() && old.size() <= 4096))));
+     if (!password.isEmpty()) OPENSSL_cleanse(password.data(),static_cast<std::size_t>(password.size()) * sizeof(QChar));
+     if (!confirmation.isEmpty()) OPENSSL_cleanse(confirmation.data(),static_cast<std::size_t>(confirmation.size()) * sizeof(QChar));
+     if (!oldPassword.isEmpty()) OPENSSL_cleanse(oldPassword.data(),static_cast<std::size_t>(oldPassword.size()) * sizeof(QChar));
+@@ -45,7 +93,8 @@ bool PromptController::approve(QString password, QString confirmation, QString o
+     }
+     frame.clear();
+     if (written) QCoreApplication::exit(0);
+-    else { status = tr("Enter a nonempty password; confirmation must match."); Q_EMIT statusChanged(); }
++    else { status = !reviewed_ ? tr("Review the requester and access scope before continuing.")
++                              : tr("Enter a nonempty password; confirmation must match."); Q_EMIT statusChanged(); }
+     return written;
+ }
+ void PromptController::cancel() { Q_EMIT clearFields(); QCoreApplication::exit(1); }
+diff --git a/src/services/keyring/prompt/prompt_controller.h b/src/services/keyring/prompt/prompt_controller.h
+index c7f09075d..27b8efbb7 100644
+--- a/src/services/keyring/prompt/prompt_controller.h
++++ b/src/services/keyring/prompt/prompt_controller.h
+@@ -2,6 +2,7 @@
+ #pragma once
+ #include <QObject>
+ #include <QString>
++#include <qindaqt/services/keyring_protocol/prompt_metadata.h>
+ namespace qindaqt::keyring::service {
+ // One process/request. QML/framework text allocations cannot be promised locked
+ // or entirely wiped; explicit owned copies are wiped, fields clear, dump disabled,
+@@ -13,15 +14,33 @@ class PromptController final : public QObject {
+     Q_PROPERTY(bool revealing MEMBER revealing CONSTANT)
+     Q_PROPERTY(bool confirming MEMBER confirming CONSTANT)
+     Q_PROPERTY(QString label MEMBER label CONSTANT)
++    Q_PROPERTY(QString requester MEMBER requester CONSTANT)
++    Q_PROPERTY(QString requesterDetails MEMBER requesterDetails CONSTANT)
++    Q_PROPERTY(QString parentContext MEMBER parentContext CONSTANT)
++    Q_PROPERTY(QString operation MEMBER operation CONSTANT)
++    Q_PROPERTY(QString scope MEMBER scope CONSTANT)
++    Q_PROPERTY(QString application MEMBER application CONSTANT)
++    Q_PROPERTY(bool requesterKnown MEMBER requesterKnown CONSTANT)
++    Q_PROPERTY(bool executableKnown MEMBER executableKnown CONSTANT)
++    Q_PROPERTY(bool reviewed READ reviewed NOTIFY reviewChanged)
+     Q_PROPERTY(QString status MEMBER status NOTIFY statusChanged)
+ public:
+     bool creation = false, changing = false, revealing = false, confirming = false;
+     QString label;
+     QString status;
++    QString requester, requesterDetails, parentContext, operation, scope, application;
++    bool requesterKnown = false, executableKnown = false;
++    // Set once before QML construction. Reject mixed/unknown action metadata.
++    bool setRequest(const QString &action, const protocol::PromptMetadata &);
++    bool reviewed() const { return reviewed_; }
++    Q_INVOKABLE bool review();
+     Q_INVOKABLE bool approve(QString password, QString confirmation, QString oldPassword = {});
+     Q_INVOKABLE void cancel();
+ Q_SIGNALS:
+     void clearFields();
+     void statusChanged();
++    void reviewChanged();
++private:
++    bool reviewed_ = false;
+ };
+ }
+diff --git a/src/services/keyring_client/qt_keyring_gateway.cpp b/src/services/keyring_client/qt_keyring_gateway.cpp
+index 948eb7054..a1bd0f715 100644
+--- a/src/services/keyring_client/qt_keyring_gateway.cpp
++++ b/src/services/keyring_client/qt_keyring_gateway.cpp
+@@ -111,6 +111,10 @@ public:
+         if(!validObjectPath(value,"prompt")) { fail("Keyring requires an authenticated prompt");return; }
+         prompt=value;
+         if(!bus.connect(owner,prompt,PromptInterface,"Completed",&q,SLOT(promptCompleted(bool,QDBusVariant,QDBusMessage)))) { fail("Prompt unavailable");return; }
++        // AGENT-CONTRACT: match the daemon's bounded queue/review lifetime
++        // (ADR-0432); the ordinary 45-second RPC deadline is too short to read
++        // a credential request. Owner loss and explicit cancellation still win.
++        timeout.start(300000);
+         call(owner,prompt,PromptInterface,"Prompt",{QString()},[](const QDBusMessage &){});
+     }
+     void begin(quint64 id,Request request,const QString &object,const QString &label) {
+diff --git a/src/services/keyring_protocol/include/qindaqt/services/keyring_protocol/prompt_metadata.h b/src/services/keyring_protocol/include/qindaqt/services/keyring_protocol/prompt_metadata.h
+index 76a47a548..733850439 100644
+--- a/src/services/keyring_protocol/include/qindaqt/services/keyring_protocol/prompt_metadata.h
++++ b/src/services/keyring_protocol/include/qindaqt/services/keyring_protocol/prompt_metadata.h
+@@ -2,10 +2,20 @@
+ #pragma once
+ #include <QByteArray>
+ #include <QString>
++#include <QStringList>
+ namespace qindaqt::keyring::protocol {
+-// Non-password presentation values, copied only for one prompt lifetime.
+-// Frame QMP1/u16 label/u16 caller/UTF-8 payload; no trailing or NUL bytes.
+-struct PromptMetadata { QString label,caller; };
++// QMP2 is a private daemon/helper pipe contract; deploy both together. All
++// integers are big endian: PID/UID u32, five u16-length UTF-8 strings in member
++// order, u8 parent count, then u16-length parents. No trailing/NUL bytes.
++// Process metadata is observed context, never executable or intent attestation.
++inline constexpr qsizetype MaxPromptMetadataBytes = 12288;
++struct PromptMetadata {
++    QString label, caller, executable, operation, application;
++    quint32 processId = 0, userId = 0;
++    QStringList parents;
++};
+ QByteArray encodePromptMetadata(const PromptMetadata &);
+ PromptMetadata decodePromptMetadata(QByteArray &);
++// Display controls/bidi as visible escapes; callers must still use PlainText.
++QString promptDisplayText(const QString &);
+ }
+diff --git a/src/services/keyring_protocol/prompt_metadata.cpp b/src/services/keyring_protocol/prompt_metadata.cpp
+index 53c031581..1e7e65d5f 100644
+--- a/src/services/keyring_protocol/prompt_metadata.cpp
++++ b/src/services/keyring_protocol/prompt_metadata.cpp
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-3.0-or-later
+ #include <qindaqt/services/keyring_protocol/prompt_metadata.h>
+ #include <qindaqt/services/keyring_protocol/wire_types.h>
++#include <QScopeGuard>
+ #include <QStringDecoder>
+ #include <stdexcept>
+ namespace qindaqt::keyring::protocol {
+@@ -8,27 +9,75 @@ namespace {
+ [[noreturn]] void invalid() { throw std::runtime_error("Invalid prompt metadata"); }
+ QString utf8(QByteArrayView bytes) {
+     QStringDecoder decode(QStringDecoder::Utf8);
+-    const QString value=decode(bytes);
+-    if(decode.hasError() || value.contains(QChar(0))) invalid();
++    const QString value = decode(bytes);
++    if (decode.hasError() || value.contains(QChar(0))) invalid();
+     return value;
+ }
++void number(QByteArray &out, quint32 value, int bytes) {
++    for (int shift = (bytes - 1) * 8; shift >= 0; shift -= 8)
++        out.append(static_cast<char>((value >> shift) & 255U));
++}
++void string(QByteArray &out, const QString &value, qsizetype maximum) {
++    auto bytes = value.toUtf8();
++    auto scrub = qScopeGuard([&] { wipe(bytes); });
++    if (bytes.size() > maximum || utf8(bytes) != value) invalid();
++    number(out, static_cast<quint32>(bytes.size()), 2);
++    out.append(bytes);
++}
++class Reader {
++public:
++    QByteArrayView bytes;
++    quint32 number(int size) {
++        if (bytes.size() < size) invalid();
++        quint32 value = 0;
++        for (int i = 0; i < size; ++i) value = (value << 8) | static_cast<unsigned char>(bytes[i]);
++        bytes = bytes.sliced(size);
++        return value;
++    }
++    QString string(qsizetype maximum) {
++        const auto size = static_cast<qsizetype>(number(2));
++        if (size > maximum || size > bytes.size()) invalid();
++        const auto value = utf8(bytes.first(size));
++        bytes = bytes.sliced(size);
++        return value;
++    }
++};
+ }
+ QByteArray encodePromptMetadata(const PromptMetadata &value) {
+-    auto label=value.label.toUtf8(),caller=value.caller.toUtf8();
+-    if(label.size()>1024 || caller.size()>256 || utf8(label)!=value.label || utf8(caller)!=value.caller) invalid();
+-    QByteArray output("QMP1",4);
+-    output.append(static_cast<char>(label.size()>>8));output.append(static_cast<char>(label.size()&255));
+-    output.append(static_cast<char>(caller.size()>>8));output.append(static_cast<char>(caller.size()&255));
+-    output.append(label);output.append(caller);wipe(label);wipe(caller);return output;
++    if (value.parents.size() > 6) invalid();
++    QByteArray out("QMP2", 4);
++    number(out, value.processId, 4); number(out, value.userId, 4);
++    string(out, value.label, 1024); string(out, value.caller, 256);
++    string(out, value.executable, 4096); string(out, value.operation, 32);
++    string(out, value.application, 256);
++    number(out, static_cast<quint32>(value.parents.size()), 1);
++    for (const auto &parent : value.parents) string(out, parent, 1024);
++    return out;
+ }
+ PromptMetadata decodePromptMetadata(QByteArray &frame) {
+-    if(frame.size()<8 || frame.size()>1288 || !frame.startsWith("QMP1")) invalid();
+-    const auto u=[](char c) { return static_cast<unsigned char>(c); };
+-    const qsizetype label=(qsizetype(u(frame[4]))<<8)|u(frame[5]);
+-    const qsizetype caller=(qsizetype(u(frame[6]))<<8)|u(frame[7]);
+-    if(label>1024 || caller>256 || frame.size()!=8+label+caller) invalid();
+-    PromptMetadata result{utf8(QByteArrayView(frame).sliced(8,label)),
+-                          utf8(QByteArrayView(frame).sliced(8+label,caller))};
+-    wipe(frame);return result;
++    auto scrub = qScopeGuard([&] { wipe(frame); });
++    if (frame.size() < 23 || frame.size() > MaxPromptMetadataBytes || !frame.startsWith("QMP2")) invalid();
++    Reader in{QByteArrayView(frame).sliced(4)};
++    PromptMetadata result;
++    result.processId = in.number(4); result.userId = in.number(4);
++    result.label = in.string(1024); result.caller = in.string(256);
++    result.executable = in.string(4096); result.operation = in.string(32);
++    result.application = in.string(256);
++    const auto parents = in.number(1);
++    if (parents > 6) invalid();
++    for (quint32 i = 0; i < parents; ++i) result.parents.append(in.string(1024));
++    if (!in.bytes.isEmpty()) invalid();
++    return result;
++}
++QString promptDisplayText(const QString &value) {
++    QString result;
++    for (const auto ch : value) {
++        const auto category = ch.category();
++        if (category == QChar::Other_Control || category == QChar::Other_Format
++            || category == QChar::Separator_Line || category == QChar::Separator_Paragraph)
++            result += QStringLiteral("\\u%1").arg(static_cast<unsigned>(ch.unicode()), 4, 16, QLatin1Char('0'));
++        else result += ch;
++    }
++    return result;
+ }
+ }

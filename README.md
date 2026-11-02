@@ -1036,3 +1036,33 @@ owner has not yet completed a real login on qinda; that first login is the
 acceptance check (`journalctl -b -u qindaqt-keyring@1000.service` shows the
 owner running, not `status=3`). The shared delivery catalog is unchanged and
 the archive is not yet published for the laptop.
+
+## Keyring request review revision 48 — prepared
+
+Desktop `0.1.0_pre20261002-r48` retains revision 47's exact base source and its
+existing patches, adding product `539aecf5adf1b870d6ef97253e39a7c93177d4f0` as a source patch. The
+daemon, importer and helper use bounded QMP2 and must be updated together.
+The screen shows actual bus/process identity, available executable and parent
+context, operation, missing agent reason and shared unlock scope before password
+entry. Protected executable paths remain explicitly unavailable and require a
+labelled continuation. Missing process identity cannot approve.
+
+Source verification: five focused CTest groups (28 Qt results plus a two-prompt
+private Wayland journey), eight private standard/native protocol cases, strict
+MkDocs and 583-document validation pass. This recipe has not yet had a signed
+Portage build or installation; the preparing session has no passwordless sudo.
+The prepared archive is byte-identical to the verified revision 47 base archive;
+the additional patch carries the new code. No released recipe/archive is changed.
+
+Run `sudo -v`, then
+`qinda-sync packages '=gui-wm/qindaqt-desktop-0.1.0_pre20261002-r48'` when
+ready to authenticate for the package installation. Sign out and back in after
+the upgrade so the resident daemon and helper use the same protocol. The helper
+and a previous running daemon reject each other's metadata until adoption.
+No running desktop/keyring is restarted by this preparation.
+
+The r48 Manifest and five-patch application check pass. All changed production
+files match the tested product commit after accounting for the retained r45
+activation-helper install stanza. `pkgcheck` exits 0 with inherited exact-6.6.6
+LayerShellQt/KWayland availability and cross-profile solvability findings; this
+revision does not change those dependency expressions.
