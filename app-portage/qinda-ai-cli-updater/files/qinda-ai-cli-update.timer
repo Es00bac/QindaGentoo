@@ -1,0 +1,12 @@
+[Unit]
+Description=Check official AI CLI releases daily
+ConditionHost=qinda
+
+[Timer]
+OnCalendar=daily
+RandomizedDelaySec=30m
+Persistent=true
+Unit=qinda-ai-cli-update.service
+
+[Install]
+WantedBy=timers.target

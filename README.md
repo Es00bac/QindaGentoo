@@ -405,6 +405,53 @@ The October 20 Codex update adds official stable release 0.163.0 with the same
 standalone musl bundle layout. Update it independently with
 `qinda-sync packages '=dev-util/codex-bin-0.163.0'`.
 
+#### AI CLI release updates
+
+The November 2 update packages Codex **0.166.0** and Claude Code **2.1.316**
+from their official `latest` channels. Both payloads are verified against
+upstream SHA256 metadata; all four supported Claude Linux payloads have pinned
+Manifest entries. Historical recipes and checksums are retained. The profile
+accepts Claude's testing keyword so future versions resolve on both hosts.
+
+`app-portage/qinda-ai-cli-updater` provides `qinda-ai-cli-update` and a daily
+systemd user timer, both installed through Portage. On **qinda**, install the
+helper and enable the timer as the overlay owner:
+
+```sh
+sudo emerge --oneshot app-portage/qinda-ai-cli-updater::qindaqt
+systemctl --user daemon-reload
+systemctl --user enable --now qinda-ai-cli-update.timer
+```
+
+The timer checks every day after midnight with up to 30 minutes of jitter,
+and catches up after the user manager was offline. It runs silently, without
+model workers. Inspect it with `systemctl --user list-timers
+qinda-ai-cli-update.timer` and `journalctl --user -u qinda-ai-cli-update.service`.
+Run `qinda-ai-cli-update --check` to compare versions, or
+`qinda-ai-cli-update --publish` for an immediate verified update.
+
+Each update uses an isolated clone of qinda's **master** overlay branch,
+checks upstream hashes and binary versions/help in Portage staging images,
+regenerates Manifests, checks package metadata, and then commits and pushes
+without force. Build settings, including `MAKEOPTS`, are inherited unchanged.
+Changed download layouts or checksums stop publication. A clean master checkout
+on qinda is fast-forwarded; dirty or divergent work is preserved. The laptop's
+bare mirror is pushed over qinda's existing SSH connection, with retries on
+later daily runs if it is offline. Optional settings are in
+`/etc/qinda-ai-cli-updater.conf`.
+
+The timer updates **overlay recipes only**. Install current CLI versions on
+both hosts from qinda when ready:
+
+```sh
+git -C ~/git/QindaGentoo.git push qinda-top:git/QindaGentoo.git master:master && sudo emaint sync -r qindaqt && sudo emerge -u1 dev-util/codex-bin::qindaqt dev-util/claude-code::qindaqt && ssh -t qinda-top 'sudo emaint sync -r qindaqt && sudo emerge -u1 dev-util/codex-bin::qindaqt dev-util/claude-code::qindaqt'
+```
+
+Offline updater checks: `python3 -m unittest discover -s tests -p
+test_ai_cli_updater.py -v`. A maintainer can stage a bump without publication
+using `python3 app-portage/qinda-ai-cli-updater/files/qinda-ai-cli-update.py
+--prepare .` from the overlay checkout.
+
 Installed acceptance on qinda-top (2026-10-13): all 44 Codex files and 2
 symlinks and all 3,544 desktop files matched Portage's CONTENTS records. Codex
 version/help checks passed. The desktop executable, bundled Node runtime and

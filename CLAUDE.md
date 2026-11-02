@@ -49,6 +49,11 @@ eselect profile set qindaqt:qindaqt/systemd
 ```
 
 Manifests pin every distfile; a version bump is not done until its new DIST row exists.
+For requests to update Codex or Claude Code to the latest release, check the
+official upstream channels and bump this overlay first; syncing/emerging an
+older packaged version does not satisfy the request. The Portage-managed
+`qinda-ai-cli-update --publish` performs verified release bumps on qinda, with
+an optional daily user timer. See the README's AI CLI release-update section.
 Use `pkgcheck scan` for changed-package metadata and run bounded source/install-stage
 checks plus the relevant `tests/` fixtures. An image-stage `ebuild ... install` does not
 merge to the host; do not turn publication checks into desktop or model workload tests.

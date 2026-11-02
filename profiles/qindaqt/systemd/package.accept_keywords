@@ -37,6 +37,8 @@ dev-util/ghidra-bin ~amd64
 dev-util/rea-agents ~amd64
 net-misc/adguard-cli-bin ~amd64
 dev-util/codex-bin ~amd64
+dev-util/claude-code ~amd64
+app-portage/qinda-ai-cli-updater ~amd64
 www-client/qindafox-bin ~amd64
 media-libs/noise-suppression-for-voice ~amd64
 media-gfx/sloom-studio-bin ~amd64

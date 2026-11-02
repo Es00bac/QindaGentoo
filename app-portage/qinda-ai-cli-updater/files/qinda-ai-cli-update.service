@@ -1,0 +1,10 @@
+[Unit]
+Description=Update Codex and Claude Code recipes in the Qinda overlay
+ConditionHost=qinda
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/qinda-ai-cli-updater.conf
+ExecStart=/usr/bin/qinda-ai-cli-update --publish
+TimeoutStartSec=2h
+UMask=0022
