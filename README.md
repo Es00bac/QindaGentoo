@@ -1113,3 +1113,17 @@ files match the tested product commit after accounting for the retained r45
 activation-helper install stanza. `pkgcheck` exits 0 with inherited exact-6.6.6
 LayerShellQt/KWayland availability and cross-profile solvability findings; this
 revision does not change those dependency expressions.
+
+## QQ_Term 0.3.1 — verified interaction repairs
+
+`gui-apps/qqterm-0.3.1` pins QindaQt_Apps `44088c4` and retains QindaTK ABI
+subslot 18. It adds regex search, explicit web/email links, quoted file drops,
+multiline-paste review and readable Qt accessibility text, and makes zoom local
+to its window. Four private regression groups pass (31 QtTest results plus the
+D-Bus process fixture); rendered search and paste UI were inspected.
+
+This release does not include the rejected QindaTK reflow experiment. The
+separate engine acceptance probe still demonstrates cropped live rows after
+width shrink and physical newlines in wrapped copies. Full parity and native
+screen-reader qualification remain open; see `docs/terminal-parity.md` in the
+source repository. Historical recipes remain unchanged.

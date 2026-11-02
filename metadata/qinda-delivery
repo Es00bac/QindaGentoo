@@ -37,7 +37,8 @@
 =virtual/notification-daemon-0-r1
 =x11-misc/qindaqt-xdg-menu-1.0.0
 =gui-wm/qindaqt-kwin-6.6.6_p1-r7
-=gui-apps/qqterm-0.3.0-r1
+# 2026-11-02: verified interaction/accessibility repairs; engine parity remains open.
+=gui-apps/qqterm-0.3.1
 =media-video/qqmpv-0.1.0_p20260920
 # 2026-10-10: coordinated QindaTK r18 (Office controls and mail adapters)
 # with the rebuilt Office integration. The r17 Scroll focus-reveal repair
